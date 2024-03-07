@@ -3,15 +3,15 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 import '../screens/home_screen.dart';
+
 class NavigationDestination {
-  final Icon icon;
-  final String label;
-  final Color selectedColor;
+  final IconData icon;
+  final int index;
 
   NavigationDestination({
+    required this.index,
     required this.icon,
-    required this.label,
-    required this.selectedColor,
+    // required this.selectedColor,
   });
 }
 
@@ -24,7 +24,8 @@ class NavigationBar extends StatelessWidget {
   final List<NavigationDestination> destinations;
   final TextStyle labelStyle;
 
-  const NavigationBar({super.key,
+  const NavigationBar({
+    super.key,
     required this.backgroundColor,
     required this.height,
     required this.elevation,
@@ -37,18 +38,30 @@ class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
       backgroundColor: backgroundColor,
       type: BottomNavigationBarType.fixed,
       elevation: elevation,
-      selectedItemColor: destinations[selectedIndex].selectedColor,
+      selectedItemColor: Colors.white,
       currentIndex: selectedIndex,
       items: destinations.map((destination) {
         return BottomNavigationBarItem(
-          icon: destination.icon,
-          label: destination.label,
-        );
+            icon: Container(
+              padding: EdgeInsets.all(10),
+              child:Icon( destination.icon,color:selectedIndex == destination.index
+                  ? Colors.white
+                  : Color(0xff6E232F) ,),
+              decoration: BoxDecoration(
+                  color: selectedIndex == destination.index
+                      ? Color(0xff6E232F)
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.all(Radius.circular(25))),
+            ),
+            label: '',);
       }).toList(),
-      selectedLabelStyle: labelStyle, // Add this line
+      selectedLabelStyle: labelStyle,
+      // Add this line
       onTap: onDestinationSelected,
     );
   }
@@ -66,39 +79,25 @@ class CustomeBottomNavBar extends StatelessWidget {
     final controller = Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
-            () => NavigationBar(
+        () => NavigationBar(
           backgroundColor: Color(0xffF0F2F6),
           height: 80,
           elevation: 0,
           selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) =>
-          controller.selectedIndex.value = index,
+          onDestinationSelected: (index) {
+            return controller.selectedIndex.value = index;
+          },
           destinations: [
             NavigationDestination(
-              icon: Icon(Icons.search),
-              label: 'Search',
-              selectedColor: Color(0xff6482C4),
+              icon: Icons.search,
+              index: 0,
             ),
+            NavigationDestination(icon: Icons.favorite, index: 1),
             NavigationDestination(
-              icon: Icon(Icons.favorite),
-              label: 'Saved',
-              selectedColor: Color(0xff6482C4),
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.label_important_sharp),
-              label: 'My Home',
-              selectedColor: Color(0xff6482C4),
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.person),
-              label: 'Account',
-              selectedColor: Color(0xff6482C4),
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.person),
-              label: 'Account',
-              selectedColor: Color(0xff6482C4),
-            ),
+                icon: Icons.label_important_sharp, index: 2),
+            NavigationDestination(icon: Icons.person, index: 3),
+            NavigationDestination(icon: Icons.person, index: 4),
+
           ],
           labelStyle: TextStyle(
             fontFamily: 'Kadwa',
@@ -112,11 +111,6 @@ class CustomeBottomNavBar extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
-
-  final Rx<int> selectedIndex = 0.obs;// here the first value was zero
-  final screens = [
-    HomeScreen()
-  ];
+  final Rx<int> selectedIndex = 0.obs; // here the first value was zero
+  final screens = [HomeScreen()];
 }
-
-
