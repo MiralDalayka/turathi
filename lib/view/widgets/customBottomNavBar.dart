@@ -11,7 +11,6 @@ class NavigationDestination {
   NavigationDestination({
     required this.index,
     required this.icon,
-    // required this.selectedColor,
   });
 }
 
@@ -47,18 +46,22 @@ class NavigationBar extends StatelessWidget {
       currentIndex: selectedIndex,
       items: destinations.map((destination) {
         return BottomNavigationBarItem(
-            icon: Container(
-              padding: EdgeInsets.all(10),
-              child:Icon( destination.icon,color:selectedIndex == destination.index
+          icon: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+                color: selectedIndex == destination.index
+                    ? Color(0xff6E232F)
+                    : Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(25))),
+            child: Icon(
+              destination.icon,
+              color: selectedIndex == destination.index
                   ? Colors.white
-                  : Color(0xff6E232F) ,),
-              decoration: BoxDecoration(
-                  color: selectedIndex == destination.index
-                      ? Color(0xff6E232F)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
+                  : Color(0xff6E232F),
             ),
-            label: '',);
+          ),
+          label: '',
+        );
       }).toList(),
       selectedLabelStyle: labelStyle,
       // Add this line
@@ -72,10 +75,6 @@ class CustomeBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //fetchProducts();
-    // getProducts();
-    // print("getProducts funtion");
-    // Test();
     final controller = Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -89,15 +88,13 @@ class CustomeBottomNavBar extends StatelessWidget {
           },
           destinations: [
             NavigationDestination(
-              icon: Icons.search,
+              icon: Icons.map_outlined,
               index: 0,
             ),
-            NavigationDestination(icon: Icons.favorite, index: 1),
-            NavigationDestination(
-                icon: Icons.label_important_sharp, index: 2),
-            NavigationDestination(icon: Icons.person, index: 3),
-            NavigationDestination(icon: Icons.person, index: 4),
-
+            NavigationDestination(icon: Icons.group_outlined, index: 1),
+            NavigationDestination(icon: Icons.home_outlined, index: 2),
+            NavigationDestination(icon: Icons.favorite_outline, index: 3),
+            NavigationDestination(icon: Icons.person_outline, index: 4),
           ],
           labelStyle: TextStyle(
             fontFamily: 'Kadwa',

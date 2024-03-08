@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+
+class ThemeManager {
+  static Color primary = const Color(0xff6E232F);
+  static Color second = const Color(0xffF7F3EE);//xffF0F2F6
+
+  static Color background = const Color(0xffF0F2F6);//xffF0F2F6
+
+}
+
