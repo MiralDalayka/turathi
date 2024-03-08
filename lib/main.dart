@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       routes: {
-         "bottomScreen": (context) => CustomeBottomNavBar(),
+         "bottomScreen": (context) => const CustomeBottomNavBar(),
         "homeScreen": (context) => const HomeScreen(),
         "profileScreen": (context) => const ProfileScreen(),
       },
