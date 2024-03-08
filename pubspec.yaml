@@ -33,49 +33,49 @@ dependencies:
   cupertino_icons: ^1.0.6
   get: ^4.6.6
   carousel_slider: ^4.2.1
-  # DateTime
-  jiffy: ^6.2.1
-  intl: ^0.18.1
-  http: ^1.1.2
-  # Images
-  cached_network_image: ^3.2.0 
-  image_picker: ^1.0.7
+  # # DateTime
+  # jiffy: ^6.2.1
+  # intl: ^0.18.1
+  # http: ^1.1.2
+  # # Images
+  # cached_network_image: ^3.2.0 
+  # image_picker: ^1.0.7
   
-  # Animate
-  show_up_animation: ^2.0.0
-  auto_animated: ^3.0.1
-  # Google Map
-  flutter_polyline_points: ^2.0.0
-  google_maps_flutter: ^2.1.5
-  geolocator: ^10.1.0
-  geocoding: ^2.0.4
-  # Firebase And Notification 
-  firebase_messaging: ^14.7.4
-  firebase_core: ^2.24.2
-  flutter_local_notifications: ^16.1.0
-  cloud_firestore: ^4.14.0
-  firebase_auth: ^4.16.0
-  firebase_storage: ^11.5.6
-  # Local Data Cache
-  #sqflite: ^2.0.2
-  shared_preferences: ^2.0.15
-  path: ^1.8.0
-  # Qrcode 
-  qr_flutter: ^4.0.0
-  scan: ^1.6.0
-  grouped_list: ^5.1.2
-  url_launcher: ^6.1.2
-  dropdown_search: ^5.0.6
-  badges: ^3.1.2
-  # Icon 
-  flutter_svg: ^2.0.9
-  font_awesome_flutter: ^10.1.0
-  fluttericon: ^2.0.0
-  dartz: ^0.10.1
-  google_fonts: ^6.1.0 
-  flutter_lints: ^3.0.1
-  firebase_app_check: ^0.2.1+8
-  flare_flutter: ^3.0.2
+  # # Animate
+  # show_up_animation: ^2.0.0
+  # auto_animated: ^3.0.1
+  # # Google Map
+  # flutter_polyline_points: ^2.0.0
+  # google_maps_flutter: ^2.1.5
+  # geolocator: ^10.1.0
+  # geocoding: ^2.0.4
+  # # Firebase And Notification 
+  # firebase_messaging: ^14.7.4
+  # firebase_core: ^2.24.2
+  # flutter_local_notifications: ^16.1.0
+  # cloud_firestore: ^4.14.0
+  # firebase_auth: ^4.16.0
+  # firebase_storage: ^11.5.6
+  # # Local Data Cache
+  # #sqflite: ^2.0.2
+  # shared_preferences: ^2.0.15
+  # path: ^1.8.0
+  # # Qrcode 
+  # qr_flutter: ^4.0.0
+  # scan: ^1.6.0
+  # grouped_list: ^5.1.2
+  # url_launcher: ^6.1.2
+  # dropdown_search: ^5.0.6
+  # badges: ^3.1.2
+  # # Icon 
+  # flutter_svg: ^2.0.9
+  # font_awesome_flutter: ^10.1.0
+  # fluttericon: ^2.0.0
+  # dartz: ^0.10.1
+  # google_fonts: ^6.1.0 
+  # flutter_lints: ^3.0.1
+  # firebase_app_check: ^0.2.1+8
+  # flare_flutter: ^3.0.2
 
 
   # The following adds the Cupertino Icons font to your application.

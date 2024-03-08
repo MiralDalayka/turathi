@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layoutManager.dart';
-
+import 'package:turathi/utils/theme_manager.dart';
 
 class firstBox extends StatefulWidget {
   const firstBox({super.key});
 
   @override
-  State<firstBox> createState() => _firstBox();
+  State<firstBox> createState() => FirstBox();
 }
 
-class _firstBox extends State<firstBox> {
+class FirstBox extends State<firstBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,10 +20,10 @@ class _firstBox extends State<firstBox> {
       ),
       child: Container(
           height: LayoutManager.widthNHeight0(context, 1) * 0.5,
-          padding: EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
+          padding:
+              EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
           child: Column(
             children: [
-
               InkWell(
                 onTap: () {
                   // Navigator.of(context).pushNamed("personal");
@@ -35,14 +35,25 @@ class _firstBox extends State<firstBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.person, color: Color(0xff263238)),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                          Image.asset(
+                            'assets/images/img_png/userProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.06,
+                          ),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'Personal details',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -52,9 +63,9 @@ class _firstBox extends State<firstBox> {
               ),
 
               SizedBox(
-                height:LayoutManager.widthNHeight0(context, 1) * 0.05,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.05,
               ),
-              
+
               InkWell(
                 onTap: () {
                   // Navigator.of(context).pushNamed("Change Info");
@@ -66,14 +77,25 @@ class _firstBox extends State<firstBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.email, color: Color(0xff263238)),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                       Image.asset(
+                            'assets/images/img_png/infoProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.06,
+                          ), 
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'Change Info',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -84,7 +106,7 @@ class _firstBox extends State<firstBox> {
               SizedBox(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.05,
               ),
-             
+
               InkWell(
                 onTap: () {
                   // Navigator.of(context).pushNamed("Change Password");
@@ -96,14 +118,25 @@ class _firstBox extends State<firstBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.lock, color: Color(0xff263238)),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                         Image.asset(
+                            'assets/images/img_png/lockProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.06,
+                          ),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'Change Password',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -126,14 +159,25 @@ class _firstBox extends State<firstBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.delete_outline, color: Color(0xff263238)),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                         Image.asset(
+                            'assets/images/img_png/deleteProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.055,
+                          ),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'Delete Account',
                             style: TextStyle(
-                              fontSize:LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),

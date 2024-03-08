@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/theme_manager.dart';
 
 
 class secondBox extends StatefulWidget {
@@ -34,13 +35,21 @@ class _secondBox extends State<secondBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.person, color: Color(0xff263238)),
+                          Image.asset(
+                            'assets/images/img_png/imageProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.06,
+                          ),
                           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
                           Text(
                             'View added places',
                             style: TextStyle(
                               fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
                               fontFamily: 'KohSantepheap',
+                              color: ThemeManager.primary,
+                               fontWeight: FontWeight.bold
                             ),
                           ),
                         ],
@@ -63,13 +72,21 @@ class _secondBox extends State<secondBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.email, color: Color(0xff263238)),
+                        Image.asset(
+                            'assets/images/img_png/expertProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.06,
+                          ),
                           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
                           Text(
                             'Request to be Expert',
                             style: TextStyle(
                               fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
                               fontFamily: 'KohSantepheap',
+                              color: ThemeManager.primary,
+                               fontWeight: FontWeight.bold
                             ),
                           ),
                         ],

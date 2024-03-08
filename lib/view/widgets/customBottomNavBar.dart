@@ -4,7 +4,7 @@ import 'package:get/state_manager.dart';
 import 'package:turathi/utils/layoutManager.dart';
 import 'package:turathi/view/screens/profile/profile.dart';
 
-import '../screens/home_screen.dart';
+import '../screens/homeScreen.dart';
 
 class NavigationDestination {
   final IconData icon;
@@ -106,8 +106,8 @@ class CustomeBottomNavBar extends StatelessWidget {
                 icon: Icons.map_outlined,
                 index: 0,
               ),
-              NavigationDestination(icon: Icons.group_outlined, index: 1),
-              NavigationDestination(icon: Icons.home_outlined, index: 2),
+              NavigationDestination(icon: Icons.people_outline_sharp, index: 1),
+              NavigationDestination(icon: Icons.home_rounded, index: 2),
               NavigationDestination(icon: Icons.favorite_outline, index: 3),
               NavigationDestination(icon: Icons.person_outline, index: 4),
             ],
@@ -126,5 +126,5 @@ class CustomeBottomNavBar extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs; 
-  final screens = [HomeScreen(), ScreenProfile()];
+  final screens = [HomeScreen(), ProfileScreen()];
 }

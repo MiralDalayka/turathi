@@ -5,14 +5,14 @@ import 'package:turathi/view/screens/profile/first_box/firstBox.dart';
 import 'package:turathi/view/screens/profile/second_box/secondBox.dart';
 import 'package:turathi/view/screens/profile/third_box/thirdBox.dart';
 
-class ScreenProfile extends StatefulWidget {
-  const ScreenProfile({Key? key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key});
 
   @override
-  State<ScreenProfile> createState() => _ScreenProfileState();
+  State<ProfileScreen> createState() =>_ProfileScreen();
 }
 
-class _ScreenProfileState extends State<ScreenProfile> {
+class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +24,8 @@ class _ScreenProfileState extends State<ScreenProfile> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(160.0),
-                    bottomRight: Radius.circular(160.0),
+                    bottomLeft: Radius.circular(150.0),
+                    bottomRight: Radius.circular(150.0),
                   ),
                   child: Transform.scale(
                     scale: 1.1,
@@ -38,8 +38,8 @@ class _ScreenProfileState extends State<ScreenProfile> {
                   ),
                 ),
                 Positioned(
-                  top: LayoutManager.widthNHeight0(context, 1) * 0.18,
-                  left: LayoutManager.widthNHeight0(context, 1) * 0.1,
+                  top: LayoutManager.widthNHeight0(context, 1) * 0.155,
+                  left: LayoutManager.widthNHeight0(context, 1) * 0.08,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -50,7 +50,9 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                 LayoutManager.widthNHeight0(context, 1) * 0.06,
                             color: Color(0xffE8EBEC),
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'KohSantepheap'),
+                            fontFamily: 'KohSantepheap',
+                          
+                             ),
                       ),
                       Text(
                         "Welcome Again",
@@ -76,15 +78,15 @@ class _ScreenProfileState extends State<ScreenProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.08,
                   ),
                   const firstBox(),
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.06,
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.035,
                   ),
                   const secondBox(),
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.06,
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.035,
                   ),
                   const thirdBox(),
                 ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/theme_manager.dart';
 
 class thirdBox extends StatefulWidget {
   const thirdBox({super.key});
@@ -33,13 +34,21 @@ class _thirdBox extends State<thirdBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.info, color: Color(0xff263238)),
+                        Image.asset(
+                            'assets/images/img_png/infoProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.03,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.054,
+                          ),
                           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
                           Text(
                             'About us',
                             style: TextStyle(
                               fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
                               fontFamily: 'KohSantepheap',
+                              color: ThemeManager.primary,
+                               fontWeight: FontWeight.bold
                             ),
                           ),
                         ],
@@ -62,13 +71,22 @@ class _thirdBox extends State<thirdBox> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.logout, color: Color(0xff263238)),
+                         Image.asset(
+                            'assets/images/img_png/logoutProfile.png',
+                            width:  LayoutManager.widthNHeight0(context, 0) *
+                                  0.027,
+                            height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.055,
+                          ),
                           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
                           Text(
                             'Sgin out',
                             style: TextStyle(
                               fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
                               fontFamily: 'KohSantepheap',
+                               color: ThemeManager.primary,
+                               fontWeight: FontWeight.bold
+                               
                             ),
                           ),
                         ],

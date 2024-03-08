@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/view/screens/home_screen.dart';
+import 'package:turathi/view/screens/homeScreen.dart';
+import 'package:turathi/view/screens/profile/profile.dart';
+import 'package:turathi/view/screens/splach_screen/splachScreen.dart';
 import 'package:turathi/view/widgets/customBottomNavBar.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const CustomeBottomNavBar(),
-      debugShowCheckedModeBanner: false,
+  debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+      routes: {
+         "bottomScreen": (context) => CustomeBottomNavBar(),
+        "homeScreen": (context) => const HomeScreen(),
+        "profileScreen": (context) => const ProfileScreen(),
+      },
     );
   }
 }
