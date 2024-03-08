@@ -17,51 +17,72 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ThemeManager.background,
+        toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.notifications_none_outlined,
+              color: ThemeManager.primary,
+            ),
+            onPressed: () {
+              //back
+            },
+            iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
+          ),
+          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+        ],
+      ),
       body: Container(
         color: ThemeManager.background,
         child: Padding(
-          padding: EdgeInsets.only(top: 10, right: 8, left: 8),
+          padding: const EdgeInsets.only(right: 12, left: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Hi Alaa !',
-                    style: TextStyle(
-                      color: ThemeManager.primary,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.05,
-                      fontWeight: FontWeight.bold,
+              Text(
+                'Hi Alaa !',
+                style: TextStyle(
+                  fontFamily: 'KohSantepheap',
+                  color: ThemeManager.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 1,
+                      offset: Offset(0, 3),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {}, //BACK
-                    icon: Icon(
-                      Icons.notifications_outlined,
-                      size: 30,
-                      color: ThemeManager.primary,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Text(
-                'Welcome',
+                'Good Morning',
                 style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontSize: LayoutManager.widthNHeight0(context, 0) * 0.03,
-                    // fontWeight: FontWeight.bold,
-                    letterSpacing: 2),
+                  fontFamily: 'KohSantepheap',
+                  color: ThemeManager.primary,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
+                  letterSpacing: 4,
+                  fontWeight: FontWeight.bold,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 1,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
-                height: 20,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.026,
               ),
               Container(
-                height: LayoutManager.widthNHeight0(context, 1) * 0.15,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.16,
                 width: LayoutManager.widthNHeight0(context, 0),
                 decoration: BoxDecoration(
                   color: ThemeManager.second,
-                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -69,11 +90,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Be Part Of Collect Data With Us",
                       style: TextStyle(
+                          fontFamily: 'KohSantepheap',
+                          color: ThemeManager.primary,
+                          fontWeight: FontWeight.bold,
                           fontSize:
-                              LayoutManager.widthNHeight0(context, 0) * 0.025),
+                              LayoutManager.widthNHeight0(context, 0) * 0.0175),
                     ),
                     CircleAvatar(
                       backgroundColor: ThemeManager.primary,
+                      radius: LayoutManager.widthNHeight0(context, 0) * 0.033,
                       child: IconButton(
                         icon: Icon(
                           Icons.add,
@@ -88,75 +113,139 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: LayoutManager.widthNHeight0(context, 0) * 0.014,
               ),
               Text(
                 'Popular Places',
                 style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'KohSantepheap',
                   color: ThemeManager.primary,
-                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.025,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 0.01,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.018,
               ),
-              ImageSlideshow(
-                width: double.infinity,
-                height: 200,
-
-                /// The page to show when first creating the [ImageSlideshow].
-                initialPage: 0,
-
-                /// The color to paint the indicator.
-                indicatorColor: ThemeManager.primary,
-
-                indicatorBackgroundColor: Colors.grey,
+              Stack(
                 children: [
-                  Image.network(
-                    'https://th.bing.com/th/id/OIP.XW8L0hrGaMGOZjKCmILZJQHaEq?rs=1&pid=ImgDetMain',
-                    fit: BoxFit.cover,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: ImageSlideshow(
+                      width: double.infinity,
+                      height: 210,
+                      initialPage: 0,
+                      indicatorRadius: 6,
+                      indicatorColor: ThemeManager.second,
+                      indicatorBackgroundColor:
+                          Color.fromRGBO(172, 166, 157, 1),
+                      children: [
+                        Image.asset(
+                          'assets/images/img_png/slider1.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          'assets/images/img_png/slider1.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          'assets/images/img_png/slider1.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                      autoPlayInterval: 3000,
+                      isLoop: true,
+                    ),
                   ),
-                  Image.network(
-                    'https://th.bing.com/th/id/OIP.XW8L0hrGaMGOZjKCmILZJQHaEq?rs=1&pid=ImgDetMain',
-                    fit: BoxFit.cover,
+                  Positioned(
+                    top: 2,
+                    right: 2,
+                    child: IconButton(
+                      icon: Icon(
+                          color: ThemeManager.second,
+                          Icons.favorite_outline_sharp),
+                      onPressed: () {
+                        //back
+                      },
+                    ),
                   ),
-                  Image.network(
-                    'https://th.bing.com/th/id/OIP.XW8L0hrGaMGOZjKCmILZJQHaEq?rs=1&pid=ImgDetMain',
-                    fit: BoxFit.cover,
+                  Positioned(
+                    bottom: 168,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Text(
+                        'Am aljamal',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: ThemeManager.second,
+                          fontFamily: 'KohSantepheap',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
-
-                autoPlayInterval: 3000,
-                isLoop: true,
               ),
               SizedBox(
-                height: 10,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.018,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Events',
-                    style: TextStyle(
-                      color: ThemeManager.primary,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.025,
+                  InkWell(
+                    child: Text(
+                      'Events',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'KohSantepheap',
+                        color: ThemeManager.primary,
+                        fontSize:
+                            LayoutManager.widthNHeight0(context, 0) * 0.015,
+                        shadows: const [
+                          Shadow(
+                            color: Colors.grey,
+                            blurRadius: 0.01,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   InkWell(
                     //BACK
-                    child: Text(
-                      'See All',
-                      style: TextStyle(
-                        color: ThemeManager.primary,
-                        fontSize:
-                            LayoutManager.widthNHeight0(context, 0) * 0.025,
+                    child: Padding(
+                      padding:  EdgeInsets.only(right: LayoutManager.widthNHeight0(context, 1) * 0.02),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'KohSantepheap',
+                          color: ThemeManager.primary,
+                          fontSize:
+                              LayoutManager.widthNHeight0(context, 0) * 0.015,
+                          shadows: const [
+                            Shadow(
+                              color: Colors.grey,
+                              blurRadius: 0.01,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   )
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.02,
               ),
               Container(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.25,
@@ -167,19 +256,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.network(
-                      'https://th.bing.com/th/id/OIP.XW8L0hrGaMGOZjKCmILZJQHaEq?rs=1&pid=ImgDetMain',
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.25,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.asset(
+                        'assets/images/img_png/event1.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                   SizedBox(width: 20,),
-                   Column(
-
-                     children: [
-                       Text("***********"),
-                       Text("AAAAAAAAAAZZZZZZZZZZ"),
-                       Text("QQQQQQZ")
-                     ],
-                   )
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                            
+                            ),
+                          ),
+                          SizedBox(
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.02,
+                          ),
+                          Text(
+                            'Open ⋅ Closes 10 PM',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                            
+                            ),
+                          ),
+                          SizedBox(
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.02,
+                          ),
+                          Text(
+                            'Address: Khaled Al-Walid Amman',
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                             
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -195,23 +331,69 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.network(
-                      'https://th.bing.com/th/id/OIP.XW8L0hrGaMGOZjKCmILZJQHaEq?rs=1&pid=ImgDetMain',
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.25,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.asset(
+                        'assets/images/img_png/event2.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    SizedBox(width: 20,),
-                    Column(
-
-                      children: [
-                        Text("***********"),
-                        Text("AAAAAAAAAAZZZZZZZZZZ"),
-                        Text("QQQQQQZ")
-                      ],
-                    )
+                    SizedBox(
+                      width: 20,
+                    ),
+                   Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                             
+                            ),
+                          ),
+                          SizedBox(
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.02,
+                          ),
+                          Text(
+                            'Open ⋅ Closes 10 PM',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                            
+                            ),
+                          ),
+                          SizedBox(
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.02,
+                          ),
+                          Text(
+                            'Address: Khaled Al-Walid Amman',
+                            style: TextStyle(
+                              fontFamily: 'KohSantepheap',
+                              color: ThemeManager.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 0) *
+                                      0.013,
+                            
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
-
             ],
           ),
         ),

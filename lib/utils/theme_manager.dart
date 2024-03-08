@@ -5,6 +5,7 @@ class ThemeManager {
   static Color second = const Color(0xffF7F3EE);//xffF0F2F6
 
   static Color background = const Color(0xffF0F2F6);//xffF0F2F6
+  static Color textColor=const Color(0xff31221D);//31221D
 
 }
 
