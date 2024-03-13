@@ -87,7 +87,6 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 TextButton(
                   onPressed: () {
                     log(questionController.text);
-                    // Write this code in the context to save the question
                     // Create a question model
                     // QuestionModel(questionTxt: questionController.text, writerName: userModel, date: DateTime.now(), writtenByExpert: userModelExpert)
                     // State management
