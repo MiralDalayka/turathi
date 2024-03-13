@@ -3,14 +3,14 @@ import 'package:turathi/utils/layoutManager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 
-class secondBox extends StatefulWidget {
-  const secondBox({super.key});
+class SecondBox extends StatefulWidget {
+  const SecondBox({super.key});
 
   @override
-  State<secondBox> createState() => _secondBox();
+  State<SecondBox> createState() => _secondBox();
 }
 
-class _secondBox extends State<secondBox> {
+class _secondBox extends State<SecondBox> {
   @override
   Widget build(BuildContext context) {
     return Container(

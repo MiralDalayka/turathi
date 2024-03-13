@@ -5,6 +5,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../../utils/layoutManager.dart';
 import '../../utils/theme_manager.dart';
+import '../widgets/add_button.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -96,19 +97,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize:
                               LayoutManager.widthNHeight0(context, 0) * 0.0175),
                     ),
-                    CircleAvatar(
-                      backgroundColor: ThemeManager.primary,
-                      radius: LayoutManager.widthNHeight0(context, 0) * 0.033,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.add,
-                          color: ThemeManager.second,
-                        ),
-                        onPressed: () {
-                          //BACK
-                        },
-                      ),
-                    )
+                    AddButton(onPressed: (){
+                      //BACK
+                    },)
                   ],
                 ),
               ),

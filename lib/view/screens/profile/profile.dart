@@ -84,7 +84,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.035,
                   ),
-                  const secondBox(),
+                  const SecondBox(),
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.035,
                   ),
