@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/comment_model.dart';
 
-import '../../utils/layoutManager.dart';
-import '../../utils/theme_manager.dart';
+import '../../../../utils/layoutManager.dart';
+import '../../../../utils/theme_manager.dart';
 
 class CommentBox extends StatelessWidget {
   const CommentBox({super.key, required this.comment});
