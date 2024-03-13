@@ -8,6 +8,7 @@ import 'package:turathi/view/screens/community_screens/community_screen.dart';
 import '../../../core/models/comment_model.dart';
 import '../../../utils/layoutManager.dart';
 import '../../widgets/add_button.dart';
+import '../../widgets/back_arrow_button.dart';
 import '../../widgets/comment_box.dart';
 import 'comment_dialog.dart';
 
@@ -29,6 +30,7 @@ class _QuestionViewState extends State<QuestionView> {
     double left = 15;
     return Stack(
       children: <Widget>[
+
         SizedBox(
           height: height,
           width: double.infinity,
@@ -103,7 +105,7 @@ class _QuestionViewState extends State<QuestionView> {
           bottom: 20,
           right: 20,
           child: AddButton(onPressed: (){
-            //show dialog
+            //controller //BACK
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -111,7 +113,11 @@ class _QuestionViewState extends State<QuestionView> {
               },
             );
           }),
-        )
+        ),
+        Positioned(
+            top: 10,
+            left: left,
+            child: BackArrowButton(color: Colors.white,)),
       ],
     );
   }

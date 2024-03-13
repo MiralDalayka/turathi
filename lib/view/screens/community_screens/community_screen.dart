@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/widgets/add_button.dart';
 
 import '../../../core/models/question_model.dart';
 import '../../../utils/layoutManager.dart';
+import '../../widgets/back_arrow_button.dart';
 import '../../widgets/question_box.dart';
+import '../../widgets/question_dialog.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -16,8 +19,17 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: AddButton(onPressed: (){
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return QuestionDialog();
+          },
+        );
+      },),
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
+        leading: BackArrowButton(color:  ThemeManager.primary,),
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.06,
         title: Text(
