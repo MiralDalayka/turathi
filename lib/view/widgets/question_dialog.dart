@@ -8,7 +8,7 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/community_screens/question_view.dart';
 
 class QuestionDialog extends StatefulWidget {
-  const QuestionDialog({super.key});
+  const QuestionDialog({Key? key}) : super(key: key);
 
   @override
   State<QuestionDialog> createState() => _QuestionDialogState();
@@ -16,16 +16,17 @@ class QuestionDialog extends StatefulWidget {
 
 class _QuestionDialogState extends State<QuestionDialog> {
   final TextEditingController questionController = TextEditingController();
-   late XFile image ;
-
-  // Function to pick an image from the gallery
+   XFile? image;
+//controller
   Future<void> _pickImage() async {
     final imagePicker = ImagePicker();
     final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
-      image = pickedImage!;
-    });
+    if (pickedImage != null) {
+      setState(() {
+        image = pickedImage;
+      });
+    }
   }
 
   @override
@@ -53,22 +54,23 @@ class _QuestionDialogState extends State<QuestionDialog> {
               decoration: InputDecoration(
                 hintText: 'Ask your question here...',
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ThemeManager.primary)),
+                  borderSide: BorderSide(color: ThemeManager.primary),
+                ),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ThemeManager.primary)),
+                  borderSide: BorderSide(color: ThemeManager.primary),
+                ),
               ),
             ),
             const SizedBox(height: 20),
-            const SizedBox(height: 20),
+
             image != null
-                ? Image.file(File(image.path))
+                ? Image.file(File(image!.path))
                 : const Text('No image selected.'),
             ElevatedButton(
               onPressed: _pickImage,
               child: const Text('Pick Image'),
             ),
             const SizedBox(height: 20),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -76,7 +78,10 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child:  Text('Cancel',style: ThemeManager.textStyle,),
+                  child: Text(
+                    'Cancel',
+                    style: ThemeManager.textStyle,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 TextButton(
