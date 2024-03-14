@@ -7,7 +7,7 @@ import 'package:turathi/view/screens/home_screen.dart';
 import 'package:turathi/view/screens/profile/profile.dart';
 import 'package:turathi/view/screens/splach_screen/splachScreen.dart';
 import 'package:turathi/view/widgets/custom_bottom_nav_bar.dart';
-import 'package:turathi/view/widgets/question_box.dart';
+import 'package:turathi/view/screens/community_screens/widgets/question_box.dart';
 
 void main() {
   runApp(const MyApp());

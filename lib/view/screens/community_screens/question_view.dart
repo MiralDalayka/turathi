@@ -9,8 +9,8 @@ import '../../../core/models/comment_model.dart';
 import '../../../utils/layoutManager.dart';
 import '../../widgets/add_button.dart';
 import '../../widgets/back_arrow_button.dart';
-import '../../widgets/comment_box.dart';
-import 'comment_dialog.dart';
+import 'widgets/comment_box.dart';
+import 'widgets/comment_dialog.dart';
 
 class QuestionView extends StatefulWidget {
   const QuestionView({super.key, required this.question});
