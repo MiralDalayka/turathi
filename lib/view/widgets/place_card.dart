@@ -1,7 +1,4 @@
-// ignore_for_file: use_super_parameters
-
 import 'package:flutter/material.dart';
-
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layoutManager.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -10,7 +7,6 @@ class PlaceCard extends StatefulWidget {
   const PlaceCard({
     Key? key,
     this.width = 300,
-
     this.aspectRatio = 0.7,
     required this.onPress,
     required this.placeModel,
@@ -23,11 +19,18 @@ class PlaceCard extends StatefulWidget {
   final Function(bool isFavourite) onFavoriteChanged;
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ProductCardState createState() => _ProductCardState();
+  _PlaceCardState createState() => _PlaceCardState();
 }
 
-class _ProductCardState extends State<PlaceCard> {
+class _PlaceCardState extends State<PlaceCard> {
+  bool isFavourite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavourite = widget.placeModel.isFavourite;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,17 +48,12 @@ class _ProductCardState extends State<PlaceCard> {
                     child: Stack(
                       children: [
                         ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.asset(
-                              "assets/images/img_png/place1.png",
-                              fit: BoxFit.fill,
-                            )
-                            // Image.network(
-                            //   widget.placeModel.images[0],
-
-                            // ),
-                            ),
-
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            "assets/images/img_png/place1.png",
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                         Positioned(
                           top: LayoutManager.widthNHeight0(context, 0) * 0.18,
                           left: LayoutManager.widthNHeight0(context, 1) * 0.088,
@@ -71,18 +69,20 @@ class _ProductCardState extends State<PlaceCard> {
                           ),
                         ),
                         Positioned(
-                          top: LayoutManager.widthNHeight0(context, 0) * 0.215,
-                          left: LayoutManager.widthNHeight0(context, 1) * 0.35,
-                          child: Icon(
-                             widget.placeModel.isFavourite
-                             ? Icons.favorite
-                            :Icons.favorite_border_outlined ,
-                          
-                            size:
-                                LayoutManager.widthNHeight0(context, 1) * 0.065,
-                            color: widget.placeModel.isFavourite
-                                ? const Color(0xFFA74040)
-                                : ThemeManager.second
+                          top: LayoutManager.widthNHeight0(context, 0) * 0.2,
+                          left: LayoutManager.widthNHeight0(context, 1) * 0.33,
+                          child: IconButton(
+                            icon: Icon(
+                              isFavourite ? Icons.favorite : Icons.favorite_border_outlined,
+                              size: LayoutManager.widthNHeight0(context, 1) * 0.065,
+                              color: isFavourite ? const Color(0xFFA74040) : ThemeManager.second,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isFavourite = !isFavourite;
+                                widget.onFavoriteChanged(isFavourite);
+                              });
+                            },
                           ),
                         ),
                       ],
@@ -90,12 +90,9 @@ class _ProductCardState extends State<PlaceCard> {
                   ),
                 ),
               ),
-             
-              
             ],
           ),
         ),
-        
       ],
     );
   }

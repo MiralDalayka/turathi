@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/models/question_model.dart';
 import 'package:turathi/view/screens/community_screens/community_screen.dart';
 import 'package:turathi/view/screens/community_screens/question_view.dart';
-import 'package:turathi/view/screens/favorite_screens/FavoriteScreen.dart';
+import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
 import 'package:turathi/view/screens/home_screen.dart';
-import 'package:turathi/view/screens/profile/profile.dart';
+import 'package:turathi/view/screens/location_screens/location_Screen.dart';
+import 'package:turathi/view/screens/profile_screens/profile.dart';
 import 'package:turathi/view/screens/splach_screen/splachScreen.dart';
 import 'package:turathi/view/widgets/custom_bottom_nav_bar.dart';
 import 'package:turathi/view/screens/community_screens/widgets/question_box.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
           "profileScreen": (context) => const ProfileScreen(),
           "communityScreen": (context) => const CommunityScreen(),
           "favoriteScreen": (context) => const FavoriteScreen(),
+          "locationPage": (context) => const LocationPage(),
+
 
         },
         onGenerateRoute: (settings) {

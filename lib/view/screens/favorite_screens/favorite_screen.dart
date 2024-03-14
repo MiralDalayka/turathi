@@ -43,29 +43,32 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 children: [
                   if (favoritePlaces.isEmpty)
                     Center(
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20),
-                          Text(
-                            "SAVE YOUR FAVOURITE PLACE NOW!",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: ThemeManager.primary,
-                              fontFamily: "KohSantepheap",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
+                      child: Padding(
+                        padding:  EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1)*0.45),
+                        child: Column(
+                          children: [
+                            SizedBox(height:  LayoutManager.widthNHeight0(context, 1)*0.02),
+                            Text(
+                              "SAVE YOUR FAVOURITE PLACE NOW!",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: ThemeManager.primary,
+                                fontFamily: "KohSantepheap",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "It looks like you haven’t added any favourite place just yet.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: "KohSantepheap",
-                              fontSize: 16,
+                            SizedBox(height:  LayoutManager.widthNHeight0(context, 1)*0.025),
+                            Text(
+                              "It looks like you haven’t added any favourite place just yet.",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: "KohSantepheap",
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     )
                   else

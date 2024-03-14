@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layoutManager.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/profile/first_box/firstBox.dart';
-import 'package:turathi/view/screens/profile/second_box/secondBox.dart';
-import 'package:turathi/view/screens/profile/third_box/thirdBox.dart';
+import 'package:turathi/view/screens/profile_screens/first_box/firstBox.dart';
+import 'package:turathi/view/screens/profile_screens/second_box/secondBox.dart';
+import 'package:turathi/view/screens/profile_screens/third_box/thirdBox.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key});
