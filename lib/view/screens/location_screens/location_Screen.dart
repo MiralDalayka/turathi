@@ -68,7 +68,10 @@ class _Location_PageState extends State<LocationPage>
               child: TabBar(
                 controller: tabController,
                 labelStyle: TextStyle(fontSize: 12, color: ThemeManager.primary, fontWeight: FontWeight.bold, fontFamily: 'KohSantepheap'), // Make text bold
-                indicatorColor: ThemeManager.primary,
+                indicatorColor: ThemeManager.second,
+                labelColor: ThemeManager.primary,
+                unselectedLabelColor: Colors.grey,
+                dividerColor:ThemeManager.second ,
                 tabs: [
                   Tab(text: 'My Location'),
                   Tab(text: 'Nearest Place'),
