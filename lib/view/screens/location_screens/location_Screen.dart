@@ -22,9 +22,7 @@ class _Location_PageState extends State<LocationPage>
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
-    log("not yet");
     tabController.addListener(_tabControllerListener);
-    log('done');
   }
 
   @override
