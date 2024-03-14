@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/models/question_model.dart';
 import 'package:turathi/view/screens/community_screens/community_screen.dart';
 import 'package:turathi/view/screens/community_screens/question_view.dart';
+import 'package:turathi/view/screens/favorite_screens/FavoriteScreen.dart';
 import 'package:turathi/view/screens/home_screen.dart';
 import 'package:turathi/view/screens/profile/profile.dart';
 import 'package:turathi/view/screens/splach_screen/splachScreen.dart';
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
           "homeScreen": (context) => const HomeScreen(),
           "profileScreen": (context) => const ProfileScreen(),
           "communityScreen": (context) => const CommunityScreen(),
+          "favoriteScreen": (context) => const FavoriteScreen(),
+
         },
         onGenerateRoute: (settings) {
           if (settings.name == 'questionView') {

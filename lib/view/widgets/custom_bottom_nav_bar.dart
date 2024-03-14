@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/view/screens/favorite_screens/FavoriteScreen.dart';
 import 'package:turathi/view/screens/profile/profile.dart';
 
 import '../screens/community_screens/community_screen.dart';
@@ -127,5 +128,5 @@ class CustomeBottomNavBar extends StatelessWidget {
 
 class NavigationController extends GetxController {
   final Rx<int> selectedIndex = 0.obs; 
-  final screens = [HomeScreen(),CommunityScreen(), ProfileScreen()];
+  final screens = [HomeScreen(),CommunityScreen(), ProfileScreen(),FavoriteScreen()];
 }
