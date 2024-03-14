@@ -50,7 +50,7 @@ class _Location_PageState extends State<LocationPage>
               color: ThemeManager.primary,
             ),
             onPressed: () {
-           //back
+              //back
             },
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
           ),
@@ -60,21 +60,27 @@ class _Location_PageState extends State<LocationPage>
       body: Container(
         color: ThemeManager.background,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HeaderPart(),
-            TabBar(
-              controller: tabController,
-              tabs: [
-                Tab(text: 'My Location'),
-                Tab(text: 'Nearest Place'),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(right: 160.0),
+              child: TabBar(
+                controller: tabController,
+                labelStyle: TextStyle(fontSize: 12, color: ThemeManager.primary, fontWeight: FontWeight.bold, fontFamily: 'KohSantepheap'), // Make text bold
+                indicatorColor: ThemeManager.primary,
+                tabs: [
+                  Tab(text: 'My Location'),
+                  Tab(text: 'Nearest Place'),
+                ],
+              ),
             ),
             Expanded(
               child: isTabControllerInitialized
                   ? TabBarView(
                       controller: tabController,
                       children: [
-                          BodyPlaces(tab: 'My Location'),
+                        BodyPlaces(tab: 'My Location'),
                         BodyPlaces(tab: 'Nearest Place'),
                       ],
                     )

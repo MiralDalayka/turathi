@@ -25,7 +25,10 @@ class _BodyPlacesState extends State<BodyPlaces> {
     int crossAxisCount = MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
     return Padding(
-      padding: EdgeInsets.all(
+      padding: EdgeInsets.only(
+       left: 
+        LayoutManager.widthNHeight0(context, 1) * 0.05,
+        right:  
         LayoutManager.widthNHeight0(context, 1) * 0.05,
       ),
       child: GridView.builder(

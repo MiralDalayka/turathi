@@ -113,7 +113,7 @@ class _HeaderPartState extends State<HeaderPart> {
                     ),
                   ),
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 0) * 0.014,
+                    height: LayoutManager.widthNHeight0(context, 0) * 0.005,
                   ),
                 ],
               ),
