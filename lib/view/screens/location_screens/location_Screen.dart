@@ -54,17 +54,16 @@ class _Location_PageState extends State<LocationPage>
             },
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
           ),
-          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
         ],
       ),
       body: Container(
         color: ThemeManager.background,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             HeaderPart(),
             Padding(
-              padding: const EdgeInsets.only(right: 160.0),
+              padding: const EdgeInsets.only(right: 0),//50//
               child: TabBar(
                 controller: tabController,
                 labelStyle: TextStyle(fontSize: 12, color: ThemeManager.primary, fontWeight: FontWeight.bold, fontFamily: 'KohSantepheap'), // Make text bold
