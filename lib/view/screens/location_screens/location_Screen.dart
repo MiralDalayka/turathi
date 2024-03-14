@@ -14,7 +14,7 @@ class LocationPage extends StatefulWidget {
 class _Location_PageState extends State<LocationPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
-  bool isTabControllerInitialized = false;
+  bool isTabControllerInitialized = true;
 
   @override
   void initState() {
