@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class PlaceCard extends StatefulWidget {

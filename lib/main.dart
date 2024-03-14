@@ -6,7 +6,7 @@ import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
 import 'package:turathi/view/screens/home_screen.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/screens/profile_screens/profile.dart';
-import 'package:turathi/view/screens/splach_screen/splachScreen.dart';
+import 'package:turathi/view/screens/splach_screen/splach_screen.dart';
 import 'package:turathi/view/widgets/custom_bottom_nav_bar.dart';
 import 'package:turathi/view/screens/community_screens/widgets/question_box.dart';
 

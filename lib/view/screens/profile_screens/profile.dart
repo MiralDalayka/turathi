@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/profile_screens/first_box/firstBox.dart';
 import 'package:turathi/view/screens/profile_screens/second_box/secondBox.dart';

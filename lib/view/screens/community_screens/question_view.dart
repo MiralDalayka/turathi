@@ -6,7 +6,7 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/community_screens/community_screen.dart';
 
 import '../../../core/models/comment_model.dart';
-import '../../../utils/layoutManager.dart';
+import '../../../utils/layout_manager.dart';
 import '../../widgets/add_button.dart';
 import '../../widgets/back_arrow_button.dart';
 import 'widgets/comment_box.dart';

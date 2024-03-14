@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/screens/profile_screens/profile.dart';

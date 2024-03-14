@@ -3,7 +3,7 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/add_button.dart';
 
 import '../../../core/models/question_model.dart';
-import '../../../utils/layoutManager.dart';
+import '../../../utils/layout_manager.dart';
 import '../../widgets/back_arrow_button.dart';
 import 'widgets/question_box.dart';
 import 'widgets/question_dialog.dart';

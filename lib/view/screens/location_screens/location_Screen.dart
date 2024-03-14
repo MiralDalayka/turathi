@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/body_Places.dart';
 import 'package:turathi/view/screens/location_screens/location_header.dart';
@@ -20,7 +22,9 @@ class _Location_PageState extends State<LocationPage>
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    log("not yet");
     tabController.addListener(_tabControllerListener);
+    log('done');
   }
 
   @override
@@ -67,11 +71,16 @@ class _Location_PageState extends State<LocationPage>
               padding: const EdgeInsets.only(right: 160.0),
               child: TabBar(
                 controller: tabController,
-                labelStyle: TextStyle(fontSize: 12, color: ThemeManager.primary, fontWeight: FontWeight.bold, fontFamily: 'KohSantepheap'), // Make text bold
+                labelStyle: TextStyle(
+                    fontSize: 12,
+                    color: ThemeManager.primary,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'KohSantepheap'),
+                // Make text bold
                 indicatorColor: ThemeManager.second,
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,
-                dividerColor:ThemeManager.second ,
+                dividerColor: ThemeManager.second,
                 tabs: [
                   Tab(text: 'My Location'),
                   Tab(text: 'Nearest Place'),
@@ -79,16 +88,15 @@ class _Location_PageState extends State<LocationPage>
               ),
             ),
             Expanded(
-              child: isTabControllerInitialized
-                  ? TabBarView(
-                      controller: tabController,
-                      children: [
-                        BodyPlaces(tab: 'My Location'),
-                        BodyPlaces(tab: 'Nearest Place'),
-                      ],
-                    )
-                  : Center(child: CircularProgressIndicator()),
-            ),
+                child: TabBarView(
+              controller: tabController,
+              children: [
+                BodyPlaces(tab: 'My Location'),
+                isTabControllerInitialized
+                    ? BodyPlaces(tab: 'Nearest Place')
+                    : Center(child: CircularProgressIndicator()),
+              ],
+            )),
           ],
         ),
       ),

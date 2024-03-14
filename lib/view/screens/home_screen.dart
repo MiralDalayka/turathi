@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
-import '../../utils/layoutManager.dart';
+import '../../utils/layout_manager.dart';
 import '../../utils/theme_manager.dart';
 import '../widgets/add_button.dart';
 
