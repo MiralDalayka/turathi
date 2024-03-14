@@ -69,7 +69,7 @@ class _HeaderPartState extends State<HeaderPart> {
                       width: LayoutManager.widthNHeight0(context, 0),
                       decoration: BoxDecoration(
                         color: ThemeManager.second,
-                        borderRadius: const BorderRadius.all(Radius.circular(22)),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.4),
