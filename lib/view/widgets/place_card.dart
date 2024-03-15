@@ -50,7 +50,7 @@ class _PlaceCardState extends State<PlaceCard> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(5),
                           child: Image.asset(
-                            "assets/images/img_png/place1.png",
+                            widget.placeModel.images[0],
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -73,9 +73,14 @@ class _PlaceCardState extends State<PlaceCard> {
                           left: LayoutManager.widthNHeight0(context, 1) * 0.33,
                           child: IconButton(
                             icon: Icon(
-                              isFavourite ? Icons.favorite : Icons.favorite_border_outlined,
-                              size: LayoutManager.widthNHeight0(context, 1) * 0.065,
-                              color: isFavourite ? const Color(0xFFA74040) : ThemeManager.second,
+                              isFavourite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              size: LayoutManager.widthNHeight0(context, 1) *
+                                  0.065,
+                              color: isFavourite
+                                  ? const Color(0xFFA74040)
+                                  : ThemeManager.second,
                             ),
                             onPressed: () {
                               setState(() {

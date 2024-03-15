@@ -45,8 +45,8 @@ List<PlaceModel> demoPlaces = [
     like: 0,
     disLike: 0,
     images: [
-      "assets/images/img_png/place1.png",
-      "assets/images/img_png/place1.png",
+      "assets/images/img_png/Dukes.png",
+      "assets/images/img_png/Dukes.png",
     ],
     title: "Duke's Diwan",
     description: "description",
