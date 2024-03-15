@@ -58,11 +58,11 @@ class _PlaceCardState extends State<PlaceCard> {
                           top: LayoutManager.widthNHeight0(context, 0) * 0.18,
                           left: LayoutManager.widthNHeight0(context, 1) * 0.088,
                           child: Text(
-                            "Am aljamal",
+                            widget.placeModel.title,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 17,
-                              fontFamily: "KohSantepheap",
+                              fontFamily:ThemeManager.fontFamily,
                               color: ThemeManager.second,
                               fontWeight: FontWeight.bold,
                             ),
@@ -72,20 +72,26 @@ class _PlaceCardState extends State<PlaceCard> {
                           top: LayoutManager.widthNHeight0(context, 0) * 0.2,
                           left: LayoutManager.widthNHeight0(context, 1) * 0.33,
                           child: IconButton(
-                            icon: Icon(
-                              isFavourite
+                            icon: 
+                            // Icon(
+                            //   Icons.favorite,
+                            //   size: LayoutManager.widthNHeight0(context, 1) * 0.06,
+                            //   color: widget.placeModel.isFavourite ? const Color(0xFFA74040) : const Color(0xff263238),
+                            // ),
+                            Icon(
+                              widget.placeModel.isFavourite
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined,
                               size: LayoutManager.widthNHeight0(context, 1) *
                                   0.065,
-                              color: isFavourite
+                              color: widget.placeModel.isFavourite
                                   ? const Color(0xFFA74040)
                                   : ThemeManager.second,
                             ),
                             onPressed: () {
                               setState(() {
-                                isFavourite = !isFavourite;
-                                widget.onFavoriteChanged(isFavourite);
+                                widget.placeModel.isFavourite = !widget.placeModel.isFavourite;
+                                widget.onFavoriteChanged(widget.placeModel.isFavourite);
                               });
                             },
                           ),
