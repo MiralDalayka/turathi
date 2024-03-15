@@ -70,7 +70,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
                         favoritePlaces.removeWhere((p) => p.id == placeModel.id);
                       }
                     }
-                  });
+                  }
+                  );
                 },
                 onPress: () {},
               ),

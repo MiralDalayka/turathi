@@ -50,7 +50,7 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: true,
+    isFavourite: false,
     isPopular: false,
   ),
   PlaceModel(
@@ -122,7 +122,7 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: true,
+    isFavourite: false,
     isPopular: false,
   ),
   PlaceModel(
@@ -140,7 +140,7 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: true,
+    isFavourite: false,
     isPopular: false,
   ),
   PlaceModel(
@@ -158,7 +158,7 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: true,
+    isFavourite: false,
     isPopular: false,
   ),
 ];
