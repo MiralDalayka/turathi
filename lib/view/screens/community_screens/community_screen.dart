@@ -19,17 +19,18 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: AddButton(onPressed: (){
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return QuestionDialog();
-          },
-        );
-      },),
+      floatingActionButton: AddButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return QuestionDialog();
+            },
+          );
+        },
+      ),
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
-        leading: BackArrowButton(color:  ThemeManager.primary,),
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.06,
         title: Text(
@@ -73,32 +74,42 @@ class _CommunityScreenState extends State<CommunityScreen> {
   }
 }
 
-var txt = "Nunc dictum facilisis lectus, a cursus tellus vulputate id. In neque lectus, congue dictum accumsan eget, congue venenatis leo. Vestibulum porta quis risus vitae finibus.";
+var txt =
+    "Nunc dictum facilisis lectus, a cursus tellus vulputate id. In neque lectus, congue dictum accumsan eget, congue venenatis leo. Vestibulum porta quis risus vitae finibus.";
 List<QuestionModel> questions = [
   QuestionModel(
       imageUrl:
-      'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
+          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
       title: 'Title',
       writer: 'Alla',
-      id: '1',questionTxt: txt),  QuestionModel(
+      id: '1',
+      questionTxt: txt),
+  QuestionModel(
       imageUrl:
-      'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
+          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
       title: 'Title',
       writer: 'Alla',
-      id: '1',questionTxt: txt),  QuestionModel(
+      id: '1',
+      questionTxt: txt),
+  QuestionModel(
       imageUrl:
-      'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
+          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
       title: 'Title',
       writer: 'Alla',
-      id: '1',questionTxt: txt),  QuestionModel(
+      id: '1',
+      questionTxt: txt),
+  QuestionModel(
       imageUrl:
-      'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
+          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
       title: 'Title',
       writer: 'Alla',
-      id: '1',questionTxt: txt),  QuestionModel(
+      id: '1',
+      questionTxt: txt),
+  QuestionModel(
       imageUrl:
-      'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
+          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
       title: 'Title',
       writer: 'Alla',
-      id: '1',questionTxt: txt),
+      id: '1',
+      questionTxt: txt),
 ];

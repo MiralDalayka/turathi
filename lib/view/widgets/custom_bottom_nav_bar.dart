@@ -128,6 +128,6 @@ class CustomeBottomNavBar extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
-  final Rx<int> selectedIndex = 0.obs; 
-  final screens = [HomeScreen(),CommunityScreen(),LocationPage(),FavoriteScreen(),ProfileScreen()];
+  final Rx<int> selectedIndex = 2.obs; 
+  final screens = [LocationPage(),CommunityScreen(),HomeScreen(),FavoriteScreen(),ProfileScreen()];
 }

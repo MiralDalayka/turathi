@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/view/screens/places_screens/details_place.dart';
+import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
 import 'package:turathi/view/widgets/place_card.dart';
 
 class BodyPlaces extends StatefulWidget {
-  final String tab; 
+  final String tab;
 
   const BodyPlaces({Key? key, required this.tab}) : super(key: key);
 
@@ -14,7 +14,8 @@ class BodyPlaces extends StatefulWidget {
 }
 
 class _BodyPlacesState extends State<BodyPlaces> {
-  List<PlaceModel> favoritePlaces = demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
+  List<PlaceModel> favoritePlaces =
+      demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +23,20 @@ class _BodyPlacesState extends State<BodyPlaces> {
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;
 
-    int crossAxisCount = MediaQuery.of(context).size.width ~/ totalWidth; //number of col
+    int crossAxisCount =
+        MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
     return Padding(
       padding: EdgeInsets.only(
-       left: 
-        LayoutManager.widthNHeight0(context, 1) * 0.05,
-        right:  
-        LayoutManager.widthNHeight0(context, 1) * 0.05,
+        left: LayoutManager.widthNHeight0(context, 1) * 0.05,
+        right: LayoutManager.widthNHeight0(context, 1) * 0.05,
       ),
       child: GridView.builder(
         itemCount: demoPlaces.length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
-          childAspectRatio: cardWidth / (cardWidth + 65), 
+          childAspectRatio: cardWidth / (cardWidth + 65),
           mainAxisSpacing: 1,
           crossAxisSpacing: 10,
         ),
@@ -47,7 +47,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailsScreen(placeModel: demoPlaces[index]),
+                  builder: (context) =>
+                      DetailsScreen(placeModel: demoPlaces[index]),
                 ),
               );
             },
@@ -57,7 +58,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
                 placeModel: placeModel,
                 onFavoriteChanged: (bool isFavourite) {
                   setState(() {
-                    final productIndex = demoPlaces.indexWhere((p) => p.id == placeModel.id);
+                    final productIndex =
+                        demoPlaces.indexWhere((p) => p.id == placeModel.id);
 
                     if (isFavourite) {
                       if (productIndex != -1) {
@@ -67,13 +69,22 @@ class _BodyPlacesState extends State<BodyPlaces> {
                     } else {
                       if (productIndex != -1) {
                         demoPlaces[productIndex].isFavourite = false;
-                        favoritePlaces.removeWhere((p) => p.id == placeModel.id);
+                        favoritePlaces
+                            .removeWhere((p) => p.id == placeModel.id);
                       }
                     }
-                  }
+                  });
+                },
+                onPress: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailsScreen(
+                        placeModel: placeModel,
+                      ),
+                    ),
                   );
                 },
-                onPress: () {},
               ),
             ),
           );
