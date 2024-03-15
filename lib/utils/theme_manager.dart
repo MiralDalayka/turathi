@@ -6,6 +6,8 @@ class ThemeManager {
 
   static Color background = const Color(0xffF0F2F6); //xffF0F2F6
   static Color textColor = const Color(0xff31221D); //31221D
+  static Color containerback = const Color(0xffE2D1B9); //E2D1B9
+
 
   static String fontFamily = 'KohSantepheap';
   static TextStyle textStyle = TextStyle(

@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 class PlaceModel {
   final String ussid; // user id
   final String id;
-  final String title, description, status, location;
+  final String title, description, status, location, type, distance;
   final List<String> commentsPlace;
   final List<dynamic> images;
+  final int comments_counter;
   final int like, disLike;
   bool isFavourite, isPopular;
   double long, late;
@@ -17,9 +18,12 @@ class PlaceModel {
     required this.images,
     required this.commentsPlace,
     required this.title,
+    required this.distance,
+ this.comments_counter=0,
     required this.id,
     required this.description,
     required this.status,
+    required this.type,
     required this.location,
     this.like = 0,
     this.disLike = 0,
@@ -36,11 +40,14 @@ class PlaceModel {
 
 List<PlaceModel> demoPlaces = [
   PlaceModel(
+    comments_counter: 100,
+    type: "New Place",
     long: 31.895647,
     late: 35.894724,
+    distance: "10",
     id: "1",
     commentsPlace: ["something", "somethig"],
-    status: "Close",
+    status: "Closed for maintenance",
     location: "Amman , Downtown ",
     like: 0,
     disLike: 0,
@@ -49,13 +56,16 @@ List<PlaceModel> demoPlaces = [
       "assets/images/img_png/Dukes.png",
     ],
     title: "Duke's Diwan",
-    description: "description",
+    description: "The Duke's Diwan is an arts and cultural center and historic house museum. Located on King Faisal Street in downtown Amman, it is housed in one of the city's oldest buildings. Built in 1924 as Amman's first post office, the building later became the Finance Ministry, and then the Haifa Hotel from 1948 to 1998 it was rented by Mamdouh Bisharat, a Jordanian heritage conservationist and businessman, at double its price to prevent the building's owners from knocking it down. Bisharat",
     isFavourite: false,
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
+    type: "New Place",
+    distance: "10",
     id: "2",
     commentsPlace: ["something", "somethig"],
     status: "Close",
@@ -72,8 +82,11 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
+    distance: "10",
+    type: "New Place",
     id: "3",
     commentsPlace: ["something", "somethig"],
     status: "Close",
@@ -90,9 +103,12 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
     id: "4",
+    distance: "10",
+    type: "New Place",
     commentsPlace: ["something", "somethig"],
     status: "Close",
     location: "Amman",
@@ -108,8 +124,11 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
+    type: "New Place",
+    distance: "10",
     id: "5",
     commentsPlace: ["something", "somethig"],
     status: "Close",
@@ -126,7 +145,10 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
+    type: "New Place",
+    distance: "10",
     late: 35.894724,
     id: "6",
     commentsPlace: ["something", "somethig"],
@@ -144,8 +166,11 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
+    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
+    distance: "10",
+    type: "New Place",
     id: "7",
     commentsPlace: ["something", "somethig"],
     status: "Close",
