@@ -10,7 +10,7 @@ import 'package:turathi/view/widgets/back_arrow_button.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
- 
+
   final PlaceModel placeModel;
 
   @override
@@ -24,40 +24,42 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var height = LayoutManager.widthNHeight0(context, 0) * 0.35;
-double left = 15;
+    var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
+    double left = 20;
     return Stack(
       children: <Widget>[
-
         SizedBox(
           height: height,
           width: double.infinity,
           child: Image.asset(
             widget.placeModel.images[0],
             fit: BoxFit.cover,
+            color: Colors.black.withOpacity(0.1),
+            colorBlendMode: BlendMode.darken,
           ),
         ),
         Positioned(
-          top: height - 120,
+          top: height - 110,
           left: left,
           child: Text(
-           " widget.question.title!,",
+            widget.placeModel.title,
             style: TextStyle(
                 fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.second,
-                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.04,
+                fontWeight: FontWeight.w700,
+                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.032,
                 decoration: TextDecoration.none),
           ),
         ),
         Positioned(
-          top: height - 70,
+          top: height - 65,
           left: left,
           child: Text(
-         "   widget.question.writer!,",
+            widget.placeModel.location,
             style: TextStyle(
                 // fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.second,
-                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
+                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
                 decoration: TextDecoration.none),
           ),
         ),
@@ -74,17 +76,16 @@ double left = 15;
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Column(
-                  children: [
-                   
-                  ],
+                  children: [],
                 ),
               ),
             )),
-      
         Positioned(
-            top: 10,
-            left: 15,
-            child: BackArrowButton(color: Colors.white,)),
+            top: 30,
+            left: 10,
+            child: BackArrowButton(
+              color: Colors.white,
+            )),
       ],
     );
   }

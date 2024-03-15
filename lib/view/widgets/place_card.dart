@@ -48,12 +48,13 @@ class _PlaceCardState extends State<PlaceCard> {
                     child: Stack(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.asset(
-                            widget.placeModel.images[0],
-                            fit: BoxFit.fill,
-                          ),
-                        ),
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.asset(
+                              widget.placeModel.images[0],
+                              fit: BoxFit.fill,
+                              color: Colors.black.withOpacity(0.15),
+                              colorBlendMode: BlendMode.darken,
+                            )),
                         Positioned(
                           top: LayoutManager.widthNHeight0(context, 0) * 0.18,
                           left: LayoutManager.widthNHeight0(context, 1) * 0.088,
@@ -61,8 +62,15 @@ class _PlaceCardState extends State<PlaceCard> {
                             widget.placeModel.title,
                             textAlign: TextAlign.center,
                             style: TextStyle(
+                              shadows: const [
+                                Shadow(
+                                  color: Colors.black,
+                                  blurRadius: 2,
+                                  offset: Offset(3, 3),
+                                ),
+                              ],
                               fontSize: 17,
-                              fontFamily:ThemeManager.fontFamily,
+                              fontFamily: ThemeManager.fontFamily,
                               color: ThemeManager.second,
                               fontWeight: FontWeight.bold,
                             ),
@@ -72,13 +80,7 @@ class _PlaceCardState extends State<PlaceCard> {
                           top: LayoutManager.widthNHeight0(context, 0) * 0.2,
                           left: LayoutManager.widthNHeight0(context, 1) * 0.33,
                           child: IconButton(
-                            icon: 
-                            // Icon(
-                            //   Icons.favorite,
-                            //   size: LayoutManager.widthNHeight0(context, 1) * 0.06,
-                            //   color: widget.placeModel.isFavourite ? const Color(0xFFA74040) : const Color(0xff263238),
-                            // ),
-                            Icon(
+                            icon: Icon(
                               widget.placeModel.isFavourite
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined,
@@ -90,8 +92,10 @@ class _PlaceCardState extends State<PlaceCard> {
                             ),
                             onPressed: () {
                               setState(() {
-                                widget.placeModel.isFavourite = !widget.placeModel.isFavourite;
-                                widget.onFavoriteChanged(widget.placeModel.isFavourite);
+                                widget.placeModel.isFavourite =
+                                    !widget.placeModel.isFavourite;
+                                widget.onFavoriteChanged(
+                                    widget.placeModel.isFavourite);
                               });
                             },
                           ),

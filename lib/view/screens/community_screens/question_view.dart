@@ -28,6 +28,7 @@ class _QuestionViewState extends State<QuestionView> {
     //cotroller
     comments.sort((a, b) => b.writtenByExpert!.compareTo(a.writtenByExpert!));
     double left = 15;
+    double icon_left=10;
     return Stack(
       children: <Widget>[
 
@@ -35,6 +36,8 @@ class _QuestionViewState extends State<QuestionView> {
           height: height,
           width: double.infinity,
           child: Image.network(
+              color: Colors.black.withOpacity(0.2),
+            colorBlendMode: BlendMode.darken,
             widget.question.imageUrl!,
             fit: BoxFit.cover,
           ),
@@ -115,8 +118,8 @@ class _QuestionViewState extends State<QuestionView> {
           }),
         ),
         Positioned(
-            top: 10,
-            left: left,
+            top: 25,
+            left: icon_left,
             child: BackArrowButton(color: Colors.white,)),
       ],
     );

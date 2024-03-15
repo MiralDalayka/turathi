@@ -41,7 +41,7 @@ List<PlaceModel> demoPlaces = [
     id: "1",
     commentsPlace: ["something", "somethig"],
     status: "Close",
-    location: "Amman",
+    location: "Amman , Downtown ",
     like: 0,
     disLike: 0,
     images: [
