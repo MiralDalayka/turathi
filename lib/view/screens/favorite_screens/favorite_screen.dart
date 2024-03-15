@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/utils/layoutManager.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/places_screens/details_place.dart';
 import 'package:turathi/view/widgets/place_card.dart';
