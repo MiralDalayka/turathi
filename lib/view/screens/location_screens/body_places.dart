@@ -13,15 +13,12 @@ class BodyPlaces extends StatefulWidget {
   State<BodyPlaces> createState() => _BodyPlacesState();
 }
 
-
 class _BodyPlacesState extends State<BodyPlaces> {
-    List<PlaceModel> favoritePlaces =
+  List<PlaceModel> favoritePlaces =
       demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
 
- 
   @override
   Widget build(BuildContext context) {
-
     double cardWidth = 150;
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;

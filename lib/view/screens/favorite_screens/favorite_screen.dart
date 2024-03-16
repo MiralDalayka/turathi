@@ -112,6 +112,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   }
                                 }
                               });
+
                             },
                           );
                         },
