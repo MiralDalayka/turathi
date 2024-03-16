@@ -8,7 +8,6 @@ import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/screens/profile_screens/profile.dart';
 import 'package:turathi/view/screens/splach_screen/splach_screen.dart';
 import 'package:turathi/view/widgets/custom_bottom_nav_bar.dart';
-import 'package:turathi/view/screens/community_screens/widgets/question_box.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +16,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

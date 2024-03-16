@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/back_arrow_button.dart';
+import 'package:turathi/view/widgets/deff_button%203.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
@@ -14,8 +16,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  int selectedImage = 0;
-
   Key? get key => null;
 
   @override
@@ -85,22 +85,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
                           color: ThemeManager.primary,
                           decoration: TextDecoration.none,
                           shadows: [
                             Shadow(
-                              color: Colors.black.withOpacity(0.5),
-                              blurRadius: 3,
-                              offset: Offset(1, 1),
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 2,
+                              offset: Offset(-1, 1),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                ),
+                ), //
               ],
             )),
         Positioned(
@@ -153,6 +153,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
+                              SizedBox(
+                                height: 3,
+                              ),
                               Text(
                                 "+${widget.placeModel.distance} Km",
                                 textAlign: TextAlign.center,
@@ -185,6 +188,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
+                              SizedBox(
+                                height: 3,
+                              ),
                               Column(
                                 children: [
                                   Text(
@@ -213,19 +219,28 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 children: [
                                   Column(
                                     children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          print("Thumbs-up clicked ");
-                                        },
-                                        icon: Icon(
-                                          Icons.thumb_up_off_alt_outlined,
-                                          color: ThemeManager.primary,
-                                        ),
-                                      ),
+                                      Container(
+                                          height: 30.0,
+                                          width: 18.0,
+                                          child: new IconButton(
+                                            padding: new EdgeInsets.all(0.0),
+                                            icon: new Image.asset(
+                                                "assets/images/img_png/like.png"),
+
+                                            //  new Icon(
+                                            //   Icons.thumb_up_off_alt_outlined,
+                                            //   size: 18.0,
+                                            //   color: ThemeManager.primary,
+                                            // ),
+                                            onPressed: () {
+                                              print("Thumbs-up clicked ");
+                                            },
+                                          )),
                                       Text(
                                         "${widget.placeModel.like}",
                                         style: TextStyle(
                                           fontSize: 10,
+                                          fontFamily: ThemeManager.fontFamily,
                                           color: ThemeManager.textColor
                                               .withOpacity(0.7),
                                           decoration: TextDecoration.none,
@@ -233,30 +248,44 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       )
                                     ],
                                   ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
                                   Column(
                                     children: [
+                                      SizedBox(
+                                        height: 10,
+                                      ),
                                       Text(
                                         "${widget.placeModel.disLike}",
                                         style: TextStyle(
                                           fontSize: 10,
+                                          fontFamily: ThemeManager.fontFamily,
                                           color: ThemeManager.textColor
                                               .withOpacity(0.7),
                                           decoration: TextDecoration.none,
                                         ),
                                       ),
-                                      IconButton(
-                                        onPressed: () {
-                                          print("Thumbs-down clicked ");
-                                        },
-                                        icon: Icon(
-                                          Icons.thumb_down_off_alt_outlined,
-                                          color: ThemeManager.primary,
-                                        ),
-                                      ),
+                                      Container(
+                                          height: 30.0,
+                                          width: 18.0,
+                                          child: new IconButton(
+                                            padding: new EdgeInsets.all(0.0),
+                                            icon: new Image.asset(
+                                                "assets/images/img_png/dislike.png"),
+                                            // new Icon(
+                                            //   Icons.thumb_down_off_alt_outlined,
+                                            //   size: 18.0,
+                                            //   color: ThemeManager.primary,
+                                            // ),
+                                            onPressed: () {
+                                              print("Thumbs-down clicked ");
+                                            },
+                                          )),
                                     ],
                                   ),
                                 ],
-                              )
+                              ),
                             ],
                           )
                         ],
@@ -267,7 +296,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       height: 12,
                     ),
                     Text(
-                      "( ${widget.placeModel.description} )",
+                      "${widget.placeModel.description} ",
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: ThemeManager.textColor.withOpacity(0.7),
@@ -282,21 +311,50 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       height: 20,
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "${widget.placeModel.status}",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            color: ThemeManager.primary,
-                            fontFamily: ThemeManager.fontFamily,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.none,
+                        Container(
+                          width: 150,
+                          child: Text(
+                            "${widget.placeModel.status}",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              color: ThemeManager.primary,
+                              fontFamily: ThemeManager.fontFamily,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none,
+                              shadows: <Shadow>[
+                                Shadow(
+                                  offset: Offset(5.0, 5.0),
+                                  blurRadius: 2.0,
+                                  color: Colors.black.withOpacity(0.25),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        
+                        defaultButton3(
+                          fontSize:
+                              LayoutManager.widthNHeight0(context, 1) * 0.045,
+                          text: 'Show Map',
+                          width: LayoutManager.widthNHeight0(context, 1) * 0.36,
+                          borderRadius: 18,
+                          background: ThemeManager.primary,
+                          textColor: ThemeManager.second,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MapScreenLocation(
+                                    lon: widget.placeModel.long,
+                                    lat: widget.placeModel.late),
+                              ),
+                            );
+                          },
+                          borderWidth: 0,
+                        ),
                       ],
                     )
                   ],
@@ -304,11 +362,87 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
             )),
         Positioned(
-            top: 30,
+            top: 45,
             left: 10,
             child: BackArrowButton(
               color: Colors.white,
             )),
+        Positioned(
+          top: 45,
+          left: 310,
+          child: GestureDetector(
+            onTap: () {
+              //BACK
+              print("Report button");
+            },
+            child: Container(
+              width: 75,
+              height: 25,
+              decoration: BoxDecoration(
+                color: ThemeManager.favIcon.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 0,
+                    blurRadius: 5,
+                    offset: Offset(3, 3),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.all(0),
+                  child: Text(
+                    "Report",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: ThemeManager.fontFamily,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: ThemeManager.second,
+                      decoration: TextDecoration.none,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 2,
+                          offset: Offset(-1, 1),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 80,
+          left: 330,
+          child: GestureDetector(
+            onTap: () {
+              setState(() {
+                widget.placeModel.toggleFavorite();
+              });
+            },
+            child: Container(
+              width: 40,
+              height: 40,
+             
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                 color: ThemeManager.second.withOpacity(0.25),
+              ),
+              child: Icon(
+                Icons.favorite,
+                size: 25,
+                color: widget.placeModel.isFavourite
+                    ? ThemeManager.favIcon
+                    : ThemeManager.second,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

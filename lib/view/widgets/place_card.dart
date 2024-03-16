@@ -48,7 +48,7 @@ class _PlaceCardState extends State<PlaceCard> {
                     child: Stack(
                       children: [
                         ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
                               widget.placeModel.images[0],
                               fit: BoxFit.fill,

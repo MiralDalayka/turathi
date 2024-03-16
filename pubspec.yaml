@@ -44,11 +44,11 @@ dependencies:
   # # Animate
   # show_up_animation: ^2.0.0
   # auto_animated: ^3.0.1
-  # # Google Map
-  # flutter_polyline_points: ^2.0.0
-  # google_maps_flutter: ^2.1.5
-  # geolocator: ^10.1.0
-  # geocoding: ^2.0.4
+  # Google Map
+  flutter_polyline_points: ^2.0.0
+  google_maps_flutter: ^2.1.5
+  geolocator: ^10.1.0
+  geocoding: ^2.0.4
   # # Firebase And Notification 
   # firebase_messaging: ^14.7.4
   # firebase_core: ^2.24.2
