@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,17 +14,6 @@ class MapScreenLocation extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreenLocation> {
-  late GoogleMapController mapController;
-  late CameraPosition cam_pos = CameraPosition(target: LatLng(0, 0));
-
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
-  Set<Marker> markers = {};
-  Set<Polyline> polylines = {};
-
-  MapType currentMapType = MapType.hybrid;
-
   Position? currentLocation;
 
   double? distance;
@@ -34,31 +22,25 @@ class _MapScreenState extends State<MapScreenLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: 
-         Column(
-          children: [
-            SizedBox(
-              height: _getHeight(context),
-              child: GoogleMap(
-                myLocationButtonEnabled: true,
-                zoomControlsEnabled: true,
-                mapType: currentMapType,
-                initialCameraPosition: cam_pos,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                  mapController = controller;
-                  performNearbySearch(controller, 'your_place_type');
-                },
-                markers: markers,
-                polylines: polylines, 
-              ),
+      body: Column(
+        children: [
+          SizedBox(
+            height: _getHeight(context),
+            child: FutureBuilder(
+              future: performNearbySearch(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                       child: CircularProgressIndicator(),
+                      );
+                } else {
+                  return Container();
+                }
+              },
             ),
-        
-           
-          ],
-        ),
-    
+          ),
+        ],
+      ),
     );
   }
 
@@ -66,24 +48,7 @@ class _MapScreenState extends State<MapScreenLocation> {
     return MediaQuery.of(context).size.height * 0.85;
   }
 
-  Future<void> performNearbySearch(
-      GoogleMapController controller, String placeType) async {
-    LatLng currentPosition = LatLng(widget.lon, widget.lat);
-
-    final Marker currentMarker = Marker(
-      markerId: MarkerId("currentPosition"),
-      position: currentPosition,
-      infoWindow: InfoWindow(title: "Current Position"),
-      onTap: () {},
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-    );
-
-    markers.add(currentMarker);
-
-    mapController.animateCamera(
-      CameraUpdate.newLatLng(currentPosition),
-    );
-
+  Future<void> performNearbySearch() async {
     await _getCurrentLocation().then((currentPos) {
       setState(() {
         currentLocation = currentPos;
@@ -103,9 +68,9 @@ class _MapScreenState extends State<MapScreenLocation> {
         print('Distance: $distance meters');
         print('Bearing: $bearing degrees');
 
-_launchMaps(widget.lon,widget.lat,32.49517491030077,35.991236423865466);
-     
-      });//, 
+        _launchMaps(
+            widget.lon, widget.lat, 32.49517491030077, 35.991236423865466);
+      }); //,
     }).catchError((error) {
       showDialog(
         context: context,
@@ -132,16 +97,7 @@ _launchMaps(widget.lon,widget.lat,32.49517491030077,35.991236423865466);
   }
 
   Future<void> _initMap() async {
-    await _getCurrentLocation().then((value) {
-      setState(() {
-        cam_pos = CameraPosition(
-          bearing: 192.8334901395799,
-          target: LatLng(widget.lon, widget.lat),
-          tilt: 0,
-          zoom: 20,
-        );
-      });
-    }).catchError((error) {
+    await _getCurrentLocation().then((value) {}).catchError((error) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -179,22 +135,19 @@ _launchMaps(widget.lon,widget.lat,32.49517491030077,35.991236423865466);
     return await Geolocator.getCurrentPosition();
   }
 
-
-
-void _launchMaps(double lat, double lon, double d,double a) async {
-
-    final double myLatitude =lat;// 32.494564056396484;
-    final double myLongitude = lon;//35.99126052856445  ;
-    final double destinationLatitude = d;//34.0522;
-    final double destinationLongitude = a;//-118.2437;
-    final String url = "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
+  void _launchMaps(double lat, double lon, double d, double a) async {
+    final double myLatitude = lat; // 32.494564056396484;
+    final double myLongitude = lon; //35.99126052856445  ;
+    final double destinationLatitude = d; //34.0522;
+    final double destinationLongitude = a; //-118.2437;
+    final String url =
+        "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
     if (await canLaunch(url)) {
       await launch(url);
     } else {
       throw 'Could not launch $url';
     }
   }
- 
 
 //   void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
 //   PolylineId id = PolylineId('poly');
@@ -217,13 +170,8 @@ void _launchMaps(double lat, double lon, double d,double a) async {
 //       northeast: LatLng(endLatitude, endLongitude),
 //     );
 //     mapController.animateCamera(
-//       CameraUpdate.newLatLngBounds(bounds, 100), 
+//       CameraUpdate.newLatLngBounds(bounds, 100),
 //     );
 //   });
 // }
-
-
-
-
 }
-
