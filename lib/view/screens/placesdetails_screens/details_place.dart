@@ -222,22 +222,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   Column(
                                     children: [
                                       Container(
-                                          height: 30.0,
-                                          width: 18.0,
+                                          height: LayoutManager.widthNHeight0(
+                                                  context, 1) *
+                                              0.05, //30.0,
+                                          width: LayoutManager.widthNHeight0(
+                                                  context, 0) *
+                                              0.035, //18.0,
                                           child: new IconButton(
                                             padding: new EdgeInsets.all(0.0),
                                             icon: new Image.asset(
                                                 "assets/images/img_png/like.png"),
-
-                                            //  new Icon(
-                                            //   Icons.thumb_up_off_alt_outlined,
-                                            //   size: 18.0,
-                                            //   color: ThemeManager.primary,
-                                            // ),
                                             onPressed: () {
                                               print("Thumbs-up clicked ");
                                             },
                                           )),
+                                      SizedBox(
+                                        height: LayoutManager.widthNHeight0(
+                                                context, 1) *
+                                            0.015,
+                                      ),
                                       Text(
                                         "${widget.placeModel.like}",
                                         style: TextStyle(
@@ -251,13 +254,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ],
                                   ),
                                   SizedBox(
-                                    width: 20,
+                                    width: LayoutManager.widthNHeight0(
+                                            context, 0) *
+                                        0.01,
                                   ),
                                   Column(
                                     children: [
-                                      SizedBox(
-                                        height: 10,
-                                      ),
                                       Text(
                                         "${widget.placeModel.disLike}",
                                         style: TextStyle(
@@ -268,18 +270,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           decoration: TextDecoration.none,
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: LayoutManager.widthNHeight0(
+                                                context, 1) *
+                                            0.015,
+                                      ),
                                       Container(
-                                          height: 30.0,
-                                          width: 18.0,
+                                          height: LayoutManager.widthNHeight0(
+                                                  context, 1) *
+                                              0.05, //30.0,
+                                          width: LayoutManager.widthNHeight0(
+                                                  context, 0) *
+                                              0.035, //18.0,
                                           child: new IconButton(
                                             padding: new EdgeInsets.all(0.0),
                                             icon: new Image.asset(
                                                 "assets/images/img_png/dislike.png"),
-                                            // new Icon(
-                                            //   Icons.thumb_down_off_alt_outlined,
-                                            //   size: 18.0,
-                                            //   color: ThemeManager.primary,
-                                            // ),
                                             onPressed: () {
                                               print("Thumbs-down clicked ");
                                             },
@@ -303,21 +309,22 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       style: TextStyle(
                         color: ThemeManager.textColor.withOpacity(0.7),
                         fontFamily: ThemeManager.fontFamily,
-                        fontSize: 14,
+                        fontSize:
+                            LayoutManager.widthNHeight0(context, 1) * 0.0355,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.none,
                       ),
                     ),
 
                     SizedBox(
-                      height: 20,
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          width: 150,
+                          width: LayoutManager.widthNHeight0(context, 0) * 0.2,
                           child: Text(
                             "${widget.placeModel.status}",
                             textAlign: TextAlign.start,
@@ -364,21 +371,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
             )),
         Positioned(
-            top: 45,
+            top: LayoutManager.widthNHeight0(context, 1) * 0.1, //45,
             left: 10,
             child: BackArrowButton(
               color: Colors.white,
             )),
         Positioned(
-          top: 45,
-          left: 310,
+          top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
+          left: LayoutManager.widthNHeight0(context, 0) * 0.37, //310
           child: GestureDetector(
             onTap: () {
               //BACK
               print("Report button");
             },
             child: Container(
-              width: 75,
+              width: LayoutManager.widthNHeight0(context, 0) * 0.082,
               height: 25,
               decoration: BoxDecoration(
                 color: ThemeManager.favIcon.withOpacity(0.8),
@@ -419,8 +426,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
         Positioned(
-          top: 80,
-          left: 330,
+          top: LayoutManager.widthNHeight0(context, 1) * 0.22, // 80,
+
+          left: LayoutManager.widthNHeight0(context, 0) * 0.39, //310
           child: GestureDetector(
             onTap: () {
               setState(() {
@@ -445,18 +453,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
         Positioned(
-          top: 250,
-          left: 340,
+          top: LayoutManager.widthNHeight0(context, 1) * 0.4,
+          left: LayoutManager.widthNHeight0(context, 0) * 0.51, //340,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-           
             children: [
               for (int index = 0;
                   index < widget.placeModel.images.length;
                   index++)
-                  
-               Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: SmallImage(
                     isSelected: index == selectedImage,
                     press: () {
@@ -467,8 +473,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     image: widget.placeModel.images[index],
                   ),
                 ),
-          
-              
             ],
           ),
         )
