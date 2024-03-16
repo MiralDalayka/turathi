@@ -5,6 +5,7 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+import 'package:turathi/view/widgets/small_Image.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
@@ -16,6 +17,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  int selectedImage = 0;
   Key? get key => null;
 
   @override
@@ -28,7 +30,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           height: height,
           width: double.infinity,
           child: Image.asset(
-            widget.placeModel.images[0],
+            widget.placeModel.images[selectedImage],
             fit: BoxFit.cover,
             color: Colors.black.withOpacity(0.1),
             colorBlendMode: BlendMode.darken,
@@ -428,10 +430,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Container(
               width: 40,
               height: 40,
-             
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                 color: ThemeManager.second.withOpacity(0.25),
+                color: ThemeManager.second.withOpacity(0.25),
               ),
               child: Icon(
                 Icons.favorite,
@@ -443,6 +444,34 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
         ),
+        Positioned(
+          top: 250,
+          left: 340,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           
+            children: [
+              for (int index = 0;
+                  index < widget.placeModel.images.length;
+                  index++)
+                  
+               Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: SmallImage(
+                    isSelected: index == selectedImage,
+                    press: () {
+                      setState(() {
+                        selectedImage = index;
+                      });
+                    },
+                    image: widget.placeModel.images[index],
+                  ),
+                ),
+          
+              
+            ],
+          ),
+        )
       ],
     );
   }

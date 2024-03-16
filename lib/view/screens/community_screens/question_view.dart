@@ -121,6 +121,8 @@ class _QuestionViewState extends State<QuestionView> {
             top: 25,
             left: icon_left,
             child: BackArrowButton(color: Colors.white,)),
+
+          
       ],
     );
   }
