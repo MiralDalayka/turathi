@@ -373,9 +373,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.1, //45,
             left: 10,
-            child: BackArrowButton(
-              color: Colors.white,
-            )),
+            child:IconButton(onPressed: (){
+     Navigator.of(context).pushReplacementNamed("bottomScreen");
+    }, icon:Icon( Icons.arrow_back_sharp,color: Colors.white,size: 25,))
+            //  BackArrowButton(
+            //   color: Colors.white,
+            // )
+            
+            
+            ),
+
+
         Positioned(
           top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
           left: LayoutManager.widthNHeight0(context, 0) * 0.37, //310
@@ -453,8 +461,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
         Positioned(
-          top: LayoutManager.widthNHeight0(context, 1) * 0.4,
-          left: LayoutManager.widthNHeight0(context, 0) * 0.51, //340,
+          top: LayoutManager.widthNHeight0(context, 1) * 0.55,
+          left: LayoutManager.widthNHeight0(context, 0) * 0.395, //340,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
