@@ -15,12 +15,13 @@ class MapScreenLocation extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreenLocation> {
   late GoogleMapController mapController;
-  late CameraPosition cam_pos = CameraPosition(target: LatLng(0, 0)); 
+  late CameraPosition cam_pos = CameraPosition(target: LatLng(0, 0));
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
   Set<Marker> markers = {};
+  Set<Polyline> polylines = {};
 
   MapType currentMapType = MapType.hybrid;
 
@@ -87,8 +88,8 @@ class _MapScreenState extends State<MapScreenLocation> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
+      body: 
+         Column(
           children: [
             SizedBox(
               height: _getHeight(context),
@@ -103,22 +104,14 @@ class _MapScreenState extends State<MapScreenLocation> {
                   performNearbySearch(controller, 'your_place_type');
                 },
                 markers: markers,
+                polylines: polylines, 
               ),
             ),
-            SizedBox(height: 20),
-            if (distance != null)
-              Text(
-                'Distance: ${distance!.toStringAsFixed(2)} meters',
-                style: TextStyle(fontSize: 16),
-              ),
-            if (bearing != null)
-              Text(
-                'Bearing: ${bearing!.toStringAsFixed(2)} degrees',
-                style: TextStyle(fontSize: 16),
-              ),
+        
+           
           ],
         ),
-      ),
+    
     );
   }
 
@@ -144,7 +137,6 @@ class _MapScreenState extends State<MapScreenLocation> {
       CameraUpdate.newLatLng(currentPosition),
     );
 
-
     await _getCurrentLocation().then((currentPos) {
       setState(() {
         currentLocation = currentPos;
@@ -163,6 +155,8 @@ class _MapScreenState extends State<MapScreenLocation> {
         print('Current: ${currentPos.latitude} meters');
         print('Distance: $distance meters');
         print('Bearing: $bearing degrees');
+
+        _createPolylines(31.895146, 35.894731, 31.903574, 35.887567);//31.903574, 35.887567
       });
     }).catchError((error) {
       showDialog(
@@ -196,7 +190,7 @@ class _MapScreenState extends State<MapScreenLocation> {
           bearing: 192.8334901395799,
           target: LatLng(widget.lon, widget.lat),
           tilt: 0,
-          zoom: 19,
+          zoom: 200,
         );
       });
     }).catchError((error) {
@@ -235,5 +229,24 @@ class _MapScreenState extends State<MapScreenLocation> {
       throw 'Location permission permanently denied.';
     }
     return await Geolocator.getCurrentPosition();
+  }
+
+  void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
+    PolylineId id = PolylineId('poly');
+    List<LatLng> polylineCoordinates = [];
+
+    polylineCoordinates.add(LatLng(startLatitude, startLongitude));
+    polylineCoordinates.add(LatLng(endLatitude, endLongitude));
+
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.red,
+      points: polylineCoordinates,
+      width: 5,
+    );
+
+    setState(() {
+      polylines.add(polyline);
+    });
   }
 }
