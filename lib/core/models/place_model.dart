@@ -64,8 +64,8 @@ List<PlaceModel> demoPlaces = [
   ),
   PlaceModel(
     comments_counter: 100,
-    long: 31.895647,
-    late: 35.894724,
+    long: 35.86536868153866,
+    late: 32.53594091877603,
     type: "New Place",
     distance: "10",
     id: "2",
@@ -107,7 +107,7 @@ List<PlaceModel> demoPlaces = [
   PlaceModel(
     comments_counter: 100,
     long: 31.895647,
-    late: 35.894724, 
+    late: 35.894724, //37.785834
     id: "4",
     distance: "10",
     type: "New Place",

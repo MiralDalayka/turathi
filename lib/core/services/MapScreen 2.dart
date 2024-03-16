@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MapScreenLocation extends StatefulWidget {
   const MapScreenLocation({Key? key, required this.lon, required this.lat})
@@ -33,61 +34,7 @@ class _MapScreenState extends State<MapScreenLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.arrow_back_sharp,
-            color: Colors.grey,
-            size: 25,
-          ),
-        ),
-        actions: [
-          PopupMenuButton<MapType>(
-            onSelected: (MapType result) {
-              setState(() {
-                currentMapType = result;
-              });
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<MapType>>[
-              const PopupMenuItem<MapType>(
-                value: MapType.normal,
-                child: Text('Normal'),
-              ),
-              const PopupMenuItem<MapType>(
-                value: MapType.satellite,
-                child: Text('Satellite'),
-              ),
-              const PopupMenuItem<MapType>(
-                value: MapType.terrain,
-                child: Text('Terrain'),
-              ),
-              const PopupMenuItem<MapType>(
-                value: MapType.hybrid,
-                child: Text('Hybrid'),
-              ),
-            ],
-          ),
-          IconButton(
-            icon: Icon(Icons.zoom_in),
-            onPressed: () {
-              mapController.animateCamera(
-                CameraUpdate.zoomIn(),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.zoom_out),
-            onPressed: () {
-              mapController.animateCamera(
-                CameraUpdate.zoomOut(),
-              );
-            },
-          ),
-        ],
-      ),
+      
       body: 
          Column(
           children: [
@@ -156,8 +103,9 @@ class _MapScreenState extends State<MapScreenLocation> {
         print('Distance: $distance meters');
         print('Bearing: $bearing degrees');
 
-        _createPolylines(31.895146, 35.894731, 31.903574, 35.887567);//31.903574, 35.887567
-      });
+_launchMaps(widget.lon,widget.lat,32.49517491030077,35.991236423865466);
+     
+      });//, 
     }).catchError((error) {
       showDialog(
         context: context,
@@ -190,7 +138,7 @@ class _MapScreenState extends State<MapScreenLocation> {
           bearing: 192.8334901395799,
           target: LatLng(widget.lon, widget.lat),
           tilt: 0,
-          zoom: 200,
+          zoom: 20,
         );
       });
     }).catchError((error) {
@@ -231,22 +179,51 @@ class _MapScreenState extends State<MapScreenLocation> {
     return await Geolocator.getCurrentPosition();
   }
 
-  void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
-    PolylineId id = PolylineId('poly');
-    List<LatLng> polylineCoordinates = [];
 
-    polylineCoordinates.add(LatLng(startLatitude, startLongitude));
-    polylineCoordinates.add(LatLng(endLatitude, endLongitude));
 
-    Polyline polyline = Polyline(
-      polylineId: id,
-      color: Colors.red,
-      points: polylineCoordinates,
-      width: 5,
-    );
+void _launchMaps(double lat, double lon, double d,double a) async {
 
-    setState(() {
-      polylines.add(polyline);
-    });
+    final double myLatitude =lat;// 32.494564056396484;
+    final double myLongitude = lon;//35.99126052856445  ;
+    final double destinationLatitude = d;//34.0522;
+    final double destinationLongitude = a;//-118.2437;
+    final String url = "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
+ 
+
+//   void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
+//   PolylineId id = PolylineId('poly');
+//   List<LatLng> polylineCoordinates = [];
+
+//   polylineCoordinates.add(LatLng(startLatitude, startLongitude));
+//   polylineCoordinates.add(LatLng(endLatitude, endLongitude));
+
+//   Polyline polyline = Polyline(
+//     polylineId: id,
+//     color: Colors.red,
+//     points: polylineCoordinates,
+//     width: 5,
+//   );
+
+//   setState(() {
+//     polylines.add(polyline);
+//     LatLngBounds bounds = LatLngBounds(
+//       southwest: LatLng(startLatitude, startLongitude),
+//       northeast: LatLng(endLatitude, endLongitude),
+//     );
+//     mapController.animateCamera(
+//       CameraUpdate.newLatLngBounds(bounds, 100), 
+//     );
+//   });
+// }
+
+
+
+
 }
+
