@@ -6,6 +6,7 @@ import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
 import 'package:turathi/view/screens/home_screen.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/screens/profile_screens/profile.dart';
+import 'package:turathi/view/screens/profile_screens/screens/added_places.dart';
 import 'package:turathi/view/screens/splach_screen/splach_screen.dart';
 import 'package:turathi/view/widgets/custom_bottom_nav_bar.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           "communityScreen": (context) => const CommunityScreen(),
           "favoriteScreen": (context) => const FavoriteScreen(),
           "locationPage": (context) => const LocationPage(),
+          "addedCard": (context) => const AddedPlaces(),
 
 
         },

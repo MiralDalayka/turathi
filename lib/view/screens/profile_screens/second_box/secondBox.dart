@@ -26,7 +26,7 @@ class _secondBox extends State<SecondBox> {
             children: [
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushNamed("View added places");
+                  Navigator.of(context).pushNamed("addedCard");
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
