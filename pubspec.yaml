@@ -50,13 +50,13 @@ dependencies:
   google_maps_flutter: ^2.1.5
   geolocator: ^10.1.0
   geocoding: ^2.0.4
-  # # Firebase And Notification 
-  # firebase_messaging: ^14.7.4
-  # firebase_core: ^2.24.2
-  # flutter_local_notifications: ^16.1.0
-  # cloud_firestore: ^4.14.0
-  # firebase_auth: ^4.16.0
-  # firebase_storage: ^11.5.6
+  # Firebase And Notification 
+  firebase_auth: ^4.17.9
+  firebase_messaging: ^14.7.4
+  firebase_core: ^2.24.2
+  flutter_local_notifications: ^16.1.0
+  cloud_firestore: ^4.14.0
+  firebase_storage: ^11.5.6
   # # Local Data Cache
   # #sqflite: ^2.0.2
   # shared_preferences: ^2.0.15
