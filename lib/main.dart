@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
 
-        home: SplashScreen(),
+        home: const SplashScreen(),
         routes: {
           "bottomScreen": (context) => const CustomeBottomNavBar(),
           "homeScreen": (context) => const HomeScreen(),
