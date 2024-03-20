@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/theme_manager.dart';
 
 class AddedCard extends StatefulWidget {
   const AddedCard({
@@ -67,11 +68,11 @@ class _ProductCardState extends State<AddedCard> {
             homeId == doc.id) {
           await doc.reference.delete();
 
-          print('Home deleted successfully');
+          print('Place deleted successfully');
         }
       }
     } catch (e) {
-      print('Error deleting home: $e');
+      print('Error deleting place: $e');
     }
 
     if (mounted) {
@@ -83,9 +84,7 @@ class _ProductCardState extends State<AddedCard> {
     print('Edit button pressed');
   }
 
-  void onRequestPressed() {
-    print('Request button pressed');
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +137,7 @@ class _ProductCardState extends State<AddedCard> {
                                   "checked",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontFamily: "Kadwa",
+                                    fontFamily:ThemeManager.fontFamily,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -175,7 +174,7 @@ class _ProductCardState extends State<AddedCard> {
                                     builder: (BuildContext context) {
 
                                       return AlertDialog(
-                                       backgroundColor: Color(0xff6482C4),
+                                       backgroundColor: ThemeManager.primary,
                                         title: Text('Confirm Deletion',style: TextStyle(color: Colors.white),),
                                         content: Text(
                                             'Are you sure you want to delete this Home?',style: TextStyle(color: Colors.white),),
@@ -210,28 +209,12 @@ class _ProductCardState extends State<AddedCard> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
-                                fontFamily: "Kadwa",
+                                fontFamily: ThemeManager.fontFamily,
                               ),
                             ),
                           ),
                           SizedBox(width: LayoutManager.widthNHeight0(context, 1) * 0.02),
-                          ElevatedButton(
-                            onPressed: onRequestPressed,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              backgroundColor: Color(0xff6482C4),
-                            ),
-                            child: Text(
-                              'Request',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Kadwa",
-                              ),
-                            ),
-                          ),
+                        
                         ],
                       ),
                     ),

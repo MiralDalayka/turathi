@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
 import 'package:turathi/view/widgets/added_card.dart';
 
@@ -82,11 +83,11 @@ haveOfnot=true;
     appBar: AppBar(
       title: Center(
         child: Text(
-          'My Home',
+          'Added Places',
           style: TextStyle(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.06,
             fontWeight: FontWeight.bold,
-            fontFamily: 'Kadwa',
+            fontFamily: ThemeManager.fontFamily,
           ),
         ),
       ),
@@ -110,23 +111,23 @@ haveOfnot=true;
                       top: LayoutManager.widthNHeight0(context, 1) * 0.5),
                   child: Center(
                     child: Column(
-                      children: const [
+                      children:  [
                         Text(
-                          "SELL OR RENT YOUR HOME NOW!",
+                          "Add any historical place u know now",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color(0xff6482C4),
-                            fontFamily: "Kadwa",
+                            color: ThemeManager.primary,
+                            fontFamily: ThemeManager.fontFamily,
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
                           ),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          "It looks like you haven’t sold or rented \nany homes just yet.",
+                          "It looks like you haven’t add \nany Place just yet.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontFamily: "Kadwa",
+                            fontFamily: ThemeManager.fontFamily,
                             fontSize: 16,
                           ),
                         ),
