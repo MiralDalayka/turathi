@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/models/question_model.dart';
+import '../../view/screens/community_screens/question_view.dart';
 import '../../view/screens/splach_screen/splach_screen.dart';
 import '../../view/widgets/custom_bottom_nav_bar.dart';
 import 'const_router_names.dart';
@@ -19,9 +21,17 @@ class MyRouter {
 
 
 
+      case questionRoute:
+        {
+          final arg = settings.arguments as QuestionModel;
+          return _route(QuestionView(question: arg,));
+        }
 
 
-      // case ex:
+
+
+
+    // case ex:
       //   {
       //     final arg = settings.arguments as modelName;
       //     return _route(PageClass(

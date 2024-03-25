@@ -9,6 +9,8 @@ const String communityRoute = '/bottomScreen/communityScreen';
 const String favoriteRoute = '/bottomScreen/favoriteScreen';
 const String profileRoute = '/bottomScreen/profileScreen';
 const String placeInfoRoute = '/bottomScreen/-/AddedPlaces';
+const String questionRoute = '/bottomScreen/communityScreen/question_view';
+
 
 
 

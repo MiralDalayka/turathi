@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: ThemeManager.primary,
             ),
             onPressed: () {
-              //back
+             Navigator.of(context).pop();
             },
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
           ),

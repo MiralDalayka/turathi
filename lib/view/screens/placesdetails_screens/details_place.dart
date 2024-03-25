@@ -20,6 +20,7 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   int selectedImage = 0;
+
   Key? get key => null;
 
   @override
@@ -326,7 +327,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            width: LayoutManager.widthNHeight0(context, 0) * 0.2,
+                            width:
+                                LayoutManager.widthNHeight0(context, 0) * 0.2,
                             child: Text(
                               "${widget.placeModel.status}",
                               textAlign: TextAlign.start,
@@ -350,7 +352,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             fontSize:
                                 LayoutManager.widthNHeight0(context, 1) * 0.045,
                             text: 'Show Map',
-                            width: LayoutManager.widthNHeight0(context, 1) * 0.36,
+                            width:
+                                LayoutManager.widthNHeight0(context, 1) * 0.36,
                             borderRadius: 18,
                             background: ThemeManager.primary,
                             textColor: ThemeManager.second,
@@ -376,214 +379,118 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.1, //45,
             left: 10,
-            child:IconButton(onPressed: (){
-     Navigator.of(context).popAndPushNamed(bottomNavRoute); //change it
-    }, icon:const Icon( Icons.arrow_back_sharp,color: Colors.white,size: 25,))
-
-
-
-            ),
-
-        Positioned(
-          top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
-          right: 10,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  //BACK
-                  print("Report button");
+            child: IconButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .popAndPushNamed(bottomNavRoute); //change it
                 },
-                child: Container(
-                  width: LayoutManager.widthNHeight0(context, 0) * 0.082,
-                  height: 25,
-                  decoration: BoxDecoration(
-                    color: ThemeManager.favIcon.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        spreadRadius: 0,
-                        blurRadius: 5,
-                        offset: Offset(3, 3),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                        "Report",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: ThemeManager.fontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: ThemeManager.second,
-                          decoration: TextDecoration.none,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black.withOpacity(0.3),
-                              blurRadius: 2,
-                              offset: Offset(-1, 1),
-                            ),
-                          ],
+                icon: const Icon(
+                  Icons.arrow_back_sharp,
+                  color: Colors.white,
+                  size: 25,
+                ))),
+        Positioned(
+            top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
+            right: 10,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    //BACK
+                    print("Report button");
+                  },
+                  child: Container(
+                    width: LayoutManager.widthNHeight0(context, 0) * 0.082,
+                    height: 25,
+                    decoration: BoxDecoration(
+                      color: ThemeManager.favIcon.withOpacity(0.8),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                          "Report",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: ThemeManager.fontFamily,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: ThemeManager.second,
+                            decoration: TextDecoration.none,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 2,
+                                offset: Offset(-1, 1),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10,),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    widget.placeModel.toggleFavorite();
-                  });
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: ThemeManager.second.withOpacity(0.25),
-                  ),
-                  child: Icon(
-                    Icons.favorite,
-                    size: 25,
-                    color: widget.placeModel.isFavourite
-                        ? ThemeManager.favIcon
-                        : ThemeManager.second,
+                SizedBox(
+                  height: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      widget.placeModel.toggleFavorite();
+                    });
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: ThemeManager.second.withOpacity(0.25),
+                    ),
+                    child: Icon(
+                      Icons.favorite,
+                      size: 25,
+                      color: widget.placeModel.isFavourite
+                          ? ThemeManager.favIcon
+                          : ThemeManager.second,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10,),
-
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (int index = 0;
-                  index < widget.placeModel.images.length;
-                  index++)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: SmallImage(
-                        isSelected: index == selectedImage,
-                        press: () {
-                          setState(() {
-                            selectedImage = index;
-                          });
-                        },
-                        image: widget.placeModel.images[index],
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    for (int index = 0;
+                        index < widget.placeModel.images.length;
+                        index++)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SmallImage(
+                          isSelected: index == selectedImage,
+                          press: () {
+                            setState(() {
+                              selectedImage = index;
+                            });
+                          },
+                          image: widget.placeModel.images[index],
+                        ),
                       ),
-                    ),
-                ],
-              )
-            ],
-          )
-        ),
-        // Positioned(
-        //   top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
-        //   right: 10,
-        //   child: GestureDetector(
-        //     onTap: () {
-        //       //BACK
-        //       print("Report button");
-        //     },
-        //     child: Container(
-        //       width: LayoutManager.widthNHeight0(context, 0) * 0.082,
-        //       height: 25,
-        //       decoration: BoxDecoration(
-        //         color: ThemeManager.favIcon.withOpacity(0.8),
-        //         borderRadius: BorderRadius.circular(10),
-        //         boxShadow: [
-        //           BoxShadow(
-        //             color: Colors.black.withOpacity(0.2),
-        //             spreadRadius: 0,
-        //             blurRadius: 5,
-        //             offset: Offset(3, 3),
-        //           ),
-        //         ],
-        //       ),
-        //       child: Center(
-        //         child: Padding(
-        //           padding: EdgeInsets.all(0),
-        //           child: Text(
-        //             "Report",
-        //             textAlign: TextAlign.center,
-        //             style: TextStyle(
-        //               fontFamily: ThemeManager.fontFamily,
-        //               fontSize: 13,
-        //               fontWeight: FontWeight.w600,
-        //               color: ThemeManager.second,
-        //               decoration: TextDecoration.none,
-        //               shadows: [
-        //                 Shadow(
-        //                   color: Colors.black.withOpacity(0.3),
-        //                   blurRadius: 2,
-        //                   offset: Offset(-1, 1),
-        //                 ),
-        //               ],
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Positioned(
-        //   top: LayoutManager.widthNHeight0(context, 1) * 0.22, // 80,
-        //
-        //  right: 10,
-        //   child: GestureDetector(
-        //     onTap: () {
-        //       setState(() {
-        //         widget.placeModel.toggleFavorite();
-        //       });
-        //     },
-        //     child: Container(
-        //       width: 40,
-        //       height: 40,
-        //       decoration: BoxDecoration(
-        //         borderRadius: BorderRadius.circular(20),
-        //         color: ThemeManager.second.withOpacity(0.25),
-        //       ),
-        //       child: Icon(
-        //         Icons.favorite,
-        //         size: 25,
-        //         color: widget.placeModel.isFavourite
-        //             ? ThemeManager.favIcon
-        //             : ThemeManager.second,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // Positioned(
-        //   top: LayoutManager.widthNHeight0(context, 1) * 0.40,
-        //  right: 10,
-        //   child: Column(
-        //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //     children: [
-        //       for (int index = 0;
-        //           index < widget.placeModel.images.length;
-        //           index++)
-        //         Padding(
-        //           padding: const EdgeInsets.symmetric(vertical: 8.0),
-        //           child: SmallImage(
-        //             isSelected: index == selectedImage,
-        //             press: () {
-        //               setState(() {
-        //                 selectedImage = index;
-        //               });
-        //             },
-        //             image: widget.placeModel.images[index],
-        //           ),
-        //         ),
-        //     ],
-        //   ),
-        // )
+                  ],
+                )
+              ],
+            )),
       ],
     );
   }

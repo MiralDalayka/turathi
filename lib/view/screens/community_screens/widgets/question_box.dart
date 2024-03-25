@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/question_model.dart';
 
+import '../../../../utils/Router/const_router_names.dart';
 import '../../../../utils/layout_manager.dart';
 import '../../../../utils/theme_manager.dart';
 
@@ -13,9 +14,9 @@ class QuestionBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          'questionView',
+        Navigator.of(context).pushNamed(
+
+          questionRoute,
           arguments: question,
         );
       },

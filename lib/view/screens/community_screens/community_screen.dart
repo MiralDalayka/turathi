@@ -19,6 +19,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       floatingActionButton: AddButton(
         onPressed: () {
           showDialog(
