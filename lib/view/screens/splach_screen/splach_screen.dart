@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+import '../../../utils/Router/const_router_names.dart';
+import '../../../utils/layout_manager.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -15,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 3),
         //  (FirebaseAuth.instance.currentUser != null)
         // ?
-        () => Navigator.of(context).pushReplacementNamed("bottomScreen")
+        () => Navigator.of(context).pushReplacementNamed(bottomNavRoute)
 
         // : Navigator.of(context).pushReplacementNamed("signin")
 
@@ -26,7 +29,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
+        height: LayoutManager.widthNHeight0(context, 0) ,
+        width: LayoutManager.widthNHeight0(context, 1) ,
+
         child: Image.asset(
           'assets/images/img_png/splach.png',
          

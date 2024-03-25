@@ -84,6 +84,7 @@ class CustomeBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(NavigationController());
     return Scaffold(
+
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [

@@ -43,6 +43,8 @@ class _Location_PageState extends State<LocationPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
         actions: <Widget>[
