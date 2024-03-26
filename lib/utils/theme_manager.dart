@@ -16,4 +16,8 @@ class ThemeManager {
       color: textColor,
       fontWeight: FontWeight.bold,
       fontSize: 18);
+ static ButtonStyle buttonStyle= ButtonStyle(
+  shape: MaterialStateProperty.all(const StadiumBorder()),
+  backgroundColor:
+  MaterialStateProperty.all(ThemeManager.second));
 }

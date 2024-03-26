@@ -3,11 +3,15 @@ import 'package:turathi/core/models/place_model.dart';
 
 import '../../core/models/event_model.dart';
 import '../../core/models/question_model.dart';
+import '../../view/screens/add_data_screens/add_event_page.dart';
+import '../../view/screens/add_data_screens/add_place_page.dart';
 import '../../view/screens/community_screens/question_view.dart';
 import '../../view/screens/events_screens/event_details.dart';
 import '../../view/screens/events_screens/view_all_events.dart';
 import '../../view/screens/placesdetails_screens/details_place.dart';
+import '../../view/screens/placesdetails_screens/report_screen.dart';
 import '../../view/screens/profile_screens/screens/added_places.dart';
+import '../../view/screens/profile_screens/screens/request_to_be_expert.dart';
 import '../../view/screens/splach_screen/splach_screen.dart';
 import '../../view/widgets/custom_bottom_nav_bar.dart';
 import 'const_router_names.dart';
@@ -29,13 +33,17 @@ class MyRouter {
         {
           final arg = settings.arguments as PlaceModel;
 
-          return _route(DetailsScreen(placeModel: arg,));
+          return _route(DetailsScreen(
+            placeModel: arg,
+          ));
         }
 
       case questionRoute:
         {
           final arg = settings.arguments as QuestionModel;
-          return _route(QuestionView(question: arg,));
+          return _route(QuestionView(
+            question: arg,
+          ));
         }
 
       case addedPlacesRoute:
@@ -47,29 +55,40 @@ class MyRouter {
         {
           final arg = settings.arguments as List<EventModel>;
 
-          return _route(EventsScreen(eventsList:arg));
+          return _route(EventsScreen(eventsList: arg));
         }
       case eventDetailsRoute:
         {
           final arg = settings.arguments as EventModel;
 
-          return _route(EventDetailsScreen(eventModel:arg));
+          return _route(EventDetailsScreen(eventModel: arg));
         }
-
-
-    // case ex:
+      case addNewPlaceRoute:
+        {
+          return _route(const AddNewPlace());
+        }
+      case addNewEventRoute:
+        {
+          return _route(const AddNewEvent());
+        }
+      case requestToBeExpertRoute:
+        {
+          return _route(const RequestToBeExpert());
+        }
+      case addReportRoute:
+        {
+          final arg = settings.arguments as String;
+          return _route(ReportPlace(
+            placeID: arg,
+          ));
+        }
+      // case ex:
       //   {
       //     final arg = settings.arguments as modelName;
       //     return _route(PageClass(
       //       model: arg,
       //     ));
       //   }
-
-
-
-
-
-
 
       default:
         {

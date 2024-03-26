@@ -3,9 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/question_model.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/community_screens/question_view.dart';
 
 class QuestionDialog extends StatefulWidget {
   const QuestionDialog({Key? key}) : super(key: key);
@@ -16,11 +14,12 @@ class QuestionDialog extends StatefulWidget {
 
 class _QuestionDialogState extends State<QuestionDialog> {
   final TextEditingController questionController = TextEditingController();
-   XFile? image;
-//controller
+  XFile? image;
+
   Future<void> _pickImage() async {
     final imagePicker = ImagePicker();
-    final pickedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
       setState(() {
@@ -63,14 +62,13 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 ),
               ),
               const SizedBox(height: 20),
-        
               image != null
                   ? Image.file(File(image!.path))
                   : const Text('No image selected.'),
               ElevatedButton(
-                onPressed: _pickImage,
-                child: const Text('Pick Image'),
-              ),
+                  onPressed: _pickImage,
+                  style: ThemeManager.buttonStyle,
+                  child:  Text('Pick Image',style: ThemeManager.textStyle.copyWith(fontWeight:FontWeight.w300  ),)),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

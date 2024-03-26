@@ -3,6 +3,7 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 import '../../../../utils/Router/const_router_names.dart';
+import '../screens/request_to_be_expert.dart';
 
 class SecondBox extends StatefulWidget {
   const SecondBox({super.key});
@@ -68,7 +69,7 @@ class _secondBox extends State<SecondBox> {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushNamed("Request to be Expert");
+                  Navigator.of(context).pushNamed(requestToBeExpertRoute);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),

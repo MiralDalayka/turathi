@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/community_screens/community_screen.dart';
-
 import '../../../core/models/comment_model.dart';
+import '../../../core/models/question_model.dart';
 import '../../../utils/layout_manager.dart';
+import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
 import '../../widgets/back_arrow_button.dart';
 import 'widgets/comment_box.dart';
@@ -25,18 +21,17 @@ class _QuestionViewState extends State<QuestionView> {
   @override
   Widget build(BuildContext context) {
     var height = LayoutManager.widthNHeight0(context, 0) * 0.35;
-    //cotroller
+    //controller
     comments.sort((a, b) => b.writtenByExpert!.compareTo(a.writtenByExpert!));
     double left = 15;
-    double icon_left=10;
+    double iconLeft = 10;
     return Stack(
       children: <Widget>[
-
         SizedBox(
           height: height,
           width: double.infinity,
           child: Image.network(
-              color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withOpacity(0.2),
             colorBlendMode: BlendMode.darken,
             widget.question.imageUrl!,
             fit: BoxFit.cover,
@@ -89,7 +84,9 @@ class _QuestionViewState extends State<QuestionView> {
                           color: ThemeManager.textColor,
                           decoration: TextDecoration.none),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     Expanded(
                       child: ListView.separated(
                           itemBuilder: (context, index) {
@@ -97,7 +94,8 @@ class _QuestionViewState extends State<QuestionView> {
                               comment: comments[index],
                             );
                           },
-                          separatorBuilder: (context, index) => SizedBox(),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(),
                           itemCount: comments.length),
                     )
                   ],
@@ -107,7 +105,7 @@ class _QuestionViewState extends State<QuestionView> {
         Positioned(
           bottom: 20,
           right: 20,
-          child: AddButton(onPressed: (){
+          child: AddButton(onPressed: () {
             //controller //BACK
             showDialog(
               context: context,
@@ -119,10 +117,10 @@ class _QuestionViewState extends State<QuestionView> {
         ),
         Positioned(
             top: 25,
-            left: icon_left,
-            child: BackArrowButton(color: Colors.white,)),
-
-          
+            left: iconLeft,
+            child: const BackArrowButton(
+              color: Colors.white,
+            )),
       ],
     );
   }

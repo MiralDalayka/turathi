@@ -397,8 +397,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    //BACK
-                    print("Report button");
+                    Navigator.of(context).pushNamed(addReportRoute,
+                        arguments: widget.placeModel.id);
                   },
                   child: Container(
                     width: LayoutManager.widthNHeight0(context, 0) * 0.082,

@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       AddButton(
                         onPressed: () {
-                          //BACK
+                          Navigator.of(context).pushNamed(addNewPlaceRoute);
                         },
                       )
                     ],

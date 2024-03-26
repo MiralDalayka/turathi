@@ -4,6 +4,7 @@ import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.da
 import 'package:turathi/view/widgets/add_button.dart';
 
 import '../../../core/models/event_model.dart';
+import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
 
 
@@ -21,7 +22,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
       floatingActionButton: AddButton(
         onPressed: () {
-          // move to add event form
+          Navigator.of(context).pushNamed(addNewEventRoute);
         },
       ),
       backgroundColor: ThemeManager.background,
