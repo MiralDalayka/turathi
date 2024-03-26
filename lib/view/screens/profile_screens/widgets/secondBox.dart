@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+import '../../../../utils/Router/const_router_names.dart';
 
 class SecondBox extends StatefulWidget {
   const SecondBox({super.key});
@@ -21,12 +22,13 @@ class _secondBox extends State<SecondBox> {
       ),
       child: Container(
           height: LayoutManager.widthNHeight0(context, 1) * 0.3,
-          padding: EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
+          padding:
+              EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
           child: Column(
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed("addedCard");
+                  Navigator.of(context).pushNamed(addedPlacesRoute);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
@@ -37,20 +39,23 @@ class _secondBox extends State<SecondBox> {
                         children: [
                           Image.asset(
                             'assets/images/img_png/imageProfile.png',
-                            width:  LayoutManager.widthNHeight0(context, 0) *
-                                  0.03,
-                            height: LayoutManager.widthNHeight0(context, 1) *
-                                  0.06,
+                            width:
+                                LayoutManager.widthNHeight0(context, 0) * 0.03,
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.06,
                           ),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'View added places',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                              color: ThemeManager.primary,
-                               fontWeight: FontWeight.bold
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -72,22 +77,25 @@ class _secondBox extends State<SecondBox> {
                     children: [
                       Row(
                         children: [
-                        Image.asset(
+                          Image.asset(
                             'assets/images/img_png/expertProfile.png',
-                            width:  LayoutManager.widthNHeight0(context, 0) *
-                                  0.03,
-                            height: LayoutManager.widthNHeight0(context, 1) *
-                                  0.06,
+                            width:
+                                LayoutManager.widthNHeight0(context, 0) * 0.03,
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.06,
                           ),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'Request to be Expert',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                              color: ThemeManager.primary,
-                               fontWeight: FontWeight.bold
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: 'KohSantepheap',
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),

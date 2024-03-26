@@ -5,7 +5,7 @@ import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/view/screens/community_screens/community_screen.dart';
 import 'package:turathi/view/screens/community_screens/question_view.dart';
 import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
-import 'package:turathi/view/screens/home_screen.dart';
+import 'package:turathi/view/screens/home_screen_widgets/home_screen.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/screens/profile_screens/profile.dart';
 import 'package:turathi/view/screens/profile_screens/screens/added_places.dart';

@@ -51,7 +51,6 @@ class _ProductCardState extends State<AddedCard> {
         String homeId = widget.placeModel.id;
         if (dataList != null) {
           String str = dataList[7].toString();
-
           int openingBraceIndex = str.indexOf("{");
           int closingBraceIndex = str.indexOf("}");
 

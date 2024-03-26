@@ -58,63 +58,63 @@ class _HeaderPartState extends State<HeaderPart> {
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.028,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                    //Back
-                    print("show me the map");
-                    },
-                    child: Container(
-                    //  margin: EdgeInsets.only(right: 10,left:10),
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.145,
-                      width: LayoutManager.widthNHeight0(context, 0),
-                      decoration: BoxDecoration(
-                        color: ThemeManager.second,
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.4),
-                            blurRadius: 2,
-                            offset: const Offset(-1, -1),
-                            spreadRadius: 0,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Show me The Map",
-                            style: TextStyle(
-                                fontFamily: 'KohSantepheap',
-                                color: ThemeManager.primary,
-                                fontWeight: FontWeight.bold,
-                                fontSize: LayoutManager.widthNHeight0(context, 0) *
-                                    0.0175,
-                                     shadows: const [
-                        Shadow(
-                          color: Colors.grey,
-                          blurRadius: 5,
-                          offset: Offset(2, 2),
-                        ),
-                      ],),
-                                    
-                                    
-                          ),
-                          SizedBox(
-                            width: LayoutManager.widthNHeight0(context, 0) * 0.015,
-                          ),
-                          Icon(
-                            Icons.map_outlined,
-                            color: ThemeManager.primary,
-                            size: LayoutManager.widthNHeight0(context, 0) * 0.023,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 0) * 0.005,
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //   //Back
+                  //   print("show me the map");
+                  //   },
+                  //   child: Container(
+                  //   //  margin: EdgeInsets.only(right: 10,left:10),
+                  //     height: LayoutManager.widthNHeight0(context, 1) * 0.145,
+                  //     width: LayoutManager.widthNHeight0(context, 0),
+                  //     decoration: BoxDecoration(
+                  //       color: ThemeManager.second,
+                  //       borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: Colors.grey.withOpacity(0.4),
+                  //           blurRadius: 2,
+                  //           offset: const Offset(-1, -1),
+                  //           spreadRadius: 0,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         Text(
+                  //           "Show me The Map",
+                  //           style: TextStyle(
+                  //               fontFamily: 'KohSantepheap',
+                  //               color: ThemeManager.primary,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: LayoutManager.widthNHeight0(context, 0) *
+                  //                   0.0175,
+                  //                    shadows: const [
+                  //       Shadow(
+                  //         color: Colors.grey,
+                  //         blurRadius: 5,
+                  //         offset: Offset(2, 2),
+                  //       ),
+                  //     ],),
+                  //
+                  //
+                  //         ),
+                  //         SizedBox(
+                  //           width: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                  //         ),
+                  //         Icon(
+                  //           Icons.map_outlined,
+                  //           color: ThemeManager.primary,
+                  //           size: LayoutManager.widthNHeight0(context, 0) * 0.023,
+                  //         )
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: LayoutManager.widthNHeight0(context, 0) * 0.005,
+                  // ),
                 ],
               ),
                 ),

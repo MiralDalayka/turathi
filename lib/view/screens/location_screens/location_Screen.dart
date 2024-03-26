@@ -47,18 +47,7 @@ class _Location_PageState extends State<LocationPage>
 
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: ThemeManager.primary,
-            ),
-            onPressed: () {
-              //back
-            },
-            iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
-          ),
-        ],
+       
       ),
       body: Container(
         color: ThemeManager.background,
@@ -80,7 +69,7 @@ class _Location_PageState extends State<LocationPage>
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,
                 dividerColor: ThemeManager.second,
-                tabs: [
+                tabs: const [
                   Tab(text: 'My Location'),
                   Tab(text: 'Nearest Place'),
                 ],

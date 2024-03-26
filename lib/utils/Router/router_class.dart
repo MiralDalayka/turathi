@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/core/models/place_model.dart';
 
+import '../../core/models/event_model.dart';
 import '../../core/models/question_model.dart';
 import '../../view/screens/community_screens/question_view.dart';
+import '../../view/screens/events_screens/event_details.dart';
+import '../../view/screens/events_screens/view_all_events.dart';
+import '../../view/screens/placesdetails_screens/details_place.dart';
+import '../../view/screens/profile_screens/screens/added_places.dart';
 import '../../view/screens/splach_screen/splach_screen.dart';
 import '../../view/widgets/custom_bottom_nav_bar.dart';
 import 'const_router_names.dart';
@@ -19,7 +25,12 @@ class MyRouter {
           return _route(CustomeBottomNavBar());
         }
 
+      case placeDetailsRoute:
+        {
+          final arg = settings.arguments as PlaceModel;
 
+          return _route(DetailsScreen(placeModel: arg,));
+        }
 
       case questionRoute:
         {
@@ -27,8 +38,23 @@ class MyRouter {
           return _route(QuestionView(question: arg,));
         }
 
+      case addedPlacesRoute:
+        {
+          return _route(AddedPlaces());
+        }
 
+      case eventsRoute:
+        {
+          final arg = settings.arguments as List<EventModel>;
 
+          return _route(EventsScreen(eventsList:arg));
+        }
+      case eventDetailsRoute:
+        {
+          final arg = settings.arguments as EventModel;
+
+          return _route(EventDetailsScreen(eventModel:arg));
+        }
 
 
     // case ex:

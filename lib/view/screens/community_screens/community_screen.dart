@@ -42,18 +42,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
               fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: ThemeManager.primary,
-            ),
-            onPressed: () {
-              //back
-            },
-            iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
-          ),
-        ],
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

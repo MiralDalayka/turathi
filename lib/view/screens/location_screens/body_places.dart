@@ -4,6 +4,8 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
 import 'package:turathi/view/widgets/place_card.dart';
 
+import '../../../utils/Router/const_router_names.dart';
+
 class BodyPlaces extends StatefulWidget {
   final String tab;
 
@@ -44,13 +46,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
           final placeModel = demoPlaces[index];
           return GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      DetailsScreen(placeModel: demoPlaces[index]),
-                ),
-              );
+              Navigator.of(context)
+                  .pushNamed(placeDetailsRoute, arguments: demoPlaces[index]);
             },
             child: SizedBox(
               width: cardWidth,
