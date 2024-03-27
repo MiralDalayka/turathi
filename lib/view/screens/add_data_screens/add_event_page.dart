@@ -24,6 +24,7 @@ class _AddNewEventState extends State<AddNewEvent> {
   //date
 
   XFile? image;
+  DateTime selectedDate = DateTime.now();
 
   Future<void> _pickImage() async {
     final imagePicker = ImagePicker();
@@ -33,6 +34,19 @@ class _AddNewEventState extends State<AddNewEvent> {
     if (pickedImage != null) {
       setState(() {
         image = pickedImage;
+      });
+    }
+  }
+  Future<void> _pickDate() async{
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(DateTime.now().year),
+        lastDate: DateTime(2025)
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
       });
     }
   }
@@ -60,17 +74,17 @@ class _AddNewEventState extends State<AddNewEvent> {
                   labelText: 'Name',
                 ),
                 TextFormFieldWidget(
-                  controller: name,
+                  controller: address,
                   hintText: 'Enter event address in your words',
                   labelText: 'Address',
                 ),
                 TextFormFieldWidget(
-                  controller: name,
+                  controller: ticketPrice,
                   hintText: 'Enter event ticket price, 0 for free events',
                   labelText: 'Ticket Price',
                 ),
                 TextFormFieldWidget(
-                  controller: name,
+                  controller: creatorName,
                   hintText: 'Enter event creator name',
                   labelText: 'Creator Name',
                 ),
@@ -106,7 +120,18 @@ class _AddNewEventState extends State<AddNewEvent> {
                         style: ThemeManager.textStyle
                             .copyWith(color: ThemeManager.primary),
                       ),
-                    )
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _pickDate();
+                      },
+                      style: ThemeManager.buttonStyle,
+                      child: Text(
+                        'Select date',
+                        style: ThemeManager.textStyle
+                            .copyWith(color: ThemeManager.primary),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -143,3 +168,5 @@ class _AddNewEventState extends State<AddNewEvent> {
     );
   }
 }
+
+
