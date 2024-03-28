@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -37,8 +38,10 @@ class _Location_PageState extends State<LocationPage>
       setState(() {
         
         isTabControllerInitialized = true;
+       
+        
           print(
-        'Latitude: ${nearestLat}, Longitude: ${nearestLog}');
+        'Latitude: ${selectednearestLat}, Longitude: ${selectednearestLog}   \n,cureent long: ${usernearestLog},cureent lat: ${usernearestLat} ');
       });
     }
   }

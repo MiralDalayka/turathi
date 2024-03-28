@@ -126,12 +126,13 @@ class _NearestMapState extends State<NearestMap> {
                   textColor: ThemeManager.second,
                   onPressed: () {
                     // Navigator.of(context).pushNamed(locationRoute);//locationRoute
-                     Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LocationPage(),
-                  ),
-                );
+                //      Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => LocationPage(),
+                //   ),
+                // );
+                  Navigator.of(context).pop();
                   },
                   borderWidth: 0,
                 ),
@@ -155,8 +156,8 @@ class _NearestMapState extends State<NearestMap> {
 
     // print(
     //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
-    nearestLat = tappedPoint.latitude;
-    nearestLog = tappedPoint.longitude;
+    selectednearestLat = tappedPoint.latitude;
+    selectednearestLog = tappedPoint.longitude;
 
     //////back
   }
@@ -171,12 +172,15 @@ class _NearestMapState extends State<NearestMap> {
     await _getCurrentLocation().then((value) {});
   }
 
-  Future<Position> _getCurrentLocation() async {
+ Future<Position> _getCurrentLocation() async {
+  try {
     await Permission.locationWhenInUse.request();
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    
     if (!serviceEnabled) {
       throw 'Location services are disabled.';
     }
+    
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -184,9 +188,14 @@ class _NearestMapState extends State<NearestMap> {
         throw 'Location permission denied.';
       }
     }
+    
     if (permission == LocationPermission.deniedForever) {
       throw 'Location permission permanently denied.';
     }
+    
     return await Geolocator.getCurrentPosition();
+  } catch (e) {
+    throw e.toString();
   }
+}
 }
