@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
@@ -43,7 +44,11 @@ class NavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
+
     return BottomNavigationBar(
+      
       showSelectedLabels: false,
       showUnselectedLabels: false,
       backgroundColor: backgroundColor,
@@ -71,6 +76,7 @@ class NavigationBar extends StatelessWidget {
           label: '',
         );
       }).toList(),
+      
       // selectedLabelStyle: labelStyle,
       onTap: onDestinationSelected,
     );
@@ -82,6 +88,7 @@ class CustomeBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final controller = Get.put(NavigationController());
     return Scaffold(
 
@@ -129,6 +136,7 @@ class CustomeBottomNavBar extends StatelessWidget {
 }
 
 class NavigationController extends GetxController {
+  
   final Rx<int> selectedIndex = 2.obs; 
   final screens = [LocationPage(),CommunityScreen(),HomeScreen(),FavoriteScreen(),ProfileScreen()];
 }

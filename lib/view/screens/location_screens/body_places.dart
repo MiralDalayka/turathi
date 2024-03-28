@@ -34,8 +34,21 @@ class _BodyPlacesState extends State<BodyPlaces> {
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
+
+//here to filter places that  within 10 km from  selected nearest location
+      final List<PlaceModel> SelectednearestPlaces = demoPlaces.where((place) {
+        double distanceInKm = calculateDistanceInKm(
+          place.late,
+          place.long,
+          selectednearestLat,
+          selectednearestLog,
+        );
+
+        return distanceInKm <= 10;
+      }).toList();
+      ///////first scenario
     if (isNearestPlaceTab &&
-        (selectednearestLat == 0 || selectednearestLog == 0)) {
+        (selectednearestLat == 0.0 || selectednearestLog == 0.0)) {
       return Center(
           child: Center(
         child: Padding(
@@ -70,19 +83,50 @@ class _BodyPlacesState extends State<BodyPlaces> {
       );
     } 
     
-    
-    else if (isNearestPlaceTab) {
-      //here to filter places that  within 10 km from  selected nearest location
-      final List<PlaceModel> SelectednearestPlaces = demoPlaces.where((place) {
-        double distanceInKm = calculateDistanceInKm(
-          place.late,
-          place.long,
-          selectednearestLat,
-          selectednearestLog,
-        );
+     ///////second scenario
+    else if(isNearestPlaceTab && SelectednearestPlaces.length == 0 ){
+Center(
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "There IS No Places",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                "Nearest The Point You Choose!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      );
 
-        return distanceInKm <= 10;
-      }).toList();
+
+
+    }
+
+
+     ///////Third scenario
+     
+    else  {
+      
 
       return Padding(
         padding: EdgeInsets.only(
@@ -146,10 +190,73 @@ class _BodyPlacesState extends State<BodyPlaces> {
           },
         ),
       );
-    } else if (isMyLocationTab &&
-        (usernearestLat == 0 || usernearestLog == 0)) 
+    } 
+
+     
+
+
+
+
+
+
+    
+     //here to filter places that  within 10 km from  User nearest location (my location)
+    final List<PlaceModel> UsernearestPlaces = demoPlaces.where((place) {
+      double distanceInKm = calculateDistanceInKm(
+        place.late,
+        place.long,
+        usernearestLat,
+        usernearestLog,
+      );
+
+      return distanceInKm <= 10;
+    }).toList();
+
+    
+         ///////first scenario
+     if (isMyLocationTab &&
+        (usernearestLat == 0.0 || usernearestLog == 0.0)) 
        {
       return Center(
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "Allow Access To",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                "Your Location",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      );
+    } 
+
+
+
+   
+  ///////second scenario
+else if( isMyLocationTab && UsernearestPlaces.length==0){
+ return Center(
           child: Center(
         child: Padding(
           padding: EdgeInsets.only(
@@ -181,23 +288,12 @@ class _BodyPlacesState extends State<BodyPlaces> {
         ),
       )
       );
-    } 
+  
+}
 
+  ///////third scenario
 
-
-    //here to filter places that  within 10 km from  User nearest location (my location)
-    final List<PlaceModel> UsernearestPlaces = demoPlaces.where((place) {
-      double distanceInKm = calculateDistanceInKm(
-        place.late,
-        place.long,
-        usernearestLat,
-        usernearestLog,
-      );
-
-      return distanceInKm <= 10;
-    }).toList();
-
-    return Padding(
+   else  return Padding(
       padding: EdgeInsets.only(
         left: LayoutManager.widthNHeight0(context, 1) * 0.05,
         right: LayoutManager.widthNHeight0(context, 1) * 0.05,
