@@ -14,7 +14,7 @@ double calculateDistanceInKm(
   double dLat = radiansLat2 - radiansLat1;
   double dLon = radiansLon2 - radiansLon1; //diff
 
-  // Calcul the distance usee Haversine formula
+  // Calcul the distance usee (Haversine formula)
   double a = pow(sin(dLat / 2), 2) +
       cos(radiansLat1) * cos(radiansLat2) * pow(sin(dLon / 2), 2);
   double c = 2 * atan2(sqrt(a), sqrt(1 - a));

@@ -83,57 +83,23 @@ class _BodyPlacesState extends State<BodyPlaces> {
       );
     } 
     
+   
+
+
      ///////second scenario
-    else if(isNearestPlaceTab && SelectednearestPlaces.length == 0 ){
-Center(
-          child: Center(
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-          child: Column(
-            children: [
-              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
-              Text(
-                "There IS No Places",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ThemeManager.primary,
-                  fontFamily: "KohSantepheap",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-              ),
-              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-              Text(
-                "Nearest The Point You Choose!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "KohSantepheap",
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-      )
-      );
-
-
-
-    }
-
-
-     ///////Third scenario
+    
      
-    else  {
-      
+    else  if(isNearestPlaceTab && SelectednearestPlaces.length != 0) {
+     
 
       return Padding(
+        
         padding: EdgeInsets.only(
           left: LayoutManager.widthNHeight0(context, 1) * 0.05,
           right: LayoutManager.widthNHeight0(context, 1) * 0.05,
         ),
         child: GridView.builder(
+          
           itemCount: SelectednearestPlaces.length,
           shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -192,7 +158,44 @@ Center(
       );
     } 
 
-     
+       ///////Third scenario
+    else if(isNearestPlaceTab  && SelectednearestPlaces.length == 0 ){
+Center(
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "There IS No Places",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                "Nearest The Point You Choose!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      );
+
+
+
+    }
 
 
 
@@ -293,7 +296,7 @@ else if( isMyLocationTab && UsernearestPlaces.length==0){
 
   ///////third scenario
 
-   else  return Padding(
+   else if(isMyLocationTab && UsernearestPlaces.length!=0) return Padding(
       padding: EdgeInsets.only(
         left: LayoutManager.widthNHeight0(context, 1) * 0.05,
         right: LayoutManager.widthNHeight0(context, 1) * 0.05,
@@ -354,6 +357,11 @@ else if( isMyLocationTab && UsernearestPlaces.length==0){
           );
         },
       ),
+    );
+
+    
+ print('>>>>>>>>>>>>>>>>>>>>>> ${SelectednearestPlaces.length}');
+     return Container(child: Text("pop"),
     );
   }
 }
