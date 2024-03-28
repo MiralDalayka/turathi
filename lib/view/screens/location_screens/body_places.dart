@@ -98,7 +98,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
             children: [
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
               Text(
-                "There IS No Places",
+                "There ARE No Places Nearest",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeManager.primary,
@@ -109,7 +109,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
               ),
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
               Text(
-                "Nearest The Point You Choose",
+                "TO The Point You Choose.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: "KohSantepheap",
@@ -230,7 +230,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
             children: [
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
               Text(
-                "Allow Access To",
+                "You Should Allow Access To",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeManager.primary,
