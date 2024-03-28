@@ -4,6 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 
@@ -121,7 +122,7 @@ class _NearestMapState extends State<NearestMap> {
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-                    //back
+                     Navigator.pop(context);
                   },
                   borderWidth: 0,
                 ),
@@ -138,14 +139,17 @@ class _NearestMapState extends State<NearestMap> {
       markers.add(Marker(
         markerId: MarkerId(tappedPoint.toString()),
         position: tappedPoint,
-        icon: BitmapDescriptor.defaultMarkerWithHue(
-            BitmapDescriptor.hueRed), 
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
-      markerAdded = true; 
+      markerAdded = true;
     });
 
-    print(
-        'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');//////back
+    // print(
+    //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
+        nearestLat=tappedPoint.latitude;
+        nearestLog=tappedPoint.longitude;
+
+    //////back
   }
 
   @override
@@ -156,7 +160,6 @@ class _NearestMapState extends State<NearestMap> {
 
   Future<void> _initMap() async {
     await _getCurrentLocation().then((value) {});
-
   }
 
   Future<Position> _getCurrentLocation() async {
