@@ -23,6 +23,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
       demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
 
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
+  bool get isMyLocationTab => widget.tab == "My Location";
 
   @override
   Widget build(BuildContext context) {
@@ -33,118 +34,168 @@ class _BodyPlacesState extends State<BodyPlaces> {
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
-    if (isNearestPlaceTab && nearestLat == 0 && nearestLog == 0) {
-    
+    if (isNearestPlaceTab &&
+        (selectednearestLat == 0 || selectednearestLog == 0)) {
       return Center(
-        child: Center(
-                      child: Padding(
-                        padding:  EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1)*0.45),
-                        child: Column(
-                          children: [
-                            SizedBox(height:  LayoutManager.widthNHeight0(context, 1)*0.02),
-                            Text(
-                              "You Have To Choose",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: ThemeManager.primary,
-                                fontFamily: "KohSantepheap",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
-                            ),
-                            SizedBox(height:  LayoutManager.widthNHeight0(context, 1)*0.025),
-                            Text(
-                              " The Nearest Point To You!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: "KohSantepheap",
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "You Have To Choose",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                " The Nearest Point To You!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
       );
-    }
-  else if (isNearestPlaceTab) {
-  // Filter places that are within 10 km from the user's current location
-  final List<PlaceModel> nearestPlaces = demoPlaces.where((place) {
-    // Calculate the distance between the current place and the user's location
-    double distanceInKm = calculateDistanceInKm(
-      place.late,
-      place.long,
-      nearestLat,
-      nearestLog,
-    );
-    // Return true if the distance is less than or equal to 10 km
-    return distanceInKm <= 10;
-  }).toList();
+    } 
+    
+    
+    else if (isNearestPlaceTab) {
+      //here to filter places that  within 10 km from  selected nearest location
+      final List<PlaceModel> SelectednearestPlaces = demoPlaces.where((place) {
+        double distanceInKm = calculateDistanceInKm(
+          place.late,
+          place.long,
+          selectednearestLat,
+          selectednearestLog,
+        );
 
-  return Padding(
-    padding: EdgeInsets.only(
-      left: LayoutManager.widthNHeight0(context, 1) * 0.05,
-      right: LayoutManager.widthNHeight0(context, 1) * 0.05,
-    ),
-    child: GridView.builder(
-      itemCount: nearestPlaces.length,
-      shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: crossAxisCount,
-        childAspectRatio: cardWidth / (cardWidth + 65),
-        mainAxisSpacing: 1,
-        crossAxisSpacing: 10,
-      ),
-      itemBuilder: (context, index) {
-        final placeModel = nearestPlaces[index];
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(
-              placeDetailsRoute,
-              arguments: placeModel,
-            );
-          },
-          child: SizedBox(
-            width: cardWidth,
-            child: PlaceCard(
-              placeModel: placeModel,
-              onFavoriteChanged: (bool isFavourite) {
-                setState(() {
-                  final productIndex = demoPlaces
-                      .indexWhere((p) => p.id == placeModel.id);
+        return distanceInKm <= 10;
+      }).toList();
 
-                  if (isFavourite) {
-                    if (productIndex != -1) {
-                      demoPlaces[productIndex].isFavourite = true;
-                      favoritePlaces.add(demoPlaces[productIndex]);
-                    }
-                  } else {
-                    if (productIndex != -1) {
-                      demoPlaces[productIndex].isFavourite = false;
-                      favoritePlaces.removeWhere((p) =>
-                          p.id == placeModel.id);
-                    }
-                  }
-                });
-              },
-              onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(
-                      placeModel: placeModel,
-                    ),
-                  ),
+      return Padding(
+        padding: EdgeInsets.only(
+          left: LayoutManager.widthNHeight0(context, 1) * 0.05,
+          right: LayoutManager.widthNHeight0(context, 1) * 0.05,
+        ),
+        child: GridView.builder(
+          itemCount: SelectednearestPlaces.length,
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            childAspectRatio: cardWidth / (cardWidth + 65),
+            mainAxisSpacing: 1,
+            crossAxisSpacing: 10,
+          ),
+          itemBuilder: (context, index) {
+            final placeModel = SelectednearestPlaces[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  placeDetailsRoute,
+                  arguments: placeModel,
                 );
               },
-            ),
-          ),
-        );
-      },
-    ),
-  );
-}
+              child: SizedBox(
+                width: cardWidth,
+                child: PlaceCard(
+                  placeModel: placeModel,
+                  onFavoriteChanged: (bool isFavourite) {
+                    setState(() {
+                      final productIndex =
+                          demoPlaces.indexWhere((p) => p.id == placeModel.id);
 
+                      if (isFavourite) {
+                        if (productIndex != -1) {
+                          demoPlaces[productIndex].isFavourite = true;
+                          favoritePlaces.add(demoPlaces[productIndex]);
+                        }
+                      } else {
+                        if (productIndex != -1) {
+                          demoPlaces[productIndex].isFavourite = false;
+                          favoritePlaces
+                              .removeWhere((p) => p.id == placeModel.id);
+                        }
+                      }
+                    });
+                  },
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreen(
+                          placeModel: placeModel,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
+        ),
+      );
+    } else if (isMyLocationTab &&
+        (usernearestLat == 0 || usernearestLog == 0)) 
+       {
+      return Center(
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "There IS No Places",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                "Nearest Your Location",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      );
+    } 
+
+
+
+    //here to filter places that  within 10 km from  User nearest location (my location)
+    final List<PlaceModel> UsernearestPlaces = demoPlaces.where((place) {
+      double distanceInKm = calculateDistanceInKm(
+        place.late,
+        place.long,
+        usernearestLat,
+        usernearestLog,
+      );
+
+      return distanceInKm <= 10;
+    }).toList();
 
     return Padding(
       padding: EdgeInsets.only(
@@ -152,7 +203,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
         right: LayoutManager.widthNHeight0(context, 1) * 0.05,
       ),
       child: GridView.builder(
-        itemCount: demoPlaces.length,
+        itemCount: UsernearestPlaces.length,
         shrinkWrap: true,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
@@ -161,11 +212,13 @@ class _BodyPlacesState extends State<BodyPlaces> {
           crossAxisSpacing: 10,
         ),
         itemBuilder: (context, index) {
-          final placeModel = demoPlaces[index];
+          final placeModel = UsernearestPlaces[index];
           return GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .pushNamed(placeDetailsRoute, arguments: demoPlaces[index]);
+              Navigator.of(context).pushNamed(
+                placeDetailsRoute,
+                arguments: placeModel,
+              );
             },
             child: SizedBox(
               width: cardWidth,

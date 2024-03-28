@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:turathi/utils/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MapScreenLocation extends StatefulWidget {
@@ -31,8 +32,8 @@ class _MapScreenState extends State<MapScreenLocation> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
-                       child: CircularProgressIndicator(),
-                      );
+                    child: CircularProgressIndicator(),
+                  );
                 } else {
                   return Container();
                 }
@@ -52,7 +53,11 @@ class _MapScreenState extends State<MapScreenLocation> {
     await _getCurrentLocation().then((currentPos) {
       setState(() {
         currentLocation = currentPos;
-        distance = Geolocator.distanceBetween(
+
+        usernearestLat = currentPos.latitude;
+        usernearestLog= currentPos.longitude;
+        
+         distance = Geolocator.distanceBetween(
           currentPos.latitude,
           currentPos.longitude,
           widget.lat,

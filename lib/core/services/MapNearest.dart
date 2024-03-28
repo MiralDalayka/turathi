@@ -126,12 +126,13 @@ class _NearestMapState extends State<NearestMap> {
                   textColor: ThemeManager.second,
                   onPressed: () {
                     // Navigator.of(context).pushNamed(locationRoute);//locationRoute
-                     Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LocationPage(),
-                  ),
-                );
+                //      Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => LocationPage(),
+                //   ),
+                // );
+                  Navigator.of(context).pop();
                   },
                   borderWidth: 0,
                 ),
@@ -155,8 +156,8 @@ class _NearestMapState extends State<NearestMap> {
 
     // print(
     //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
-    nearestLat = tappedPoint.latitude;
-    nearestLog = tappedPoint.longitude;
+    selectednearestLat = tappedPoint.latitude;
+    selectednearestLog = tappedPoint.longitude;
 
     //////back
   }

@@ -38,7 +38,7 @@ class _Location_PageState extends State<LocationPage>
         
         isTabControllerInitialized = true;
           print(
-        'Latitude: ${nearestLat}, Longitude: ${nearestLog}');
+        'Latitude: ${selectednearestLat}, Longitude: ${selectednearestLog}');
       });
     }
   }
