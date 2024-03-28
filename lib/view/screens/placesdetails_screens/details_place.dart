@@ -6,6 +6,7 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+import 'package:turathi/view/widgets/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 
 import '../../../utils/Router/const_router_names.dart';
@@ -115,7 +116,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: SingleChildScrollView(
               child: Container(
                 width: LayoutManager.widthNHeight0(context, 1),
-                height:LayoutManager.widthNHeight0(context, 0),
+                height: LayoutManager.widthNHeight0(context, 0),
                 decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
                     borderRadius:
@@ -332,20 +333,41 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             width:
                                 LayoutManager.widthNHeight0(context, 0) * 0.2,
                             child: AutoSizeText(
-                                maxLines: 3,
+                              addNewLineAfterChars(
                                 widget.placeModel.status,
-                                textAlign: TextAlign.start,
-                                style: ThemeManager.textStyle.copyWith(
-                                  color: ThemeManager.primary,
-                                  decoration: TextDecoration.none,
-                                  shadows: <Shadow>[
-                                    Shadow(
-                                      offset: Offset(5.0, 5.0),
-                                      blurRadius: 2.0,
-                                      color: Colors.black.withOpacity(0.25),
-                                    ),
-                                  ],
-                                )),
+                                20,
+                              ),
+                              maxLines: 3,
+                              textAlign: TextAlign.start,
+                              style: ThemeManager.textStyle.copyWith(
+                                color: ThemeManager.primary,
+                                decoration: TextDecoration.none,
+                                shadows: <Shadow>[
+                                  Shadow(
+                                    offset: Offset(5.0, 5.0),
+                                    blurRadius: 2.0,
+                                    color: Colors.black.withOpacity(0.25),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // AutoSizeText(
+                            //     maxLines: 3,
+                            //     widget.placeModel.status,
+                            //     textAlign: TextAlign.start,
+                            //     style: ThemeManager.textStyle.copyWith(
+                            //       color: ThemeManager.primary,
+                            //       decoration: TextDecoration.none,
+                            //       shadows: <Shadow>[
+                            //         Shadow(
+                            //           offset: Offset(5.0, 5.0),
+                            //           blurRadius: 2.0,
+                            //           color: Colors.black.withOpacity(0.25),
+                            //         ),
+                            //       ],
+                            //     )
+                            //     )
                           ),
                           defaultButton3(
                             text: 'Show Map',
