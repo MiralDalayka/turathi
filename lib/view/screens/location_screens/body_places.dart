@@ -86,7 +86,48 @@ class _BodyPlacesState extends State<BodyPlaces> {
    
 
 
-     ///////second scenario
+
+       ///////second scenario
+    else if(isNearestPlaceTab  && SelectednearestPlaces.length == 0 ){
+        return Center(
+          child: Center(
+        child: Padding(
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          child: Column(
+            children: [
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+              Text(
+                "There IS No Places",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: "KohSantepheap",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+              Text(
+                "Nearest The Point You Choose",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "KohSantepheap",
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ),
+      )
+      );
+
+
+
+    }
+
+
+  ///////Third scenario
     
      
     else  if(isNearestPlaceTab && SelectednearestPlaces.length != 0) {
@@ -157,46 +198,6 @@ class _BodyPlacesState extends State<BodyPlaces> {
         ),
       );
     } 
-
-       ///////Third scenario
-    else if(isNearestPlaceTab  && SelectednearestPlaces.length == 0 ){
-Center(
-          child: Center(
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-          child: Column(
-            children: [
-              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
-              Text(
-                "There IS No Places",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: ThemeManager.primary,
-                  fontFamily: "KohSantepheap",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-              ),
-              SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-              Text(
-                "Nearest The Point You Choose!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: "KohSantepheap",
-                  fontSize: 16,
-                ),
-              ),
-            ],
-          ),
-        ),
-      )
-      );
-
-
-
-    }
-
 
 
 
