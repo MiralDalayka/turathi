@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 
 class NearestMap extends StatefulWidget {
@@ -40,6 +42,7 @@ class _NearestMapState extends State<NearestMap> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
+            //locationRoute
             Navigator.of(context).pop();
           },
           icon: Icon(
@@ -122,7 +125,13 @@ class _NearestMapState extends State<NearestMap> {
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-                     Navigator.pop(context);
+                    // Navigator.of(context).pushNamed(locationRoute);//locationRoute
+                     Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LocationPage(),
+                  ),
+                );
                   },
                   borderWidth: 0,
                 ),
@@ -146,8 +155,8 @@ class _NearestMapState extends State<NearestMap> {
 
     // print(
     //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
-        nearestLat=tappedPoint.latitude;
-        nearestLog=tappedPoint.longitude;
+    nearestLat = tappedPoint.latitude;
+    nearestLog = tappedPoint.longitude;
 
     //////back
   }

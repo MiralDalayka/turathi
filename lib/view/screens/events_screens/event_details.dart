@@ -5,7 +5,7 @@ import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
-import 'package:turathi/view/widgets/new_line_after.dart';
+import 'package:turathi/core/functions/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 import 'package:intl/intl.dart';
 

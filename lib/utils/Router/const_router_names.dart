@@ -10,7 +10,7 @@ const String addNewPlaceRoute = '/bottomScreen/home/AddNewPlace';
 
 const String eventDetailsRoute = '/bottomScreen/home/EventsScreen/EventDetailsScreen';
 
-const String locationRoute = '/bottomScreen/locationPage';
+const String locationRoute = '/bottomScreen/LocationPage';//LocationPage
 const String communityRoute = '/bottomScreen/communityScreen';
 const String favoriteRoute = '/bottomScreen/favoriteScreen';
 const String profileRoute = '/bottomScreen/profileScreen';
@@ -21,7 +21,7 @@ const String questionRoute = '/bottomScreen/communityScreen/question_view';
 
 const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
-
+//LocationPage
 
 
 

@@ -6,7 +6,7 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
-import 'package:turathi/view/widgets/new_line_after.dart';
+import 'package:turathi/core/functions/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 
 import '../../../utils/Router/const_router_names.dart';
