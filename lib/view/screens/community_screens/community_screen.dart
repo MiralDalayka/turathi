@@ -65,7 +65,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 }
 
 var txt =
-    "Nunc dictum facilisis lectus, a cursus tellus vulputate id. In neque lectus, congue dictum accumsan eget, congue venenatis leo. Vestibulum porta quis risus vitae finibus.";
+    "Nunc dictum facilisis lectus, ab cursus tellus vulputate id. In neque lectus, congue dictum accumsan eget, congue venenatis leo. Vestibulum porta quis risus vitae finibus.";
 List<QuestionModel> questions = [
   QuestionModel(
       imageUrl:

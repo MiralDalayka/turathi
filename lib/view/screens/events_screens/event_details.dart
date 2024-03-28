@@ -1,19 +1,14 @@
-import 'dart:math';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 import 'package:turathi/view/widgets/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 import 'package:intl/intl.dart';
 
-import '../../../utils/Router/const_router_names.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   const EventDetailsScreen({Key? key, required this.eventModel})
@@ -33,7 +28,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
-    double left = 20;
+    double left = LayoutManager.widthNHeight0(context, 0) * 0.02;
     return Stack(
       children: <Widget>[
         SizedBox(
@@ -254,8 +249,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   size: 25,
                 ))),
         Positioned(
-            top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
-            right: 10,
+            top: LayoutManager.widthNHeight0(context, 1) * 0.25, //45,
+            right: LayoutManager.widthNHeight0(context, 1) * 0.03,//10
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -421,7 +421,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   },
                   child: Container(
                     width: LayoutManager.widthNHeight0(context, 0) * 0.082,
-                    height: 25,
+                    height:  LayoutManager.widthNHeight0(context, 0) * 0.025,
                     decoration: BoxDecoration(
                       color: ThemeManager.favIcon.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10),

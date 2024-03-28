@@ -18,7 +18,7 @@ class EventModel {
       this.address,
       this.longitude,
       this.latitude,
-      this.ticketPrice=0,
+      this.ticketPrice = 0,
       this.creatorName,
       this.images});
 
@@ -53,35 +53,35 @@ class EventModel {
 
 List<EventModel> events = [
   EventModel(
-    name: 'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
-    images: [
-      'assets/images/img_png/event1.png',
-      'assets/images/img_png/event2.png'
-    ],
-    date: DateTime.now(),
-    address: 'Khaled Al-Walid Amman',
-    creatorName: 'Alaa',
-    ticketPrice: 0,
-    description: '''
+      longitude: 35.99126052856445,
+      latitude: 32.494564056396484,
+      name: 'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
+      images: [
+        'assets/images/img_png/event1.png',
+        'assets/images/img_png/event2.png'
+      ],
+      date: DateTime.now(),
+      address: 'Khaled Al-Walid Amman',
+      creatorName: 'Alaa',
+      ticketPrice: 0,
+      description: '''
     @MrPool Yes, same issue with the static members cannot be accessed in initializers. Very frustrating because having the date static makes no sense. – 
 Michael T Apr 28, 2020 at 10:33 Michael T Apr 28, 2020 at 10:33
-    '''
-
-  ),
+    '''),
   EventModel(
-    name: 'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
-    images: [
-      'assets/images/img_png/event1.png',
-      'assets/images/img_png/event2.png',
-
-    ],
-    date: DateTime.now(),
-    address: 'Khaled Al-Walid Amman',
+      longitude: 35.99126052856445,
+      latitude: 32.494564056396484,
+      name: 'Rabbath Ammon Oriental Bazaar \n Shopping Centre',
+      images: [
+        'assets/images/img_png/event1.png',
+        'assets/images/img_png/event2.png',
+      ],
+      date: DateTime.now(),
+      address: 'Khaled Al-Walid Amman',
       creatorName: 'Alaa',
-    ticketPrice: 50,
-    description: '''
+      ticketPrice: 50,
+      description: '''
   @MrPool Yes, same issue with the static members cannot be accessed in initializers. Very frustrating because having the date static makes no sense. – 
 Michael T Apr 28, 2020 at 10:33 Michael T Apr 28, 2020 at 10:33
-    '''
-  )
+    ''')
 ];

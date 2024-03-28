@@ -21,7 +21,7 @@ class ViewEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    height ??= LayoutManager.widthNHeight0(context, 0) * 0.15;
+    height ??= LayoutManager.widthNHeight0(context, 0) * 0.13;//0.15
     return InkWell(
       onTap: () {
         Navigator.of(context)
@@ -44,7 +44,7 @@ class ViewEvent extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: 2,),
+            SizedBox(width: LayoutManager.widthNHeight0(context, 1)*0.02,),//2
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
