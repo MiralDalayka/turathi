@@ -125,7 +125,7 @@ Center(
 
      ///////Third scenario
      
-    else  {
+    else  if(isNearestPlaceTab) {
       
 
       return Padding(
@@ -190,7 +190,7 @@ Center(
           },
         ),
       );
-    } 
+    } ;
 
      
 
@@ -293,7 +293,7 @@ else if( isMyLocationTab && UsernearestPlaces.length==0){
 
   ///////third scenario
 
-   else  return Padding(
+   else if(isMyLocationTab) return Padding(
       padding: EdgeInsets.only(
         left: LayoutManager.widthNHeight0(context, 1) * 0.05,
         right: LayoutManager.widthNHeight0(context, 1) * 0.05,
@@ -355,5 +355,7 @@ else if( isMyLocationTab && UsernearestPlaces.length==0){
         },
       ),
     );
+
+     return Container();
   }
 }
