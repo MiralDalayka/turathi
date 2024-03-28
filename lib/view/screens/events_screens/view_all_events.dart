@@ -31,10 +31,7 @@ class _EventsScreenState extends State<EventsScreen> {
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.06,
         title: Text(
           "Events",
-          style: TextStyle(
-              fontFamily: ThemeManager.fontFamily,
-              color: ThemeManager.primary,
-              fontWeight: FontWeight.bold),
+          style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
         ),
         centerTitle: true,
 
@@ -47,7 +44,7 @@ class _EventsScreenState extends State<EventsScreen> {
               itemBuilder: (context, index) {
                 return ViewEvent(
                  eventModel:widget.eventsList[index] ,
-                  height:150,
+                  height:LayoutManager.widthNHeight0(context, 0)*0.2,
                   flag: true,
                 );
               },

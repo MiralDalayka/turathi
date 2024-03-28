@@ -94,22 +94,23 @@ class _AddNewEventState extends State<AddNewEvent> {
                   maxLine: 3,
                   controller: disc,
                 ),
+                ElevatedButton(
+                  onPressed: _pickImage,
+                  style: ThemeManager.buttonStyle,
+                  child: Text(
+                    'Pick Image',
+                    style: ThemeManager.textStyle
+                        .copyWith(color: ThemeManager.primary),
+                  ),
+                ),
                 if (image != null) Image.file(File(image!.path)),
                 const SizedBox(
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: _pickImage,
-                      style: ThemeManager.buttonStyle,
-                      child: Text(
-                        'Pick Image',
-                        style: ThemeManager.textStyle
-                            .copyWith(color: ThemeManager.primary),
-                      ),
-                    ),
+
                     ElevatedButton(
                       onPressed: () {
                         //open google map

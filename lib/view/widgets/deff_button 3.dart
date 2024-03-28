@@ -13,14 +13,13 @@ Widget defaultButton3({
   Color textColor = const Color(0xffF7F3EE),
   final Function()? function,
   required String text,
-  double fontSize = 20.0,
   double borderRadius = 0.0,
   required void Function() onPressed,
   required int borderWidth, // Change this line
 }) =>
     Container(
-      width: width,
-      height: height,
+      // width: width,
+      // height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(color: borderColor),
@@ -38,19 +37,14 @@ Widget defaultButton3({
         onPressed: onPressed, // Change this line
         child: Text(
           text,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: textColor,
-            fontSize: fontSize,
-            fontFamily: ThemeManager.fontFamily,
-            shadows: <Shadow>[
-              Shadow(
-                offset: Offset(-2.0, 2.0),
-                blurRadius: 1.0,
-                color: Colors.white.withOpacity(0.2),
-              ),
-            ],
-          ),
+          style:ThemeManager.textStyle.copyWith( shadows: <Shadow>[
+            Shadow(
+              offset: Offset(-2.0, 2.0),
+              blurRadius: 1.0,
+              color: Colors.white.withOpacity(0.2),
+
+            ),
+          ],color: ThemeManager.second)
         ),
       ),
     );

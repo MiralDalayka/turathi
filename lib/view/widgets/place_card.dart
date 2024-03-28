@@ -51,8 +51,8 @@ class _PlaceCardState extends State<PlaceCard> {
                       colorBlendMode: BlendMode.darken,
                     )),
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 1) * 0.088,
-                  left: LayoutManager.widthNHeight0(context, 1) * 0.088,
+                  bottom: 40,
+                  left:7,
                   child: Text(
                     widget.placeModel.title,
                     textAlign: TextAlign.center,
@@ -64,23 +64,21 @@ class _PlaceCardState extends State<PlaceCard> {
                           offset: Offset(3, 3),
                         ),
                       ],
-                      fontSize: 17,
-                      fontFamily: ThemeManager.fontFamily,
                       color: ThemeManager.second,
-                      fontWeight: FontWeight.bold,
+                      fontFamily: ThemeManager.fontFamily,
+                      fontSize: 12
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom:3,
-                  right:7,
+                  bottom: 3,
+                  right: 7,
                   child: IconButton(
                     icon: Icon(
                       widget.placeModel.isFavourite
                           ? Icons.favorite
                           : Icons.favorite_border_outlined,
-                      size: LayoutManager.widthNHeight0(context, 1) *
-                          0.065,
+                      size: LayoutManager.widthNHeight0(context, 1) * 0.065,
                       color: widget.placeModel.isFavourite
                           ? const Color(0xFFA74040)
                           : ThemeManager.second,
@@ -89,8 +87,7 @@ class _PlaceCardState extends State<PlaceCard> {
                       setState(() {
                         widget.placeModel.isFavourite =
                             !widget.placeModel.isFavourite;
-                        widget.onFavoriteChanged(
-                            widget.placeModel.isFavourite);
+                        widget.onFavoriteChanged(widget.placeModel.isFavourite);
                       });
                     },
                   ),

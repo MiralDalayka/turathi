@@ -51,6 +51,7 @@ class _ReportPlaceState extends State<ReportPlace> {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text("Report Added Successfully")));
+                        Navigator.pop(context);
                       } else {
                         log('add report failed');
                       }

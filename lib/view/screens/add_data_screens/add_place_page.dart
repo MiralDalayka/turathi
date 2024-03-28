@@ -2,16 +2,17 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/utils/Router/const_router_names.dart';
 
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
+import '../../widgets/ui_helper.dart';
 
 class AddNewPlace extends StatefulWidget {
   const AddNewPlace({super.key});
 
   @override
   State<AddNewPlace> createState() => _AddNewPlaceState();
-
 }
 
 class _AddNewPlaceState extends State<AddNewPlace> {
@@ -81,13 +82,20 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                       onPressed: () {
                         setState(() {
                           if (formKey.currentState!.validate()) {
-                            //call controller
-                            name.clear();
-                            disc.clear();
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text("Place Added Successfully")));
+                            if (image == null) {
+                              snackBarFunction(
+                                  msg: "Pick Image Please", context: context);
+                            } else {
+                              //call controller
+                              name.clear();
+                              disc.clear();
+                              snackBarFunction(
+                                  msg: "Place Added Successfully",
+                                  context: context);
+                              //BACK
+                              // Navigator.of(context).pushNamed(placeDetailsRoute,arguments: );
+                              Navigator.of(context).pop();
+                            }
                           } else {
                             log('add place failed');
                           }

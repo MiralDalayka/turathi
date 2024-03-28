@@ -1,12 +1,17 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../../core/models/event_model.dart';
 import '../../../../utils/Router/const_router_names.dart';
 import '../../../../utils/layout_manager.dart';
 import '../../../../utils/theme_manager.dart';
+import '../../../widgets/ui_helper.dart';
 
 class ViewEvent extends StatelessWidget {
-  ViewEvent({super.key, required this.eventModel, this.height, required this.flag});
+  ViewEvent(
+      {super.key, required this.eventModel, this.height, required this.flag});
 
 //eventModel
   final EventModel eventModel;
@@ -19,18 +24,19 @@ class ViewEvent extends StatelessWidget {
     height ??= LayoutManager.widthNHeight0(context, 0) * 0.15;
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(eventDetailsRoute,arguments: eventModel);
+        Navigator.of(context)
+            .pushNamed(eventDetailsRoute, arguments: eventModel);
       },
       child: Container(
         height: height,
-        width: LayoutManager.widthNHeight0(context, 0),
+        width: LayoutManager.widthNHeight0(context, 1),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(25)),
+            borderRadius: const BorderRadius.all(Radius.circular(25)),
             color: ThemeManager.second),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: [
 
+          children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: Image.asset(
@@ -38,52 +44,31 @@ class ViewEvent extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    eventModel.name!,
-                    style: TextStyle(
-                      fontFamily: 'KohSantepheap',
-                      color: ThemeManager.textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.013,
-                    ),
-                  ),
-                  SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.02,
-                  ),
-                  Text(
-                    'Open ⋅ Closes ${eventModel.date!.hour} PM',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontFamily: 'KohSantepheap',
-                      color: ThemeManager.textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.013,
-                    ),
-                  ),
-                  SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.02,
-                  ),
-                  Text(
-                    'Address: ${eventModel.address!}',
-                    style: TextStyle(
-                      fontFamily: 'KohSantepheap',
-                      color: ThemeManager.textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.013,
-                    ),
-                  ),
-                  if (flag!)
-                    ...creatorNameFunction(creatorName: eventModel.creatorName!,context:context),
-                  if (flag!&&eventModel.ticketPrice!=0)
-                    ...ticketPriceFunction(ticketPrice: eventModel.ticketPrice!,context:context),
+            SizedBox(width: 2,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                autoTextFunction(txt: eventModel.name!,maxLine: 3),
 
-                ],
-              ),
+                autoTextFunction(
+                  txt: 'Open ⋅ Closes ${eventModel.date!.hour}',
+                ),
+                autoTextFunction(
+                  txt: 'Address: ${eventModel.address!}',
+                  maxLine: 3
+
+                ),
+                if (flag!)
+                  autoTextFunction(
+                    txt: 'Creator Name: ${eventModel.creatorName!}',
+                  ),
+
+                if (flag! && eventModel.ticketPrice != 0)
+                  autoTextFunction(
+                    txt: 'Ticket Price: ${eventModel.ticketPrice!}',
+                  )
+              ],
             )
           ],
         ),
@@ -92,35 +77,4 @@ class ViewEvent extends StatelessWidget {
   }
 }
 
-List<Widget> creatorNameFunction({required String creatorName, context}) {
-  return [
-    SizedBox(
-      height: LayoutManager.widthNHeight0(context, 1) * 0.02,
-    ),
-    Text(
-      'Creator Name: $creatorName',
-      style: TextStyle(
-        fontFamily: 'KohSantepheap',
-        color: ThemeManager.textColor,
-        fontWeight: FontWeight.bold,
-        fontSize: LayoutManager.widthNHeight0(context, 0) * 0.013,
-      ),
-    )
-  ];
-}
-List<Widget> ticketPriceFunction({required double ticketPrice, context}) {
-  return [
-    SizedBox(
-      height: LayoutManager.widthNHeight0(context, 1) * 0.02,
-    ),
-    Text(
-      'Ticket Price: $ticketPrice JOD',
-      style: TextStyle(
-        fontFamily: 'KohSantepheap',
-        color: ThemeManager.textColor,
-        fontWeight: FontWeight.bold,
-        fontSize: LayoutManager.widthNHeight0(context, 0) * 0.013,
-      ),
-    )
-  ];
-}
+

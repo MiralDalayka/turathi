@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/models/place_model.dart';
@@ -45,14 +46,17 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         Positioned(
           top: height - 110,
           left: left,
-          child: Text(
-            widget.eventModel.name!,
-            style: TextStyle(
-                fontFamily: ThemeManager.fontFamily,
+          child: SizedBox(
+            width: LayoutManager.widthNHeight0(context, 1)-20,
+            child: AutoSizeText(
+              maxLines: 3,
+              widget.eventModel.name!,
+              style: ThemeManager.textStyle.copyWith(
                 color: ThemeManager.second,
-                fontWeight: FontWeight.w700,
-                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.025,
-                decoration: TextDecoration.none),
+                  decoration: TextDecoration.none
+
+              )
+            ),
           ),
         ),
 
@@ -189,20 +193,18 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        AutoSizeText(
                           widget.eventModel.address!,
-                          style: TextStyle(
-                            fontFamily: ThemeManager.fontFamily,
-                            color: ThemeManager.primary,
-                            fontSize: LayoutManager.widthNHeight0(context, 0) * 0.020,
+                          overflow: TextOverflow.ellipsis,
+                          style: ThemeManager.textStyle.copyWith(
                             decoration: TextDecoration.none,
+                            color: ThemeManager.primary
                           ),
+                          maxLines: 3,
                         ),
                         defaultButton3(
-                          fontSize:
-                              LayoutManager.widthNHeight0(context, 1) * 0.045,
                           text: 'Show Map',
-                          width: LayoutManager.widthNHeight0(context, 1) * 0.36,
+                          // width: LayoutManager.widthNHeight0(context, 1) * 0.36,
                           borderRadius: 18,
                           background: ThemeManager.primary,
                           textColor: ThemeManager.second,

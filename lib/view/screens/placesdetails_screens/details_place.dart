@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/MapScreen%202.dart';
@@ -114,6 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: SingleChildScrollView(
               child: Container(
                 width: LayoutManager.widthNHeight0(context, 1),
+                height:LayoutManager.widthNHeight0(context, 0),
                 decoration: BoxDecoration(
                     color: Color(0xffFFFFFF),
                     borderRadius:
@@ -324,33 +326,28 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Container(
+                          SizedBox(
                             width:
                                 LayoutManager.widthNHeight0(context, 0) * 0.2,
-                            child: Text(
-                              "${widget.placeModel.status}",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: ThemeManager.primary,
-                                fontFamily: ThemeManager.fontFamily,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.none,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(5.0, 5.0),
-                                    blurRadius: 2.0,
-                                    color: Colors.black.withOpacity(0.25),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            child: AutoSizeText(
+                                maxLines: 3,
+                                widget.placeModel.status,
+                                textAlign: TextAlign.start,
+                                style: ThemeManager.textStyle.copyWith(
+                                  color: ThemeManager.primary,
+                                  decoration: TextDecoration.none,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(5.0, 5.0),
+                                      blurRadius: 2.0,
+                                      color: Colors.black.withOpacity(0.25),
+                                    ),
+                                  ],
+                                )),
                           ),
                           defaultButton3(
-                            fontSize:
-                                LayoutManager.widthNHeight0(context, 1) * 0.045,
                             text: 'Show Map',
                             width:
                                 LayoutManager.widthNHeight0(context, 1) * 0.36,
