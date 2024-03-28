@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class SmallImage extends StatelessWidget {
@@ -23,14 +24,14 @@ class SmallImage extends StatelessWidget {
         duration: Duration.zero,
         margin: const EdgeInsets.only(right: 0),
         padding: const EdgeInsets.all(3),
-        height: 42,
-        width: 42,
+        height: LayoutManager.widthNHeight0(context, 1)*0.11,
+        width:LayoutManager.widthNHeight0(context, 1)*0.11,
       decoration: BoxDecoration(
-          color: ThemeManager.second.withOpacity(0.7),
+          color: ThemeManager.second.withOpacity(0.6),
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: ThemeManager.primary.withOpacity(isSelected ? 1 : 0),
-            width: 1.8, 
+            width: LayoutManager.widthNHeight0(context, 1)*0.005, //1.8
           ),
         ),
         child: Image.asset(

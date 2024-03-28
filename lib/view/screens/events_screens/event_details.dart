@@ -1,16 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+import 'package:turathi/core/functions/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 import 'package:intl/intl.dart';
 
-import '../../../utils/Router/const_router_names.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   const EventDetailsScreen({Key? key, required this.eventModel})
@@ -30,7 +28,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
-    double left = 20;
+    double left = LayoutManager.widthNHeight0(context, 0) * 0.02;
     return Stack(
       children: <Widget>[
         SizedBox(
@@ -47,19 +45,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           top: height - 110,
           left: left,
           child: SizedBox(
-            width: LayoutManager.widthNHeight0(context, 1)-20,
+            width: LayoutManager.widthNHeight0(context, 1) - 20,
             child: AutoSizeText(
-              maxLines: 3,
-              widget.eventModel.name!,
-              style: ThemeManager.textStyle.copyWith(
-                color: ThemeManager.second,
-                  decoration: TextDecoration.none
-
-              )
-            ),
+                maxLines: 3,
+                widget.eventModel.name!,
+                style: ThemeManager.textStyle.copyWith(
+                    color: ThemeManager.second,
+                    decoration: TextDecoration.none)),
           ),
         ),
-
         Positioned(
             top: height - 35,
             bottom: 0,
@@ -152,8 +146,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                 ),
                                 Text(
                                   widget.eventModel.ticketPrice == 0
-                                      ? 'Free' :widget.eventModel.ticketPrice.toString()
-                                       ,
+                                      ? 'Free'
+                                      : widget.eventModel.ticketPrice
+                                          .toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: ThemeManager.primary,
@@ -194,14 +189,29 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AutoSizeText(
-                          widget.eventModel.address!,
+                          addNewLineAfterChars(
+                            widget.eventModel.address!,
+                            18, 
+                          ),
                           overflow: TextOverflow.ellipsis,
                           style: ThemeManager.textStyle.copyWith(
                             decoration: TextDecoration.none,
-                            color: ThemeManager.primary
+                            color: ThemeManager.primary,
                           ),
                           maxLines: 3,
                         ),
+
+                        // AutoSizeText(
+
+                        //   widget.eventModel.address!,
+                        //   overflow: TextOverflow.ellipsis,
+                        //   style: ThemeManager.textStyle.copyWith(
+
+                        //     decoration: TextDecoration.none,
+                        //     color: ThemeManager.primary
+                        //   ),
+                        //   maxLines: 3,
+                        // ),
                         defaultButton3(
                           text: 'Show Map',
                           // width: LayoutManager.widthNHeight0(context, 1) * 0.36,
@@ -226,14 +236,12 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 ),
               ),
             )),
-
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.1, //45,
             left: 10,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .pop();
+                  Navigator.of(context).pop();
                 },
                 icon: const Icon(
                   Icons.arrow_back_sharp,
@@ -241,8 +249,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   size: 25,
                 ))),
         Positioned(
-            top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
-            right: 10,
+            top: LayoutManager.widthNHeight0(context, 1) * 0.25, //45,
+            right: LayoutManager.widthNHeight0(context, 1) * 0.03,//10
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

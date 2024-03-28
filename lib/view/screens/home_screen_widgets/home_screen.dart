@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     //change it
+
     eventsList = events;
     return Scaffold(
       appBar: AppBar(
@@ -37,8 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.notifications_none_outlined,
               color: ThemeManager.primary,
             ),
-            onPressed: () {
-            },
+            onPressed: () {},
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
           ),
           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
@@ -48,166 +48,171 @@ class _HomeScreenState extends State<HomeScreen> {
         color: ThemeManager.background,
         child: Padding(
           padding: const EdgeInsets.only(right: 12, left: 12),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hi Alaa !',
-                  style: TextStyle(
-                    fontFamily: 'KohSantepheap',
-                    color: ThemeManager.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
-                    shadows: const [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 1,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hi Alaa !',
+                style: TextStyle(
+                  fontFamily: 'KohSantepheap',
+                  color: ThemeManager.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 1,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                Text(
-                  'Good Morning',
-                  style: TextStyle(
-                    fontFamily: 'KohSantepheap',
-                    color: ThemeManager.primary,
-                    fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
-                    letterSpacing: 4,
-                    fontWeight: FontWeight.bold,
-                    shadows: const [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 1,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
+              ),
+              Text(
+                'Good Morning',
+                style: TextStyle(
+                  fontFamily: 'KohSantepheap',
+                  color: ThemeManager.primary,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
+                  letterSpacing: 4,
+                  fontWeight: FontWeight.bold,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 1,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 1) * 0.026,
+              ),
+              SizedBox(
+                height: LayoutManager.widthNHeight0(context, 1) * 0.026,
+              ),
+              Container(
+                height: LayoutManager.widthNHeight0(context, 1) * 0.16,
+                width: LayoutManager.widthNHeight0(context, 0),
+                decoration: BoxDecoration(
+                  color: ThemeManager.second,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
                 ),
-                Container(
-                  height: LayoutManager.widthNHeight0(context, 1) * 0.16,
-                  width: LayoutManager.widthNHeight0(context, 0),
-                  decoration: BoxDecoration(
-                    color: ThemeManager.second,
-                    borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        "Be Part Of Collect Data With Us",
-                        style: TextStyle(
-                            fontFamily: 'KohSantepheap',
-                            color: ThemeManager.primary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: LayoutManager.widthNHeight0(context, 0) *
-                                0.0175),
-                      ),
-                      AddButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(addNewPlaceRoute);
-                        },
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 0) * 0.014,
-                ),
-                Text(
-                  'Popular Places',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'KohSantepheap',
-                    color: ThemeManager.primary,
-                    fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
-                    shadows: const [
-                      Shadow(
-                        color: Colors.grey,
-                        blurRadius: 0.01,
-                        offset: Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 1) * 0.018,
-                ),
-                ImageSliderWidget(),
-                SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 1) * 0.018,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      'Events',
+                      "Be Part Of Collect Data With Us",
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'KohSantepheap',
-                        color: ThemeManager.primary,
-                        fontSize:
-                            LayoutManager.widthNHeight0(context, 0) * 0.015,
-                        shadows: const [
-                          Shadow(
-                            color: Colors.grey,
-                            blurRadius: 0.01,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
+                          fontFamily: 'KohSantepheap',
+                          color: ThemeManager.primary,
+                          fontWeight: FontWeight.bold,
+                          fontSize:
+                              LayoutManager.widthNHeight0(context, 0) * 0.0175),
                     ),
-                    InkWell(
-                      onTap: (){
-                        //nav to all events
-                        Navigator.of(context).pushNamed(eventsRoute,arguments: eventsList);
+                    AddButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(addNewPlaceRoute);
                       },
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                            right:
-                                LayoutManager.widthNHeight0(context, 1) * 0.02),
-                        child: Text(
-                          'See All',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'KohSantepheap',
-                            color: ThemeManager.primary,
-                            fontSize:
-                                LayoutManager.widthNHeight0(context, 0) * 0.015,
-                            shadows: const [
-                              Shadow(
-                                color: Colors.grey,
-                                blurRadius: 0.01,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     )
                   ],
                 ),
-                SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 1) * 0.02,
+              ),
+              SizedBox(
+                height: LayoutManager.widthNHeight0(context, 0) * 0.014,
+              ),
+              Text(
+                'Popular Places',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'KohSantepheap',
+                  color: ThemeManager.primary,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                  shadows: const [
+                    Shadow(
+                      color: Colors.grey,
+                      blurRadius: 0.01,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
                 ),
-                ViewEvent(
-                  eventModel: eventsList![0],
-                  flag: false,
+              ),
+              SizedBox(
+                height: LayoutManager.widthNHeight0(context, 1) * 0.018,
+              ),
+              ImageSliderWidget(),
+              SizedBox(
+                height: LayoutManager.widthNHeight0(context, 1) * 0.04,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Events',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'KohSantepheap',
+                      color: ThemeManager.primary,
+                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                      shadows: const [
+                        Shadow(
+                          color: Colors.grey,
+                          blurRadius: 0.01,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      //nav to all events
+                      Navigator.of(context)
+                          .pushNamed(eventsRoute, arguments: eventsList);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          right:
+                              LayoutManager.widthNHeight0(context, 1) * 0.02),
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'KohSantepheap',
+                          color: ThemeManager.primary,
+                          fontSize:
+                              LayoutManager.widthNHeight0(context, 0) * 0.015,
+                          shadows: const [
+                            Shadow(
+                              color: Colors.grey,
+                              blurRadius: 0.01,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: LayoutManager.widthNHeight0(context, 1) * 0.02,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ViewEvent(
+                        eventModel: eventsList![0],
+                        flag: false,
+                      ),
+                      SizedBox(
+                        height: LayoutManager.widthNHeight0(context, 1) * 0.04,
+                      ),
+                      ViewEvent(
+                        eventModel: eventsList![1],
+                        flag: false,
+                      ),
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                ViewEvent(
-                  eventModel: eventsList![1],
-                  flag: false,
-
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

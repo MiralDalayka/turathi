@@ -51,8 +51,8 @@ class _PlaceCardState extends State<PlaceCard> {
                       colorBlendMode: BlendMode.darken,
                     )),
                 Positioned(
-                  bottom: 40,
-                  left:7,
+                  bottom: LayoutManager.widthNHeight0(context, 0)*0.045,
+                  left: LayoutManager.widthNHeight0(context, 0)*0.04,
                   child: Text(
                     widget.placeModel.title,
                     textAlign: TextAlign.center,
@@ -66,13 +66,14 @@ class _PlaceCardState extends State<PlaceCard> {
                       ],
                       color: ThemeManager.second,
                       fontFamily: ThemeManager.fontFamily,
-                      fontSize: 12
+                      fontWeight: FontWeight.w900,
+                      fontSize: LayoutManager.widthNHeight0(context, 0)*0.017
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: 3,
-                  right: 7,
+                  bottom:  LayoutManager.widthNHeight0(context, 0)*0.001,
+                  right:  LayoutManager.widthNHeight0(context, 1)*0.0002,
                   child: IconButton(
                     icon: Icon(
                       widget.placeModel.isFavourite
