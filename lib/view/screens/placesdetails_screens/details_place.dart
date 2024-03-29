@@ -239,6 +239,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               icon: new Image.asset(
                                                   "assets/images/img_png/like.png"),
                                               onPressed: () {
+                                                setState(() {
+                                                 widget.placeModel.like += 1;
+                                              });
                                                 print("Thumbs-up clicked ");
                                               },
                                             )),
@@ -293,6 +296,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               icon: new Image.asset(
                                                   "assets/images/img_png/dislike.png"),
                                               onPressed: () {
+                                                 setState(() {
+                                                 widget.placeModel.disLike += 1;
+                                              });
                                                 print("Thumbs-down clicked ");
                                               },
                                             )),
