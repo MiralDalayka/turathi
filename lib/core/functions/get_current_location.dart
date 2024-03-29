@@ -21,8 +21,8 @@ class GetCurrentLocation {
       Position? currentPos = await _getCurrentLocation();
       if (currentPos != null) {
         currentLocation = currentPos;
-        usernearestLat = currentPos.latitude;
-        usernearestLog = currentPos.longitude;
+        userNearestLat = currentPos.latitude;
+        userNearestLog = currentPos.longitude;
       } else {
         throw ('Failed to get current location');
       }

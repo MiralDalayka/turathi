@@ -54,8 +54,8 @@ class _MapScreenState extends State<MapScreenLocation> {
       setState(() {
         currentLocation = currentPos;
 
-        usernearestLat = currentPos.latitude;
-        usernearestLog= currentPos.longitude;
+        userNearestLat = currentPos.latitude;
+        userNearestLog= currentPos.longitude;
         
          distance = Geolocator.distanceBetween(
           currentPos.latitude,

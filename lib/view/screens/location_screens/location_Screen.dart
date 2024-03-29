@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -9,7 +8,7 @@ import 'package:turathi/view/screens/location_screens/body_Places.dart';
 import 'package:turathi/view/screens/location_screens/location_header.dart';
 
 class LocationPage extends StatefulWidget {
-  const LocationPage({Key? key}) : super(key: key);
+  const LocationPage({super.key});
 
   @override
   State<LocationPage> createState() => _Location_PageState();
@@ -19,6 +18,8 @@ class _Location_PageState extends State<LocationPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool isTabControllerInitialized = false;
+
+//here
 
   @override
   void initState() {
@@ -36,12 +37,9 @@ class _Location_PageState extends State<LocationPage>
   void _tabControllerListener() {
     if (!isTabControllerInitialized) {
       setState(() {
-        
         isTabControllerInitialized = true;
-       
-        
-          print(
-        'Latitude: ${selectednearestLat}, Longitude: ${selectednearestLog}   \n,cureent long: ${usernearestLog},cureent lat: ${usernearestLat} ');
+
+        log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
       });
     }
   }
@@ -49,31 +47,26 @@ class _Location_PageState extends State<LocationPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
         automaticallyImplyLeading: false,
-
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
-       
       ),
       body: Container(
         color: ThemeManager.background,
         child: Column(
-            
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            HeaderPart(),
+            const HeaderPart(),
             Padding(
-              padding: const EdgeInsets.only(right: 0),//50//
+              padding: const EdgeInsets.only(right: 0), //50//
               child: TabBar(
                 controller: tabController,
                 labelStyle: TextStyle(
-                    fontSize: LayoutManager.widthNHeight0(context, 1)*0.035,
+                    fontSize: LayoutManager.widthNHeight0(context, 1) * 0.035,
                     color: ThemeManager.primary,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'KohSantepheap'),
-             
                 indicatorColor: ThemeManager.second,
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,
@@ -82,21 +75,16 @@ class _Location_PageState extends State<LocationPage>
                   Tab(text: 'My Location'),
                   Tab(text: 'Nearest Place'),
                 ],
-                
               ),
             ),
-            
             Expanded(
-            
                 child: TabBarView(
               controller: tabController,
               children: [
                 BodyPlaces(tab: 'My Location'),
-                
                 isTabControllerInitialized
-                
                     ? BodyPlaces(tab: 'Nearest Place')
-                    : Center(child: CircularProgressIndicator()),
+                    : const Center(child: CircularProgressIndicator()),
               ],
             )),
           ],

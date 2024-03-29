@@ -1,14 +1,19 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
+import 'package:turathi/core/providers/nearest_places_provider.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/location_Screen.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+
+import '../../view/screens/location_screens/body_Places.dart';
 
 class NearestMap extends StatefulWidget {
   const NearestMap({Key? key}) : super(key: key);
@@ -36,8 +41,11 @@ class _NearestMapState extends State<NearestMap> {
 
   bool markerAdded = false;
 
+
   @override
   Widget build(BuildContext context) {
+    var placesProvider = Provider.of<NearestPlacesProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -126,15 +134,22 @@ class _NearestMapState extends State<NearestMap> {
                   textColor: ThemeManager.second,
                   onPressed: () {
                     // Navigator.of(context).pushNamed(locationRoute);//locationRoute
-                //      Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => LocationPage(),
-                //   ),
-                // );
+                    //      Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => LocationPage(),
+                    //   ),
+                    // );
+                    log("From done button ");
+                    placesProvider.createNearestPlaceList(selectedNearestLat, selectedNearestLog);
 
-                
-                  Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => LocationPage(),
+                    //   ),
+                    // );
                   },
                   borderWidth: 0,
                 ),
@@ -158,8 +173,8 @@ class _NearestMapState extends State<NearestMap> {
 
     // print(
     //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
-    selectednearestLat = tappedPoint.latitude;
-    selectednearestLog = tappedPoint.longitude;
+    selectedNearestLat = tappedPoint.latitude;
+    selectedNearestLog = tappedPoint.longitude;
 
     //////back
   }
@@ -174,30 +189,30 @@ class _NearestMapState extends State<NearestMap> {
     await _getCurrentLocation().then((value) {});
   }
 
- Future<Position> _getCurrentLocation() async {
-  try {
-    await Permission.locationWhenInUse.request();
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    
-    if (!serviceEnabled) {
-      throw 'Location services are disabled.';
-    }
-    
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        throw 'Location permission denied.';
+  Future<Position> _getCurrentLocation() async {
+    try {
+      await Permission.locationWhenInUse.request();
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+      if (!serviceEnabled) {
+        throw 'Location services are disabled.';
       }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          throw 'Location permission denied.';
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        throw 'Location permission permanently denied.';
+      }
+
+      return await Geolocator.getCurrentPosition();
+    } catch (e) {
+      throw e.toString();
     }
-    
-    if (permission == LocationPermission.deniedForever) {
-      throw 'Location permission permanently denied.';
-    }
-    
-    return await Geolocator.getCurrentPosition();
-  } catch (e) {
-    throw e.toString();
   }
-}
 }
