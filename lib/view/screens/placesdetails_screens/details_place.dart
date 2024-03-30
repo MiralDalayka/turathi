@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -184,16 +185,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  "Comments",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color:
-                                        ThemeManager.textColor.withOpacity(0.7),
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.none,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                      commentsPlaceRoute,
+                                      // arguments: widget.placeModel.id,
+                                    );
+                                  },
+                                  child: Text(
+                                    "Comments",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: ThemeManager.textColor
+                                          .withOpacity(0.7),
+                                      fontFamily: ThemeManager.fontFamily,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      decoration: TextDecoration.none,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
@@ -240,8 +249,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                   "assets/images/img_png/like.png"),
                                               onPressed: () {
                                                 setState(() {
-                                                 widget.placeModel.like += 1;
-                                              });
+                                                  widget.placeModel.like += 1;
+                                                });
                                                 print("Thumbs-up clicked ");
                                               },
                                             )),
@@ -296,9 +305,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               icon: new Image.asset(
                                                   "assets/images/img_png/dislike.png"),
                                               onPressed: () {
-                                                 setState(() {
-                                                 widget.placeModel.disLike += 1;
-                                              });
+                                                setState(() {
+                                                  widget.placeModel.disLike +=
+                                                      1;
+                                                });
                                                 print("Thumbs-down clicked ");
                                               },
                                             )),
@@ -427,7 +437,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   },
                   child: Container(
                     width: LayoutManager.widthNHeight0(context, 0) * 0.082,
-                    height:  LayoutManager.widthNHeight0(context, 0) * 0.025,
+                    height: LayoutManager.widthNHeight0(context, 0) * 0.025,
                     decoration: BoxDecoration(
                       color: ThemeManager.favIcon.withOpacity(0.8),
                       borderRadius: BorderRadius.circular(10),

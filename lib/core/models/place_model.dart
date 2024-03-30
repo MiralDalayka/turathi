@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class PlaceModel {
-  final String ussid; // user id
+  final String userID; 
   final String id;
   final String title, description, status, location, type, distance;
   final List<String> commentsPlace;
@@ -14,7 +14,7 @@ class PlaceModel {
   double long, late;
 
   PlaceModel({
-    this.ussid = "",
+    this.userID = "",
     required this.images,
     required this.commentsPlace,
     required this.title,

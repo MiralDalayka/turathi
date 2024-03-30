@@ -50,7 +50,7 @@ Widget build(BuildContext context) {
   List<Widget> homeWidgets = List.generate(
     demoPlaces.length,
     (index) {
-      if (demoPlaces[index].ussid == uid) {
+      if (demoPlaces[index].userID == uid) {
 haveOfnot=true;
         return Padding(
           padding: const EdgeInsets.all(0),

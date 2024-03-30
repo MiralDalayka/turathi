@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 
     return  MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: NearestPlacesProvider()),
+        ChangeNotifierProvider.value(value: NearestPlacesProvider()),/////here at the right give it model
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/view/screens/placesdetails_screens/comments_place.dart';
 
 import '../../core/models/event_model.dart';
 import '../../core/models/question_model.dart';
@@ -81,6 +82,10 @@ class MyRouter {
           return _route(ReportPlace(
             placeID: arg,
           ));
+        }
+        case commentsPlaceRoute:
+        {
+          return _route(const CommentsPlace());
         }
       // case ex:
       //   {
