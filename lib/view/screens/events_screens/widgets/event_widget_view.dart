@@ -21,7 +21,7 @@ class ViewEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    height ??= LayoutManager.widthNHeight0(context, 0) * 0.13;//0.15
+    height ??= LayoutManager.widthNHeight0(context, 0) * 0.12;//0.15
     return InkWell(
       onTap: () {
         Navigator.of(context)
@@ -45,30 +45,33 @@ class ViewEvent extends StatelessWidget {
               ),
             ),
             SizedBox(width: LayoutManager.widthNHeight0(context, 1)*0.02,),//2
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                autoTextFunction(txt: eventModel.name!,maxLine: 3),
-
-                autoTextFunction(
-                  txt: 'Open ⋅ Closes ${eventModel.date!.hour}',
-                ),
-                autoTextFunction(
-                  txt: 'Address: ${eventModel.address!}',
-                  maxLine: 3
-
-                ),
-                if (flag!)
+            Padding(
+              padding:  EdgeInsets.all( LayoutManager.widthNHeight0(context, 1)*0.005),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  autoTextFunction(txt: eventModel.name!,maxLine: 3),
+              
                   autoTextFunction(
-                    txt: 'Creator Name: ${eventModel.creatorName!}',
+                    txt: 'Open ⋅ Closes ${eventModel.date!.hour}',
                   ),
-
-                if (flag! && eventModel.ticketPrice != 0)
                   autoTextFunction(
-                    txt: 'Ticket Price: ${eventModel.ticketPrice!}',
-                  )
-              ],
+                    txt: 'Address: ${eventModel.address!}',
+                    maxLine: 3
+              
+                  ),
+                  if (flag!)
+                    autoTextFunction(
+                      txt: 'Creator Name: ${eventModel.creatorName!}',
+                    ),
+              
+                  if (flag! && eventModel.ticketPrice != 0)
+                    autoTextFunction(
+                      txt: 'Ticket Price: ${eventModel.ticketPrice!}',
+                    )
+                ],
+              ),
             )
           ],
         ),
