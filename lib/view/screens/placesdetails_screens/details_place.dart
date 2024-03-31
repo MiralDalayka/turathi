@@ -115,7 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Positioned(
             top: height - 35,
             bottom: 0,
-            child: SingleChildScrollView(
+           
               child: Container(
                 width: LayoutManager.widthNHeight0(context, 1),
                 height: LayoutManager.widthNHeight0(context, 0),
@@ -126,299 +126,299 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       left: 25.0, right: 25, top: 20, bottom: 15),
-                  child: Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: ThemeManager.containerback.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xffE9E6E2).withOpacity(0.4),
-                              spreadRadius: 0,
-                              blurRadius: 12,
-                              offset: Offset(3, -3),
-                            ),
-                          ],
-                        ),
-                        width: double.infinity,
-                        height: 60,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Distance",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color:
-                                        ThemeManager.textColor.withOpacity(0.7),
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  "+${widget.placeModel.distance} Km",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: ThemeManager.primary,
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    // Navigator.of(context).pushNamed(
-                                    //   commentsPlaceRoute,
-                                    //   // arguments: widget.placeModel.id,
-                                    // );\
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => CommentsPlace(
-                                            place: widget.placeModel),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    "Comments",
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: ThemeManager.containerback.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xffE9E6E2).withOpacity(0.4),
+                                spreadRadius: 0,
+                                blurRadius: 12,
+                                offset: Offset(3, -3),
+                              ),
+                            ],
+                          ),
+                          width: double.infinity,
+                          height: 60,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Distance",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: ThemeManager.textColor
-                                          .withOpacity(0.7),
+                                      color:
+                                          ThemeManager.textColor.withOpacity(0.7),
                                       fontFamily: ThemeManager.fontFamily,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       decoration: TextDecoration.none,
                                     ),
                                   ),
-                                ),
+                                  SizedBox(
+                                    height: 3,
+                                  ),
+                                  Text(
+                                    "+${widget.placeModel.distance} Km",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: ThemeManager.primary,
+                                      fontFamily: ThemeManager.fontFamily,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.none,
+                                    ),
+                                  )
+                                ],
+                              ),
                                 SizedBox(
-                                  height: 3,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      "( ${widget.placeModel.comments_counter} )",
+                                width: LayoutManager.widthNHeight0(context, 1)*0.1,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  
+                                 
+                                  Column(
+                                    children: [
+                                       Text(
+                                      "Comments",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: ThemeManager.primary,
+                                        color: ThemeManager.textColor
+                                            .withOpacity(0.7),
                                         fontFamily: ThemeManager.fontFamily,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w600,
                                         decoration: TextDecoration.none,
                                       ),
                                     ),
-                                  ],
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Container(
-                                            height: LayoutManager.widthNHeight0(
-                                                    context, 1) *
-                                                0.05, //30.0,
-                                            width: LayoutManager.widthNHeight0(
-                                                    context, 0) *
-                                                0.035, //18.0,
-                                            child: new IconButton(
-                                              padding: new EdgeInsets.all(0.0),
-                                              icon: new Image.asset(
-                                                  "assets/images/img_png/like.png"),
-                                              onPressed: () {
-                                                setState(() {
-                                                  widget.placeModel.like += 1;
-                                                });
-                                                print("Thumbs-up clicked ");
-                                              },
-                                            )),
-                                        SizedBox(
-                                          height: LayoutManager.widthNHeight0(
-                                                  context, 1) *
-                                              0.015,
+                                    ],
+                                  ),
+                                   SizedBox(
+                                    height: 3,
+                                  ),
+                    
+                                  GestureDetector(
+                                    onTap: () {
+                                      // Navigator.of(context).pushNamed(
+                                      //   commentsPlaceRoute,
+                                      //   // arguments: widget.placeModel.id,
+                                      // );\
+                    
+                                      ////////////here we have to chnage to pushNamed 
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => CommentsPlace(
+                                              place: widget.placeModel),
                                         ),
-                                        Text(
-                                          "${widget.placeModel.like}",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontFamily: ThemeManager.fontFamily,
-                                            color: ThemeManager.textColor
-                                                .withOpacity(0.7),
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: LayoutManager.widthNHeight0(
-                                              context, 0) *
-                                          0.01,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          "${widget.placeModel.disLike}",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontFamily: ThemeManager.fontFamily,
-                                            color: ThemeManager.textColor
-                                                .withOpacity(0.7),
-                                            decoration: TextDecoration.none,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: LayoutManager.widthNHeight0(
-                                                  context, 1) *
-                                              0.015,
-                                        ),
-                                        Container(
-                                            height: LayoutManager.widthNHeight0(
-                                                    context, 1) *
-                                                0.05, //30.0,
-                                            width: LayoutManager.widthNHeight0(
-                                                    context, 0) *
-                                                0.035, //18.0,
-                                            child: new IconButton(
-                                              padding: new EdgeInsets.all(0.0),
-                                              icon: new Image.asset(
-                                                  "assets/images/img_png/dislike.png"),
-                                              onPressed: () {
-                                                setState(() {
-                                                  widget.placeModel.disLike +=
-                                                      1;
-                                                });
-                                                print("Thumbs-down clicked ");
-                                              },
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      ////////////////////////////
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        "${widget.placeModel.description} ",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: ThemeManager.textColor.withOpacity(0.7),
-                          fontFamily: ThemeManager.fontFamily,
-                          fontSize:
-                              LayoutManager.widthNHeight0(context, 1) * 0.0357,
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-
-                      SizedBox(
-                        height: LayoutManager.widthNHeight0(context, 1) * 0.06,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            width:
-                                LayoutManager.widthNHeight0(context, 0) * 0.2,
-                            child: AutoSizeText(
-                              addNewLineAfterChars(
-                                widget.placeModel.status,
-                                20,
-                              ),
-                              maxLines: 3,
-                              textAlign: TextAlign.start,
-                              style: ThemeManager.textStyle.copyWith(
-                                color: ThemeManager.primary,
-                                decoration: TextDecoration.none,
-                                shadows: <Shadow>[
-                                  Shadow(
-                                    offset: Offset(5.0, 5.0),
-                                    blurRadius: 2.0,
-                                    color: Colors.black.withOpacity(0.25),
+                                      );
+                                    },
+                                    child:
+                                    Icon(Icons.comment_outlined,color: ThemeManager.primary,size: LayoutManager.widthNHeight0(context, 1)*0.05,)
+                                   
                                   ),
                                 ],
                               ),
-                            ),
-
-                            // AutoSizeText(
-                            //     maxLines: 3,
-                            //     widget.placeModel.status,
-                            //     textAlign: TextAlign.start,
-                            //     style: ThemeManager.textStyle.copyWith(
-                            //       color: ThemeManager.primary,
-                            //       decoration: TextDecoration.none,
-                            //       shadows: <Shadow>[
-                            //         Shadow(
-                            //           offset: Offset(5.0, 5.0),
-                            //           blurRadius: 2.0,
-                            //           color: Colors.black.withOpacity(0.25),
-                            //         ),
-                            //       ],
-                            //     )
-                            //     )
+                                 SizedBox(
+                                width: LayoutManager.widthNHeight0(context, 1)*0.1,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Container(
+                                              height: LayoutManager.widthNHeight0(
+                                                      context, 1) *
+                                                  0.05, //30.0,
+                                              width: LayoutManager.widthNHeight0(
+                                                      context, 0) *
+                                                  0.035, //18.0,
+                                              child: new IconButton(
+                                                padding: new EdgeInsets.all(0.0),
+                                                icon: new Image.asset(
+                                                    "assets/images/img_png/like.png"),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    widget.placeModel.like += 1;
+                                                  });
+                                                  print("Thumbs-up clicked ");
+                                                },
+                                              )),
+                                          SizedBox(
+                                            height: LayoutManager.widthNHeight0(
+                                                    context, 1) *
+                                                0.015,
+                                          ),
+                                          Text(
+                                            "${widget.placeModel.like}",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontFamily: ThemeManager.fontFamily,
+                                              color: ThemeManager.textColor
+                                                  .withOpacity(0.7),
+                                              decoration: TextDecoration.none,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: LayoutManager.widthNHeight0(
+                                                context, 0) *
+                                            0.01,
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(
+                                            "${widget.placeModel.disLike}",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontFamily: ThemeManager.fontFamily,
+                                              color: ThemeManager.textColor
+                                                  .withOpacity(0.7),
+                                              decoration: TextDecoration.none,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: LayoutManager.widthNHeight0(
+                                                    context, 1) *
+                                                0.015,
+                                          ),
+                                          Container(
+                                              height: LayoutManager.widthNHeight0(
+                                                      context, 1) *
+                                                  0.05, //30.0,
+                                              width: LayoutManager.widthNHeight0(
+                                                      context, 0) *
+                                                  0.035, //18.0,
+                                              child: new IconButton(
+                                                padding: new EdgeInsets.all(0.0),
+                                                icon: new Image.asset(
+                                                    "assets/images/img_png/dislike.png"),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    widget.placeModel.disLike +=
+                                                        1;
+                                                  });
+                                                  print("Thumbs-down clicked ");
+                                                },
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
-                          defaultButton3(
-                            text: 'Show Map',
-                            width:
-                                LayoutManager.widthNHeight0(context, 1) * 0.36,
-                            borderRadius: 18,
-                            background: ThemeManager.primary,
-                            textColor: ThemeManager.second,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MapScreenLocation(
-                                      lon: widget.placeModel.long,
-                                      lat: widget.placeModel.late),
+                        ),
+                        ////////////////////////////
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          "${widget.placeModel.description} ",
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            color: ThemeManager.textColor.withOpacity(0.7),
+                            fontFamily: ThemeManager.fontFamily,
+                            fontSize:
+                                LayoutManager.widthNHeight0(context, 1) * 0.0357,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
+                    
+                        SizedBox(
+                          height: LayoutManager.widthNHeight0(context, 1) * 0.06,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              width:
+                                  LayoutManager.widthNHeight0(context, 0) * 0.2,
+                              child: AutoSizeText(
+                                addNewLineAfterChars(
+                                  widget.placeModel.status,
+                                  20,
                                 ),
-                              );
-                            },
-                            borderWidth: 0,
-                          ),
-                        ],
-                      )
-                    ],
+                                maxLines: 3,
+                                textAlign: TextAlign.start,
+                                style: ThemeManager.textStyle.copyWith(
+                                  color: ThemeManager.primary,
+                                  decoration: TextDecoration.none,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset(5.0, 5.0),
+                                      blurRadius: 2.0,
+                                      color: Colors.black.withOpacity(0.25),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                    
+                              // AutoSizeText(
+                              //     maxLines: 3,
+                              //     widget.placeModel.status,
+                              //     textAlign: TextAlign.start,
+                              //     style: ThemeManager.textStyle.copyWith(
+                              //       color: ThemeManager.primary,
+                              //       decoration: TextDecoration.none,
+                              //       shadows: <Shadow>[
+                              //         Shadow(
+                              //           offset: Offset(5.0, 5.0),
+                              //           blurRadius: 2.0,
+                              //           color: Colors.black.withOpacity(0.25),
+                              //         ),
+                              //       ],
+                              //     )
+                              //     )
+                            ),
+                            defaultButton3(
+                              text: 'Show Map',
+                              width:
+                                  LayoutManager.widthNHeight0(context, 1) * 0.36,
+                              borderRadius: 18,
+                              background: ThemeManager.primary,
+                              textColor: ThemeManager.second,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MapScreenLocation(
+                                        lon: widget.placeModel.long,
+                                        lat: widget.placeModel.late),
+                                  ),
+                                );
+                              },
+                              borderWidth: 0,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
-            )),
+            
+            ),
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.1, //45,
             left: 10,

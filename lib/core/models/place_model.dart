@@ -40,7 +40,7 @@ class PlaceModel {
 
 List<PlaceModel> demoPlaces = [
   PlaceModel(
-    comments_counter: 100,
+    comments_counter: 0,
     type: "New Place",
     long: 35.890933,
     late: 31.900762,
@@ -63,7 +63,7 @@ List<PlaceModel> demoPlaces = [
     isPopular: false,
   ),
   PlaceModel(
-    comments_counter: 100,
+    comments_counter: 0,
     long: 35.86536868153866,
     late: 32.53594091877603,
     type: "New Place",

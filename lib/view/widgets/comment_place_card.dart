@@ -51,7 +51,7 @@ class CommentInfo extends StatelessWidget {
         ),
         Row(
           children: [
-            CircleTextWidget(),
+           CircleTextWidget(text: place ?? ''),
             SizedBox(
               width: LayoutManager.widthNHeight0(context, 1) * 0.015,
             ),
