@@ -23,7 +23,7 @@ List<PlaceCommentModel> demoComments = [
   PlaceCommentModel(
     id: "1",
     placeID:"1",
-    date:DateTime.now(),
+    date: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day - 5),
     commentTxt:"I learned so much about the local history from visiting this place.",
     writerName:"Alaa Jamal",
     writtenByExpert:1,
