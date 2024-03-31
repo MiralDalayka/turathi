@@ -21,8 +21,9 @@ const String questionRoute = '/bottomScreen/communityScreen/question_view';
 
 const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
-//LocationPage
+//LocationPage//CommentsPlace
 
+const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
 
 
 

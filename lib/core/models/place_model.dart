@@ -3,18 +3,18 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class PlaceModel {
-  final String ussid; // user id
+  final String userID; 
   final String id;
   final String title, description, status, location, type, distance;
   final List<String> commentsPlace;
   final List<dynamic> images;
   final int comments_counter;
-  final int like, disLike;
+   int like, disLike;
   bool isFavourite, isPopular;
   double long, late;
 
   PlaceModel({
-    this.ussid = "",
+    this.userID = "",
     required this.images,
     required this.commentsPlace,
     required this.title,
@@ -49,8 +49,8 @@ List<PlaceModel> demoPlaces = [
     commentsPlace: ["something", "somethig"],
     status: "Closed for maintenance",
     location: "Amman , Downtown ",
-    like: 33,
-    disLike: 124,
+    like: 0,
+    disLike: 0,
     images: [
       "assets/images/img_png/Dukes.png",
       "assets/images/img_png/place3.png",

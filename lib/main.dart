@@ -33,13 +33,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    GetCurrentLocation().performNearbySearch(context);
+   body: GetCurrentLocation().performNearbySearch(context);
 
     print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
     return  MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: NearestPlacesProvider()),
+        ChangeNotifierProvider.value(value: NearestPlacesProvider()),/////here at the right give it model
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
