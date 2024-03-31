@@ -31,12 +31,12 @@ class _QuestionDialogState extends State<QuestionDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: ThemeManager.second,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(40.0), // make it circular
       ),
       child: SingleChildScrollView(
         child: Container(
-          color: ThemeManager.second,
           padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -66,9 +66,13 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   ? Image.file(File(image!.path))
                   : const Text('No image selected.'),
               ElevatedButton(
-                  onPressed: _pickImage,
-                  style: ThemeManager.buttonStyle,
-                  child:  Text('Pick Image',style: ThemeManager.textStyle.copyWith(fontWeight:FontWeight.w300  ),)),
+                onPressed: _pickImage,
+                style: ThemeManager.buttonStyle,
+                child: Text(
+                  'Pick Image',
+                  style: ThemeManager.textStyle.copyWith(fontWeight: FontWeight.w300),
+                ),
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
