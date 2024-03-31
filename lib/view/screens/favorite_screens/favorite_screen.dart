@@ -19,7 +19,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: ThemeManager.background,
       appBar: AppBar(
+         backgroundColor: ThemeManager.background,
         title: Center(
           child: Text(
             'WishList Page',

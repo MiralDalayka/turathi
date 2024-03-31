@@ -48,6 +48,7 @@ class _NearestMapState extends State<NearestMap> {
 
     return Scaffold(
       appBar: AppBar(
+           backgroundColor: ThemeManager.background,
         leading: IconButton(
           onPressed: () {
             //locationRoute

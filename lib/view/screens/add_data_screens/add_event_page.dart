@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
@@ -54,11 +55,23 @@ class _AddNewEventState extends State<AddNewEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            backgroundColor: ThemeManager.background,
+
       appBar: AppBar(
+         backgroundColor: ThemeManager.background,
         centerTitle: true,
         title: Text(
           'Add Event',
           style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
+        ),
+         
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
         ),
       ),
       body: Form(
