@@ -12,7 +12,7 @@ class CircleTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String initial = text.isNotEmpty && text[1].isNotEmpty ? text[0].toUpperCase()+text[1].toUpperCase() : '';
+String initial = getInitials(text); 
 
     return Container(
       width: LayoutManager.widthNHeight0(context, 1) * 0.1,
@@ -32,4 +32,17 @@ class CircleTextWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+String getInitials(String text) {
+  List<String> words = text.split(' ');
+  String initials = '';
+
+  for (String word in words) {
+    if (word.isNotEmpty) {
+      initials += word[0].toUpperCase();
+    }
+  }
+
+  return initials;
 }
