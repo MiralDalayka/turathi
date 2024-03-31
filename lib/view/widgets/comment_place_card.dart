@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/comment_model.dart';
+import 'package:turathi/core/models/comment_place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/comment_circle.dart';
 
 class CommentCard extends StatelessWidget {
-  final CommentModel commentModel;
+  final PlaceCommentModel commentModel;
 
   const CommentCard({
     Key? key, 
@@ -17,7 +18,7 @@ class CommentCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          CommentInfo(text: "text", place: commentModel.writerName),
+          CommentInfo(text: commentModel.commentTxt, place: commentModel.writerName),
           SizedBox(
             height: LayoutManager.widthNHeight0(context, 0) * 0.02,
           ),
@@ -32,7 +33,7 @@ class CommentCard extends StatelessWidget {
 }
 
 class CommentInfo extends StatelessWidget {
-  final String text;
+  final String? text;
   final String? place;
 
   const CommentInfo({
@@ -68,7 +69,7 @@ class CommentInfo extends StatelessWidget {
           height: LayoutManager.widthNHeight0(context, 0) * 0.02,
         ),
         Text(
-          text,
+          text ?? '',
           style: TextStyle(
             fontFamily: ThemeManager.fontFamily,
             color: ThemeManager.textColor,

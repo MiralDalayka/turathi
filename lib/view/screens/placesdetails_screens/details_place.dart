@@ -5,6 +5,7 @@ import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/widgets/back_arrow_button.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 import 'package:turathi/core/functions/new_line_after.dart';
@@ -187,9 +188,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).pushNamed(
-                                      commentsPlaceRoute,
-                                      // arguments: widget.placeModel.id,
+                                    // Navigator.of(context).pushNamed(
+                                    //   commentsPlaceRoute,
+                                    //   // arguments: widget.placeModel.id,
+                                    // );\
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CommentsPlace(
+                                            place: widget.placeModel),
+                                      ),
                                     );
                                   },
                                   child: Text(
