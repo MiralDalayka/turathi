@@ -21,17 +21,23 @@ class _CommentsPlaceState extends State<CommentsPlace> {
 
   int _commentId = 1;
 
+  bool placeHasComments=false;
+
   @override
   Widget build(BuildContext context) {
     List<Widget> commentWidgets = List.generate(
       demoComments.length,
       (index) {
         if (demoComments[index].placeID == widget.place.id) {
+            placeHasComments=true;
           return Padding(
+           
             padding: const EdgeInsets.all(0),
             child: CommentCard(
               commentModel: demoComments[index],
+              
             ),
+         
           );
         } else {
           return SizedBox();
@@ -133,31 +139,31 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                 child: Column(
                   children: [
                     Divider(height: 1, color: Colors.grey[300]),
-                    if (commentWidgets.isNotEmpty) ...commentWidgets,
-                    if (commentWidgets.isEmpty)
+                    if (placeHasComments) ...commentWidgets,
+                    if (placeHasComments==false)
                       Padding(
                         padding: EdgeInsets.only(
-                            top: LayoutManager.widthNHeight0(context, 1) * 0.5),
+                            top: LayoutManager.widthNHeight0(context, 1) * 0.35),
                         child: Center(
                           child: Column(
                             children: [
                               Text(
-                                "There are no comments on this place yet",
+                                "No Comments On This Place Yet",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,
                                   fontFamily: ThemeManager.fontFamily,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  fontSize:  LayoutManager.widthNHeight0(context, 0)*0.021,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              SizedBox(height: LayoutManager.widthNHeight0(context, 0)*0.01),
                               Text(
-                                "You can add any comments you want!",
+                                "You're welcome to share your\n thoughts and comments!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: ThemeManager.fontFamily,
-                                  fontSize: 16,
+                                  fontSize:  LayoutManager.widthNHeight0(context, 0)*0.02,
                                 ),
                               ),
                             ],

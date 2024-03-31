@@ -41,6 +41,14 @@ class _CommunityScreenState extends State<CommunityScreen> {
               color: ThemeManager.primary,
               fontWeight: FontWeight.bold),
         ),
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
+        ),
         centerTitle: true,
 
       ),

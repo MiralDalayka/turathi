@@ -9,7 +9,6 @@ import 'package:turathi/core/functions/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 import 'package:intl/intl.dart';
 
-
 class EventDetailsScreen extends StatefulWidget {
   const EventDetailsScreen({Key? key, required this.eventModel})
       : super(key: key);
@@ -42,7 +41,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           ),
         ),
         Positioned(
-          top: height - 110,
+          top: height - 95,
           left: left,
           child: SizedBox(
             width: LayoutManager.widthNHeight0(context, 1) - 20,
@@ -82,7 +81,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         ],
                       ),
                       width: double.infinity,
-                      height: 60,
+                      height: LayoutManager.widthNHeight0(context, 0) * 0.074,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,73 +89,72 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(
-                                  "Date: ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color:
-                                        ThemeManager.textColor.withOpacity(0.7),
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.none,
-                                  ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Date & Time",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeManager.textColor
+                                            .withOpacity(0.7),
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                     SizedBox(
+                                      height: LayoutManager.widthNHeight0(context, 0)*0.008,
+                                    ),
+                                    Text(
+                                      DateFormat('yyyy-MM-dd || kk:mm')
+                                          .format(widget.eventModel.date!),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeManager.primary,
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  DateFormat('yyyy-MM-dd – kk:mm')
-                                      .format(widget.eventModel.date!),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: ThemeManager.primary,
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Ticket Price: ",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color:
-                                        ThemeManager.textColor.withOpacity(0.7),
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Text(
-                                  widget.eventModel.ticketPrice == 0
-                                      ? 'Free'
-                                      : widget.eventModel.ticketPrice
-                                          .toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: ThemeManager.primary,
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    decoration: TextDecoration.none,
-                                  ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      "Ticket Price",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeManager.textColor
+                                            .withOpacity(0.7),
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: LayoutManager.widthNHeight0(context, 0)*0.008,
+                                    ),
+                                    Text(
+                                      widget.eventModel.ticketPrice == 0
+                                          ? 'Free'
+                                          : widget.eventModel.ticketPrice
+                                              .toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeManager.primary,
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.none,
+                                      ),
+                                    )
+                                  ],
                                 )
                               ],
                             ),
@@ -191,7 +189,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         AutoSizeText(
                           addNewLineAfterChars(
                             widget.eventModel.address!,
-                            18, 
+                            18,
                           ),
                           overflow: TextOverflow.ellipsis,
                           style: ThemeManager.textStyle.copyWith(
@@ -250,7 +248,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 ))),
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.25, //45,
-            right: LayoutManager.widthNHeight0(context, 1) * 0.03,//10
+            right: LayoutManager.widthNHeight0(context, 1) * 0.03, //10
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
