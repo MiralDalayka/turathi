@@ -6,6 +6,8 @@ import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/utils/shared.dart';
 
+import 'core/providers/place_provider.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -33,13 +35,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   body: GetCurrentLocation().performNearbySearch(context);
+    // GetCurrentLocation().performNearbySearch(context);
 
     print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
     return  MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: NearestPlacesProvider()),/////here at the right give it model
+        ChangeNotifierProvider.value(value: PlaceProvider()),/////here at the right give it model
+
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

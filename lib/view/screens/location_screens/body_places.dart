@@ -24,16 +24,17 @@ class BodyPlaces extends StatefulWidget {
 
 class _BodyPlacesState extends State<BodyPlaces> {
   List<PlaceModel> favoritePlaces =
-      demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
+      demoPlaces.where((placeModel) => placeModel.isFavourite!).toList();
 
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
 
   bool get isMyLocationTab => widget.tab == "My Location";
 
   List<PlaceModel>? nearestPlacesList;
-
+//here PlacesList
   @override
   Widget build(BuildContext context) {
+
     log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
     double cardWidth = 150;
     double spacingWidth = 10;
@@ -43,6 +44,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
     var placesProvider = Provider.of<NearestPlacesProvider>(context);
     nearestPlacesList = placesProvider.nearestPlacesList;
+    //
 
     if (isNearestPlaceTab) {
       if ((selectedNearestLat == 0.0 || selectedNearestLog == 0.0)) {
@@ -186,8 +188,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
       //here to filter places that  within 10 km from  User nearest location (my location)
       final List<PlaceModel> userNearestPlaces = demoPlaces.where((place) {
         double distanceInKm = calculateDistanceInKm(
-          place.late,
-          place.long,
+          place.late!,
+          place.long!,
           userNearestLat,
           userNearestLog,
         );

@@ -1,30 +1,66 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:turathi/core/models/place_model.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class PlaceService {
+  //create instance
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  final String collectionName = "places";
 
-CollectionReference<Map<String, dynamic>> productsCollection =
-    _firestore.collection('your_collection_name'); 
+  //add -get - update visibility,modify info
 
-Future<List<PlaceModel>> getProducts() async {
-  try {
-    QuerySnapshot<Map<String, dynamic>> snapshot =
-        await productsCollection.get();
+  Future<String> addPlace(PlaceModel model) async {
+    _fireStore
+        .collection(collectionName)
+        .add(model.toJson())
+        .whenComplete(() => "Done")
+        .catchError((error) {
+      log(error.toString());
+      return "Failed";
+    });
+    return "Done";
+  }
 
-    return snapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
-      Map<String, dynamic> data = doc.data()!;
+  Future<PlaceList> getPlaces() async {
+    QuerySnapshot placesData =
+        await _fireStore.collection(collectionName).get().whenComplete(() {
+      log("getPlaces done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    //map to store docs data in
+    Map<String, dynamic> data = {};
+    //temp model
+    PlaceModel tempModel;
+    //temp list
+    PlaceList placeList = PlaceList(places: []);
+    for (var item in placesData.docs) {
+      data["id"] = item.get("id"); //.....
+      tempModel = PlaceModel.fromJson(data);
+      placeList.places.add(tempModel);
+    }
 
-      return PlaceModel(
-        id: data['id'] ?? 0,
-        images: List<String>.from(data['images'] ?? []),
-     
-        title: data['title'] ?? '',
-        description: data['description'] ?? '', commentsPlace: [], distance: '', status: '', type: '', location: '',
-      
-      );
-    }).toList();
-  } catch (e) {
-    print('Error fetching products: $e');
-    return []; 
+    return placeList;
+  }
+
+ Future<PlaceModel> updatePlace(PlaceModel placeModel) async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(collectionName)
+        .where('id', isEqualTo: placeModel.id)
+        .get();
+    String placeId = placesData.docs[0].id; //id for the ref
+    _fireStore
+        .collection(collectionName)
+        .doc(placeId)
+        .update(placeModel.toJson())
+        .whenComplete(() {
+      log("UPDATE done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    return placeModel;
   }
 }
+

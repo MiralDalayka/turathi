@@ -14,7 +14,7 @@ class FavoriteScreen extends StatefulWidget {
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
   List<PlaceModel> favoritePlaces =
-      demoPlaces.where((placeModel) => placeModel.isFavourite).toList();
+      demoPlaces.where((placeModel) => placeModel.isFavourite!).toList();
 
   @override
   Widget build(BuildContext context) {

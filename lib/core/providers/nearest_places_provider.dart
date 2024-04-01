@@ -26,8 +26,8 @@ class NearestPlacesProvider with ChangeNotifier {
      */
     _nearestPlaces = demoPlaces.where((place) {
       double distanceInKm = calculateDistanceInKm(
-        place.late,
-        place.long,
+        place.late!,
+        place.long!,
         selectedNearestLat,
         selectedNearestLog,
       );

@@ -40,7 +40,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           height: height,
           width: double.infinity,
           child: Image.asset(
-            widget.placeModel.images[selectedImage],
+            widget.placeModel.images![selectedImage],
             fit: BoxFit.cover,
             color: Colors.black.withOpacity(0.1),
             colorBlendMode: BlendMode.darken,
@@ -50,7 +50,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           top: height - 110,
           left: left,
           child: Text(
-            widget.placeModel.title,
+            widget.placeModel.title!,
             style: TextStyle(
                 fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.second,
@@ -65,7 +65,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Row(
               children: [
                 Text(
-                  widget.placeModel.location,
+                  widget.placeModel.location!,
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: ThemeManager.second,
@@ -93,7 +93,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     child: Padding(
                       padding: EdgeInsets.all(0),
                       child: Text(
-                        widget.placeModel.type,
+                        widget.placeModel.state!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
@@ -172,8 +172,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Text(
                                 getFormattedDistance(
                                   calculateDistanceInKm(
-                                      widget.placeModel.late,
-                                      widget.placeModel.long,
+                                      widget.placeModel.late!,
+                                      widget.placeModel.long!,
                                       userNearestLat,
                                       userNearestLog),
                                 ),
@@ -259,13 +259,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           width: LayoutManager.widthNHeight0(
                                                   context, 0) *
                                               0.035, //18.0,
-                                          child: new IconButton(
-                                            padding: new EdgeInsets.all(0.0),
-                                            icon: new Image.asset(
+                                          child: IconButton(
+                                            padding: EdgeInsets.all(0.0),
+                                            icon: Image.asset(
                                                 "assets/images/img_png/like.png"),
                                             onPressed: () {
                                               setState(() {
-                                                widget.placeModel.like += 1;
+                                                widget.placeModel.like =
+                                                    widget.placeModel.like! + 1;
                                               });
                                               print("Thumbs-up clicked ");
                                             },
@@ -322,7 +323,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 "assets/images/img_png/dislike.png"),
                                             onPressed: () {
                                               setState(() {
-                                                widget.placeModel.disLike += 1;
+                                                widget.placeModel.disLike =widget.placeModel.disLike!+ 1;
                                               });
                                               print("Thumbs-down clicked ");
                                             },
@@ -364,7 +365,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           width: LayoutManager.widthNHeight0(context, 0) * 0.2,
                           child: AutoSizeText(
                             addNewLineAfterChars(
-                              widget.placeModel.status,
+                              widget.placeModel.status!,
                               20,
                             ),
                             maxLines: 3,
@@ -410,8 +411,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MapScreenLocation(
-                                    lon: widget.placeModel.long,
-                                    lat: widget.placeModel.late),
+                                    lon: widget.placeModel.long!,
+                                    lat: widget.placeModel.late!),
                               ),
                             );
                           },
@@ -495,7 +496,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      widget.placeModel.toggleFavorite();
+                      //BACK
+                      // widget.placeModel.toggleFavorite();
                     });
                   },
                   child: Container(
@@ -508,7 +510,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     child: Icon(
                       Icons.favorite,
                       size: 25,
-                      color: widget.placeModel.isFavourite
+                      color: widget.placeModel.isFavourite!
                           ? ThemeManager.favIcon
                           : ThemeManager.second,
                     ),
@@ -522,7 +524,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     for (int index = 0;
-                        index < widget.placeModel.images.length;
+                        index < widget.placeModel.images!.length;
                         index++)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -533,7 +535,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               selectedImage = index;
                             });
                           },
-                          image: widget.placeModel.images[index],
+                          image: widget.placeModel.images![index],
                         ),
                       ),
                   ],

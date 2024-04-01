@@ -1,53 +1,101 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+enum PlaceStatus {
+  ClosedForMaintenance,
+  Open,
+} //
+
+enum PlaceState { NewPlace, TrustWorthy } //
+
 class PlaceModel {
-  final String userID; 
-  final String id;
-  final String title, description, status, location, type, distance;
-  final List<String> commentsPlace;
-  final List<dynamic> images;
-  final int comments_counter;
-   int like, disLike;
-  bool isFavourite, isPopular;
-  double long, late;
+  String? userID;
+  String? id;
+  String? title;
+  String? description;
+  String? status = PlaceStatus.Open.toString();
+  String? location;
+  String? state = PlaceState.NewPlace.toString();
+  String? distance;
+  List<String>? commentsPlace = [];
+  List<String>? images;
+  int? like = 0;
+  int? disLike = 0;
+  bool? isVisible = true;
+  bool? isFavourite = false; //BACK
+  double? long;
+  double? late;
 
-  PlaceModel({
-    this.userID = "",
-    required this.images,
-    required this.commentsPlace,
-    required this.title,
-    required this.distance,
-    this.comments_counter = 0,
-    required this.id,
-    required this.description,
-    required this.status,
-    required this.type,
-    required this.location,
-    this.like = 0,
-    this.disLike = 0,
-    this.isFavourite = false,
-    this.isPopular = false,
-    this.long = 1,
-    this.late = 1,
-  });
+  PlaceModel(
+      {this.userID,
+      required this.id,
+      this.title,
+      this.description,
+      this.status,
+      this.location,
+      this.state,
+      this.distance,
+      this.commentsPlace,
+      this.images,
+      this.like,
+      this.disLike,
+      this.isVisible,
+      this.isFavourite,
+      this.long,
+      this.late});
 
-  void toggleFavorite() {
-    isFavourite = !isFavourite;
+  PlaceModel.fromJson(Map<String, dynamic> json) {
+    userID = json['userID'];
+    id = json['id'];
+    title = json['title'];
+    description = json['description'];
+    status = json['status'];
+    location = json['location'];
+    state = json['state'];
+    distance = json['distance'];
+    commentsPlace = json['commentsPlace'].cast<String>();
+    images = json['images'].cast<String>();
+    like = json['like'];
+    disLike = json['disLike'];
+    isVisible = json['isVisible'];
+    isFavourite = json['isFavourite'];
+    long = json['long'];
+    late = json['late'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userID'] = this.userID;
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['status'] = this.status;
+    data['location'] = this.location;
+    data['state'] = this.state;
+    data['distance'] = this.distance;
+    data['commentsPlace'] = this.commentsPlace;
+    data['images'] = this.images;
+    data['like'] = this.like;
+    data['disLike'] = this.disLike;
+    data['isVisible'] = this.isVisible;
+    data['isFavourite'] = this.isFavourite;
+    data['long'] = this.long;
+    data['late'] = this.late;
+    return data;
   }
 }
 
 List<PlaceModel> demoPlaces = [
   PlaceModel(
-    comments_counter: 0,
-    type: "New Place",
+    state: "New Place",
     long: 35.890933,
     late: 31.900762,
     distance: "10",
     id: "1",
     commentsPlace: ["something", "somethig"],
-    status: "Closed for maintenance",
+    status: PlaceStatus.ClosedForMaintenance.toString(),
     location: "Amman , Downtown ",
     like: 0,
     disLike: 0,
@@ -59,14 +107,11 @@ List<PlaceModel> demoPlaces = [
     title: "Duke's Diwan",
     description:
         "The Duke's Diwan is an arts and cultural center and historic house museum. Located on King Faisal Street in downtown Amman, it is housed in one of the city's oldest buildings. Built in 1924 as Amman's first post office, the building later became the Finance Ministry, and then the Haifa Hotel from 1948 to 1998 it was rented by Mamdouh Bisharat, a Jordanian heritage conservationist and businessman, at double its price to prevent the building's owners from knocking it down. Bisharat",
-    isFavourite: false,
-    isPopular: false,
   ),
   PlaceModel(
-    comments_counter: 0,
     long: 35.86536868153866,
     late: 32.53594091877603,
-    type: "New Place",
+    state: "New Place",
     distance: "10",
     id: "2",
     commentsPlace: ["something", "somethig"],
@@ -80,15 +125,12 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: false,
-    isPopular: false,
   ),
   PlaceModel(
-    comments_counter: 100,
     long: 31.895647,
     late: 35.894724,
     distance: "10",
-    type: "New Place",
+    state: "New Place",
     id: "3",
     commentsPlace: ["something", "somethig"],
     status: "Close",
@@ -101,16 +143,14 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: false,
-    isPopular: false,
   ),
   PlaceModel(
-    comments_counter: 100,
     long: 31.895647,
-    late: 35.894724, //37.785834
+    late: 35.894724,
+    //37.785834
     id: "4",
     distance: "10",
-    type: "New Place",
+    state: "New Place",
     commentsPlace: ["something", "somethig"],
     status: "Close",
     location: "Amman",
@@ -122,7 +162,22 @@ List<PlaceModel> demoPlaces = [
     ],
     title: "Duke's Diwan",
     description: "description",
-    isFavourite: false,
-    isPopular: false,
   ),
 ];
+
+class PlaceList {
+  List<PlaceModel> places;
+
+  PlaceList({required this.places});
+
+  factory PlaceList.fromJson(List<dynamic> data) {
+    log("I'm In Place List Factory");
+    //1. temp list
+    List<PlaceModel> tempPlaces = [];
+    tempPlaces = data.map((item) {
+      return PlaceModel.fromJson(Map<String, dynamic>.from(item));
+    }).toList();
+
+    return PlaceList(places: tempPlaces);
+  }
+}

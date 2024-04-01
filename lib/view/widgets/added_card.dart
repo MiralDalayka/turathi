@@ -48,7 +48,7 @@ class _ProductCardState extends State<AddedCard> {
       for (QueryDocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
         List<dynamic>? dataList = doc['dataList'];
         counter++;
-        String homeId = widget.placeModel.id;
+        String homeId = widget.placeModel.id!;
         if (dataList != null) {
           String str = dataList[7].toString();
           int openingBraceIndex = str.indexOf("{");
@@ -116,7 +116,7 @@ class _ProductCardState extends State<AddedCard> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: Image.network(
-                                widget.placeModel.images[0],
+                                widget.placeModel.images![0],
                                 fit: BoxFit.fill,
                               ),
                             ),

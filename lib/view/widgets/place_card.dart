@@ -28,7 +28,7 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   void initState() {
     super.initState();
-    isFavourite = widget.placeModel.isFavourite;
+    isFavourite = widget.placeModel.isFavourite!;
   }
 
   @override
@@ -45,7 +45,7 @@ class _PlaceCardState extends State<PlaceCard> {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.asset(
-                      widget.placeModel.images[0],
+                      widget.placeModel.images![0],
                       fit: BoxFit.fill,
                       color: Colors.black.withOpacity(0.15),
                       colorBlendMode: BlendMode.darken,
@@ -54,7 +54,7 @@ class _PlaceCardState extends State<PlaceCard> {
                   bottom: LayoutManager.widthNHeight0(context, 0)*0.045,
                   left: LayoutManager.widthNHeight0(context, 0)*0.04,
                   child: Text(
-                    widget.placeModel.title,
+                    widget.placeModel.title!,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       shadows: const [
@@ -76,19 +76,19 @@ class _PlaceCardState extends State<PlaceCard> {
                   right:  LayoutManager.widthNHeight0(context, 1)*0.0002,
                   child: IconButton(
                     icon: Icon(
-                      widget.placeModel.isFavourite
+                      widget.placeModel.isFavourite!
                           ? Icons.favorite
                           : Icons.favorite_border_outlined,
                       size: LayoutManager.widthNHeight0(context, 1) * 0.065,
-                      color: widget.placeModel.isFavourite
+                      color: widget.placeModel.isFavourite!
                           ? const Color(0xFFA74040)
                           : ThemeManager.second,
                     ),
                     onPressed: () {
                       setState(() {
                         widget.placeModel.isFavourite =
-                            !widget.placeModel.isFavourite;
-                        widget.onFavoriteChanged(widget.placeModel.isFavourite);
+                            !widget.placeModel.isFavourite!;
+                        widget.onFavoriteChanged(widget.placeModel.isFavourite!);
                       });
                     },
                   ),
