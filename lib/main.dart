@@ -14,37 +14,12 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      // options: DefaultFirebaseOptions.currentPlatform
 
-      // const FirebaseOptions(
-      //     apiKey: 'apiKey',
-      //     appId: "com.example.turathi",
-      //     messagingSenderId: "messagingSenderId",
-      //     projectId: "projectId"
-      //
-      // )
 
   );
   runApp(const MyApp());
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     GetCurrentLocation().performNearbySearch(context);
-//
-//     print('cureent long: ${usernearestLog},cureent lat: ${usernearestLat} ');
-//
-//     return const MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       onGenerateRoute: MyRouter.generateRoute,
-//       initialRoute: initRoute,
-//     );
-//   }
-// }
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
 //
