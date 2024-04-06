@@ -7,9 +7,8 @@ import 'package:turathi/firebase_options.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/utils/shared.dart';
-
 import 'core/providers/place_provider.dart';
-
+//fdsf
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -39,3 +38,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+//test tets 
