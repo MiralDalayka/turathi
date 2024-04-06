@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/testModel.dart';
-import 'package:turathi/core/services/test_service.dart';
+import 'package:turathi/core/services/testService.dart';
 import 'package:turathi/testView.dart';
 
 class AddTest extends StatefulWidget {
