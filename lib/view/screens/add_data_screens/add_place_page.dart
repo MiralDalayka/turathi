@@ -39,7 +39,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
 
   @override
   Widget build(BuildContext context) {
-    var placeProvider = Provider.of<PlaceProvider>(context);
+    // var placeProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -97,7 +97,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                                   msg: "Place Added Successfully",
                                   context: context);
                               //BACK
-                              placeProvider.addPlace(PlaceModel(id: '211'));
+                              // placeProvider.addPlace(PlaceModel(id: '211'));
                               // Navigator.of(context).pushNamed(placeDetailsRoute,arguments: );
                               Navigator.of(context).pop();
                             }
