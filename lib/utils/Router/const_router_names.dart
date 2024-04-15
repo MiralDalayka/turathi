@@ -21,6 +21,9 @@ const String questionRoute = '/bottomScreen/communityScreen/question_view';
 
 const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
+
+const String signIn = '/LogIn';
+const String signUp= '/LogIn';
 //LocationPage//CommentsPlace
 
 const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
