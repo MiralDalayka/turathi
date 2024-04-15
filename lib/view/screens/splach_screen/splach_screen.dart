@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 3),
         //  (FirebaseAuth.instance.currentUser != null)
         // ?
-        () => Navigator.of(context).pushReplacementNamed(bottomNavRoute)
+        () => Navigator.of(context).pushReplacementNamed(signUp)//bottomNavRoute
 
         // : Navigator.of(context).pushReplacementNamed("signin")
 
