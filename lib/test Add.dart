@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/models/testModel.dart';
 import 'package:turathi/core/services/testService.dart';
 import 'package:turathi/testView.dart';
+
+import 'core/services/place_service.dart';
 
 class AddTest extends StatefulWidget {
   const AddTest({super.key});
@@ -13,7 +16,7 @@ class AddTest extends StatefulWidget {
 class _AddTestState extends State<AddTest> {
   @override
   Widget build(BuildContext context) {
-    TestService service = TestService();
+    PlaceService service = PlaceService();
     return Scaffold(
       body: Center(
         child: Column(
@@ -22,9 +25,10 @@ class _AddTestState extends State<AddTest> {
             ElevatedButton(
               child: Text("Add test"),
               onPressed: (){
-                service.addTest(TestModel(title: 'title4', num: 4));
-                service.addTest(TestModel(title: 'title5', num: 5));
-                service.addTest(TestModel(title: 'title6', num: 6));
+                service.addPlace(PlaceModel(id: 'testPlace1',distance: '10'));
+                service.addPlace(PlaceModel(id: 'testPlace2',distance: '20'));
+                service.addPlace(PlaceModel(id: 'testPlace3',distance: '30'));
+
         
               }
               ,
@@ -40,7 +44,7 @@ class _AddTestState extends State<AddTest> {
             ElevatedButton(
               child: Text("Edit test num 2"),
               onPressed: (){
-                service.updateTest(TestModel(title: 'updated test', num: 2));
+                service.updatePlace(PlaceModel(id: 'testPlace1',distance: '100'));
 
               }
               ,

@@ -14,8 +14,11 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-
-
+      options: const FirebaseOptions(
+          apiKey: 'AIzaSyB3QtjJBEuek0j4so5fbqStFOSSgO689mE',
+          appId: '1:907003448312:android:810d4e035314db8384240d',
+          messagingSenderId: '907003448312',
+          projectId: 'turathi-96897')
   );
   runApp(const MyApp());
 }
@@ -49,8 +52,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: NearestPlacesProvider()),

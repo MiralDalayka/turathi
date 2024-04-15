@@ -84,6 +84,8 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/services/place_service.dart';
 import 'package:turathi/core/services/testService.dart';
 
 
@@ -98,16 +100,16 @@ class TestView extends StatefulWidget {
 }
 
 class _TestViewState extends State<TestView> {
-  TestList? testList;
+  PlaceList? placeList;
 
   @override
   Widget build(BuildContext context) {
-    TestService service = TestService();
+    PlaceService service = PlaceService();
     return Scaffold(
       appBar: AppBar(
       ),
         body: FutureBuilder(
-      future: service.getTests(),
+      future: service.getPlaces(),
       builder: (context, snapshot) {
         var data = snapshot.data;
         if (data == null) {
@@ -115,8 +117,8 @@ class _TestViewState extends State<TestView> {
             child: CircularProgressIndicator(),
           );
         }
-        testList = data as TestList;
-        if (testList!.tests.isEmpty) {
+        placeList = data as PlaceList;
+        if (placeList!.places.isEmpty) {
           return Align(
             alignment: Alignment.center,
             child: RichText(
@@ -152,11 +154,11 @@ class _TestViewState extends State<TestView> {
         return Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView.builder(
-            itemCount: testList!.tests.length,
+            itemCount: placeList!.places.length,
             itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                    "${testList!.tests[index].title} and ${testList!.tests[index].num}")),
+                    "${placeList!.places[index].id} and ${placeList!.places[index].distance}")),
           ),
         );
       },
