@@ -247,7 +247,7 @@ class _LogInState extends State<LogIn> {
       if (mounted) {
         //   sharedEmail = email; if the email match the firebase
         Navigator.of(context)
-            .pushReplacementNamed("search_home_bar"); // to the bottomnav
+            .pushReplacementNamed("bottomNavRoute"); // to the bottomnav
       }
     } else {
       print("error is happend");
