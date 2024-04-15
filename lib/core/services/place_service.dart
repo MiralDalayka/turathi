@@ -40,9 +40,7 @@ class PlaceService {
     for (var item in placesData.docs) {
       data["id"] = item.get("id");
       data["distance"] = item.get("distance"); //.....
-      //.....
       tempModel = PlaceModel.fromJson(data);
-      log(tempModel.distance.toString());
 
       placeList.places.add(tempModel);
     }
