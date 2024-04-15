@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/view/screens/SignIn/Signup.dart';
+import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 
 import '../../core/models/event_model.dart';
@@ -23,6 +25,15 @@ class MyRouter {
       case initRoute:
         {
           return _route(SplashScreen());
+        }
+
+        case signIn:
+        {
+          return _route(LogIn());
+        }
+        case signUp:
+        {
+          return _route(SignUp());
         }
 
       case bottomNavRoute:

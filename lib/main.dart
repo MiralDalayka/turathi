@@ -7,6 +7,7 @@ import 'package:turathi/tests/test%20Add.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/utils/shared.dart';
+import 'package:turathi/view/screens/SignIn/signin.dart';
 
 import 'core/providers/place_provider.dart';
 import 'firebase_options.dart';
@@ -14,11 +15,11 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: 'AIzaSyB3QtjJBEuek0j4so5fbqStFOSSgO689mE',
-          appId: '1:907003448312:android:810d4e035314db8384240d',
-          messagingSenderId: '907003448312',
-          projectId: 'turathi-96897')
+      // options: const FirebaseOptions(
+      //     apiKey: 'AIzaSyB3QtjJBEuek0j4so5fbqStFOSSgO689mE',
+      //     appId: '1:907003448312:android:810d4e035314db8384240d',
+      //     messagingSenderId: '907003448312',
+      //     projectId: 'turathi-96897')
   );
   runApp(const MyApp());
 }
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return MultiProvider(
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
 //       ],
 //       child: const MaterialApp(
 //         debugShowCheckedModeBanner: false,
-//         home: AddTest(),
+//         home: LogIn(),
 //       ),
 //     );
 //   }
