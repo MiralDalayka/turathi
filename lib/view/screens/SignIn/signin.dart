@@ -187,7 +187,7 @@ class _LogInState extends State<LogIn> {
                                       print(result);
                                       Navigator.of(context)
                                           .pushReplacementNamed(
-                                              "search_home_bar");
+                                              "bottomNavRoute");
                                     }
                                   },
                                   child: Text(
