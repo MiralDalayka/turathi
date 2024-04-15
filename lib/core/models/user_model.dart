@@ -9,9 +9,10 @@ class User {
   String? certificate;
 
   User(
-      { this.userId,
-        this.name,
-        this.password,
+      {
+        required this.userId,
+        required this.name,
+        required this.password,
         this.role,
         this.longitude,
         this.latitude,
