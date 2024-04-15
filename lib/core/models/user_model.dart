@@ -1,36 +1,41 @@
-class UserModel{
 
+class User {
+  String? userId;
+  String? name;
+  String? password;
+  String? role;
+  double? longitude;
+  double? latitude;
+  String? certificate;
 
+  User(
+      { this.userId,
+        this.name,
+        this.password,
+        this.role,
+        this.longitude,
+        this.latitude,
+        this.certificate});
 
-  final String? id;
-  final String? firstName;
-   final String? secondName;
-    final String? email;
-     final String? phoneNo;
-      final String? password;
-      const UserModel({
-        this.id,
-        required this.firstName,  
-        required this.secondName,
-        required this.email,
-        required this.password,
-        required this.phoneNo,
+  User.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    name = json['name'];
+    password = json['password'];
+    role = json['role'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
+    certificate = json['certificate'];
+  }
 
-
-
-
-      });
-
-      toJson(){
-        return{
-          "FirstName":firstName,
-          "SecondName":secondName,
-           "Email":email,
-            "Phone":phoneNo,
-             "Password":password,
-
-        };
-      }
-
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['name'] = this.name;
+    data['password'] = this.password;
+    data['role'] = this.role;
+    data['longitude'] = this.longitude;
+    data['latitude'] = this.latitude;
+    data['certificate'] = this.certificate;
+    return data;
+  }
 }
