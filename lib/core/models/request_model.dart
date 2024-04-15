@@ -1,12 +1,12 @@
-class Request {
+class RequestModel {
   String? requestId;
   String? status;
   String? certificate;
   String? userId;
 
-  Request({this.requestId, this.status, this.certificate, this.userId});
+  RequestModel({this.requestId, this.status, this.certificate, this.userId});
 
-  Request.fromJson(Map<String, dynamic> json) {
+  RequestModel.fromJson(Map<String, dynamic> json) {
     requestId = json['requestId'];
     status = json['status'];
     certificate = json['certificate'];

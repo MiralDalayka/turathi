@@ -26,3 +26,18 @@ class QuestionModel {
     return data;
   }
 }
+class QuestionList {
+  List<QuestionModel> questions;
+
+  QuestionList({required this.questions});
+
+  factory QuestionList.fromJson(List<dynamic> data) {
+
+    List<QuestionModel> temp = [];
+    temp = data.map((item) {
+      return QuestionModel.fromJson(Map<String, dynamic>.from(item));
+    }).toList();
+
+    return QuestionList(questions: temp);
+  }
+}

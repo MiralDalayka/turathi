@@ -85,3 +85,18 @@ Michael T Apr 28, 2020 at 10:33 Michael T Apr 28, 2020 at 10:33
 Michael T Apr 28, 2020 at 10:33 Michael T Apr 28, 2020 at 10:33
     ''')
 ];
+class EventList {
+  List<EventModel> events;
+
+  EventList({required this.events});
+
+  factory EventList.fromJson(List<dynamic> data) {
+
+    List<EventModel> temp = [];
+    temp = data.map((item) {
+      return EventModel.fromJson(Map<String, dynamic>.from(item));
+    }).toList();
+
+    return EventList(events: temp);
+  }
+}

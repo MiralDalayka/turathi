@@ -1,11 +1,11 @@
-class Report {
+class ReportModel {
   String? reportId;
   String? reasons;
   String? userId;
 
-  Report({this.reportId, this.reasons, this.userId});
+  ReportModel({this.reportId, this.reasons, this.userId});
 
-  Report.fromJson(Map<String, dynamic> json) {
+  ReportModel.fromJson(Map<String, dynamic> json) {
     reportId = json['reportId'];
     reasons = json['reasons'];
     userId = json['userId'];

@@ -1,5 +1,5 @@
 
-class User {
+class UserModel {
   String? userId;
   String? name;
   String? password;
@@ -8,7 +8,7 @@ class User {
   double? latitude;
   String? certificate;
 
-  User(
+  UserModel(
       {
         required this.userId,
         required this.name,
@@ -18,7 +18,7 @@ class User {
         this.latitude,
         this.certificate});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     name = json['name'];
     password = json['password'];
