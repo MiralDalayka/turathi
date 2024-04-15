@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
 import 'package:turathi/core/services/firebase/firebase_auth.dart';
+import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
@@ -186,8 +187,7 @@ class _LogInState extends State<LogIn> {
                                       print('sign in');
                                       print(result);
                                       Navigator.of(context)
-                                          .pushReplacementNamed(
-                                              "bottomNavRoute");
+                                          .pushReplacementNamed(bottomNavRoute);
                                     }
                                   },
                                   child: Text(
@@ -245,9 +245,9 @@ class _LogInState extends State<LogIn> {
     if (user != null) {
       print("User is successfully Signin");
       if (mounted) {
-        //   sharedEmail = email; if the email match the firebase
-        Navigator.of(context)
-            .pushReplacementNamed("bottomNavRoute"); // to the bottomnav
+        //   sharedEmail = email; if the email match the firebase //back
+
+        Navigator.of(context).pushReplacementNamed(bottomNavRoute);
       }
     } else {
       print("error is happend");
