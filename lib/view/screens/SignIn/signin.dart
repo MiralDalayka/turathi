@@ -217,7 +217,7 @@ class _LogInState extends State<LogIn> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed("signup");
+                              Navigator.of(context).pushReplacementNamed(signUp);
                             },
                             child: Text(
                               "Sign Up",

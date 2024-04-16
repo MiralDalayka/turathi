@@ -67,7 +67,7 @@ class _Location_PageState extends State<LocationPage>
                     color: ThemeManager.primary,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'KohSantepheap'),
-                indicatorColor: ThemeManager.second,
+                indicatorColor: ThemeManager.primary,
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,
                 dividerColor: ThemeManager.second,
