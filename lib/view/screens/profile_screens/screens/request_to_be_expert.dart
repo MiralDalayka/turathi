@@ -55,34 +55,37 @@ File? file;
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      
+      body: Center(
+        child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ElevatedButton(
-          onPressed: () {
-            _pickFile();
-        },
-          style: ThemeManager.buttonStyle,
-          child: Text(
-            'Upload Certificate',
-            style: ThemeManager.textStyle
-                .copyWith(color: ThemeManager.primary),
-          ),
-        ),
-          SizedBox(height: 50,),
-          ElevatedButton(
+          children: [
+            ElevatedButton(
             onPressed: () {
-              // back
-            },
+              _pickFile();
+          },
             style: ThemeManager.buttonStyle,
             child: Text(
-              'Request',
+              'Upload Certificate',
               style: ThemeManager.textStyle
                   .copyWith(color: ThemeManager.primary),
             ),
-          )
-        ],
+          ),
+            SizedBox(height: 50,),
+            ElevatedButton(
+              onPressed: () {
+                // back
+              },
+              style: ThemeManager.buttonStyle,
+              child: Text(
+                'Request',
+                style: ThemeManager.textStyle
+                    .copyWith(color: ThemeManager.primary),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
