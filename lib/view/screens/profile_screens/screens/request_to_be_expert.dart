@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../../utils/theme_manager.dart';
 
@@ -22,11 +23,36 @@ File? file;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Request To Be Expert',
-          style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(
+      //     'Request To Be Expert',
+      //     style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary,fontFamily: ThemeManager.fontFamily),
+      //   ),
+      // ),
+        backgroundColor: ThemeManager.background,
+       appBar: AppBar(
+         centerTitle: true,
+         backgroundColor: ThemeManager.background,
+        title:
+         Text(
+            'Request To Be Expert',
+            style:  ThemeManager.textStyle.copyWith(
+              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+              fontWeight: FontWeight.bold,
+             fontFamily: ThemeManager.fontFamily,
+              color: ThemeManager.primary,
+            ),
+         
+        ),
+       // automaticallyImplyLeading: false,
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
         ),
       ),
       body: Column(
