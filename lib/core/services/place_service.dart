@@ -7,13 +7,13 @@ import 'package:turathi/core/models/place_model.dart';
 class PlaceService {
   //create instance
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  final String collectionName = "places";
+  final String _collectionName = "places";
 
   //add -get - update visibility,modify info
 
   Future<String> addPlace(PlaceModel model) async {
     _fireStore
-        .collection(collectionName)
+        .collection(_collectionName)
         .add(model.toJson())
         .whenComplete(() => "Done")
         .catchError((error) {
@@ -25,7 +25,7 @@ class PlaceService {
 
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData =
-        await _fireStore.collection(collectionName).get().whenComplete(() {
+        await _fireStore.collection(_collectionName).get().whenComplete(() {
       log("getPlaces done");
     }).catchError((error) {
       log(error.toString());
@@ -50,12 +50,12 @@ class PlaceService {
 
  Future<PlaceModel> updatePlace(PlaceModel placeModel) async {
     QuerySnapshot placesData = await _fireStore
-        .collection(collectionName)
+        .collection(_collectionName)
         .where('id', isEqualTo: placeModel.id)
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
     _fireStore
-        .collection(collectionName)
+        .collection(_collectionName)
         .doc(placeId)
         .update(placeModel.toJson())
         .whenComplete(() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/MapNearest.dart';
+import 'package:turathi/core/services/google_map_api.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';

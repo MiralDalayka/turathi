@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/functions/files_stoage.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 
@@ -22,20 +23,19 @@ class _AddNewPlaceState extends State<AddNewPlace> {
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
   final disc = TextEditingController();
-
-  XFile? image;
-
-  Future<void> _pickImage() async {
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
-    }
-  }
+  final ImageStorageService _fileService = ImageStorageService();
+  // XFile? image;
+  // Future<void> _pickImage() async {
+  //   final imagePicker = ImagePicker();
+  //   final pickedImage =
+  //       await imagePicker.pickImage(source: ImageSource.gallery);
+  //
+  //   if (pickedImage != null) {
+  //     setState(() {
+  //       image = pickedImage;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,31 +66,31 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   maxLine: 5,
                   controller: disc,
                 ),
-                if (image != null) Image.file(File(image!.path)),
+                // if (image != null) Image.file(File(image!.path)),
                 const SizedBox(
                   height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    ElevatedButton(
-                      onPressed: _pickImage,
-                      style: ThemeManager.buttonStyle,
-                      child: Text(
-                        'Pick Image',
-                        style: ThemeManager.textStyle
-                            .copyWith(color: ThemeManager.primary),
-                      ),
-                    ),
+                    // ElevatedButton(
+                    //   onPressed: _fileService.pickImages,
+                    //   style: ThemeManager.buttonStyle,
+                    //   child: Text(
+                    //     'Pick Image',
+                    //     style: ThemeManager.textStyle
+                    //         .copyWith(color: ThemeManager.primary),
+                    //   ),
+                    // ),
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
                           if (formKey.currentState!.validate()) {
-                            if (image == null) {
-                              snackBarFunction(
-                                  msg: "Pick Image Please", context: context);
-                            } else {
-                              //call controller
+                            // if (image == null) {
+                            //   snackBarFunction(
+                            //       msg: "Pick Image Please", context: context);
+                            // } else {
+                             { //call controller
                               name.clear();
                               disc.clear();
                               snackBarFunction(

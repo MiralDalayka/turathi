@@ -1,20 +1,5 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:turathi/core/functions/calculate_distanceInKm.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/services/MapScreen%202.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
-import 'package:turathi/view/widgets/back_arrow_button.dart';
-import 'package:turathi/view/widgets/comment_circle.dart';
-import 'package:turathi/view/widgets/deff_button%203.dart';
-import 'package:turathi/core/functions/new_line_after.dart';
-import 'package:turathi/view/widgets/small_Image.dart';
-
-import '../../../utils/Router/const_router_names.dart';
+import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);

@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/services/MapScreen%202.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 import 'package:turathi/core/functions/new_line_after.dart';
 import 'package:turathi/view/widgets/small_Image.dart';
 import 'package:intl/intl.dart';
+
+import '../../../core/services/google_map.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   const EventDetailsScreen({Key? key, required this.eventModel})
