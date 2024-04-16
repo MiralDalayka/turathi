@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../../utils/theme_manager.dart';
 
@@ -22,41 +23,69 @@ File? file;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Request To Be Expert',
-          style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(
+      //     'Request To Be Expert',
+      //     style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary,fontFamily: ThemeManager.fontFamily),
+      //   ),
+      // ),
+        backgroundColor: ThemeManager.background,
+       appBar: AppBar(
+         centerTitle: true,
+         backgroundColor: ThemeManager.background,
+        title:
+         Text(
+            'Request To Be Expert',
+            style:  ThemeManager.textStyle.copyWith(
+              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+              fontWeight: FontWeight.bold,
+             fontFamily: ThemeManager.fontFamily,
+              color: ThemeManager.primary,
+            ),
+         
         ),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ElevatedButton(
-          onPressed: () {
-            _pickFile();
-        },
-          style: ThemeManager.buttonStyle,
-          child: Text(
-            'Upload Certificate',
-            style: ThemeManager.textStyle
-                .copyWith(color: ThemeManager.primary),
+       // automaticallyImplyLeading: false,
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
           ),
         ),
-          SizedBox(height: 50,),
-          ElevatedButton(
+      ),
+      
+      body: Center(
+        child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
             onPressed: () {
-              // back
-            },
+              _pickFile();
+          },
             style: ThemeManager.buttonStyle,
             child: Text(
-              'Request',
+              'Upload Certificate',
               style: ThemeManager.textStyle
                   .copyWith(color: ThemeManager.primary),
             ),
-          )
-        ],
+          ),
+            SizedBox(height: 50,),
+            ElevatedButton(
+              onPressed: () {
+                // back
+              },
+              style: ThemeManager.buttonStyle,
+              child: Text(
+                'Request',
+                style: ThemeManager.textStyle
+                    .copyWith(color: ThemeManager.primary),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
