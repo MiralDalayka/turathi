@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/services/google_map_add_event.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
@@ -23,7 +25,7 @@ class _AddNewEventState extends State<AddNewEvent> {
   final creatorName = TextEditingController();
 
   //date
-
+  bool mapScreenOpened = false;
   XFile? image;
   DateTime selectedDate = DateTime.now();
 
@@ -38,13 +40,13 @@ class _AddNewEventState extends State<AddNewEvent> {
       });
     }
   }
-  Future<void> _pickDate() async{
+
+  Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(DateTime.now().year),
-        lastDate: DateTime(2025)
-    );
+        lastDate: DateTime(2025));
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
@@ -55,16 +57,14 @@ class _AddNewEventState extends State<AddNewEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            backgroundColor: ThemeManager.background,
-
+      backgroundColor: ThemeManager.background,
       appBar: AppBar(
-         backgroundColor: ThemeManager.background,
+        backgroundColor: ThemeManager.background,
         centerTitle: true,
         title: Text(
           'Add Event',
           style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
         ),
-         
         bottom: PreferredSize(
           preferredSize:
               Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
@@ -123,16 +123,31 @@ class _AddNewEventState extends State<AddNewEvent> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-
-                    ElevatedButton(
-                      onPressed: () {
-                        //open google map
+                     ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          mapScreenOpened = true;
+                        });
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddEventMap(),
+                          ),
+                        );
                       },
                       style: ThemeManager.buttonStyle,
                       child: Text(
                         'Location',
-                        style: ThemeManager.textStyle
-                            .copyWith(color: ThemeManager.primary),
+                        style: ThemeManager.textStyle.copyWith(
+                          color: mapScreenOpened &&
+                                  addEventLocatonLat != 0 &&
+                                  addEventLocatonLog != 0
+                              ? Colors.grey
+                              : (addEventLocatonLat != 0 &&
+                                      addEventLocatonLog != 0)
+                                  ? Colors.grey
+                                  : ThemeManager.primary,
+                        ),
                       ),
                     ),
                     ElevatedButton(
@@ -161,9 +176,9 @@ class _AddNewEventState extends State<AddNewEvent> {
 
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text("Place Event Successfully")));
+                                content: Text("Add Event Successfully")));
                       } else {
-                        log('add pleventace failed');
+                        log('add Event failed');
                       }
                     });
                   },
@@ -171,7 +186,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                   child: Text(
                     'Add Event',
                     style: ThemeManager.textStyle
-                        .copyWith(color: ThemeManager.primary),
+                        .copyWith(color: ThemeManager.textColor),
                   ),
                 )
               ],
@@ -182,5 +197,3 @@ class _AddNewEventState extends State<AddNewEvent> {
     );
   }
 }
-
-

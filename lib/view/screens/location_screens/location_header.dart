@@ -23,7 +23,7 @@ class _HeaderPartState extends State<HeaderPart> {
             Text(
               'Your Location',
               style: TextStyle(
-                fontFamily: 'KohSantepheap',
+                fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.primary,
                 fontWeight: FontWeight.bold,
                 fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
@@ -49,7 +49,7 @@ class _HeaderPartState extends State<HeaderPart> {
                 Text(
                   'Jordan Amman , Khalda ',
                   style: TextStyle(
-                    fontFamily: 'KohSantepheap',
+                    fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,
                     fontSize: LayoutManager.widthNHeight0(context, 0) * 0.014,
                     fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   ),
                 );
 
-                print("show me the map");
+                print("Choose The Nearest Point To U");
               },
               child: Container(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.145,
@@ -95,9 +95,9 @@ class _HeaderPartState extends State<HeaderPart> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Show me The Map",
+                      "Choose The Nearest Point",
                       style: TextStyle(
-                        fontFamily: 'KohSantepheap',
+                        fontFamily:ThemeManager.fontFamily,
                         color: ThemeManager.primary,
                         fontWeight: FontWeight.bold,
                         fontSize:
@@ -122,54 +122,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   ],
                 ),
               ),
-              // child: Container(
-
-              //   //  margin: EdgeInsets.only(right: 10,left:10),
-              //   height: LayoutManager.widthNHeight0(context, 1) * 0.145,
-              //   width: LayoutManager.widthNHeight0(context, 0),
-              //   decoration: BoxDecoration(
-              //     color: ThemeManager.second,
-              //     borderRadius: const BorderRadius.all(Radius.circular(20)),
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Colors.grey.withOpacity(0.4),
-              //         blurRadius: 2,
-              //         offset: const Offset(-1, -1),
-              //         spreadRadius: 0,
-              //       ),
-              //     ],
-              //   ),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       Text(
-              //         "Show me The Map",
-              //         style: TextStyle(
-              //           fontFamily: 'KohSantepheap',
-              //           color: ThemeManager.primary,
-              //           fontWeight: FontWeight.bold,
-              //           fontSize:
-              //               LayoutManager.widthNHeight0(context, 0) * 0.0175,
-              //           shadows: const [
-              //             Shadow(
-              //               color: Colors.grey,
-              //               blurRadius: 5,
-              //               offset: Offset(1, 1),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //       SizedBox(
-              //         width: LayoutManager.widthNHeight0(context, 0) * 0.015,
-              //       ),
-              //       Icon(
-              //         Icons.map_outlined,
-              //         color: ThemeManager.primary,
-              //         size: LayoutManager.widthNHeight0(context, 0) * 0.023,
-              //       )
-              //     ],
-              //   ),
-              // ),
+            
             ),
             SizedBox(
               height: LayoutManager.widthNHeight0(context, 0) * 0.005,
