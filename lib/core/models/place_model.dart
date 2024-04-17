@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 enum PlaceStatus {
-  ClosedForMaintenance,
+  Closed_For_Maintenance,
   Open,
 } //
 
@@ -98,7 +98,7 @@ List<PlaceModel> demoPlaces = [
     distance: "10",
     id: "1",
     commentsPlace: ["something", "somethig"],
-    status: PlaceStatus.ClosedForMaintenance.toString(),
+    status: PlaceStatus.Closed_For_Maintenance.toString(),
     location: "Amman , Downtown ",
     like: 0,
     disLike: 0,

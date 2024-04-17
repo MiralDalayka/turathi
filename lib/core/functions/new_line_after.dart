@@ -1,25 +1,21 @@
 String addNewLineAfterChars(String text, int charCount) {
-  List<String> words = text.split(' ');
+  List<String> words = text.split('_');
 
   StringBuffer buffer = StringBuffer();
   int count = 0;
 
-  for (int i = 0; i < words.length; i++) {
-    String word = words[i];
-
+  for (String word in words) {
     if (count + word.length > charCount) {
       buffer.write('\n');
       count = 0;
     }
 
     buffer.write(word);
-
-    if (i < words.length - 1) {
-      buffer.write(' ');
-      count++; 
-    }
-
     count += word.length;
+    if (count < charCount && words.indexOf(word) != words.length - 1) {
+      buffer.write(' ');
+      count++;
+    }
   }
 
   return buffer.toString();

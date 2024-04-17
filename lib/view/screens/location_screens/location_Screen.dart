@@ -66,7 +66,7 @@ class _Location_PageState extends State<LocationPage>
                     fontSize: LayoutManager.widthNHeight0(context, 1) * 0.035,
                     color: ThemeManager.primary,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'KohSantepheap'),
+                    fontFamily: ThemeManager.fontFamily),
                 indicatorColor: ThemeManager.primary,
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,

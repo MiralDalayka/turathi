@@ -1,20 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
-
 import '../../../core/models/event_model.dart';
-import '../../../core/models/place_model.dart';
 import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
 import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
-import 'widgets/popular_image_slider_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
