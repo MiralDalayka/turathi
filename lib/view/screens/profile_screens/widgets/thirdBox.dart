@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/screens/SignIn/signin.dart';
 
 class thirdBox extends StatefulWidget {
   const thirdBox({super.key});
@@ -10,6 +13,11 @@ class thirdBox extends StatefulWidget {
 }
 
 class _thirdBox extends State<thirdBox> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  signOut() async {
+    await auth.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +28,8 @@ class _thirdBox extends State<thirdBox> {
       ),
       child: Container(
           height: LayoutManager.widthNHeight0(context, 1) * 0.3,
-          padding: EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
+          padding:
+              EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
           child: Column(
             children: [
               InkWell(
@@ -34,22 +43,25 @@ class _thirdBox extends State<thirdBox> {
                     children: [
                       Row(
                         children: [
-                        Image.asset(
+                          Image.asset(
                             'assets/images/img_png/infoProfile.png',
-                            width:  LayoutManager.widthNHeight0(context, 0) *
-                                  0.03,
-                            height: LayoutManager.widthNHeight0(context, 1) *
-                                  0.054,
+                            width:
+                                LayoutManager.widthNHeight0(context, 0) * 0.03,
+                            height:
+                                LayoutManager.widthNHeight0(context, 1) * 0.054,
                           ),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 0) *
+                                  0.015),
                           Text(
                             'About us',
                             style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                              color: ThemeManager.primary,
-                               fontWeight: FontWeight.bold
-                            ),
+                                fontSize:
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.038,
+                                fontFamily: ThemeManager.fontFamily,
+                                color: ThemeManager.primary,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -66,33 +78,41 @@ class _thirdBox extends State<thirdBox> {
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                         Image.asset(
-                            'assets/images/img_png/logoutProfile.png',
-                            width:  LayoutManager.widthNHeight0(context, 0) *
-                                  0.027,
-                            height: LayoutManager.widthNHeight0(context, 1) *
-                                  0.055,
-                          ),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
-                          Text(
-                            'Sgin out',
-                            style: TextStyle(
-                              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.038,
-                              fontFamily: 'KohSantepheap',
-                               color: ThemeManager.primary,
-                               fontWeight: FontWeight.bold
-                               
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: GestureDetector(
+                    onTap: () async {
+                      // await  FirebaseAuth.instance.signOut();
+                      signOut();
+
+                      print("sign out");
+
+                      Navigator.of(context).pushReplacementNamed(signIn);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.login_outlined,
+                          size: LayoutManager.widthNHeight0(context, 1) * 0.045,
+                          color: Color(0xff263238),
+                        ),
+                        SizedBox(
+                            width:
+                                LayoutManager.widthNHeight0(context, 0) * 0.02),
+                        Text(
+                          'Sign out',
+                          style: TextStyle(
+                              fontSize:
+                                  LayoutManager.widthNHeight0(context, 1) *
+                                      0.038,
+                              color: ThemeManager.primary,
+                              fontFamily: ThemeManager.fontFamily,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
+
+               
                 ),
               ),
             ],

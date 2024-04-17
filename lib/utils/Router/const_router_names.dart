@@ -23,7 +23,7 @@ const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
 
 const String signIn = '/LogIn';
-const String signUp= '/LogIn';
+const String signUp= '/SingUp';
 //LocationPage//CommentsPlace
 
 const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';

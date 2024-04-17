@@ -33,7 +33,7 @@ class MyRouter {
         }
         case signUp:
         {
-          return _route(SignUp());
+          return _route(SingUp());
         }
 
       case bottomNavRoute:

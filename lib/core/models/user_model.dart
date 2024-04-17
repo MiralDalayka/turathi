@@ -1,4 +1,3 @@
-
 class UserModel {
   String? userId;
   String? name;
@@ -7,16 +6,19 @@ class UserModel {
   double? longitude;
   double? latitude;
   String? certificate;
+  String? email;
+  String? phone;
 
   UserModel(
-      {
-        required this.userId,
-        required this.name,
-        required this.password,
-        this.role,
-        this.longitude,
-        this.latitude,
-        this.certificate});
+      {this.userId,
+      required this.name,
+      required this.password,
+      this.email,
+      this.phone,
+      this.role,
+      this.longitude,
+      this.latitude,
+      this.certificate});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
@@ -26,6 +28,8 @@ class UserModel {
     longitude = json['longitude'];
     latitude = json['latitude'];
     certificate = json['certificate'];
+    phone = json['phone'];
+    email = json['email'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +41,8 @@ class UserModel {
     data['longitude'] = this.longitude;
     data['latitude'] = this.latitude;
     data['certificate'] = this.certificate;
+    data['phone'] = this.phone;
+    data['email'] = this.email;
     return data;
   }
 }
