@@ -21,10 +21,11 @@ const String questionRoute = '/bottomScreen/communityScreen/question_view';
 
 const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
+const String personalDetilsScreen = '/bottomScreen/profileScreen/PersdonalDetilsScreen';
 
 const String signIn = '/LogIn';
 const String signUp= '/SingUp';
-//LocationPage//CommentsPlace
+
 
 const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
 
