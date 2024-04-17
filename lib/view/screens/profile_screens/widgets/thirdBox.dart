@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/SignIn/signin.dart';
 
 class thirdBox extends StatefulWidget {
   const thirdBox({super.key});
@@ -74,7 +73,7 @@ class _thirdBox extends State<thirdBox> {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushNamed("Sgin out");
+                  // Navigator.of(context).pushNamed(sginout);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),

@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
 
@@ -22,6 +25,31 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<EventModel>? eventsList;
+  UserModel? user;
+  String _greeting = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _setGreeting();
+  }
+
+  void _setGreeting() {
+    DateTime now = DateTime.now();
+    if (now.hour < 12) {
+      setState(() {
+        _greeting = 'Good Morning';
+      });
+    } else if (now.hour < 18) {
+      setState(() {
+        _greeting = 'Good Afternoon';
+      });
+    } else {
+      setState(() {
+        _greeting = 'Good Evening';
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,9 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi Alaa !',
+                'Hi ${user?.name ?? 'Goust'}!',
                 style: TextStyle(
-                  fontFamily: 'KohSantepheap',
+                  fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
@@ -68,9 +96,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Text(
-                'Good Morning',
+                _greeting,
                 style: TextStyle(
-                  fontFamily: 'KohSantepheap',
+                  fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
                   letterSpacing: 4,
@@ -100,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       "Be Part Of Collect Data With Us",
                       style: TextStyle(
-                          fontFamily: 'KohSantepheap',
+                          fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontWeight: FontWeight.bold,
                           fontSize:
@@ -121,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Popular Places',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontFamily: 'KohSantepheap',
+                  fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
                   shadows: const [
@@ -147,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Events',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'KohSantepheap',
+                      fontFamily: ThemeManager.fontFamily,
                       color: ThemeManager.primary,
                       fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
                       shadows: const [
@@ -173,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         'See All',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'KohSantepheap',
+                          fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontSize:
                               LayoutManager.widthNHeight0(context, 0) * 0.015,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class UserModel {
   String? userId;
   String? name;
@@ -44,5 +46,20 @@ class UserModel {
     data['phone'] = this.phone;
     data['email'] = this.email;
     return data;
+  }
+}
+class UserList {
+  List<UserModel> users;
+
+  UserList({required this.users});
+
+  factory UserList.fromJson(List<dynamic> data) {
+    //1. temp list
+    List<UserModel> tempPlaces = [];
+    tempPlaces = data.map((item) {
+      return UserModel.fromJson(Map<String, dynamic>.from(item));
+    }).toList();
+
+    return UserList(users: tempPlaces);
   }
 }

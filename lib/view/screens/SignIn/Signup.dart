@@ -34,7 +34,6 @@ class _SingUpState extends State<SingUp> {
   @override
   void dispose() {
     signUpController.firstName.dispose();
-    signUpController.secondName.dispose();
     signUpController.email.dispose();
     signUpController.phone.dispose();
     signUpController.password.dispose();
@@ -179,31 +178,13 @@ class _SingUpState extends State<SingUp> {
                     height: LayoutManager.widthNHeight0(context, 1) * 0.08,
                   ),
                   Center(
-                    child:
-
-                        // defaultButton3(
-                        //     text: 'Sing Up',
-                        //     height:  LayoutManager.widthNHeight0(context, 1) * 0.03,
-                        //     width:   LayoutManager.widthNHeight0(context, 0) * 0.03,
-                        //     borderRadius: 10,
-                        //     function: () {},
-                        //     onPressed: () {
-                        //       if (signUpController.formKey.currentState!
-                        //           .validate()) {
-                        //         // _signUp();
-                        //         _signUp(context);
-                        //       }
-                        //     },
-                        //     borderWidth: 0),
-
-                        SizedBox(
+                    child: SizedBox(
                       width: LayoutManager.widthNHeight0(context, 1) * 0.55,
                       height: LayoutManager.widthNHeight0(context, 0) * 0.06,
                       child: InkWell(
                         onTap: () {
                           if (signUpController.formKey.currentState!
                               .validate()) {
-                            // _signUp();
                             _signUp(context);
                           }
                         },
@@ -261,7 +242,6 @@ class _SingUpState extends State<SingUp> {
 
   void _signUp(BuildContext context) async {
     String firstname = signUpController.firstName.text;
-    String lastname = signUpController.secondName.text;
     String email = signUpController.email.text;
     String pass = signUpController.password.text;
     String phone = signUpController.phone.text;
@@ -337,4 +317,6 @@ class _SingUpState extends State<SingUp> {
       }
     }
   }
+
+  
 }
