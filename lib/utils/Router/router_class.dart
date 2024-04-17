@@ -3,6 +3,7 @@ import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
+import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
 
 import '../../core/models/event_model.dart';
 import '../../core/models/question_model.dart';
@@ -31,6 +32,12 @@ class MyRouter {
         {
           return _route(LogIn());
         }
+        
+          case personalDetilsScreen:
+        {
+          return _route(PersdonalDetilsScreen());
+        }
+        
         case signUp:
         {
           return _route(SingUp());

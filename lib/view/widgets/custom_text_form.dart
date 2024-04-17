@@ -39,3 +39,84 @@ final String labelText;
     );
   }
 }
+
+class TextFormWidgetRead extends StatelessWidget {
+  final bool passToggle;
+  final TextEditingController passController;
+  final String str;
+  final double width;
+  final double height;
+  final Color color;
+  final IconData iconSufData;
+    final int maxlin,maxlog;
+
+  const TextFormWidgetRead(
+      {super.key,
+      required this.passToggle,
+      required this.passController,
+      required this.str,
+      this.width = 0,
+      this.height = 0,
+      
+      this.color = Colors.lime,
+      this.iconSufData = Icons.add,
+       this.maxlin = 1,
+       this.maxlog = 12,
+      required String? Function(dynamic value) validator});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: (width == 0) ? null : width,
+        height: (height == 0) ? null : height,
+        
+        child: TextFormField(
+          
+              maxLines: maxlin,
+                maxLength:maxlog,
+        readOnly: true,
+          textAlign: TextAlign.left,
+          keyboardType: TextInputType.emailAddress,
+          obscureText: passToggle,
+          controller: passController,
+          
+          decoration: InputDecoration(
+            counterText: "",
+            
+            prefixIcon: Icon((iconSufData == Icons.add) ? null : iconSufData),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: (color == Colors.lime)
+                      ? ThemeManager.primary
+                      : color,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: (color == Colors.lime)
+                      ?  ThemeManager.primary
+                      : color,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            errorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red.withOpacity(0.8),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red.withOpacity(0.8),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            disabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.red.withOpacity(0.8),
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(5))),
+            isDense: true,
+            hintText: str,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+          ),
+        ));
+  }
+}

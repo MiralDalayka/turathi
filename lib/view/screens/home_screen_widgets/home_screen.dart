@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,13 +21,45 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<EventModel>? eventsList;
-  UserModel? user;
+
   String _greeting = '';
+  String name = "ghost";
+
+  Future<void> fetchUserData() async {
+    String currentEmail = FirebaseAuth.instance.currentUser?.email ?? '';
+
+    try {
+      QuerySnapshot<Object?> querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: currentEmail)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
+
+        Map<String, dynamic>? userData =
+            userSnapshot.data() as Map<String, dynamic>?;
+
+        if (userData != null) {
+          setState(() {
+            name = userData['name'] ?? "";
+          });
+        } else {
+          print('User data is null.');
+        }
+      } else {
+        print('No user found with the current email.....');
+      }
+    } catch (error) {
+      print('Error querying user document: $error');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     _setGreeting();
+    fetchUserData();
   }
 
   void _setGreeting() {
@@ -50,6 +84,9 @@ class _HomeScreenState extends State<HomeScreen> {
     //change it
 
     eventsList = events;
+    if (mounted) {
+      fetchUserData();
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
@@ -74,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Hi ${user?.name ?? 'Goust'}!',
+                "Hi ${name.toUpperCase()}",
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
