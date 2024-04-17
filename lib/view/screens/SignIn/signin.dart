@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/services/firebase/firebase_auth.dart';
+import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -73,9 +73,9 @@ class _LogInState extends State<LogIn> {
                                     fontSize: LayoutManager.widthNHeight0(
                                             context, 1) *
                                         0.084,
-                                    color: Color(0xffE8EBEC),
+                                    color:  ThemeManager.second,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'KohSantepheap'),
+                                    fontFamily: ThemeManager.fontFamily),
                               ),
                             ],
                           ),
@@ -102,22 +102,25 @@ class _LogInState extends State<LogIn> {
                           TextFormFieldWidgetSign(
                             passToggle: false,
                             passController: textController.controllerEmail,
-                            labelText: 'Username',
+                            labelText: 'Email',
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Enter Username";
+                                return "Enter Email";
+                              }
+                              bool emailValid = RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value);
+                              if (!emailValid) {
+                                return "Enter valid Email";
                               }
                               return null;
                             },
-                            str: "UserName",
+                            str: "email@gmail.com",
                           ),
-
                           SizedBox(
                             height:
                                 LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
-
-                          ///
                           TextFormFieldWidgetSign(
                             passToggle: true,
                             passController: textController.controllerPass,
@@ -194,7 +197,7 @@ class _LogInState extends State<LogIn> {
                                     "SignIn As Guest",
                                     style: TextStyle(
                                         color: Colors.grey[600],
-                                        fontFamily: 'Kadwa'),
+                                        fontFamily: ThemeManager.fontFamily),
                                   ))
                             ],
                           ),
@@ -212,12 +215,13 @@ class _LogInState extends State<LogIn> {
                           style: TextStyle(
                               fontSize:
                                   MediaQuery.of(context).size.width * .033,
-                              fontFamily: 'Kadwa',
+                              fontFamily: ThemeManager.fontFamily,
                               color: Colors.grey[600]),
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushReplacementNamed(signUp);
+                              Navigator.of(context)
+                                  .pushReplacementNamed(signUp);
                             },
                             child: Text(
                               "Sign Up",
@@ -225,7 +229,7 @@ class _LogInState extends State<LogIn> {
                                   decoration: TextDecoration.underline,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 13,
-                                  fontFamily: 'Kadwa',
+                                  fontFamily: ThemeManager.fontFamily,
                                   color: Colors.grey[700]),
                             ))
                       ],
@@ -245,7 +249,7 @@ class _LogInState extends State<LogIn> {
     if (user != null) {
       print("User is successfully Signin");
       if (mounted) {
-        //   sharedEmail = email; if the email match the firebase //back
+        //   sharedEmail = email;
 
         Navigator.of(context).pushReplacementNamed(bottomNavRoute);
       }

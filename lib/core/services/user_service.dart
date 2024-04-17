@@ -23,6 +23,36 @@ class UserService {
   }
 
 
+ Future<UserList> getUsers() async {
+    QuerySnapshot usersData =
+        await _fireStore.collection(_collectionName).get().whenComplete(() {
+      log("getPlaces done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    //map to store docs data in
+    Map<String, dynamic> data = {};
+    //temp model
+    UserModel tempModel;
+    //temp list
+    UserList userList = UserList(users: []);
+   
+    for (var item in usersData.docs) {
+      data["userId"] = item.get("userId");
+      data["name"] = item.get("name"); 
+         data["email"] = item.get("email");//....
+
+      tempModel = UserModel.fromJson(data);
+
+      userList.users.add(tempModel);
+    }
+    log(userList.users[0].toString());
+    return userList;
+  }
+
+
+
+
   Future<UserModel> updateUser(UserModel model) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)

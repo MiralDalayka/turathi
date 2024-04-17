@@ -1,3 +1,4 @@
+import 'dart:math';
 
 class UserModel {
   String? userId;
@@ -7,16 +8,19 @@ class UserModel {
   double? longitude;
   double? latitude;
   String? certificate;
+  String? email;
+  String? phone;
 
   UserModel(
-      {
-        required this.userId,
-        required this.name,
-        required this.password,
-        this.role,
-        this.longitude,
-        this.latitude,
-        this.certificate});
+      {this.userId,
+      required this.name,
+      required this.password,
+      this.email,
+      this.phone,
+      this.role,
+      this.longitude,
+      this.latitude,
+      this.certificate});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
@@ -26,6 +30,8 @@ class UserModel {
     longitude = json['longitude'];
     latitude = json['latitude'];
     certificate = json['certificate'];
+    phone = json['phone'];
+    email = json['email'];
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +43,23 @@ class UserModel {
     data['longitude'] = this.longitude;
     data['latitude'] = this.latitude;
     data['certificate'] = this.certificate;
+    data['phone'] = this.phone;
+    data['email'] = this.email;
     return data;
+  }
+}
+class UserList {
+  List<UserModel> users;
+
+  UserList({required this.users});
+
+  factory UserList.fromJson(List<dynamic> data) {
+    //1. temp list
+    List<UserModel> tempPlaces = [];
+    tempPlaces = data.map((item) {
+      return UserModel.fromJson(Map<String, dynamic>.from(item));
+    }).toList();
+
+    return UserList(users: tempPlaces);
   }
 }
