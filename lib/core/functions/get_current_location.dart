@@ -3,9 +3,9 @@ import 'package:geolocator/geolocator.dart';
 import 'package:turathi/utils/shared.dart';
 
 class GetCurrentLocation {
-  late Position currentLocation;
+  late Position _currentLocation;
 
-  Future<Position?> _getCurrentLocation() async {
+  Future<Position?> getCurrentLocation() async {
     try {
       // req permission to access the device's location
       LocationPermission permission = await Geolocator.requestPermission();
@@ -15,7 +15,7 @@ class GetCurrentLocation {
         return null;
       }
 
-     
+
       return await Geolocator.getCurrentPosition( //this is to get user current position
         desiredAccuracy: LocationAccuracy.high,
       );
@@ -27,24 +27,24 @@ class GetCurrentLocation {
 
   Future<void> performNearbySearch(BuildContext context) async {
     try {
-    
-      Position? currentPos = await _getCurrentLocation(); 
+
+      Position? currentPos = await getCurrentLocation();
       if (currentPos != null) {  // If the current position is null then show me error message
-        currentLocation = currentPos;
+        _currentLocation = currentPos;
         userNearestLat = currentPos.latitude;
         userNearestLog = currentPos.longitude;
       } else {
-      
+
         throw ('Failed to get current location');
       }
     } catch (error) {
       print("Failed to get current location: $error");
-    
-      _showErrorDialog(context, error.toString()); //error 
+
+      _showErrorDialog(context, error.toString()); //error
     }
   }
 
-  //  this is to show error 
+  //  this is to show error
   void _showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,

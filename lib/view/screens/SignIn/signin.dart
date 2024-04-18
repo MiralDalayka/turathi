@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -32,6 +33,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
+    UserService _service = UserService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -152,10 +154,13 @@ class _LogInState extends State<LogIn> {
                             onTap: () {
                               if (textController.formField.currentState!
                                   .validate()) {
-                                _signIp();
+                                _service.signIn(textController.controllerEmail.text,
+                                    textController.controllerPass.text).whenComplete(() =>   Navigator.of(context)
+                                    .pushReplacementNamed(bottomNavRoute) );
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
+
                             },
                             child: Container(
                               height:
@@ -240,39 +245,5 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  void _signIp() async {
-    String email = textController.controllerEmail.text;
-    String pass = textController.controllerPass.text;
 
-    User? user = await _auth.signinwithemailandpassword(email, pass);
-
-    if (user != null) {
-      print("User is successfully Signin");
-      if (mounted) {
-        //   sharedEmail = email;
-
-        Navigator.of(context).pushReplacementNamed(bottomNavRoute);
-      }
-    } else {
-      print("error is happend");
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("An error has occurred.  don't have an account?"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
-  }
 }

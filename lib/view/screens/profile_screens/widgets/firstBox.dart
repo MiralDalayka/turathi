@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/services/user_service.dart';
@@ -55,8 +57,8 @@ class FirstBox extends State<firstBox> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    UserService().signOut();
-                                    print("sign out");
+                                    signOut();
+                                    log("sign out");
 
                                     Navigator.of(context).pushNamed(signIn);
                                   },
@@ -79,6 +81,7 @@ class FirstBox extends State<firstBox> {
                       },
                     );
                   } else {
+                    log("&&&&&&&&&&&&&");
                     Navigator.of(context).pushNamed(personalDetilsScreen);
                   }
                 },

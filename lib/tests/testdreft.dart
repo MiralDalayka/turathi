@@ -1,35 +1,18 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:turathi/tests/testView.dart';
+import 'package:http/http.dart' as http;
+class Test{
+  Future<String> _load() async {
+    var url =
+    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=31.900762,35.890933&destination=32.49517491030077,35.991236423865466");
 
-import '../core/services/file_storage_service.dart';
+    var response = await http.get(url);
+    // response.statusCode --> 200
 
-class ImageUploader extends StatelessWidget {
-
-
-
-
-  @override
-  FilesStorageService service =FilesStorageService();
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: (){
-            service.uploadImages('file44');
-          },
-          child: Text('Upload Image'),
-        ),
-
-        ElevatedButton(
-          onPressed: (){
-            Navigator.push(context,MaterialPageRoute(builder: (context)=> const TestView()));
-          },
-          child: Text('show Image'),
-        ),
-      ],
-    );
+    if (response.statusCode == 200) {
+      return response.body;
+    }
+    return "ERROR";
   }
 }
+
+

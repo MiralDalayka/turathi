@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+
+
+import '../functions/get_current_location.dart';
 
 class MapScreenLocation extends StatefulWidget {
   const MapScreenLocation({Key? key, required this.lon, required this.lat})
@@ -16,7 +21,6 @@ class MapScreenLocation extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreenLocation> {
   Position? currentLocation;
-
   double? distance;
   double? bearing;
 
@@ -74,7 +78,7 @@ class _MapScreenState extends State<MapScreenLocation> {
         print('Bearing: $bearing degrees');
 
         _launchMaps(
-            widget.lon, widget.lat, 32.49517491030077, 35.991236423865466);
+            widget.lat, widget.lon, 32.49517491030077, 35.991236423865466);
       }); //,
     }).catchError((error) {
       showDialog(
@@ -145,13 +149,18 @@ class _MapScreenState extends State<MapScreenLocation> {
     final double myLongitude = lon; //35.99126052856445  ;
     final double destinationLatitude = d; //34.0522;
     final double destinationLongitude = a; //-118.2437;
-    final String url =
-        "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    // final String url =
+    //     "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
+    var url =
+    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
+    await launchUrl(url);
+
+    // if (await canLaunchUrl(url)) {
+    //   await launchUrl(url);
+    // } else {
+    //   ///////////////
+    //   throw 'Could not launch $url';
+    // }
   }
 
 //   void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {

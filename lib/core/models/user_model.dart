@@ -1,5 +1,15 @@
+
+import '../../utils/shared.dart';
+import '../functions/modify_data.dart';
+
+
+enum UsersRole{
+  user,
+  expert
+}
+
 class UserModel {
-  String? userId;
+  String? id;
   String? name;
   String? password;
   String? role;
@@ -8,20 +18,23 @@ class UserModel {
   String? certificate;
   String? email;
   String? phone;
-
+  UserModel.empty();
   UserModel(
-      {this.userId,
+      {this.id,
       required this.name,
-      required this.password,
-      this.email,
-      this.phone,
-      this.role,
-      this.longitude,
-      this.latitude,
-      this.certificate});
+      required pass,
+        required this.email,
+        required this.phone,
+        required this.longitude,
+        required this.latitude,
+      this.certificate}){
+    role=UsersRole.user.name;
+    id =uuid.v4();
+   password= hashPassword(pass);
+  }
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    userId = json['userId'];
+    id = json['id'];
     name = json['name'];
     password = json['password'];
     role = json['role'];
@@ -34,7 +47,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data =  <String, dynamic>{};
-    data['userId'] = userId;
+    data['id'] = id;
     data['name'] = name;
     data['password'] = password;
     data['role'] = role;

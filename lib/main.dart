@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/core/providers/add_place_provider.dart';
 import 'package:turathi/core/providers/nearest_places_provider.dart';
 import 'package:turathi/firebase_options.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/utils/shared.dart';
+
+import 'core/functions/get_current_location.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

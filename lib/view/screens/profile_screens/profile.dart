@@ -7,6 +7,8 @@ import 'package:turathi/view/screens/profile_screens/widgets/firstBox.dart';
 import 'package:turathi/view/screens/profile_screens/widgets/secondBox.dart';
 import 'package:turathi/view/screens/profile_screens/widgets/thirdBox.dart';
 
+import '../../../utils/shared.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key});
 
@@ -15,49 +17,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> {
-  String name = "ghost";
 
-  Future<void> fetchUserData() async {
-    String currentEmail = FirebaseAuth.instance.currentUser?.email ?? '';
 
-    try {
-      QuerySnapshot<Object?> querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: currentEmail)
-          .get();
 
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
 
-        Map<String, dynamic>? userData =
-            userSnapshot.data() as Map<String, dynamic>?;
-
-        if (userData != null) {
-          setState(() {
-            name = userData['name'] ?? "";
-          });
-        } else {
-          print('User data is null.');
-        }
-      } else {
-        print('No user found with the current email.....');
-      }
-    } catch (error) {
-      print('Error querying user document: $error');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData();
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (mounted) {
-      fetchUserData();
-    }
+
 
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -88,7 +55,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hi ${name.toUpperCase()}",
+                        "Hi ${user.name??"Guest"}",
                         style: TextStyle(
                           fontSize:
                               LayoutManager.widthNHeight0(context, 1) * 0.06,
