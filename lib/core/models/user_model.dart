@@ -18,7 +18,7 @@ class UserModel {
   String? certificate;
   String? email;
   String? phone;
-
+  UserModel.empty();
   UserModel(
       {this.id,
       required this.name,

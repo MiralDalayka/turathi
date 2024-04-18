@@ -83,6 +83,7 @@ class FirstBox extends State<firstBox> {
                       },
                     );
                   } else {
+                    log("&&&&&&&&&&&&&");
                     Navigator.of(context).pushNamed(personalDetilsScreen);
                   }
                 },

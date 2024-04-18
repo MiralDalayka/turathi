@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 
+import '../../utils/shared.dart';
 import 'firebase_auth.dart';
 
 class UserService {
@@ -63,10 +64,10 @@ class UserService {
 
   //get user name after sign up
 
-  Future<String?> signIn(String email, String pass) async {
+  Future<String> signIn(String email, String pass) async {
     bool mounted = false;
     try {
-      await _auth.signinwithemailandpassword(email, pass);
+      await _auth.signinwithemailandpassword(email, pass).whenComplete(() => log("SIGN IN DONE"));
     } catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
@@ -86,6 +87,10 @@ class UserService {
     UserModel tempModel;
       data["name"] = placeData.docs[0].get("name");
       tempModel = UserModel.fromJson(data);
+    user = tempModel;
+
+
+    return "*********";
 
     }
   }

@@ -155,7 +155,8 @@ class _LogInState extends State<LogIn> {
                               if (textController.formField.currentState!
                                   .validate()) {
                                 _service.signIn(textController.controllerEmail.text,
-                                    textController.controllerPass.text);
+                                    textController.controllerPass.text).whenComplete(() =>   Navigator.of(context)
+                                    .pushReplacementNamed(bottomNavRoute) );
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
