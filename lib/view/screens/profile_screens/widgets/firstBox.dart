@@ -16,8 +16,6 @@ class firstBox extends StatefulWidget {
 }
 
 class FirstBox extends State<firstBox> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,12 +32,13 @@ class FirstBox extends State<firstBox> {
             children: [
               InkWell(
                 onTap: () {
-                  if (FirebaseAuth.instance.currentUser!.isAnonymous) {
+                  final currentUser = UserService().auth.currentUser;
+                  if (currentUser != null && currentUser.isAnonymous) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          backgroundColor:ThemeManager.primary,
+                          backgroundColor: ThemeManager.primary,
                           content: Text(
                             'You Have To Sign In First \nTo See Your Personal Details!',
                             style: TextStyle(
@@ -57,7 +56,7 @@ class FirstBox extends State<firstBox> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    signOut();
+                                    UserService().signOut();
                                     log("sign out");
 
                                     Navigator.of(context).pushNamed(signIn);

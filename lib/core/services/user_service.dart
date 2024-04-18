@@ -10,6 +10,7 @@ import 'firebase_auth.dart';
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final FirebaseAuthService _auth = FirebaseAuthService();
+    FirebaseAuth auth = FirebaseAuth.instance;
 
   final String _collectionName = "users";
   Future<String> addUser(UserModel model) async {
@@ -85,12 +86,20 @@ class UserService {
 
     UserModel tempModel;
       data["name"] = placeData.docs[0].get("name");
+      // data["email"] = placeData.docs[0].get("email");
       tempModel = UserModel.fromJson(data);
     user = tempModel;
 
 
     return "*********";
 
-    }
+    } 
+    
+    signOut() async {
+    await auth.signOut();
+  }
+    
+
+
   }
 
