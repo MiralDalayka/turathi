@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
@@ -58,7 +60,7 @@ class FirstBox extends State<firstBox> {
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                     signOut();
-                                    print("sign out");
+                                    log("sign out");
 
                                     Navigator.of(context).pushNamed(signIn);
                                   },

@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, annotate_overrides
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
@@ -12,6 +13,8 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+
+import '../../../core/functions/get_current_location.dart';
 
 class SingUp extends StatefulWidget {
   const SingUp({super.key});
@@ -25,6 +28,7 @@ class _SingUpState extends State<SingUp> {
 
   final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +43,8 @@ class _SingUpState extends State<SingUp> {
     signUpController.password.dispose();
     super.dispose();
   }
+
+  GetCurrentLocation currentLocation = GetCurrentLocation();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +71,7 @@ class _SingUpState extends State<SingUp> {
                             'assets/images/img_png/profile.png',
                             width: double.infinity,
                             height:
-                                LayoutManager.widthNHeight0(context, 1) * 0.54,
+                            LayoutManager.widthNHeight0(context, 1) * 0.54,
                             fit: BoxFit.fitWidth,
                           ),
                         ),
@@ -81,8 +87,8 @@ class _SingUpState extends State<SingUp> {
                               "Turathi",
                               style: TextStyle(
                                   fontSize:
-                                      LayoutManager.widthNHeight0(context, 1) *
-                                          0.084,
+                                  LayoutManager.widthNHeight0(context, 1) *
+                                      0.084,
                                   color: ThemeManager.second,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: ThemeManager.fontFamily),
@@ -112,7 +118,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                              LayoutManager.widthNHeight0(context, 1) * 0.07,
+                          LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: false,
@@ -123,7 +129,7 @@ class _SingUpState extends State<SingUp> {
                                 return 'Email must not be empty ';
                               }
                               bool emailValid = RegExp(
-                                      r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value);
                               if (!emailValid) {
                                 return "Enter valid Email";
@@ -133,7 +139,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                              LayoutManager.widthNHeight0(context, 1) * 0.07,
+                          LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: false,
@@ -144,7 +150,7 @@ class _SingUpState extends State<SingUp> {
                                 return 'Phone must not be empty ';
                               }
                               bool phoneExp =
-                                  RegExp(r'^\d{10}$').hasMatch(value);
+                              RegExp(r'^\d{10}$').hasMatch(value);
 
                               if (!phoneExp) {
                                 return 'Phone number is not valid ';
@@ -155,7 +161,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                              LayoutManager.widthNHeight0(context, 1) * 0.07,
+                          LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: true,
@@ -213,7 +219,10 @@ class _SingUpState extends State<SingUp> {
                       Text(
                         "Already a member?",
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * .033,
+                            fontSize: MediaQuery
+                                .of(context)
+                                .size
+                                .width * .033,
                             fontFamily: ThemeManager.fontFamily,
                             color: Colors.grey[600]),
                       ),
@@ -225,7 +234,10 @@ class _SingUpState extends State<SingUp> {
                             "Sign in",
                             style: TextStyle(
                                 fontSize:
-                                    MediaQuery.of(context).size.width * .033,
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * .033,
                                 fontFamily: ThemeManager.fontFamily,
                                 color: Colors.grey[700]),
                           ))
@@ -251,12 +263,16 @@ class _SingUpState extends State<SingUp> {
 
       if (user != null) {
         print("User is successfully created");
+        Position p = await currentLocation.getCurrentLocation();
 
         final user = UserModel(
-          name: signUpController.firstName.text,
-          email: signUpController.email.text,
-          password: signUpController.password.text,
-          phone: signUpController.phone.text,
+            name: signUpController.firstName.text,
+            email: signUpController.email.text,
+            password: signUpController.password.text,
+            phone: signUpController.phone.text,
+            longitude: p.longitude,
+            latitude: p.latitude
+
         );
         final userRepo = Get.put(UserService());
         await userRepo.addUser(user);
@@ -318,5 +334,5 @@ class _SingUpState extends State<SingUp> {
     }
   }
 
-  
+
 }

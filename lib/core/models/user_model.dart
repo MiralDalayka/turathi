@@ -1,3 +1,13 @@
+import 'package:uuid/uuid.dart';
+
+import '../../utils/shared.dart';
+
+
+enum UsersRole{
+  user,
+  expert
+}
+
 class UserModel {
   String? userId;
   String? name;
@@ -13,12 +23,16 @@ class UserModel {
       {this.userId,
       required this.name,
       required this.password,
-      this.email,
-      this.phone,
-      this.role,
-      this.longitude,
-      this.latitude,
-      this.certificate});
+        required this.email,
+        required this.phone,
+        required this.longitude,
+        required this.latitude,
+      this.certificate}){
+    role=(UsersRole.user).toString();
+    userId =uuid.v4();
+
+
+  }
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
