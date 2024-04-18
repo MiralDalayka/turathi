@@ -151,22 +151,16 @@ class _MapScreenState extends State<MapScreenLocation> {
     final double destinationLongitude = a; //-118.2437;
     // final String url =
     //     "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
-    // if (await canLaunch(url)) {
-    //   await launch(url);
+    var url =
+    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=31.900762,35.890933&destination=32.49517491030077,35.991236423865466");
+    await launchUrl(url);
+
+    // if (await canLaunchUrl(url)) {
+    //   await launchUrl(url);
     // } else {
     //   ///////////////
     //   throw 'Could not launch $url';
     // }
-    var url =
-    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=31.900762,35.890933&destination=32.49517491030077,35.991236423865466");
-
-    var response = await http.get(url);
-    // response.statusCode --> 200
-
-    if (response.statusCode == 200) {
-      // return response.body;
-    }
-    // return "ERROR";
   }
 
 //   void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {

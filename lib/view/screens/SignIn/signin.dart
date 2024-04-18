@@ -18,6 +18,7 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
 
+  final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
 
   @override
