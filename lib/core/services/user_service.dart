@@ -63,7 +63,7 @@ class UserService {
 
   //get user name after sign up
 
-  Future<String?> signIn(String email, String pass) async {
+  Future<String> signIn(String email, String pass) async {
     bool mounted = false;
     try {
       await _auth.signinwithemailandpassword(email, pass);
@@ -86,6 +86,7 @@ class UserService {
     UserModel tempModel;
       data["name"] = userData.docs[0].get("name");
       tempModel = UserModel.fromJson(data);
+    return "Done";
 
     }
   }
