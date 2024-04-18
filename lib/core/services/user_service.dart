@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "users";
-
   Future<String> addUser(UserModel model) async {
     _fireStore
         .collection(_collectionName)
@@ -69,4 +69,17 @@ class UserService {
     });
     return model;
   }
+
+
+   FirebaseAuth auth = FirebaseAuth.instance;
+  signOut() async {
+    await auth.signOut();
+  }
+
+
+
+
+
+
+
 }
