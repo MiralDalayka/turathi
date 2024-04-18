@@ -268,7 +268,7 @@ class _SingUpState extends State<SingUp> {
         final user = UserModel(
             name: signUpController.firstName.text,
             email: signUpController.email.text,
-            password: signUpController.password.text,
+            pass: signUpController.password.text,
             phone: signUpController.phone.text,
             longitude: p.longitude,
             latitude: p.latitude
