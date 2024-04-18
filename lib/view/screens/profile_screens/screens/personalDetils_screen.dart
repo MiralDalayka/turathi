@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/custom_text_form.dart';
 
@@ -154,7 +155,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.firstName,
-                      str: name,
+                      str: user.name.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -178,7 +179,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.secondName,
-                      str: role,
+                      str:  user.role.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -202,7 +203,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.email,
-                      str: emailAddress,
+                      str:  user.email.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -226,7 +227,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       width: double.infinity,
                       passToggle: false,
                       passController: signUpController.phone,
-                      str: phoneNu,
+                      str:   user.phone.toString(),
                     ),
                   ],
                 ),

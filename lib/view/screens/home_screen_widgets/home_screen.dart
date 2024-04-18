@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi ${user.name??"Guest"}",
+                "Hi ${user.name??"Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
