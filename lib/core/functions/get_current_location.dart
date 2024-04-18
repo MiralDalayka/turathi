@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:turathi/utils/shared.dart';
 
 class GetCurrentLocation {
   late Position _currentLocation;
 
-  Future<Position> getCurrentLocation() async {
-    await Permission.locationWhenInUse.request();
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      throw 'Location services are disabled.';
-    }
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        throw 'Location permission denied.';
+  Future<Position?> getCurrentLocation() async {
+    try {
+      // req permission to access the device's location
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        // If permission is denied then return null
+        return null;
       }
+
+
+      return await Geolocator.getCurrentPosition( //this is to get user current position
+        desiredAccuracy: LocationAccuracy.high,
+      );
+    } catch (e) {
+      print('Error getting location: $e');
+      return null;
     }
-    if (permission == LocationPermission.deniedForever) {
-      throw 'Location permission permanently denied.';
-    }
-    return await Geolocator.getCurrentPosition();
   }
 
   Future<void> performNearbySearch(BuildContext context) async {

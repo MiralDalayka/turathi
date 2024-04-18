@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
+import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
@@ -16,7 +17,6 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 
-import '../../../core/functions/get_current_location.dart';
 
 class SingUp extends StatefulWidget {
   const SingUp({super.key});
@@ -193,14 +193,14 @@ class _SingUpState extends State<SingUp> {
                         onTap: () async {
                           if (signUpController.formKey.currentState!
                               .validate()) {
-                            Position p = await currentLocation.getCurrentLocation();
+                            Position? p = await currentLocation.getCurrentLocation();
                             final user = UserModel(
                                 name: signUpController.firstName.text,
                                 email: signUpController.email.text,
                                 pass: signUpController.password.text,
                                 phone: signUpController.phone.text,
-                                longitude: p.longitude,
-                                latitude: p.latitude
+                                longitude: p?.longitude,
+                                latitude: p?.latitude
 
                             );
                             _service.addUser(user);

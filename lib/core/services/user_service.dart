@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 
@@ -94,4 +93,6 @@ class UserService {
     });
     return model;
   }
+
+  //get user name after sign up
 }

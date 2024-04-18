@@ -18,33 +18,33 @@ class _ProfileScreen extends State<ProfileScreen> {
   String name = "ghost";
 
   Future<void> fetchUserData() async {
-    String currentEmail = FirebaseAuth.instance.currentUser?.email ?? '';
-
-    try {
-      QuerySnapshot<Object?> querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: currentEmail)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
-
-        Map<String, dynamic>? userData =
-            userSnapshot.data() as Map<String, dynamic>?;
-
-        if (userData != null) {
-          setState(() {
-            name = userData['name'] ?? "";
-          });
-        } else {
-          print('User data is null.');
-        }
-      } else {
-        print('No user found with the current email.....');
-      }
-    } catch (error) {
-      print('Error querying user document: $error');
-    }
+    String currentEmail = FirebaseAuth.instance.currentUser!.uid ?? '';
+//BACK
+    // try {
+    //
+    //   final querySnapshot = await FirebaseFirestore.instance
+    //       .collection('users').doc(currentEmail).get();
+    //
+    //
+    //   if (querySnapshot..isNotEmpty) {
+    //     DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
+    //
+    //     Map<String, dynamic>? userData =
+    //         userSnapshot.data() as Map<String, dynamic>?;
+    //
+    //     if (userData != null) {
+    //       setState(() {
+    //         name = userData['name'] ?? "";
+    //       });
+    //     } else {
+    //       print('User data is null.');
+    //     }
+    //   } else {
+    //     print('No user found with the current email.....');
+    //   }
+    // } catch (error) {
+    //   print('Error querying user document: $error');
+    // }
   }
 
   @override
