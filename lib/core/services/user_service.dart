@@ -15,13 +15,12 @@ class UserService {
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
     try {
-      /////////////////////////////////newwww
       await _auth.signupwithemailandpassword(
           model.email.toString(), model.password.toString());
     } catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
-        mounted=true;
+        mounted = true;
         String errorMessage = "An error occurred during sign up.";
 
         if (e.code == 'email-already-in-use') {
@@ -44,39 +43,6 @@ class UserService {
     return "Done";
   }
 
-  // Future<UserList> getUsers() async {
-  //   QuerySnapshot usersData =
-  //       await _fireStore.collection(_collectionName).get().whenComplete(() {
-  //     log("getPlaces done");
-  //   }).catchError((error) {
-  //     log(error.toString());
-  //   });
-  //   //map to store docs data in
-  //   Map<String, dynamic> data = {};
-  //   //temp model
-  //   UserModel tempModel;
-  //   //temp list
-  //   UserList userList = UserList(users: []);
-  //
-  //   for (var item in usersData.docs) {
-  //     data["id"] = item.get("id");
-  //     data["name"] = item.get("name");
-  //     data["email"] = item.get("email");
-  //     data["password"] = item.get("password");
-  //     data["role"] = item.get("role");
-  //     data["longitude"] = item.get("longitude");
-  //     data["latitude"] = item.get("latitude");
-  //     data["certificate"] = item.get("certificate");
-  //     data["phone"] = item.get("phone");
-  //
-  //     tempModel = UserModel.fromJson(data);
-  //
-  //     userList.users.add(tempModel);
-  //   }
-  //   log(userList.users[0].toString());
-  //   return userList;
-  // }
-
   Future<UserModel> updateUser(UserModel model) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
@@ -96,4 +62,31 @@ class UserService {
   }
 
   //get user name after sign up
-}
+
+  Future<String?> signIn(String email, String pass) async {
+    bool mounted = false;
+    try {
+      await _auth.signinwithemailandpassword(email, pass);
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        log("Error occurred: $e");
+        mounted = true;
+        String errorMessage = "An error occurred during sign in";
+        if (mounted) {
+          return errorMessage;
+        }
+      }
+    }
+    QuerySnapshot placeData = await _fireStore
+        .collection(_collectionName)
+        .where('email', isEqualTo: email)
+        .get();
+    Map<String, dynamic> data = {};
+
+    UserModel tempModel;
+      data["name"] = placeData.docs[0].get("name");
+      tempModel = UserModel.fromJson(data);
+
+    }
+  }
+
