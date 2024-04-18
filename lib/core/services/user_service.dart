@@ -15,7 +15,6 @@ class UserService {
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
     try {
-      /////////////////////////////////newwww
       await _auth.signupwithemailandpassword(
           model.email.toString(), model.password.toString());
     } catch (e) {
