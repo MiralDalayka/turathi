@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
@@ -13,11 +14,15 @@ class EventService {
   final String _collectionName = "events";
   final FilesStorageService _filesStorageService = FilesStorageService();
 
-  Future<String> addEvent(EventModel model) async {
+  Future<String> addEvent(EventModel model, List<XFile> images) async {
     _fireStore
         .collection(_collectionName)
         .add(model.toJson())
-        .whenComplete(() => "event added successfully")
+        .whenComplete(() async {
+      _filesStorageService.uploadImages(
+          imageType: ImageType.eventImages.name,folderName: model.name!, pickedImages: images!);
+
+    })
         .catchError((error) {
       log(error.toString());
       return "Failed";
@@ -28,7 +33,7 @@ class EventService {
   Future<EventList> getEvents() async {
     QuerySnapshot eventsData =
     await _fireStore.collection(_collectionName).get().whenComplete(() {
-      log("events done");
+
     }).catchError((error) {
       log(error.toString());
     });

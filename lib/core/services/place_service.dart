@@ -21,7 +21,7 @@ class PlaceService {
   Future<String> addPlace(PlaceModel model, List<XFile> images) async {
     _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
       _filesStorageService.uploadImages(
-          folderName: model.title!, pickedImages: images!);
+          imageType: ImageType.placeImages.name,folderName: model.title!, pickedImages: images!);
 
 
     }).catchError((error) {

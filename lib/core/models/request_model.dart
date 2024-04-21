@@ -1,10 +1,16 @@
+import '../../utils/shared.dart';
+
 class RequestModel {
   String? requestId;
   String? status;
   String? certificate;
   String? userId;
 
-  RequestModel({this.requestId, this.status, this.certificate, this.userId});
+  RequestModel({ required this.status, this.certificate})
+  {
+    requestId = uuid.v4();
+    userId = user.id;
+  }
 
   RequestModel.fromJson(Map<String, dynamic> json) {
     requestId = json['requestId'];

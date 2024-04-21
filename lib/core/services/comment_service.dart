@@ -29,7 +29,7 @@ class CommentService {
         .where('placeId', isEqualTo: placeId)
         .get()
         .whenComplete(() {
-      log("events done");
+
     }).catchError((error) {
       log(error.toString());
     });
@@ -43,7 +43,7 @@ class CommentService {
         .where('questionId', isEqualTo: questionId)
         .get()
         .whenComplete(() {
-      log("events done");
+
     }).catchError((error) {
       log(error.toString());
     });

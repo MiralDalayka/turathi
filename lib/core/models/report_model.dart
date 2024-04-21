@@ -1,9 +1,15 @@
+import 'package:turathi/utils/shared.dart';
+
 class ReportModel {
   String? reportId;
   String? reasons;
   String? userId;
 
-  ReportModel({this.reportId, this.reasons, this.userId});
+  ReportModel({required this.reasons})
+  {
+    reportId = uuid.v4();
+    userId = user.id;
+  }
 
   ReportModel.fromJson(Map<String, dynamic> json) {
     reportId = json['reportId'];

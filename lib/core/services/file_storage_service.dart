@@ -6,10 +6,10 @@ import 'package:image_picker/image_picker.dart';
 
 
 class FilesStorageService {
-  // final FirebaseStorage _storage = FirebaseStorage.instance;
-  //
+
    final FirebaseStorage _storageInstance =
         FirebaseStorage.instanceFor(bucket: 'turathi-96897.appspot.com');
+
   Future<String> addFile(XFile xFile) async {
     File file = File(xFile.path);
     var fileName = basename(xFile.path);
@@ -26,7 +26,7 @@ class FilesStorageService {
 
 
   Future<void> uploadImages(
-      {required String folderName, required List<XFile> pickedImages}) async {
+      {required String imageType,required String folderName, required List<XFile> pickedImages}) async {
 
 
     if (pickedImages != null) {
@@ -34,7 +34,7 @@ class FilesStorageService {
         XFile file = XFile(image.path);
         String fileName = basename(image.path);
         Reference storageReference =
-            _storageInstance.ref().child('placesImages/$folderName/$fileName');
+            _storageInstance.ref().child('$imageType/$folderName/$fileName');
         await storageReference.putFile(File(file.path));
       }
     } else {
