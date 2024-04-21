@@ -38,7 +38,7 @@ class PlaceModel {
       {required this.title,
       required this.description,
       required this.address,
-      required this.images,
+       this.images,
       required this.longitude,
       required this.latitude}) {
     id = uuid.v4();

@@ -24,16 +24,14 @@ class FilesStorageService {
 
 
 
-  Future<void> uploadImages(folderName) async {
-    final picker = ImagePicker();
-    final pickedImages = await picker.pickMultiImage();
+  Future<void> uploadImages(
+      {required String folderName, required List<XFile> pickedImages}) async {
+
 
     if (pickedImages != null) {
       for (var image in pickedImages) {
         XFile file = XFile(image.path);
-        String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-        //or use this
-        // String fileName = file.path.split('/').last;
+        String fileName = basename(image.path);
         Reference storageReference =
             _storageInstance.ref().child('placesImages/$folderName/$fileName');
         await storageReference.putFile(File(file.path));

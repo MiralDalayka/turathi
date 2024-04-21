@@ -6,6 +6,7 @@ import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 
+import '../../../core/functions/picking_files.dart';
 import '../../../core/services/file_storage_service.dart';
 import '../../../core/services/place_service.dart';
 import '../../../utils/theme_manager.dart';
@@ -31,9 +32,9 @@ class _AddNewPlaceState extends State<AddNewPlace> {
 
   @override
   Widget build(BuildContext context) {
-    FilesStorageService filesStorageService = FilesStorageService();
-    List<double>? data;
+    List<double> data;
     PlaceService service = PlaceService();
+    List<XFile>? images;
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -86,7 +87,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   children: [
                     ElevatedButton(
                       onPressed: () async {
-                        await filesStorageService.uploadImages(name.text);
+                        images = await pickImages();
                       },
                       style: ThemeManager.buttonStyle,
                       child: Text(
@@ -130,19 +131,18 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    final temp = await filesStorageService.getPlaceImages(
-                        folderName: name.text);
-                    if (formKey.currentState!.validate()) {
-                      service.addPlace(PlaceModel(
-                          title: name.text,
-                          description: disc.text,
-                          address: address.text,
-                          latitude: 10,
-                          longitude: 10,
-                          images: temp));
+                    if (formKey.currentState!.validate() && images != null) {
+                      service.addPlace(
+                          PlaceModel(
+                            title: name.text,
+                            description: disc.text,
+                            address: address.text,
+                            latitude: 10,
+                            longitude: 10,
+                          ),
+                          images!);
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text("Place Successfully")));
+                          const SnackBar(content: Text("Place Successfully")));
                     } else {
                       log('add place failed');
                     }

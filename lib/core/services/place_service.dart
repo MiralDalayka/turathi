@@ -2,7 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/place_model.dart';
+
+import 'file_storage_service.dart';
 
 class PlaceService {
   //create instance
@@ -11,13 +14,16 @@ class PlaceService {
 
   //add -get - update visibility,modify info
 
-  Future<String> addPlace(PlaceModel model) async {
-    _fireStore
-        .collection(_collectionName)
-        .add(model.toJson())
-        .whenComplete(() => "Done")
-        .catchError((error) {
-      log(error.toString()+"%%%");
+  Future<String> addPlace(PlaceModel model, List<XFile> images) async {
+    _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
+      FilesStorageService filesStorageService = FilesStorageService();
+      filesStorageService.uploadImages(
+          folderName: model.title!, pickedImages: images!);
+      model.images =
+          await filesStorageService.getPlaceImages(folderName: model.title!);
+      updatePlace(model);
+    }).catchError((error) {
+      log("$error%%%");
       return "Failed";
     });
     return "Done";
@@ -48,7 +54,7 @@ class PlaceService {
     return placeList;
   }
 
- Future<PlaceModel> updatePlace(PlaceModel placeModel) async {
+  Future<PlaceModel> updatePlace(PlaceModel placeModel) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: placeModel.id)
@@ -66,4 +72,3 @@ class PlaceService {
     return placeModel;
   }
 }
-
