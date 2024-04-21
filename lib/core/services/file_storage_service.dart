@@ -14,7 +14,7 @@ class FilesStorageService {
     // File file = File(xFile.path);
     var fileName = basename(file.path);
     Reference reference = _storageInstance.ref().child("certificateFiles/$fileName");
-
+/////
     UploadTask uploadTask = reference.putFile(file);
 
     String url = await uploadTask.then((res) {
