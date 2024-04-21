@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:turathi/core/models/comment_model.dart';
 
 import '../../utils/shared.dart';
 import '../functions/calculate_distanceInKm.dart';
@@ -23,7 +24,7 @@ class PlaceModel {
   String? address;
   String? state;
 
-  List<String>? commentsPlace;
+  List<CommentModel>? commentsPlace;
   List<String>? images;
   int? like;
 

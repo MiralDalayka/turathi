@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/services/comment_service.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
 class PlaceService {
@@ -10,6 +11,7 @@ class PlaceService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "places";
   final FilesStorageService _filesStorageService = FilesStorageService();
+  final CommentService _commentService = CommentService();
   //add -get - update visibility,modify info
 
   Future<String> addPlace(PlaceModel model) async {
@@ -52,6 +54,8 @@ class PlaceService {
       data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
       data["images"] = _filesStorageService.getPlaceImages(folderName: item.get("title"));
+      // or when place is selected
+      data["commentsPlace"] = _commentService.getPlaceComments(item.get("id"));
       tempModel = PlaceModel.fromJson(data);
 
       placeList.places.add(tempModel);
