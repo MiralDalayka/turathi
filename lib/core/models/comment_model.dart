@@ -1,3 +1,6 @@
+import 'package:turathi/core/models/user_model.dart';
+import 'package:turathi/utils/shared.dart';
+
 class CommentModel {
   String? id;
   DateTime? date;
@@ -8,13 +11,16 @@ class CommentModel {
   String? questionId;
 
   CommentModel(
-      {this.id,
-        this.date,
-        this.commentTxt,
-        this.writerName,
-        this.writtenByExpert,
+      {
+        required this.commentTxt,
         this.placeId,
-        this.questionId});
+        this.questionId}){
+          id=uuid.v4();
+          date = DateTime.now();
+          writerName = user.name;
+          writtenByExpert = user.role == UsersRole.expert ? 1 : 0;
+
+  }
 
   CommentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
