@@ -1,3 +1,4 @@
+import 'package:turathi/core/models/user_model.dart';
 import 'package:uuid/uuid.dart';
 
 import '../core/functions/get_current_location.dart';
@@ -18,4 +19,6 @@ double addEventLocatonLat=0;
 double addEventLocatonLog=0;
 
 Uuid uuid = const Uuid();
+
+UserModel user = UserModel.empty() ;
 

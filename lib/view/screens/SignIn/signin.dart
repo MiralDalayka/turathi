@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
+import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
@@ -17,7 +18,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
-
+UserService _service=UserService();
   final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
 
@@ -155,7 +156,8 @@ class _LogInState extends State<LogIn> {
                               if (textController.formField.currentState!
                                   .validate()) {
                                 _service.signIn(textController.controllerEmail.text,
-                                    textController.controllerPass.text);
+                                    textController.controllerPass.text).whenComplete(() =>   Navigator.of(context)
+                                    .pushReplacementNamed(bottomNavRoute) );
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
@@ -191,10 +193,13 @@ class _LogInState extends State<LogIn> {
                                     if (result == null) {
                                       print('error signing in');
                                     } else {
+
                                       print('sign in');
                                       print(result);
                                       Navigator.of(context)
                                           .pushReplacementNamed(bottomNavRoute);
+
+                          
                                     }
                                   },
                                   child: Text(

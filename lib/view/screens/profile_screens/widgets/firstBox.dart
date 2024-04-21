@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -15,11 +16,6 @@ class firstBox extends StatefulWidget {
 }
 
 class FirstBox extends State<firstBox> {
-  FirebaseAuth auth = FirebaseAuth.instance;
-  signOut() async {
-    await auth.signOut();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,12 +32,13 @@ class FirstBox extends State<firstBox> {
             children: [
               InkWell(
                 onTap: () {
-                  if (FirebaseAuth.instance.currentUser!.isAnonymous) {
+                  final currentUser = UserService().auth.currentUser;
+                  if (currentUser != null && currentUser.isAnonymous) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          backgroundColor:ThemeManager.primary,
+                          backgroundColor: ThemeManager.primary,
                           content: Text(
                             'You Have To Sign In First \nTo See Your Personal Details!',
                             style: TextStyle(
@@ -59,7 +56,7 @@ class FirstBox extends State<firstBox> {
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
-                                    signOut();
+                                    UserService().signOut();
                                     log("sign out");
 
                                     Navigator.of(context).pushNamed(signIn);
@@ -83,6 +80,7 @@ class FirstBox extends State<firstBox> {
                       },
                     );
                   } else {
+                    log("&&&&&&&&&&&&&");
                     Navigator.of(context).pushNamed(personalDetilsScreen);
                   }
                 },

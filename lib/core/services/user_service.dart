@@ -4,14 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 
+import '../../utils/shared.dart';
 import 'firebase_auth.dart';
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final FirebaseAuthService _auth = FirebaseAuthService();
+    FirebaseAuth auth = FirebaseAuth.instance;
 
   final String _collectionName = "users";
-
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
     try {
@@ -66,7 +67,7 @@ class UserService {
   Future<String> signIn(String email, String pass) async {
     bool mounted = false;
     try {
-      await _auth.signinwithemailandpassword(email, pass);
+      await _auth.signinwithemailandpassword(email, pass).whenComplete(() => log("SIGN IN DONE"));
     } catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
@@ -77,17 +78,28 @@ class UserService {
         }
       }
     }
-    QuerySnapshot userData = await _fireStore
+    QuerySnapshot placeData = await _fireStore
         .collection(_collectionName)
         .where('email', isEqualTo: email)
         .get();
     Map<String, dynamic> data = {};
 
     UserModel tempModel;
-      data["name"] = userData.docs[0].get("name");
+      data["name"] = placeData.docs[0].get("name");
+      // data["email"] = placeData.docs[0].get("email");
       tempModel = UserModel.fromJson(data);
-    return "Done";
+    user = tempModel;
 
-    }
+
+    return "*********";
+
+    } 
+    
+    signOut() async {
+    await auth.signOut();
+  }
+    
+
+
   }
 

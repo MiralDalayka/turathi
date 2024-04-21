@@ -9,6 +9,7 @@ import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_s
 import '../../../core/models/event_model.dart';
 import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
+import '../../../utils/shared.dart';
 import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
 
@@ -23,43 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<EventModel>? eventsList;
 
   String _greeting = '';
-  String name = "ghost";
-
-  Future<void> fetchUserData() async {
-    String currentEmail = FirebaseAuth.instance.currentUser?.email ?? '';
-
-    try {
-      QuerySnapshot<Object?> querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: currentEmail)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
-
-        Map<String, dynamic>? userData =
-            userSnapshot.data() as Map<String, dynamic>?;
-
-        if (userData != null) {
-          setState(() {
-            name = userData['name'] ?? "";
-          });
-        } else {
-          print('User data is null.');
-        }
-      } else {
-        print('No user found with the current email.....');
-      }
-    } catch (error) {
-      print('Error querying user document: $error');
-    }
-  }
 
   @override
   void initState() {
     super.initState();
     _setGreeting();
-    fetchUserData();
   }
 
   void _setGreeting() {
@@ -84,9 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //change it
 
     eventsList = events;
-    if (mounted) {
-      fetchUserData();
-    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
@@ -111,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi ${name.toUpperCase()}",
+                "Hi ${user.name??"Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,

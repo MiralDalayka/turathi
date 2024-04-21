@@ -204,6 +204,8 @@ class _SingUpState extends State<SingUp> {
 
                             );
                             _service.addUser(user);
+                            //move 
+                                   Navigator.of(context).pushReplacementNamed(bottomNavRoute);
                           }
                         },
                         child: Container(
@@ -213,7 +215,7 @@ class _SingUpState extends State<SingUp> {
                               borderRadius: BorderRadius.circular(8)),
                           child: Center(
                             child: Text(
-                              "Sign In",
+                              "Sign Up",
                               style: TextStyle(
                                   color: ThemeManager.second,
                                   fontSize: 20,
@@ -243,7 +245,7 @@ class _SingUpState extends State<SingUp> {
                             Navigator.of(context).pushReplacementNamed(signIn);
                           },
                           child: Text(
-                            "Sign in",
+                            "Sign In",
                             style: TextStyle(
                                 fontSize:
                                 MediaQuery

@@ -152,7 +152,7 @@ class _MapScreenState extends State<MapScreenLocation> {
     // final String url =
     //     "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
     var url =
-    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=31.900762,35.890933&destination=32.49517491030077,35.991236423865466");
+    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
     await launchUrl(url);
 
     // if (await canLaunchUrl(url)) {
