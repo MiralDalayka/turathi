@@ -78,7 +78,17 @@ class UserService {
         }
       }
     }
-    //function get user by email
+
+    user = await getUserByEmail(email);
+    return "Done";
+
+    } 
+    
+    signOut() async {
+    await auth.signOut();
+  }
+
+  Future<UserModel> getUserByEmail(String email) async{
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('email', isEqualTo: email)
@@ -86,21 +96,21 @@ class UserService {
     Map<String, dynamic> data = {};
 
     UserModel tempModel;
-      data["name"] = userData.docs[0].get("name");
-      data["id"] = userData.docs[0].get("id");
-      tempModel = UserModel.fromJson(data);
-    user = tempModel;
+    data["id"] = userData.docs[0].get("id");
+    data["name"] = userData.docs[0].get("name");
+    data["role"] = userData.docs[0].get("role");
+    data["longitude"] = userData.docs[0].get("longitude");
+    data["latitude"] = userData.docs[0].get("latitude");
+    data["email"] = userData.docs[0].get("email");
+    data["phone"] = userData.docs[0].get("phone");
 
 
-    return "*********";
+    tempModel = UserModel.fromJson(data);
 
-    } 
-    
-    signOut() async {
-    await auth.signOut();
+    return tempModel;
   }
-    
 
 
-  }
+
+}
 

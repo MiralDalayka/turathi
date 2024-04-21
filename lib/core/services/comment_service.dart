@@ -33,23 +33,8 @@ class CommentService {
     }).catchError((error) {
       log(error.toString());
     });
-    Map<String, dynamic> data = {};
-    CommentModel tempModel;
-    CommentList commentList = CommentList(comments: []);
-    for (var item in commentsData.docs) {
-      data["id"] = item.get("id");
-      data["date"] = item.get("date");
-      data["commentTxt"] = item.get("commentTxt");
-      data["writerName"] = item.get("writerName");
-      data["writtenByExpert"] = item.get("writtenByExpert");
-      data["placeId"] = item.get("placeId");
-      data["questionId"] = item.get("questionId");
+    return _getComments(commentsData);
 
-      tempModel = CommentModel.fromJson(data);
-      commentList.comments.add(tempModel);
-    }
-
-    return commentList;
   }
 
   Future<CommentList> getQuestionComments(String questionId) async {
@@ -62,6 +47,11 @@ class CommentService {
     }).catchError((error) {
       log(error.toString());
     });
+
+    return _getComments(commentsData);
+  }
+
+  Future<CommentList> _getComments(QuerySnapshot commentsData) async{
     Map<String, dynamic> data = {};
     CommentModel tempModel;
     CommentList commentList = CommentList(comments: []);
@@ -77,7 +67,6 @@ class CommentService {
       tempModel = CommentModel.fromJson(data);
       commentList.comments.add(tempModel);
     }
-
     return commentList;
   }
 }
