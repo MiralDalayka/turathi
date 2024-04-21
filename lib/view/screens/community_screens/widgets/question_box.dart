@@ -30,11 +30,11 @@ class QuestionBox extends StatelessWidget {
                   flex: 1,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(
-                      question.imageUrl!,
-                      fit: BoxFit.cover,
-                      height: 150,
-                    ),
+                    // child: Image.network(
+                    //   question.imageUrl!,
+                    //   fit: BoxFit.cover,
+                    //   height: 150,
+                    // ),
                   )),
               const SizedBox(
                 width: 10,
@@ -81,7 +81,7 @@ class QuestionBox extends StatelessWidget {
                                 LayoutManager.widthNHeight0(context, 1) * 0.05,
                           ),
                           Text(
-                            question.writer!,
+                            question.writerName!,
                             style: TextStyle(
                               fontFamily: 'KohSantepheap',
                               color: ThemeManager.primary,

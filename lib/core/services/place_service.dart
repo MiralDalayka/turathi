@@ -7,6 +7,7 @@ import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/comment_service.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
+import '../../utils/shared.dart';
 import 'file_storage_service.dart';
 
 class PlaceService {
@@ -14,7 +15,6 @@ class PlaceService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "places";
   final FilesStorageService _filesStorageService = FilesStorageService();
-  final CommentService _commentService = CommentService();
 
   //add -get - update visibility,modify info
 
@@ -61,7 +61,9 @@ class PlaceService {
 
       tempModel = PlaceModel.fromJson(data);
       tempModel.images =
-      await _filesStorageService.getPlaceImages(folderName: tempModel.title!);
+      await _filesStorageService.getImages(imageType:ImageType.placeImages.name,
+          folderName: tempModel.title!);
+
       placeList.places.add(tempModel);
     }
     log(placeList.places[0].toString());

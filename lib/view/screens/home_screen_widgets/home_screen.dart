@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     //change it
 
-    eventsList = events;
+   // eventsList = events;
 
     return Scaffold(
       appBar: AppBar(

@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class FilesStorageService {
   // final FirebaseStorage _storage = FirebaseStorage.instance;
   //
@@ -41,13 +42,13 @@ class FilesStorageService {
     }
   }
 
-  Future<List<String>> getPlaceImages({required String folderName}) async {
+  Future<List<String>> getImages({required String imageType,required String folderName}) async {
     List<String> fileUrls = [];
 
     try {
       // Get reference to the folder
       Reference folderRef =
-          _storageInstance.ref().child('placesImages/$folderName');
+          _storageInstance.ref().child('$imageType/$folderName');
 
       ListResult result = await folderRef.listAll();
 

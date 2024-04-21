@@ -17,7 +17,13 @@ double addPlaceLocatonLong=0;
 double addEventLocatonLat=0;
 
 double addEventLocatonLog=0;
+enum ImageType {
+  placeImages,
+  questionImages,
+  eventImages,
 
+
+}
 Uuid uuid = const Uuid();
 
 UserModel user = UserModel.empty() ;

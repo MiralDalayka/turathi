@@ -54,60 +54,21 @@ class _CommunityScreenState extends State<CommunityScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: LayoutManager.widthNHeight0(context, 0),
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return QuestionBox(
-                  question: questions[index],
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                    height: 5,
-                  ),
-              itemCount: questions.length),
-        ),
+        // child: SizedBox(
+        //   height: LayoutManager.widthNHeight0(context, 0),
+        //   child: ListView.separated(
+        //       itemBuilder: (context, index) {
+        //         return QuestionBox(
+        //           question: questions[index],
+        //         );
+        //       },
+        //       separatorBuilder: (context, index) => const SizedBox(
+        //             height: 5,
+        //           ),
+        //       itemCount: questions.length),
+        // ),
       ),
     );
   }
 }
 
-var txt =
-    "Nunc dictum facilisis lectus, ab cursus tellus vulputate id. In neque lectus, congue dictum accumsan eget, congue venenatis leo. Vestibulum porta quis risus vitae finibus.";
-List<QuestionModel> questions = [
-  QuestionModel(
-      imageUrl:
-          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
-      title: 'Title',
-      writer: 'Alla',
-      id: '1',
-      questionTxt: txt),
-  QuestionModel(
-      imageUrl:
-          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
-      title: 'Title',
-      writer: 'Alla',
-      id: '1',
-      questionTxt: txt),
-  QuestionModel(
-      imageUrl:
-          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
-      title: 'Title',
-      writer: 'Alla',
-      id: '1',
-      questionTxt: txt),
-  QuestionModel(
-      imageUrl:
-          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
-      title: 'Title',
-      writer: 'Alla',
-      id: '1',
-      questionTxt: txt),
-  QuestionModel(
-      imageUrl:
-          'https://media.istockphoto.com/id/453238697/photo/vintage-pocket-watch.jpg?s=612x612&w=0&k=20&c=siL4gXxZilIMv2aAeDFsjJAtI5FZz-sazMK4ckWA7oY=',
-      title: 'Title',
-      writer: 'Alla',
-      id: '1',
-      questionTxt: txt),
-];

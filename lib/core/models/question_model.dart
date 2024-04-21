@@ -1,28 +1,34 @@
+import 'package:turathi/utils/shared.dart';
+
 class QuestionModel {
   String? id;
-  String? imageUrl;
+  List<String>? images;
   String? title;
   String? questionTxt;
-  String? writer;
+  String? writerName;
 
   QuestionModel(
-      {this.id, this.title, this.questionTxt, this.writer, this.imageUrl});
+      {  required this.title, required this.questionTxt}){
+    id=uuid.v4();
+    writerName = user.name;
+
+  }
 
   QuestionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    imageUrl = json['imageUrl'];
+
     title = json['title'];
     questionTxt = json['questionTxt'];
-    writer = json['writer'];
+    writerName = json['writer'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['imageUrl'] = this.imageUrl;
+
     data['title'] = this.title;
     data['questionTxt'] = this.questionTxt;
-    data['writer'] = this.writer;
+    data['writer'] = this.writerName;
     return data;
   }
 }

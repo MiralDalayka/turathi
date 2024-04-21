@@ -2,13 +2,16 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/core/models/event_model.dart';
+import 'package:turathi/core/services/file_storage_service.dart';
+
+import '../../utils/shared.dart';
 
 
 class EventService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "events";
-
+  final FilesStorageService _filesStorageService = FilesStorageService();
 
   Future<String> addEvent(EventModel model) async {
     _fireStore
@@ -44,6 +47,9 @@ class EventService {
       data["creatorName"] = item.get("creatorName");
 
       tempModel = EventModel.fromJson(data);
+      tempModel.images =
+      await _filesStorageService.getImages(imageType:ImageType.eventImages.name,
+          folderName: tempModel.name!);
       eventList.events.add(tempModel);
     }
 

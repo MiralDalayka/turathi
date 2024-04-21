@@ -2,12 +2,15 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/core/models/question_model.dart';
+import 'package:turathi/core/services/file_storage_service.dart';
+import 'package:turathi/utils/shared.dart';
 
 
 class QuestionService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "questions";
+  final FilesStorageService _filesStorageService = FilesStorageService();
 
 
   Future<String> addQuestion(QuestionModel model) async {
@@ -34,13 +37,17 @@ class QuestionService {
     QuestionList questionList = QuestionList( questions: []);
     for (var item in questionsData.docs) {
       data["id"] = item.get("id");
-      data["imageUrl"] = item.get("imageUrl");
+
       data["title"] = item.get("title");
       data["questionTxt"] = item.get("questionTxt");
       data["writer"] = item.get("writer");
 
 
       tempModel = QuestionModel.fromJson(data);
+      tempModel.images =
+      await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
+          folderName: tempModel.title!);
+
       questionList.questions.add(tempModel);
     }
 
