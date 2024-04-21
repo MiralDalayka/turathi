@@ -3,12 +3,13 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/services/file_storage_service.dart';
 
 class PlaceService {
   //create instance
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "places";
-
+  final FilesStorageService _filesStorageService = FilesStorageService();
   //add -get - update visibility,modify info
 
   Future<String> addPlace(PlaceModel model) async {
@@ -39,7 +40,18 @@ class PlaceService {
     // log(placesData.docs[0].get('id').toString());
     for (var item in placesData.docs) {
       data["id"] = item.get("id");
-      data["distance"] = item.get("distance"); //.....
+      data["userID"] = item.get("userID");
+      data["state"] = item.get("state");
+      data["address"] = item.get("address");
+      data["status"] = item.get("status");
+      data["description"] = item.get("description");
+      data["title"] = item.get("title");
+      data["latitude"] = item.get("latitude");
+      data["longitude"] = item.get("longitude");
+      data["isVisible"] = item.get("isVisible");
+      data["disLike"] = item.get("disLike");
+      data["like"] = item.get("like");
+      data["images"] = _filesStorageService.getPlaceImages(folderName: item.get("title"));
       tempModel = PlaceModel.fromJson(data);
 
       placeList.places.add(tempModel);
