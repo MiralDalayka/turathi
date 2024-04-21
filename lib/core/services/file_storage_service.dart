@@ -43,7 +43,7 @@ class FilesStorageService {
     }
   }
 
-  Future<List<String>> getPlaceImages(String folderName) async {
+  Future<List<String>> getPlaceImages({required String folderName}) async {
     List<String> fileUrls = [];
 
     try {

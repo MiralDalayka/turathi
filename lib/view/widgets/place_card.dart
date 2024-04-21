@@ -28,7 +28,7 @@ class _PlaceCardState extends State<PlaceCard> {
   @override
   void initState() {
     super.initState();
-    isFavourite = widget.placeModel.isFavourite!;
+    // isFavourite = widget.placeModel.isFavourite!;
   }
 
   @override
@@ -75,20 +75,22 @@ class _PlaceCardState extends State<PlaceCard> {
                   bottom:  LayoutManager.widthNHeight0(context, 0)*0.001,
                   right:  LayoutManager.widthNHeight0(context, 1)*0.0002,
                   child: IconButton(
-                    icon: Icon(
-                      widget.placeModel.isFavourite!
-                          ? Icons.favorite
-                          : Icons.favorite_border_outlined,
-                      size: LayoutManager.widthNHeight0(context, 1) * 0.065,
-                      color: widget.placeModel.isFavourite!
-                          ? const Color(0xFFA74040)
-                          : ThemeManager.second,
-                    ),
+                    //BACK
+                    icon: Icon(Icons.add),
+                    // icon: Icon(
+                    //   widget.placeModel.isFavourite!
+                    //       ? Icons.favorite
+                    //       : Icons.favorite_border_outlined,
+                    //   size: LayoutManager.widthNHeight0(context, 1) * 0.065,
+                    //   color: widget.placeModel.isFavourite!
+                    //       ? const Color(0xFFA74040)
+                    //       : ThemeManager.second,
+                    // ),
                     onPressed: () {
                       setState(() {
-                        widget.placeModel.isFavourite =
-                            !widget.placeModel.isFavourite!;
-                        widget.onFavoriteChanged(widget.placeModel.isFavourite!);
+                        // widget.placeModel.isFavourite =
+                        //     !widget.placeModel.isFavourite!;
+                        // widget.onFavoriteChanged(widget.placeModel.isFavourite!);
                       });
                     },
                   ),

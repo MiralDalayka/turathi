@@ -24,8 +24,8 @@ class BodyPlaces extends StatefulWidget {
 
 class _BodyPlacesState extends State<BodyPlaces> {
   List<PlaceModel> favoritePlaces =
-      demoPlaces.where((placeModel) => placeModel.isFavourite!).toList();
-
+      demoPlaces.where((placeModel) => true).toList();
+//true =placeModel.isFavourite!
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
 
   bool get isMyLocationTab => widget.tab == "My Location";
@@ -155,12 +155,12 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
                         if (isFavourite) {
                           if (productIndex != -1) {
-                            demoPlaces[productIndex].isFavourite = true;
+                            // demoPlaces[productIndex].isFavourite = true;
                             favoritePlaces.add(demoPlaces[productIndex]);
                           }
                         } else {
                           if (productIndex != -1) {
-                            demoPlaces[productIndex].isFavourite = false;
+                            // demoPlaces[productIndex].isFavourite = false;
                             favoritePlaces
                                 .removeWhere((p) => p.id == placeModel.id);
                           }
@@ -188,16 +188,16 @@ class _BodyPlacesState extends State<BodyPlaces> {
       //here to filter places that  within 10 km from  User nearest location (my location)
       final List<PlaceModel> userNearestPlaces = demoPlaces.where((place) {
         double distanceInKm = calculateDistanceInKm(
-          place.late!,
-          place.long!,
-          userNearestLat,
-          userNearestLog,
+       lat1:    place.latitude!,
+        lon1:   place.longitude!,
+       lat2:    userNearestLat,
+        lon2:   userNearestLog,
         );
 
         return distanceInKm <= 10;
       }).toList();
 
-      ////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////latitude//////////////////////////////////////////////////
       ///////first scenario
       if ((userNearestLat == 0.0 || userNearestLog == 0.0)) {
         return Center(
@@ -309,12 +309,12 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
                         if (isFavourite) {
                           if (productIndex != -1) {
-                            demoPlaces[productIndex].isFavourite = true;
+                            // demoPlaces[productIndex].isFavourite = true;
                             favoritePlaces.add(demoPlaces[productIndex]);
                           }
                         } else {
                           if (productIndex != -1) {
-                            demoPlaces[productIndex].isFavourite = false;
+                            // demoPlaces[productIndex].isFavourite = false;
                             favoritePlaces
                                 .removeWhere((p) => p.id == placeModel.id);
                           }

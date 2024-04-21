@@ -17,7 +17,7 @@ class PlaceService {
         .add(model.toJson())
         .whenComplete(() => "Done")
         .catchError((error) {
-      log(error.toString());
+      log(error.toString()+"%%%");
       return "Failed";
     });
     return "Done";

@@ -26,10 +26,10 @@ class AddPlacesProvider with ChangeNotifier {
      */
     _AddPlaces = demoPlaces.where((place) {
       double distanceInKm = calculateDistanceInKm(
-        place.late!,
-        place.long!,
-        addPlaceLocatonLat,
-        addPlaceLocatonLong,
+       lat1: place.latitude!,
+      lon1:   place.longitude!,
+       lat2:  addPlaceLocatonLat,
+     lon2:    addPlaceLocatonLong,
       );
       return distanceInKm <= 10;
     }).toList();

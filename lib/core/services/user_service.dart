@@ -78,15 +78,16 @@ class UserService {
         }
       }
     }
-    QuerySnapshot placeData = await _fireStore
+    //function get user by email
+    QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('email', isEqualTo: email)
         .get();
     Map<String, dynamic> data = {};
 
     UserModel tempModel;
-      data["name"] = placeData.docs[0].get("name");
-      // data["email"] = placeData.docs[0].get("email");
+      data["name"] = userData.docs[0].get("name");
+      data["id"] = userData.docs[0].get("id");
       tempModel = UserModel.fromJson(data);
     user = tempModel;
 
