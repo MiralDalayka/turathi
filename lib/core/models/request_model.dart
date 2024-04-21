@@ -6,10 +6,11 @@ class RequestModel {
   String? certificate;
   String? userId;
 
-  RequestModel({ required this.status, this.certificate})
+  RequestModel()
   {
     requestId = uuid.v4();
     userId = user.id;
+    status = 'unapproved';
   }
 
   RequestModel.fromJson(Map<String, dynamic> json) {

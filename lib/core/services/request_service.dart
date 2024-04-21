@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/request_model.dart';
@@ -10,8 +11,10 @@ class RequestService {
   final String _collectionName = "requests";
   final FilesStorageService _filesStorageService = FilesStorageService();
 
-  Future<String> addRequest(RequestModel model,XFile file) async {
-    _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
+  Future<String> addRequest(RequestModel model,File file) async {
+    _fireStore.collection(_collectionName).add(model.toJson())
+        .whenComplete(() async {
+          log("***************REQUEST***************");
      model.certificate = await _filesStorageService.addFile(file);
      updateRequest(model);
     }).catchError((error) {

@@ -10,9 +10,9 @@ class FilesStorageService {
    final FirebaseStorage _storageInstance =
         FirebaseStorage.instanceFor(bucket: 'turathi-96897.appspot.com');
 
-  Future<String> addFile(XFile xFile) async {
-    File file = File(xFile.path);
-    var fileName = basename(xFile.path);
+  Future<String> addFile(File file) async {
+    // File file = File(xFile.path);
+    var fileName = basename(file.path);
     Reference reference = _storageInstance.ref().child("certificateFiles/$fileName");
 
     UploadTask uploadTask = reference.putFile(file);

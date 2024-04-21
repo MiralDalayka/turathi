@@ -5,6 +5,8 @@ import 'dart:math';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/models/request_model.dart';
+import 'package:turathi/core/services/request_service.dart';
 
 import '../../../../utils/theme_manager.dart';
 
@@ -19,6 +21,7 @@ class RequestToBeExpert extends StatefulWidget {
 
 class _RequestToBeExpertState extends State<RequestToBeExpert> {
 File? file;
+RequestService _requestService = RequestService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,9 +71,9 @@ Future<void> _pickFile() async{
     );
 
     if (pickedFile != null) {
-      setState(() {
+      
         file = File(pickedFile.files.single.path!);
-      });
+      _requestService.addRequest(RequestModel(),file!);
     }
 
   }
