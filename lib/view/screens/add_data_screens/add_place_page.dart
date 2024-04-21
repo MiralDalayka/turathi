@@ -6,6 +6,8 @@ import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 
+import '../../../core/services/file_storage_service.dart';
+import '../../../core/services/place_service.dart';
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
 
@@ -27,21 +29,11 @@ class _AddNewPlaceState extends State<AddNewPlace> {
   bool mapScreenOpened = false;
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _pickImage() async {
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
-    }
-  }
-
-
   @override
   Widget build(BuildContext context) {
+    FilesStorageService filesStorageService = FilesStorageService();
+    List<double>? data;
+    PlaceService service = PlaceService();
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -78,11 +70,6 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   labelText: 'Address',
                 ),
                 TextFormFieldWidget(
-                  controller: creatorName,
-                  hintText: 'Enter place creator name',
-                  labelText: 'Creator Name',
-                ),
-                TextFormFieldWidget(
                   hintText: 'Enter place description',
                   labelText: 'Description',
                   maxLine: 3,
@@ -98,7 +85,9 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     ElevatedButton(
-                      onPressed: _pickImage,
+                      onPressed: () async {
+                        await filesStorageService.uploadImages(name.text);
+                      },
                       style: ThemeManager.buttonStyle,
                       child: Text(
                         'Pick Image',
@@ -106,14 +95,12 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                             .copyWith(color: ThemeManager.primary),
                       ),
                     ),
-                    if (image != null) Image.file(File(image!.path)),
-
                     ElevatedButton(
                       onPressed: () async {
                         setState(() {
                           mapScreenOpened = true;
                         });
-                        await Navigator.push(
+                        data = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => AddPlaceMap(),
@@ -123,17 +110,17 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                       style: ThemeManager.buttonStyle,
                       child: Text(
                         'Location',
-                        style: ThemeManager.textStyle.copyWith(
-                          color: ThemeManager.primary
-                          // mapScreenOpened &&
-                          //         addPlaceLocatonLat != 0 &&
-                          //         addPlaceLocatonLong != 0
-                          //     ? Colors.grey
-                          //     : (addPlaceLocatonLat != 0 &&
-                          //             addPlaceLocatonLong != 0)
-                          //         ? Colors.grey
-                          //         : ThemeManager.primary,
-                        ),
+                        style: ThemeManager.textStyle
+                            .copyWith(color: ThemeManager.primary
+                                // mapScreenOpened &&
+                                //         addPlaceLocatonLat != 0 &&
+                                //         addPlaceLocatonLong != 0
+                                //     ? Colors.grey
+                                //     : (addPlaceLocatonLat != 0 &&
+                                //             addPlaceLocatonLong != 0)
+                                //         ? Colors.grey
+                                //         : ThemeManager.primary,
+                                ),
                       ),
                     ),
                   ],
@@ -142,23 +129,23 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.1,
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      if (formKey.currentState!.validate() &&
-                          addPlaceLocatonLat != 0 &&
-                          addPlaceLocatonLat != 0) {
-                        ///check the images not empty
-
-                        name.clear();
-                        disc.clear();
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Place Successfully")));
-                      } else {
-                        log('add place failed');
-                      }
-                    });
+                  onPressed: () async {
+                    final temp = await filesStorageService.getPlaceImages(
+                        folderName: name.text);
+                    if (formKey.currentState!.validate()) {
+                      service.addPlace(PlaceModel(
+                          title: name.text,
+                          description: disc.text,
+                          address: address.text,
+                          latitude: 10,
+                          longitude: 10,
+                          images: temp));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text("Place Successfully")));
+                    } else {
+                      log('add place failed');
+                    }
                   },
                   style: ThemeManager.buttonStyle,
                   child: Text(

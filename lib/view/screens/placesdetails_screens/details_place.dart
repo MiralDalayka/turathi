@@ -50,7 +50,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Row(
               children: [
                 Text(
-                  widget.placeModel.location!,
+                  widget.placeModel.address!,
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: ThemeManager.second,
@@ -157,10 +157,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Text(
                                 getFormattedDistance(
                                   calculateDistanceInKm(
-                                      widget.placeModel.late!,
-                                      widget.placeModel.long!,
-                                      userNearestLat,
-                                      userNearestLog),
+                                   lat1:    widget.placeModel.latitude!,
+                                  lon1:     widget.placeModel.longitude!,
+                                    lat2:   userNearestLat,
+                                 lon2:      userNearestLog),
                                 ),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -396,8 +396,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => MapScreenLocation(
-                                    lon: widget.placeModel.long!,
-                                    lat: widget.placeModel.late!),
+                                    lon: widget.placeModel.longitude!,
+                                    lat: widget.placeModel.latitude!),
                               ),
                             );
                           },
@@ -495,9 +495,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     child: Icon(
                       Icons.favorite,
                       size: 25,
-                      color: widget.placeModel.isFavourite!
-                          ? ThemeManager.favIcon
-                          : ThemeManager.second,
+                      /*
+                      BACK
+                       widget.placeModel.isFavourite!
+                          ? ThemeManager.favIcon:
+                       */
+
+
+
+                      color:
+                           ThemeManager.second,
                     ),
                   ),
                 ),

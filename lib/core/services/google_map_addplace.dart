@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -40,7 +41,7 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
 
   @override
   Widget build(BuildContext context) {
-    var placesProvider = Provider.of<AddPlacesProvider>(context);
+    // var placesProvider = Provider.of<AddPlacesProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -131,10 +132,10 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
                   onPressed: () {
                     log("From done button ");
 
-                    placesProvider.createAddPlacesList(
-                        addPlaceLocatonLat, addPlaceLocatonLong);
+                    // placesProvider.createAddPlacesList(
+                    //     addPlaceLocatonLat, addPlaceLocatonLong);
 
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop([addPlaceLocatonLat,addPlaceLocatonLong]);
                   },
                   borderWidth: 0,
                 ),

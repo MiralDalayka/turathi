@@ -26,10 +26,10 @@ class NearestPlacesProvider with ChangeNotifier {
      */
     _nearestPlaces = demoPlaces.where((place) {
       double distanceInKm = calculateDistanceInKm(
-        place.late!,
-        place.long!,
-        selectedNearestLat,
-        selectedNearestLog,
+   lat1:      place.latitude!,
+        lon1:  place.longitude!,
+       lat2:  selectedNearestLat,
+       lon2:   selectedNearestLog,
       );
       return distanceInKm <= 10;
     }).toList();

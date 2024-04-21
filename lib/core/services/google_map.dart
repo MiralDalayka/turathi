@@ -149,43 +149,10 @@ class _MapScreenState extends State<MapScreenLocation> {
     final double myLongitude = lon; //35.99126052856445  ;
     final double destinationLatitude = d; //34.0522;
     final double destinationLongitude = a; //-118.2437;
-    // final String url =
-    //     "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude";
     var url =
     Uri.parse("https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
     await launchUrl(url);
 
-    // if (await canLaunchUrl(url)) {
-    //   await launchUrl(url);
-    // } else {
-    //   ///////////////
-    //   throw 'Could not launch $url';
-    // }
   }
 
-//   void _createPolylines(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
-//   PolylineId id = PolylineId('poly');
-//   List<LatLng> polylineCoordinates = [];
-
-//   polylineCoordinates.add(LatLng(startLatitude, startLongitude));
-//   polylineCoordinates.add(LatLng(endLatitude, endLongitude));
-
-//   Polyline polyline = Polyline(
-//     polylineId: id,
-//     color: Colors.red,
-//     points: polylineCoordinates,
-//     width: 5,
-//   );
-
-//   setState(() {
-//     polylines.add(polyline);
-//     LatLngBounds bounds = LatLngBounds(
-//       southwest: LatLng(startLatitude, startLongitude),
-//       northeast: LatLng(endLatitude, endLongitude),
-//     );
-//     mapController.animateCamera(
-//       CameraUpdate.newLatLngBounds(bounds, 100),
-//     );
-//   });
-// }
 }
