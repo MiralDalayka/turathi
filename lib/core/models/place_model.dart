@@ -39,7 +39,6 @@ class PlaceModel {
       {required this.title,
       required this.description,
       required this.address,
-       this.images,
       required this.longitude,
       required this.latitude}) {
     id = uuid.v4();
@@ -60,8 +59,6 @@ class PlaceModel {
     status = json['status'];
     address = json['address'];
     state = json['state'];
-    commentsPlace = json['commentsPlace'].cast<String>();
-    images = json['images'].cast<String>();
     like = json['like'];
     disLike = json['disLike'];
     isVisible = json['isVisible'];
@@ -78,8 +75,6 @@ class PlaceModel {
     data['status'] = this.status;
     data['address'] = this.address;
     data['state'] = this.state;
-    data['commentsPlace'] = this.commentsPlace;
-    data['images'] = this.images;
     data['like'] = this.like;
     data['disLike'] = this.disLike;
     data['isVisible'] = this.isVisible;
@@ -94,11 +89,6 @@ List<PlaceModel> demoPlaces = [
     longitude: 35.890933,
     latitude: 31.900762,
     address: "Amman , Downtown ",
-    images: [
-      "assets/images/img_png/Dukes.png",
-      "assets/images/img_png/place3.png",
-      "assets/images/img_png/Dukes.png",
-    ],
     title: "Duke's Diwan",
     description:
         "The Duke's Diwan is an arts and cultural center and historic house museum. Located on King Faisal Street in downtown Amman, it is housed in one of the city's oldest buildings. Built in 1924 as Amman's first post office, the building later became the Finance Ministry, and then the Haifa Hotel from 1948 to 1998 it was rented by Mamdouh Bisharat, a Jordanian heritage conservationist and businessman, at double its price to prevent the building's owners from knocking it down. Bisharat",

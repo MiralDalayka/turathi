@@ -65,5 +65,5 @@ List<PlaceCommentModel> demoComments = [
     writerName: "Rachel Thompson",
     writtenByExpert: 1,
   ),
- 
+
 ];

@@ -15,16 +15,15 @@ class PlaceService {
   final String _collectionName = "places";
   final FilesStorageService _filesStorageService = FilesStorageService();
   final CommentService _commentService = CommentService();
+
   //add -get - update visibility,modify info
 
   Future<String> addPlace(PlaceModel model, List<XFile> images) async {
     _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
-      FilesStorageService filesStorageService = FilesStorageService();
-      filesStorageService.uploadImages(
+      _filesStorageService.uploadImages(
           folderName: model.title!, pickedImages: images!);
-      model.images =
-          await filesStorageService.getPlaceImages(folderName: model.title!);
-      updatePlace(model);
+
+
     }).catchError((error) {
       log("$error%%%");
       return "Failed";
@@ -59,11 +58,10 @@ class PlaceService {
       data["isVisible"] = item.get("isVisible");
       data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
-      data["images"] = _filesStorageService.getPlaceImages(folderName: item.get("title"));
-      // or when place is selected
-      data["commentsPlace"] = _commentService.getPlaceComments(item.get("id"));
-      tempModel = PlaceModel.fromJson(data);
 
+      tempModel = PlaceModel.fromJson(data);
+      tempModel.images =
+      await _filesStorageService.getPlaceImages(folderName: tempModel.title!);
       placeList.places.add(tempModel);
     }
     log(placeList.places[0].toString());

@@ -1,10 +1,14 @@
+
 import 'package:flutter/material.dart';
+import 'package:turathi/core/models/comment_model.dart';
 import 'package:turathi/core/models/comment_place_model.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/comment_place_card.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
+
+import '../../../core/services/comment_service.dart';
 
 class CommentsPlace extends StatefulWidget {
   final PlaceModel place;
@@ -25,6 +29,9 @@ class _CommentsPlaceState extends State<CommentsPlace> {
 
   @override
   Widget build(BuildContext context) {
+    CommentService commentService =CommentService();
+    // List<CommentModel> comments = await commentService.getPlaceComments();
+    //BACK
     List<Widget> commentWidgets = List.generate(
       demoComments.length,
       (index) {

@@ -4,6 +4,9 @@ import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+import '../../../../core/models/comment_model.dart';
+import '../../../../core/services/comment_service.dart';
+
 class thirdBox extends StatefulWidget {
   const thirdBox({super.key});
 
@@ -19,6 +22,8 @@ class _thirdBox extends State<thirdBox> {
 
   @override
   Widget build(BuildContext context) {
+    // CommentService commentService=CommentService();
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -34,6 +39,8 @@ class _thirdBox extends State<thirdBox> {
               InkWell(
                 onTap: () {
                   // Navigator.of(context).pushNamed("About us");
+                  // commentService.addComment(CommentModel(commentTxt: 'ttttttttteeeeeeeeeeeesssssttt',placeId: 'f8be9249-9912-49dd-a10a-50579ce2eb10'));
+
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),

@@ -22,7 +22,7 @@ class _QuestionViewState extends State<QuestionView> {
   Widget build(BuildContext context) {
     var height = LayoutManager.widthNHeight0(context, 0) * 0.35;
     //controller
-    comments.sort((a, b) => b.writtenByExpert!.compareTo(a.writtenByExpert!));
+    // comments.sort((a, b) => b.writtenByExpert!.compareTo(a.writtenByExpert!));
     double left = 15;
     double iconLeft = 10;
     return Stack(
@@ -87,17 +87,17 @@ class _QuestionViewState extends State<QuestionView> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return CommentBox(
-                              comment: comments[index],
-                            );
-                          },
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(),
-                          itemCount: comments.length),
-                    )
+                    // Expanded(
+                    //   child: ListView.separated(
+                    //       itemBuilder: (context, index) {
+                    //         return CommentBox(
+                    //           comment: comments[index],
+                    //         );
+                    //       },
+                    //       separatorBuilder: (context, index) =>
+                    //           const SizedBox(),
+                    //       itemCount: comments.length),
+                    // )
                   ],
                 ),
               ),
@@ -126,31 +126,3 @@ class _QuestionViewState extends State<QuestionView> {
   }
 }
 
-var txt =
-    "Changed 1 dependency! 7 packages have newer versions incompatible with dependency constraints. Try `flutter pub outdated` for more information. ";
-List<CommentModel> comments = [
-  CommentModel(
-      id: '1',
-      commentTxt: txt,
-      date: DateTime.now(),
-      writerName: 'Alaa',
-      writtenByExpert: 1),
-  CommentModel(
-      id: '1',
-      commentTxt: txt,
-      date: DateTime.now(),
-      writerName: 'Alaa',
-      writtenByExpert: 0),
-  CommentModel(
-      id: '1',
-      commentTxt: txt,
-      date: DateTime.now(),
-      writerName: 'Alaa',
-      writtenByExpert: 1),
-  CommentModel(
-      id: '1',
-      commentTxt: txt,
-      date: DateTime.now(),
-      writerName: 'Alaa',
-      writtenByExpert: 0),
-];
