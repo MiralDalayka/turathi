@@ -21,7 +21,7 @@ class EventService {
         .whenComplete(() async {
       _filesStorageService.uploadImages(
           imageType: ImageType.eventImages.name,folderName: model.name!, pickedImages: images!);
-
+      log("Event Done -------------------------");
     })
         .catchError((error) {
       log(error.toString());

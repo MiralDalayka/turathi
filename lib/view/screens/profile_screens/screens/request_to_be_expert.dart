@@ -50,7 +50,7 @@ RequestService _requestService = RequestService();
           SizedBox(height: 50,),
           ElevatedButton(
             onPressed: () {
-              // back
+              _requestService.addRequest(RequestModel(),file!);
             },
             style: ThemeManager.buttonStyle,
             child: Text(
@@ -73,7 +73,7 @@ Future<void> _pickFile() async{
     if (pickedFile != null) {
       
         file = File(pickedFile.files.single.path!);
-      _requestService.addRequest(RequestModel(),file!);
+
     }
 
   }

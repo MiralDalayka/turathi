@@ -2,14 +2,11 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/core/models/event_model.dart';
-
 
 class CommentService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "comments";
-
 
   Future<String> addComment(CommentModel model) async {
     _fireStore

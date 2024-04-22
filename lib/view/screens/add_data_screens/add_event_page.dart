@@ -2,6 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/functions/picking_files.dart';
+import 'package:turathi/core/models/event_model.dart';
+import 'package:turathi/core/services/event_service.dart';
 import 'package:turathi/core/services/google_map_add_event.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
@@ -19,27 +22,16 @@ class AddNewEvent extends StatefulWidget {
 class _AddNewEventState extends State<AddNewEvent> {
   final formKey = GlobalKey<FormState>();
   final name = TextEditingController();
-  final disc = TextEditingController();
+  final description = TextEditingController();
   final address = TextEditingController();
   final ticketPrice = TextEditingController();
   final creatorName = TextEditingController();
 
   //date
   bool mapScreenOpened = false;
-  XFile? image;
+
   DateTime selectedDate = DateTime.now();
 
-  Future<void> _pickImage() async {
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
-    }
-  }
 
   Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(
@@ -56,6 +48,8 @@ class _AddNewEventState extends State<AddNewEvent> {
 
   @override
   Widget build(BuildContext context) {
+    EventService _service = EventService();
+    List<XFile>? images;
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -105,10 +99,12 @@ class _AddNewEventState extends State<AddNewEvent> {
                   hintText: 'Enter event description',
                   labelText: 'Description',
                   maxLine: 3,
-                  controller: disc,
+                  controller: description,
                 ),
                 ElevatedButton(
-                  onPressed: _pickImage,
+                  onPressed: () async {
+                   images = await pickImages();
+                    },
                   style: ThemeManager.buttonStyle,
                   child: Text(
                     'Pick Image',
@@ -116,7 +112,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                         .copyWith(color: ThemeManager.primary),
                   ),
                 ),
-                if (image != null) Image.file(File(image!.path)),
+              //  if (images != null) Image.file(File(image!.path)),
                 const SizedBox(
                   height: 10,
                 ),
@@ -169,15 +165,19 @@ class _AddNewEventState extends State<AddNewEvent> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (formKey.currentState!.validate()) {
-                        //call controller
-                        name.clear();
-                        disc.clear();
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text("Add Event Successfully")));
-                      } else {
+                      if (formKey.currentState!.validate() && images != null) {
+                        _service.addEvent(
+                            EventModel(
+                              name: name.text,
+                              address:  address.text,
+                              date: selectedDate,
+                              description: description.text,
+                              latitude: 30,
+                              longitude: 30,
+                              ticketPrice: double.parse(ticketPrice.text)
+                            ),images!);
+                      }
+                      else {
                         log('add Event failed');
                       }
                     });
