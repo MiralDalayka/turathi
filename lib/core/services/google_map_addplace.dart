@@ -6,7 +6,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/add_place_provider.dart';
 
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
@@ -131,7 +130,7 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
                   textColor: ThemeManager.second,
                   onPressed: () {
                     log("From done button ");
-
+log("$addPlaceLocatonLat and $addPlaceLocatonLong");
                     // placesProvider.createAddPlacesList(
                     //     addPlaceLocatonLat, addPlaceLocatonLong);
 

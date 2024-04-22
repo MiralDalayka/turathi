@@ -62,8 +62,8 @@ class PlaceModel {
     like = json['like'];
     disLike = json['disLike'];
     isVisible = json['isVisible'];
-    longitude = json['long'];
-    latitude = json['late'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
   }
 
   Map<String, dynamic> toJson() {
@@ -78,8 +78,8 @@ class PlaceModel {
     data['like'] = this.like;
     data['disLike'] = this.disLike;
     data['isVisible'] = this.isVisible;
-    data['long'] = this.longitude;
-    data['late'] = this.latitude;
+    data['longitude'] = this.longitude;
+    data['latitude'] = this.latitude;
     return data;
   }
 }

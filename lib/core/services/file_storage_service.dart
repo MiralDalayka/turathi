@@ -47,6 +47,7 @@ class FilesStorageService {
 
     try {
       // Get reference to the folder
+      log("$imageType/$folderName");
       Reference folderRef =
           _storageInstance.ref().child('$imageType/$folderName');
 

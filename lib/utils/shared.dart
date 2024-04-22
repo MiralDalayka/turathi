@@ -18,7 +18,7 @@ double addEventLocatonLat=0;
 
 double addEventLocatonLog=0;
 enum ImageType {
-  placeImages,
+  placesImages,
   questionImages,
   eventImages,
 

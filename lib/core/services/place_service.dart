@@ -18,10 +18,10 @@ class PlaceService {
 
   //add -get - update visibility,modify info
 
-  Future<String> addPlace(PlaceModel model, List<XFile> images) async {
+  Future<String> addPlace({required PlaceModel model, required List<XFile> images}) async {
     _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
       _filesStorageService.uploadImages(
-          imageType: ImageType.placeImages.name,folderName: model.title!, pickedImages: images!);
+          imageType: ImageType.placesImages.name,folderName: model.title!, pickedImages: images!);
 
 
     }).catchError((error) {
@@ -33,7 +33,7 @@ class PlaceService {
 
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData =
-        await _fireStore.collection(_collectionName).get().whenComplete(() {
+        await _fireStore.collection(_collectionName).orderBy('like',descending: true).get().whenComplete(() {
       log("getPlaces done");
     }).catchError((error) {
       log(error.toString());
@@ -44,8 +44,9 @@ class PlaceService {
     PlaceModel tempModel;
     //temp list
     PlaceList placeList = PlaceList(places: []);
-    // log(placesData.docs[0].get('id').toString());
     for (var item in placesData.docs) {
+      log("tempModel.title.toString()");
+
       data["id"] = item.get("id");
       data["userID"] = item.get("userID");
       data["state"] = item.get("state");
@@ -58,10 +59,10 @@ class PlaceService {
       data["isVisible"] = item.get("isVisible");
       data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
-
       tempModel = PlaceModel.fromJson(data);
+      log(tempModel.title.toString());
       tempModel.images =
-      await _filesStorageService.getImages(imageType:ImageType.placeImages.name,
+      await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
           folderName: tempModel.title!);
 
       placeList.places.add(tempModel);

@@ -223,17 +223,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      ViewEvent(
-                        eventModel: eventsList![0],
-                        flag: false,
-                      ),
+                      // ViewEvent(
+                      //   eventModel: eventsList![0],
+                      //   flag: false,
+                      // ),
                       SizedBox(
                         height: LayoutManager.widthNHeight0(context, 1) * 0.04,
                       ),
-                      ViewEvent(
-                        eventModel: eventsList![1],
-                        flag: false,
-                      ),
+                      // ViewEvent(
+                      //   eventModel: eventsList![1],
+                      //   flag: false,
+                      // ),
                     ],
                   ),
                 ),

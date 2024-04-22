@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/add_place_provider.dart';
-import 'package:turathi/core/providers/nearest_places_provider.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/firebase_options.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
@@ -27,8 +26,8 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: NearestPlacesProvider()),
-        ChangeNotifierProvider.value(value: AddPlacesProvider()),
+        ChangeNotifierProvider.value(value: PlaceProvider()),
+
         /////here at the right give it model
         // ChangeNotifierProvider.value(value: PlaceProvider()),/////here at the right give it model
       ],

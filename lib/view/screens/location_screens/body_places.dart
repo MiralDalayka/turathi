@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/calculate_distanceInKm.dart';
 import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/providers/nearest_places_provider.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -42,8 +42,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
-    var placesProvider = Provider.of<NearestPlacesProvider>(context);
-    nearestPlacesList = placesProvider.nearestPlacesList;
+    var placesProvider = Provider.of<PlaceProvider>(context);
+    // nearestPlacesList = placesProvider.createNearestPlaceList(selectedNearestLat, selectedNearestLog);
     //
 
     if (isNearestPlaceTab) {

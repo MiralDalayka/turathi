@@ -24,7 +24,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         SizedBox(
           height: height,
           width: double.infinity,
-          child: Image.asset(
+          child: Image.network(
             widget.placeModel.images![selectedImage],
             fit: BoxFit.cover,
             color: Colors.black.withOpacity(0.1),

@@ -17,7 +17,7 @@ class PopularPlaceWidget extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(placeDetailsRoute, arguments: placeModel);
       },
-      child: Image.asset(
+      child: Image.network(
         placeModel.images![0],
         fit: BoxFit.cover,
       ),

@@ -5,7 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/nearest_places_provider.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -41,7 +41,7 @@ class _AddEventMapState extends State<AddEventMap> {
 
   @override
   Widget build(BuildContext context) {
-    var placesProvider = Provider.of<NearestPlacesProvider>(context);
+    var placesProvider = Provider.of<PlaceProvider>(context);
 
     return Scaffold(
       appBar: AppBar(

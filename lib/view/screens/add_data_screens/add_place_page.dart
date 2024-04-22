@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
@@ -29,12 +30,13 @@ class _AddNewPlaceState extends State<AddNewPlace> {
   XFile? image;
   bool mapScreenOpened = false;
   DateTime selectedDate = DateTime.now();
+  List<double>? data;
+  List<XFile>? images;
 
   @override
   Widget build(BuildContext context) {
-    List<double> data;
-    PlaceService service = PlaceService();
-    List<XFile>? images;
+
+    PlaceProvider placeProvider = PlaceProvider();
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -98,15 +100,18 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
+                        final temp =   await   Navigator.push(
+                             context,
+                             MaterialPageRoute(
+                               builder: (context) => AddPlaceMap(),
+                             ),
+                           );
                         setState(() {
                           mapScreenOpened = true;
+                     data = temp;
                         });
-                        data = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddPlaceMap(),
-                          ),
-                        );
+
+
                       },
                       style: ThemeManager.buttonStyle,
                       child: Text(
@@ -131,16 +136,17 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if (formKey.currentState!.validate() && images != null) {
-                      service.addPlace(
-                          PlaceModel(
+
+                    if (formKey.currentState!.validate() && images != null &&data!.isNotEmpty) {
+                      placeProvider.addPlace(
+                         model:  PlaceModel(
                             title: name.text,
                             description: disc.text,
                             address: address.text,
-                            latitude: 10,
-                            longitude: 10,
+                            latitude: data![0],
+                            longitude: data![1],
                           ),
-                          images!);
+                        images:   images!);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Place Successfully")));
                       Navigator.pop(context); //BACK
