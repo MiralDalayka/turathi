@@ -91,11 +91,6 @@ class _AddNewEventState extends State<AddNewEvent> {
                   labelText: 'Ticket Price',
                 ),
                 TextFormFieldWidget(
-                  controller: creatorName,
-                  hintText: 'Enter event creator name',
-                  labelText: 'Creator Name',
-                ),
-                TextFormFieldWidget(
                   hintText: 'Enter event description',
                   labelText: 'Description',
                   maxLine: 3,
@@ -179,6 +174,8 @@ class _AddNewEventState extends State<AddNewEvent> {
                               longitude: data![1],
                               ticketPrice: double.parse(ticketPrice.text)
                             ),images!);
+                        Navigator.of(context).pop();
+
                       }
                       else {
                         log('add Event failed');

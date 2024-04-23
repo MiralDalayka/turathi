@@ -56,6 +56,8 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
+
               TextField(
                 maxLines: 5,
                 controller: text,
@@ -103,11 +105,12 @@ class _QuestionDialogState extends State<QuestionDialog> {
                       if (text.text.isNotEmpty &&title.text.isNotEmpty&& images != null) {
                         questionProvider.addQuestion(
                            QuestionModel(title: title.text, questionTxt: text.text),images!);
+                        Navigator.of(context).pop();
+
                       }
                       else {
                         log('add Question failed');
                       }
-                      Navigator.of(context).pop();
                     },
                     child: Text(
                       'Save',
