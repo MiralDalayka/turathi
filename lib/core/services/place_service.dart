@@ -45,7 +45,6 @@ class PlaceService {
     //temp list
     PlaceList placeList = PlaceList(places: []);
     for (var item in placesData.docs) {
-      log("tempModel.title.toString()");
 
       data["id"] = item.get("id");
       data["userID"] = item.get("userID");
@@ -60,14 +59,12 @@ class PlaceService {
       data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
       tempModel = PlaceModel.fromJson(data);
-      log(tempModel.title.toString());
       tempModel.images =
       await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
           folderName: tempModel.title!);
 
       placeList.places.add(tempModel);
     }
-    log(placeList.places[0].toString());
     return placeList;
   }
 

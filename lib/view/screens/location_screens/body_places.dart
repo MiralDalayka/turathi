@@ -25,12 +25,16 @@ class BodyPlaces extends StatefulWidget {
 class _BodyPlacesState extends State<BodyPlaces> {
   List<PlaceModel> favoritePlaces =
       demoPlaces.where((placeModel) => true).toList();
+
 //true =placeModel.isFavourite!
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
 
   bool get isMyLocationTab => widget.tab == "My Location";
 
   List<PlaceModel>? nearestPlacesList;
+
+  PlaceList? placesList;
+
 //here PlacesList
   @override
   Widget build(BuildContext context) {
@@ -42,305 +46,166 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
-    var placesProvider = Provider.of<PlaceProvider>(context);
-    // nearestPlacesList = placesProvider.createNearestPlaceList(selectedNearestLat, selectedNearestLog);
-    //
+    final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
 
-    if (isNearestPlaceTab) {
-      if ((selectedNearestLat == 0.0 || selectedNearestLog == 0.0)) {
-        return Center(
-            child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-            child: Column(
-              children: [
-                Text(
-                  "You Have To Choose",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-                const Text(
-                  " The Nearest Point To You!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "KohSantepheap",
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-      }
+    var dataList =[];
+    if(isMyLocationTab)
+{
+  log("%%%%%%%%%%%%%");
+  userNearestLat=  32.55390782924759;
+  userNearestLog=35.8474562689662;
+  dataList.addAll({userNearestLat,userNearestLog});//userNearestLat == 0.0 || userNearestLog == 0.0)
+}
+    else{
+      log("**********");
 
-      ///////second scenario
-      else if (nearestPlacesList!.isEmpty) {
-        return Center(
-            child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-            child: Column(
-              children: [
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.02),
-                Text(
-                  "There ARE No Places Nearest",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-                const Text(
-                  "TO The Point You Choose.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "KohSantepheap",
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-      }
-
-      ///////Third scenario
-
-      else if (nearestPlacesList!.isNotEmpty) {
-        return Padding(
-          padding: EdgeInsets.only(
-            left: LayoutManager.widthNHeight0(context, 1) * 0.05,
-            right: LayoutManager.widthNHeight0(context, 1) * 0.05,
-          ),
-          child: GridView.builder(
-            itemCount: nearestPlacesList!.length,
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              childAspectRatio: cardWidth / (cardWidth + 65),
-              mainAxisSpacing: 1,
-              crossAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) {
-              final placeModel = nearestPlacesList![index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                    placeDetailsRoute,
-                    arguments: placeModel,
-                  );
-                },
-                child: SizedBox(
-                  width: cardWidth,
-                  child: PlaceCard(
-                    placeModel: placeModel,
-                    onFavoriteChanged: (bool isFavourite) {
-                      setState(() {
-                        final productIndex =
-                            demoPlaces.indexWhere((p) => p.id == placeModel.id);
-
-                        if (isFavourite) {
-                          if (productIndex != -1) {
-                            // demoPlaces[productIndex].isFavourite = true;
-                            favoritePlaces.add(demoPlaces[productIndex]);
-                          }
-                        } else {
-                          if (productIndex != -1) {
-                            // demoPlaces[productIndex].isFavourite = false;
-                            favoritePlaces
-                                .removeWhere((p) => p.id == placeModel.id);
-                          }
-                        }
-                      });
-                    },
-                    onPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                            placeModel: placeModel,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      }
-    } else if (isMyLocationTab) {
-      //here to filter places that  within 10 km from  User nearest location (my location)
-      final List<PlaceModel> userNearestPlaces = demoPlaces.where((place) {
-        double distanceInKm = calculateDistanceInKm(
-       lat1:    place.latitude!,
-        lon1:   place.longitude!,
-       lat2:    userNearestLat,
-        lon2:   userNearestLog,
-        );
-
-        return distanceInKm <= 10;
-      }).toList();
-
-      //////////////////////////////latitude//////////////////////////////////////////////////
-      ///////first scenario
-      if ((userNearestLat == 0.0 || userNearestLog == 0.0)) {
-        return Center(
-            child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-            child: Column(
-              children: [
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.02),
-                Text(
-                  "You Should Allow Access To",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-                const Text(
-                  "Your Location",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "KohSantepheap",
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-      }
-
-      ///////second scenario
-      else if (userNearestPlaces.isEmpty) {
-        return Center(
-            child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(
-                top: LayoutManager.widthNHeight0(context, 1) * 0.45),
-            child: Column(
-              children: [
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.02),
-                Text(
-                  "There IS No Places",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-                SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-                const Text(
-                  "Nearest Your Location",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "KohSantepheap",
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
-      }
-
-      ///////third scenario
-
-      else if (userNearestPlaces.isNotEmpty) {
-        return Padding(
-          padding: EdgeInsets.only(
-            left: LayoutManager.widthNHeight0(context, 1) * 0.05,
-            right: LayoutManager.widthNHeight0(context, 1) * 0.05,
-          ),
-          child: GridView.builder(
-            itemCount: userNearestPlaces.length,
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              childAspectRatio: cardWidth / (cardWidth + 65),
-              mainAxisSpacing: 1,
-              crossAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) {
-              final placeModel = userNearestPlaces[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                    placeDetailsRoute,
-                    arguments: placeModel,
-                  );
-                },
-                child: SizedBox(
-                  width: cardWidth,
-                  child: PlaceCard(
-                    placeModel: placeModel,
-                    onFavoriteChanged: (bool isFavourite) {
-                      setState(() {
-                        final productIndex =
-                            demoPlaces.indexWhere((p) => p.id == placeModel.id);
-
-                        if (isFavourite) {
-                          if (productIndex != -1) {
-                            // demoPlaces[productIndex].isFavourite = true;
-                            favoritePlaces.add(demoPlaces[productIndex]);
-                          }
-                        } else {
-                          if (productIndex != -1) {
-                            // demoPlaces[productIndex].isFavourite = false;
-                            favoritePlaces
-                                .removeWhere((p) => p.id == placeModel.id);
-                          }
-                        }
-                      });
-                    },
-                    onPress: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailsScreen(
-                            placeModel: placeModel,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      }
+      dataList.addAll({selectedNearestLat,selectedNearestLog});//((selectedNearestLat
+log("$selectedNearestLat,$selectedNearestLog");
     }
-    return Container(
-      color: Colors.green,
-    );
+
+    if ( dataList.first==0.0|| dataList.last==0.0) {
+      return Center(
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+              child: Column(
+                children: [
+                  SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+                  Text(
+                    "You Should Allow Access To",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ThemeManager.primary,
+                      fontFamily: "KohSantepheap",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                  SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+                  const Text(
+                    "Your Location",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "KohSantepheap",
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ));
+    }
+
+    return FutureBuilder(
+        future: placesProvider.getNearestPlaceList(
+            dataList.first, dataList.last),
+        builder: (context, snapshot) {
+          var data = snapshot.data;
+          if (data == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          placesList = data;
+          if (placesList!.places.isNotEmpty) {
+            return Padding(
+              padding: EdgeInsets.only(
+                left: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                right: LayoutManager.widthNHeight0(context, 1) * 0.05,
+              ),
+              child: GridView.builder(
+                itemCount: placesList!.places.length,
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: crossAxisCount,
+                  childAspectRatio: cardWidth / (cardWidth + 65),
+                  mainAxisSpacing: 1,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  final placeModel = placesList!.places[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        placeDetailsRoute,
+                        arguments: placeModel,
+                      );
+                    },
+                    child: SizedBox(
+                      width: cardWidth,
+                      child: PlaceCard(
+                        placeModel: placeModel,
+                        onFavoriteChanged: (bool isFavourite) {
+                          setState(() {
+                            final productIndex = demoPlaces
+                                .indexWhere((p) => p.id == placeModel.id);
+
+                            if (isFavourite) {
+                              if (productIndex != -1) {
+                                // demoPlaces[productIndex].isFavourite = true;
+                                favoritePlaces.add(demoPlaces[productIndex]);
+                              }
+                            } else {
+                              if (productIndex != -1) {
+                                // demoPlaces[productIndex].isFavourite = false;
+                                favoritePlaces.removeWhere(
+                                        (p) => p.id == placeModel.id);
+                              }
+                            }
+                          });
+                        },
+                        onPress: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsScreen(
+                                placeModel: placeModel,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          }
+          return Center(
+              child: Center(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+                      Text(
+                        "There IS No Places",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: ThemeManager.primary,
+                          fontFamily: "KohSantepheap",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17,
+                        ),
+                      ),
+                      SizedBox(
+                          height:
+                          LayoutManager.widthNHeight0(context, 1) * 0.025),
+                      const Text(
+                        "Nearest Your Location",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: "KohSantepheap",
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ));
+        });
   }
 }

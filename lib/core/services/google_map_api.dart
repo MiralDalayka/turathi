@@ -44,8 +44,7 @@ class _NearestMapState extends State<NearestMap> {
 
   @override
   Widget build(BuildContext context) {
-    var placesProvider = Provider.of<PlaceProvider>(context);
-
+PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       appBar: AppBar(
            backgroundColor: ThemeManager.background,
@@ -134,16 +133,10 @@ class _NearestMapState extends State<NearestMap> {
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-                    // Navigator.of(context).pushNamed(locationRoute);//locationRoute
-                    //      Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => LocationPage(),
-                    //   ),
-                    // );
-                    log("From done button ");
-                    placesProvider.createNearestPlaceList(selectedNearestLat, selectedNearestLog);
 
+                    log("From done button ");
+                    //
+                    placeProvider.updatePosition(selectedNearestLat, selectedNearestLog);
                     Navigator.of(context).pop();
                     // Navigator.pushReplacement(
                     //   context,
@@ -176,6 +169,7 @@ class _NearestMapState extends State<NearestMap> {
     //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
     selectedNearestLat = tappedPoint.latitude;
     selectedNearestLog = tappedPoint.longitude;
+
 
     //////back
   }
