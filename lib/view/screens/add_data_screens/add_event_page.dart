@@ -1,14 +1,13 @@
 import 'dart:developer';
-import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/functions/picking_files.dart';
 import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/services/event_service.dart';
-import 'package:turathi/core/services/google_map_add_event.dart';
+import 'package:turathi/core/providers/event_provider.dart';
+import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
 
@@ -27,10 +26,12 @@ class _AddNewEventState extends State<AddNewEvent> {
   final ticketPrice = TextEditingController();
   final creatorName = TextEditingController();
 
-  //date
+
   bool mapScreenOpened = false;
 
   DateTime selectedDate = DateTime.now();
+  List<double>? data;
+  List<XFile>? images;
 
 
   Future<void> _pickDate() async {
@@ -48,8 +49,7 @@ class _AddNewEventState extends State<AddNewEvent> {
 
   @override
   Widget build(BuildContext context) {
-    EventService _service = EventService();
-    List<XFile>? images;
+    EventProvider eventProvider = EventProvider();
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -120,17 +120,20 @@ class _AddNewEventState extends State<AddNewEvent> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                      ElevatedButton(
-                      onPressed: () async {
-                        setState(() {
-                          mapScreenOpened = true;
-                        });
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddEventMap(),
-                          ),
-                        );
-                      },
+                       onPressed: () async {
+                         final temp = await Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) => AddPlaceMap(),
+                           ),
+                         );
+                         setState(() {
+                           mapScreenOpened = true;
+                           data = temp;
+                         });
+
+
+                       },
                       style: ThemeManager.buttonStyle,
                       child: Text(
                         'Location',
@@ -165,15 +168,15 @@ class _AddNewEventState extends State<AddNewEvent> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (formKey.currentState!.validate() && images != null) {
-                        _service.addEvent(
+                      if (formKey.currentState!.validate() && images != null && data != null) {
+                        eventProvider.addEvent(
                             EventModel(
                               name: name.text,
                               address:  address.text,
                               date: selectedDate,
                               description: description.text,
-                              latitude: 30,
-                              longitude: 30,
+                              latitude: data![0],
+                              longitude: data![1],
                               ticketPrice: double.parse(ticketPrice.text)
                             ),images!);
                       }

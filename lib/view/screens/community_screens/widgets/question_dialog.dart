@@ -3,6 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/functions/picking_files.dart';
+import 'package:turathi/core/models/question_model.dart';
+import 'package:turathi/core/providers/question_provider.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class QuestionDialog extends StatefulWidget {
@@ -13,23 +16,16 @@ class QuestionDialog extends StatefulWidget {
 }
 
 class _QuestionDialogState extends State<QuestionDialog> {
-  final TextEditingController questionController = TextEditingController();
-  XFile? image;
+  final TextEditingController text = TextEditingController();
+  final TextEditingController title = TextEditingController();
 
-  Future<void> _pickImage() async {
-    final imagePicker = ImagePicker();
-    final pickedImage =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+  List<XFile>? images;
 
-    if (pickedImage != null) {
-      setState(() {
-        image = pickedImage;
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    QuestionProvider questionProvider = QuestionProvider();
     return Dialog(
       backgroundColor: ThemeManager.second,
       shape: RoundedRectangleBorder(
@@ -49,8 +45,20 @@ class _QuestionDialogState extends State<QuestionDialog> {
               ),
               const SizedBox(height: 20),
               TextField(
+                controller: title,
+                decoration: InputDecoration(
+                  hintText: 'Title',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: ThemeManager.primary),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: ThemeManager.primary),
+                  ),
+                ),
+              ),
+              TextField(
                 maxLines: 5,
-                controller: questionController,
+                controller: text,
                 decoration: InputDecoration(
                   hintText: 'Ask your question here...',
                   border: OutlineInputBorder(
@@ -61,12 +69,15 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
-              image != null
-                  ? Image.file(File(image!.path))
+              images != null
+                  ? Image.file(File(images![0].path))
                   : const Text('No image selected.'),
               ElevatedButton(
-                onPressed: _pickImage,
+                onPressed: () async {
+                  images = await pickImages();
+                },
                 style: ThemeManager.buttonStyle,
                 child: Text(
                   'Pick Image',
@@ -89,10 +100,13 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   const SizedBox(width: 10),
                   TextButton(
                     onPressed: () {
-                      log(questionController.text);
-                      // Create a question model
-                      // QuestionModel(questionTxt: questionController.text, writerName: userModel, date: DateTime.now(), writtenByExpert: userModelExpert)
-                      // State management
+                      if (text.text.isNotEmpty &&title.text.isNotEmpty&& images != null) {
+                        questionProvider.addQuestion(
+                           QuestionModel(title: title.text, questionTxt: text.text),images!);
+                      }
+                      else {
+                        log('add Question failed');
+                      }
                       Navigator.of(context).pop();
                     },
                     child: Text(
