@@ -44,7 +44,7 @@ class _PlaceCardState extends State<PlaceCard> {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
+                    child: Image.network(
                       widget.placeModel.images![0],
                       fit: BoxFit.fill,
                       color: Colors.black.withOpacity(0.15),

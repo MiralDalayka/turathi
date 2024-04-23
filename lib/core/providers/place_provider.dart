@@ -1,26 +1,42 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/services/place_service.dart';
 
+import '../../utils/shared.dart';
 import '../functions/calculate_distanceInKm.dart';
 import '../models/place_model.dart';
 
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
+  late PlaceList _placeList;
 
+  PlaceProvider() {
+    _getPlaces();
+  }
 
-  Future<String> addPlace({required PlaceModel model, required List<XFile> images}) async {
-    String msg = (await _placeService.addPlace(model: model,images: images).whenComplete(() {
+  Future<PlaceList> get placeList async {
+    if (_placeList == null) {
+      await _getPlaces();
+    }
+    return _placeList;
+  }
+
+  Future<String> addPlace(
+      {required PlaceModel model, required List<XFile> images}) async {
+    String msg = (await _placeService
+        .addPlace(model: model, images: images)
+        .whenComplete(() {
+      _getPlaces();
       notifyListeners();
-
     }));
     return msg;
   }
 
-
-
-  Future<PlaceList> getPlaces() async {
-    return await  _placeService.getPlaces();
+  Future<void> _getPlaces() async {
+    _placeList = await _placeService.getPlaces();
   }
 
   Future<PlaceModel> updatePlace(PlaceModel model) async {
@@ -28,35 +44,41 @@ class PlaceProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-  Future<PlaceList> createNearestPlaceList(selectedNearestLat, selectedNearestLog)async {
 
-   List<PlaceModel> nearestPlaces=[];
- PlaceList places =await getPlaces() ;
+  Future<PlaceList> getNearestPlaceList(
+      selectedNearestLat, selectedNearestLog) async {
+    List<PlaceModel> nearestPlaces = [];
+    PlaceList places = _placeList;
 
     nearestPlaces = places.places.where((place) {
       double distanceInKm = calculateDistanceInKm(
-        lat1:      place.latitude!,
-        lon1:  place.longitude!,
-        lat2:  selectedNearestLat,
-        lon2:   selectedNearestLog,
+        lat1: place.latitude!,
+        lon1: place.longitude!,
+        lat2: selectedNearestLat,
+        lon2: selectedNearestLog,
       );
+      log(distanceInKm.toString());
       return distanceInKm <= 10;
     }).toList();
-   notifyListeners();
 
-   return PlaceList(places: nearestPlaces);
+    return PlaceList(places: nearestPlaces);
   }
-  Future<PlaceList> getMostPopularPlaces()async {
 
-    PlaceList places =await getPlaces() ;
+  Future<PlaceList> getMostPopularPlaces() async {
+    PlaceList places = _placeList;
     final temp;
-    if(places.places.length>=10) {
-      temp= places.places.getRange(0, 9);
+    if (places.places.length >= 10) {
+      temp = places.places.getRange(0, 9);
     } else {
-      temp= places.places.getRange(0, places.places.length-1);
+      temp = places.places.getRange(0, places.places.length - 1);
     }
 
+    return PlaceList(places: temp.toList());
+  }
 
-    return PlaceList(places: temp.toList() );
+  updatePosition(lat,long){
+    selectedNearestLat = lat;
+    selectedNearestLog= long;
+    notifyListeners();
   }
 }

@@ -66,7 +66,7 @@ class _HeaderPartState extends State<HeaderPart> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NearestMap(),
+                    builder: (context) => const NearestMap(),
                   ),
                 );
 

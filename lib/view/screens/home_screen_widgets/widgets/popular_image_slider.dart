@@ -29,7 +29,7 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
     //future widget
     //
     return FutureBuilder(
-        future: placesProvider.getPlaces(),
+        future: placesProvider.placeList,
         builder: (context, snapshot) {
           var data = snapshot.data;
           if (data == null) {
