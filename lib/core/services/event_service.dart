@@ -33,7 +33,7 @@ class EventService {
   Future<EventList> getEvents() async {
     QuerySnapshot eventsData =
     await _fireStore.collection(_collectionName).get().whenComplete(() {
-
+log("get events done");
     }).catchError((error) {
       log(error.toString());
     });
@@ -50,11 +50,12 @@ class EventService {
       data["latitude"] = item.get("latitude");
       data["ticketPrice"] = item.get("ticketPrice");
       data["creatorName"] = item.get("creatorName");
-
       tempModel = EventModel.fromJson(data);
+
       tempModel.images =
       await _filesStorageService.getImages(imageType:ImageType.eventImages.name,
           folderName: tempModel.name!);
+
       eventList.events.add(tempModel);
     }
 

@@ -72,10 +72,9 @@ class MyRouter {
 
       case eventsRoute:
         {
-          // final arg = settings.arguments as List<EventModel>;
+          final arg = settings.arguments as List<EventModel>;
 
-          // return _route(EventsScreen(eventsList: arg));
-          return _route(EventsScreen());
+          return _route(EventsScreen(eventsList: arg));
 
         }
       case eventDetailsRoute:

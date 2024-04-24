@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/picking_files.dart';
 import 'package:turathi/core/models/question_model.dart';
 import 'package:turathi/core/providers/question_provider.dart';
@@ -22,10 +23,11 @@ class _QuestionDialogState extends State<QuestionDialog> {
   List<XFile>? images;
 
 
+  String txt='';
 
   @override
   Widget build(BuildContext context) {
-    QuestionProvider questionProvider = QuestionProvider();
+    QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Dialog(
       backgroundColor: ThemeManager.second,
       shape: RoundedRectangleBorder(
@@ -73,9 +75,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
               ),
 
               const SizedBox(height: 20),
-              images != null
-                  ? Image.file(File(images![0].path))
-                  : const Text('No image selected.'),
+
               ElevatedButton(
                 onPressed: () async {
                   images = await pickImages();
@@ -86,7 +86,15 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   style: ThemeManager.textStyle.copyWith(fontWeight: FontWeight.w300),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+
+              Center(
+                child: Text(
+                 txt,
+                  style: ThemeManager.textStyle.copyWith(fontWeight: FontWeight.w200,color: Colors.red, fontSize: 10),
+                ),
+              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -103,12 +111,18 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   TextButton(
                     onPressed: () {
                       if (text.text.isNotEmpty &&title.text.isNotEmpty&& images != null) {
+                        setState(() {
+                          txt="";
+                        });
                         questionProvider.addQuestion(
                            QuestionModel(title: title.text, questionTxt: text.text),images!);
                         Navigator.of(context).pop();
 
                       }
                       else {
+                      setState(() {
+                        txt="*All field are required";
+                      });
                         log('add Question failed');
                       }
                     },

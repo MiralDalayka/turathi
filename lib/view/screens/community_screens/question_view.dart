@@ -30,12 +30,12 @@ class _QuestionViewState extends State<QuestionView> {
         SizedBox(
           height: height,
           width: double.infinity,
-          // child: Image.network(
-          //   color: Colors.black.withOpacity(0.2),
-          //   colorBlendMode: BlendMode.darken,
-          //   widget.question.imageUrl!,
-          //   fit: BoxFit.cover,
-          // ),
+          child: Image.network(
+            color: Colors.black.withOpacity(0.2),
+            colorBlendMode: BlendMode.darken,
+            widget.question.images![0],
+            fit: BoxFit.cover,
+          ),
         ),
         Positioned(
           top: height - 120,

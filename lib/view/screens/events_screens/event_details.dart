@@ -34,7 +34,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
         SizedBox(
           height: height,
           width: double.infinity,
-          child: Image.asset(
+          child: Image.network(
             widget.eventModel.images![selectedImage],
             fit: BoxFit.cover,
             color: Colors.black.withOpacity(0.1),

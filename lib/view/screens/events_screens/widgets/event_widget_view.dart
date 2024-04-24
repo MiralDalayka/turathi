@@ -39,7 +39,7 @@ class ViewEvent extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
-              child: Image.asset(
+              child: Image.network(
                 eventModel.images![0],
                 fit: BoxFit.cover,
               ),

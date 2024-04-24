@@ -9,9 +9,9 @@ import '../../../utils/layout_manager.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({super.key
-    //, required this.eventsList
+    , required this.eventsList
   });
- // final List<EventModel> eventsList;
+ final List<EventModel> eventsList;
   @override
   State<EventsScreen> createState() => _EventsScreenState();
 }
@@ -47,18 +47,18 @@ class _EventsScreenState extends State<EventsScreen> {
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
           height: LayoutManager.widthNHeight0(context, 0),
-          // child: ListView.separated(
-          //     itemBuilder: (context, index) {
-          //       return ViewEvent(
-          //         eventModel: widget.eventsList[index],
-          //         height: LayoutManager.widthNHeight0(context, 0) * 0.13,
-          //         flag: true,
-          //       );
-          //     },
-          //     separatorBuilder: (context, index) => SizedBox(
-          //           height: LayoutManager.widthNHeight0(context, 0) * 0.015,
-          //         ),
-          //     itemCount: widget.eventsList.length),
+          child: ListView.separated(
+              itemBuilder: (context, index) {
+                return ViewEvent(
+                  eventModel: widget.eventsList[index],
+                  height: LayoutManager.widthNHeight0(context, 0) * 0.13,
+                  flag: true,
+                );
+              },
+              separatorBuilder: (context, index) => SizedBox(
+                    height: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                  ),
+              itemCount: widget.eventsList.length),
         ),
       ),
     );

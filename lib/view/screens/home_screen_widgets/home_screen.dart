@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:turathi/core/models/user_model.dart';
+import 'package:provider/provider.dart';
+import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
 import '../../../core/models/event_model.dart';
@@ -21,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<EventModel>? eventsList;
+  EventList? eventsList;
 
   String _greeting = '';
 
@@ -50,10 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //change it
-
-   // eventsList = events;
-
+  EventProvider eventProvider= Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
@@ -189,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       //nav to all events
                       Navigator.of(context)
-                          .pushNamed(eventsRoute, arguments: eventsList);
+                          .pushNamed(eventsRoute, arguments: eventsList!.events);
                     },
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -219,24 +214,34 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.02,
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // ViewEvent(
-                      //   eventModel: eventsList![0],
-                      //   flag: false,
-                      // ),
-                      SizedBox(
-                        height: LayoutManager.widthNHeight0(context, 1) * 0.04,
-                      ),
-                      // ViewEvent(
-                      //   eventModel: eventsList![1],
-                      //   flag: false,
-                      // ),
-                    ],
-                  ),
-                ),
+              FutureBuilder(
+               future: eventProvider.eventList,
+                builder: (context,snapshot){
+             var    data = snapshot.data;
+                 if(data ==null) {
+                   return const Center(child: CircularProgressIndicator(),);
+                 }
+                 eventsList = data;
+                 return  Expanded(
+                   child: SingleChildScrollView(
+                     child: Column(
+                       children: [
+                         ViewEvent(
+                           eventModel: eventsList!.events[0],
+                           flag: false,
+                         ),
+                         SizedBox(
+                           height: LayoutManager.widthNHeight0(context, 1) * 0.04,
+                         ),
+                         ViewEvent(
+                           eventModel: eventsList!.events[1],
+                           flag: false,
+                         ),
+                       ],
+                     ),
+                   ),
+                 );
+                },
               ),
             ],
           ),

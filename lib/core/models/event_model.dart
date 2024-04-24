@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/utils/shared.dart';
 
 class EventModel {
@@ -24,12 +25,13 @@ class EventModel {
       }){
     id= uuid.v4();
     creatorName = user.name;
+
   }
 
   EventModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    date = json['date'];
+    date = (json["date"] as Timestamp).toDate();
     description = json['description'];
     address = json['address'];
     longitude = json['longitude'];

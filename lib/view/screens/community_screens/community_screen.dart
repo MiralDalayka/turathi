@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:turathi/core/providers/question_provider.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/add_button.dart';
 
@@ -16,8 +18,10 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
+  QuestionList? questionList;
   @override
   Widget build(BuildContext context) {
+    QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
 
       floatingActionButton: AddButton(
@@ -52,21 +56,29 @@ class _CommunityScreenState extends State<CommunityScreen> {
         centerTitle: true,
 
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        // child: SizedBox(
-        //   height: LayoutManager.widthNHeight0(context, 0),
-        //   child: ListView.separated(
-        //       itemBuilder: (context, index) {
-        //         return QuestionBox(
-        //           question: questions[index],
-        //         );
-        //       },
-        //       separatorBuilder: (context, index) => const SizedBox(
-        //             height: 5,
-        //           ),
-        //       itemCount: questions.length),
-        // ),
+      body:FutureBuilder(
+        future: questionProvider.questionList ,
+        builder: (context,snapshot){
+          var data= snapshot.data;
+          if(data==null) return Center(child: CircularProgressIndicator(),);
+          questionList=data ;
+          return  Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: LayoutManager.widthNHeight0(context, 0),
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    return QuestionBox(
+                      question: questionList!.questions[index],
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                        height: 5,
+                      ),
+                  itemCount :questionList!.questions.length),
+            ),
+          );
+        },
       ),
     );
   }

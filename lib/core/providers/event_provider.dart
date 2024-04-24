@@ -7,14 +7,29 @@ import 'package:turathi/core/services/event_service.dart';
 class EventProvider extends ChangeNotifier {
   final EventService _eventService = EventService();
 
+  late EventList _eventList;
+
+
+  EventProvider(){
+    _getEvents();
+  }
+
+  Future<EventList> get eventList async{
+    if(_eventList==null){
+      _getEvents();
+    }
+    return _eventList;
+  }
+
   Future<String> addEvent(EventModel model, List<XFile> images) async {
     String msg = (await _eventService.addEvent(model,images).whenComplete(() {
+      _getEvents();
       notifyListeners();
     }));
     return msg;
   }
 
-  Future<EventList> getEvents() async {
-    return await _eventService.getEvents();
+  Future<void> _getEvents() async {
+    _eventList= await _eventService.getEvents();
   }
 }
