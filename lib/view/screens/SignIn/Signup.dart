@@ -269,3 +269,23 @@ class _SingUpState extends State<SingUp> {
 
 
 }
+
+
+  // onTap: () async {
+  //                         if (signUpController.formKey.currentState!
+  //                             .validate()) {
+  //                           Position? p = await currentLocation.getCurrentLocation();
+  //                           final user = UserModel(
+  //                               name: signUpController.firstName.text,
+  //                               email: signUpController.email.text,
+  //                               pass: signUpController.password.text,
+  //                               phone: signUpController.phone.text,
+  //                               longitude: p?.longitude,
+  //                               latitude: p?.latitude
+
+  //                           );
+  //                           _service.addUser(user);
+  //                           //move 
+  //                                  Navigator.of(context).pushReplacementNamed(signIn);
+  //                         }
+  //                       },

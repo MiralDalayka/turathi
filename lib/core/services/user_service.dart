@@ -68,23 +68,44 @@ class UserService {
 
 
 
-Future<String>  signIn(String email, String password) async {
-   User? user = await _auth.signinwithemailandpassword(email, password);
+// Future<String>  signIn(String email, String password) async {
+//    User? user = await _auth.signinwithemailandpassword(email, password);
+
+//     if (user != null) {
+//       print("User is successfully Signin");
+//       return "Done";
+    
+//       //  Navigator.pushReplacement(
+//       //     context,
+//       //     MaterialPageRoute(
+//       //       builder: (context) => const CustomeBottomNavBar(),
+//       //     ));
+//     } else {
+//       print("error is happend");
+//        return "error";
+//     }
+// }
+
+
+Future<bool> signIn(String email, String password) async {
+    
+
+    User? user = await _auth.signinwithemailandpassword(email, password);
 
     if (user != null) {
+   
       print("User is successfully Signin");
-      return "Done";
+      return true;
     
-      //  Navigator.pushReplacement(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => const CustomeBottomNavBar(),
-      //     ));
+     
     } else {
       print("error is happend");
-       return "error";
+     checkUser=false;
+           return false;
+
+     
     }
-}
+  }
   // print("Email: $email, Password: $password");
   // try {
   //   await _auth.signinwithemailandpassword(email, password);

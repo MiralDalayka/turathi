@@ -27,7 +27,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -69,21 +72,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD13xSiyLKi_8tc_1c7c7xcXuCsUEvJic8',
-    appId: '1:907003448312:ios:e3af70155bc81cf084240d',
+    appId: '1:907003448312:ios:da8d6c016888c49a84240d',
     messagingSenderId: '907003448312',
     projectId: 'turathi-96897',
     storageBucket: 'turathi-96897.appspot.com',
-    iosBundleId: 'com.example.turathi',
+    iosBundleId: 'com.example.turathi.RunnerTests',
   );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCeqMZCEwP_XvXlpnDgnRN1qDhPrDrI5bE',
-    appId: '1:907003448312:web:e318f6ff84be0e9a84240d',
-    messagingSenderId: '907003448312',
-    projectId: 'turathi-96897',
-    authDomain: 'turathi-96897.firebaseapp.com',
-    storageBucket: 'turathi-96897.appspot.com',
-    measurementId: 'G-B0RQB0SHXV',
-  );
-
 }

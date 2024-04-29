@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 
@@ -18,7 +18,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
-
+  UserService userService = UserService();
   final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
 
@@ -34,7 +34,6 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    UserService _service = UserService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -105,7 +104,7 @@ class _LogInState extends State<LogIn> {
                           TextFormFieldWidgetSign(
                             passToggle: false,
                             passController: textController.controllerEmail,
-                            labelText: 'Email Address',
+                            labelText: 'Email',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Email";
@@ -127,7 +126,7 @@ class _LogInState extends State<LogIn> {
                           TextFormFieldWidgetSign(
                             passToggle: true,
                             passController: textController.controllerPass,
-                            labelText: 'Password',
+                            labelText: 'password',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Password";
@@ -137,7 +136,7 @@ class _LogInState extends State<LogIn> {
                                 return null;
                               }
                             },
-                            str: "password",
+                            str: "Password",
                           ),
                         ],
                       ),
@@ -152,31 +151,40 @@ class _LogInState extends State<LogIn> {
                           height:
                               LayoutManager.widthNHeight0(context, 0) * 0.06,
                           child: InkWell(
-                            onTap: ()  {
-                           
+                            onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
-                                _signIp();
+                                bool signInSuccess = await userService.signIn(
+                                  textController.controllerEmail.text,
+                                  textController.controllerPass.text,
+                                );
+                                if (signInSuccess) {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(bottomNavRoute);
+                                } else {
+                                  print("error is happened");
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Error"),
+                                        content: Text(
+                                            "An error has occurred. Don't have an account?"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text("OK"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
-                         
-//                               if (textController.formField.currentState!
-//                                   .validate()) {
-// // _signIp();
-//                                 if (textController.formField.currentState!
-//                                     .validate()) {
-//                                   if (_service.signIn(
-//                                           textController.controllerEmail.text,
-//                                           textController.controllerPass.text) =="Done") {
-//                                     Navigator.of(context)
-//                                         .pushReplacementNamed(bottomNavRoute);
-//                                     textController.controllerEmail.clear();
-//                                     textController.controllerPass.clear();
-//                                   } else
-//                                     print("Big problem");
-//                                 }
-//                               }
                             },
                             child: Container(
                               height:
@@ -259,44 +267,5 @@ class _LogInState extends State<LogIn> {
         ),
       ),
     );
-  }
-
-  void _signIp() async {
-    String email = textController.controllerEmail.text;
-    String pass = textController.controllerPass.text;
-
-    User? user = await _auth.signinwithemailandpassword(email, pass);
-
-    if (user != null) {
-      print("User is successfully Signin");
-      if (mounted) {
-        Navigator.of(context).pushReplacementNamed(bottomNavRoute);
-      }
-      //  Navigator.pushReplacement(
-      //     context,
-      //     MaterialPageRoute(
-      //       builder: (context) => const CustomeBottomNavBar(),
-      //     ));
-    } else {
-      print("error is happend");
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Error"),
-            content: Text("An error has occurred.  don't have an account?"),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-    }
   }
 }
