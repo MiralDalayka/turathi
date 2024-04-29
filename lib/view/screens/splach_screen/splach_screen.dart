@@ -6,21 +6,38 @@ import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late FirebaseAuth auth; // Initialize the FirebaseAuth instance
+
   @override
   void initState() {
-    Timer(
-        const Duration(seconds: 3),
-        () => (FirebaseAuth.instance.currentUser != null)
-            ? Navigator.of(context).pushReplacementNamed(bottomNavRoute)
-            : Navigator.of(context).pushReplacementNamed(signIn));
     super.initState();
+    auth = FirebaseAuth.instance; // Initialize the FirebaseAuth instance
+
+    // Delay for 3 seconds before navigating
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        User? currentUser = auth.currentUser;
+        if (currentUser != null) {
+          currentUser.reload().then((_) {
+            if (FirebaseAuth.instance.currentUser != null) {
+              Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+            } else {
+              Navigator.of(context).pushReplacementNamed(signIn);
+            }
+          });
+        } else {
+          Navigator.of(context).pushReplacementNamed(signIn);
+        }
+      },
+    );
   }
 
   @override

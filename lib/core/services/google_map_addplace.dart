@@ -157,7 +157,7 @@ log("$addPlaceLocatonLat and $addPlaceLocatonLong");
     });
 
     print(
-        'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
+        '--- Latitude: ${tappedPoint.latitude}, --- Longitude: ${tappedPoint.longitude}');
 
     addPlaceLocatonLat = tappedPoint.latitude;
     addPlaceLocatonLong = tappedPoint.longitude;

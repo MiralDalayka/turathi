@@ -13,9 +13,12 @@ class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
   late PlaceList _placeList;
 
-  PlaceProvider() {
-    _getPlaces();
-  }
+PlaceProvider() {
+  // _placeList = PlaceList(places: []); //this to fix eror
+  _getPlaces();
+}
+
+  
 
   Future<PlaceList> get placeList async {
     if (_placeList == null) {
