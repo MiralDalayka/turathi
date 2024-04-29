@@ -105,7 +105,7 @@ UserService _service=UserService();
                           TextFormFieldWidgetSign(
                             passToggle: false,
                             passController: textController.controllerEmail,
-                            labelText: 'Email',
+                            labelText: 'Email Address',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Email";
@@ -127,7 +127,7 @@ UserService _service=UserService();
                           TextFormFieldWidgetSign(
                             passToggle: true,
                             passController: textController.controllerPass,
-                            labelText: 'password',
+                            labelText: 'Password',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Password";
@@ -137,7 +137,7 @@ UserService _service=UserService();
                                 return null;
                               }
                             },
-                            str: "PassWord",
+                            str: "password",
                           ),
                         ],
                       ),

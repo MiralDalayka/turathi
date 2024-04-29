@@ -12,7 +12,9 @@ class EventProvider extends ChangeNotifier {
 
   EventProvider(){
     _getEvents();
+      _eventList = EventList(events: []); //this to fix eror
   }
+  
 
   Future<EventList> get eventList async{
     if(_eventList==null){
