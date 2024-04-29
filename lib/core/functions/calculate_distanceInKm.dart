@@ -26,3 +26,12 @@ double calculateDistanceInKm(
 double _degreesToRadians(double degrees) {
   return degrees * (pi / 180);
 }
+double getFormattedDistance(double distance) {
+  if (distance < 1) {
+    return -1;
+  } else if (distance < 10) {
+    return -10;
+  } else {
+    return distance;
+  }
+}

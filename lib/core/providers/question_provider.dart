@@ -1,21 +1,16 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/question_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 import 'package:turathi/core/services/question_service.dart';
-import 'package:turathi/utils/shared.dart';
-
-
 
 class QuestionProvider extends ChangeNotifier {
   final QuestionService _questionService = QuestionService();
- QuestionList _questionList=QuestionList(questions: []);
-  final FilesStorageService _filesStorageService = FilesStorageService();
+  QuestionList _questionList=QuestionList(questions: []);
   Future<QuestionList> get questionList  async{
     if(_questionList.questions.isEmpty){
-    await  _getQuestions();
+      await  _getQuestions();
     }
     log("_questionList");
     return _questionList;

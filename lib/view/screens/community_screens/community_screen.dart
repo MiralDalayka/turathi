@@ -18,7 +18,11 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
+  // Function to refresh the list of questions
   QuestionList? questionList;
+
+
+
   @override
   Widget build(BuildContext context) {
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
@@ -60,7 +64,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         future: questionProvider.questionList ,
         builder: (context,snapshot){
           var data= snapshot.data;
-          if(data==null) return Center(child: CircularProgressIndicator(),);
+          if(data==null) return const Center(child: CircularProgressIndicator(),);
           questionList=data ;
           return  Padding(
             padding: const EdgeInsets.all(8.0),
@@ -78,6 +82,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   itemCount :questionList!.questions.length),
             ),
           );
+
         },
       ),
     );

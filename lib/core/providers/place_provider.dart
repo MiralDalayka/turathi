@@ -51,12 +51,12 @@ class PlaceProvider extends ChangeNotifier {
     PlaceList places = _placeList;
 
     nearestPlaces = places.places.where((place) {
-      double distanceInKm = calculateDistanceInKm(
+      double distanceInKm = getFormattedDistance(calculateDistanceInKm(
         lat1: place.latitude!,
         lon1: place.longitude!,
         lat2: selectedNearestLat,
         lon2: selectedNearestLog,
-      );
+      ));
       log(distanceInKm.toString());
       return distanceInKm <= 10;
     }).toList();

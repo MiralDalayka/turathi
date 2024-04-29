@@ -31,7 +31,7 @@ class QuestionBox extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: Image.network(
-                      question.images![0]!,
+                      question.images![0],
                       fit: BoxFit.cover,
                       height: 150,
                     ),

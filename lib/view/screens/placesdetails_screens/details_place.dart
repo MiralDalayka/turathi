@@ -155,13 +155,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 height: 3,
                               ),
                               Text(
-                                getFormattedDistance(
+                                "${getFormattedDistance(
                                   calculateDistanceInKm(
-                                   lat1:    widget.placeModel.latitude!,
-                                  lon1:     widget.placeModel.longitude!,
-                                    lat2:   userNearestLat,
-                                 lon2:      userNearestLog),
-                                ),
+                                      lat1: widget.placeModel.latitude!,
+                                      lon1: widget.placeModel.longitude!,
+                                      lat2: userNearestLat,
+                                      lon2: userNearestLog),
+                                ).toInt()}km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,
@@ -308,7 +308,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                                 "assets/images/img_png/dislike.png"),
                                             onPressed: () {
                                               setState(() {
-                                                widget.placeModel.disLike =widget.placeModel.disLike!+ 1;
+                                                widget.placeModel.disLike =
+                                                    widget.placeModel.disLike! +
+                                                        1;
                                               });
                                               print("Thumbs-down clicked ");
                                             },
@@ -501,10 +503,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ? ThemeManager.favIcon:
                        */
 
-
-
-                      color:
-                           ThemeManager.second,
+                      color: ThemeManager.second,
                     ),
                   ),
                 ),
@@ -536,15 +535,5 @@ class _DetailsScreenState extends State<DetailsScreen> {
             )),
       ],
     );
-  }
-}
-
-String getFormattedDistance(double distance) {
-  if (distance < 1) {
-    return "-1Km";
-  } else if (distance < 10) {
-    return "-10km";
-  } else {
-    return "+${distance.toInt()} Km";
   }
 }
