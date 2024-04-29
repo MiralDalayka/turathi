@@ -205,7 +205,7 @@ class _SingUpState extends State<SingUp> {
                             );
                             _service.addUser(user);
                             //move 
-                                   Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+                                   Navigator.of(context).pushReplacementNamed(signIn);
                           }
                         },
                         child: Container(
