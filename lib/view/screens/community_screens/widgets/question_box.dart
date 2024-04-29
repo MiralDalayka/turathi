@@ -30,11 +30,13 @@ class QuestionBox extends StatelessWidget {
                   flex: 1,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
-                    child: Image.network(
+                    child:
+                   question.images!=null|| question.images!.isNotEmpty?
+                    Image.network(
                       question.images![0],
                       fit: BoxFit.cover,
                       height: 150,
-                    ),
+                    ):Image.asset("assets/images/img_png/imageProfile.png"),
                   )),
               const SizedBox(
                 width: 10,

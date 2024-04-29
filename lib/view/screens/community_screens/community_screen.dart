@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/question_provider.dart';
@@ -25,6 +27,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
 
@@ -35,7 +38,9 @@ class _CommunityScreenState extends State<CommunityScreen> {
             builder: (BuildContext context) {
               return QuestionDialog();
             },
-          );
+          ).whenComplete(() => setState(() {
+
+          }));
         },
       ),
       backgroundColor: ThemeManager.background,

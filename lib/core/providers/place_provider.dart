@@ -11,7 +11,7 @@ import '../models/place_model.dart';
 
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
-  late PlaceList _placeList;
+   PlaceList _placeList=PlaceList(places: []);
 
 PlaceProvider() {
   // _placeList = PlaceList(places: []); //this to fix eror
@@ -21,7 +21,7 @@ PlaceProvider() {
   
 
   Future<PlaceList> get placeList async {
-    if (_placeList == null) {
+    if (_placeList.places.isEmpty) {
       await _getPlaces();
     }
     return _placeList;

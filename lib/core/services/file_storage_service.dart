@@ -25,21 +25,25 @@ class FilesStorageService {
 
 
 
-  Future<void> uploadImages(
+  Future<List<String>> uploadImages(
       {required String imageType,required String folderName, required List<XFile> pickedImages}) async {
 
-
+List<String> urlList =[];
     if (pickedImages != null) {
       for (var image in pickedImages) {
         XFile file = XFile(image.path);
         String fileName = basename(image.path);
         Reference storageReference =
             _storageInstance.ref().child('$imageType/$folderName/$fileName');
-        await storageReference.putFile(File(file.path));
+        await storageReference.putFile(File(file.path)).then((p0) async {
+          urlList.add(await p0.ref.getDownloadURL());
+        });
+
       }
     } else {
       log('No data');
     }
+    return urlList;
   }
 
   Future<List<String>> getImages({required String imageType,required String folderName}) async {
