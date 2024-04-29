@@ -7,17 +7,17 @@ import 'package:turathi/core/services/event_service.dart';
 class EventProvider extends ChangeNotifier {
   final EventService _eventService = EventService();
 
-  late EventList _eventList;
+   EventList _eventList=EventList(events: []);
 
 
   EventProvider(){
     _getEvents();
-      _eventList = EventList(events: []); //this to fix eror
+     
   }
   
 
   Future<EventList> get eventList async{
-    if(_eventList==null){
+    if(_eventList.events.isEmpty){
       _getEvents();
     }
     return _eventList;
