@@ -13,6 +13,7 @@ class UserService {
     FirebaseAuth auth = FirebaseAuth.instance;
 
   final String _collectionName = "users";
+  
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
     try {
@@ -62,27 +63,72 @@ class UserService {
     return model;
   }
 
-  //get user name after sign up
 
-  Future<String> signIn(String email, String pass) async {
-    bool mounted = false;
-    try {
-      await _auth.signinwithemailandpassword(email, pass).whenComplete(() => log("SIGN IN DONE"));
-    } catch (e) {
-      if (e is FirebaseAuthException) {
-        log("Error occurred: $e");
-        mounted = true;
-        String errorMessage = "An error occurred during sign in";
-        if (mounted) {
-          return errorMessage;
-        }
-      }
+
+
+
+
+// Future<String>  signIn(String email, String password) async {
+//    User? user = await _auth.signinwithemailandpassword(email, password);
+
+//     if (user != null) {
+//       print("User is successfully Signin");
+//       return "Done";
+    
+//       //  Navigator.pushReplacement(
+//       //     context,
+//       //     MaterialPageRoute(
+//       //       builder: (context) => const CustomeBottomNavBar(),
+//       //     ));
+//     } else {
+//       print("error is happend");
+//        return "error";
+//     }
+// }
+
+
+Future<bool> signIn(String email, String password) async {
+    
+
+    User? user = await _auth.signinwithemailandpassword(email, password);
+
+    if (user != null) {
+   
+      print("User is successfully Signin");
+      return true;
+    
+     
+    } else {
+      print("error is happend");
+     checkUser=false;
+           return false;
+
+     
     }
+  }
+  // print("Email: $email, Password: $password");
+  // try {
+  //   await _auth.signinwithemailandpassword(email, password);
+  //   print("SIGN IN DONE");
+    
+  // } catch (e) {
+  //   print("Error occurred: $e");
+  //   return "An error occurred during sign in";
+  // }
 
-    user = await getUserByEmail(email);
-    return "Done";
+  // //here to retrieve the user info based on email
+  // user = await getUserByEmail(email);
+  // return "Sign in successful";
 
-    } 
+
+
+
+
+
+
+
+
+
     
     signOut() async {
     await auth.signOut();

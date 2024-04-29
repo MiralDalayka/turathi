@@ -8,6 +8,7 @@ import 'package:turathi/core/services/question_service.dart';
 class QuestionProvider extends ChangeNotifier {
   final QuestionService _questionService = QuestionService();
   QuestionList _questionList=QuestionList(questions: []);
+  
   Future<QuestionList> get questionList  async{
     if(_questionList.questions.isEmpty){
       await  _getQuestions();

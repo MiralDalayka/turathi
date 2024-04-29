@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 
@@ -18,7 +18,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
-UserService _service=UserService();
+  UserService userService = UserService();
   final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
 
@@ -34,7 +34,6 @@ UserService _service=UserService();
 
   @override
   Widget build(BuildContext context) {
-    UserService _service = UserService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -76,7 +75,7 @@ UserService _service=UserService();
                                     fontSize: LayoutManager.widthNHeight0(
                                             context, 1) *
                                         0.084,
-                                    color:  ThemeManager.second,
+                                    color: ThemeManager.second,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: ThemeManager.fontFamily),
                               ),
@@ -105,7 +104,7 @@ UserService _service=UserService();
                           TextFormFieldWidgetSign(
                             passToggle: false,
                             passController: textController.controllerEmail,
-                            labelText: 'Email Address',
+                            labelText: 'Email',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Email";
@@ -127,7 +126,7 @@ UserService _service=UserService();
                           TextFormFieldWidgetSign(
                             passToggle: true,
                             passController: textController.controllerPass,
-                            labelText: 'Password',
+                            labelText: 'password',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Enter Password";
@@ -137,7 +136,7 @@ UserService _service=UserService();
                                 return null;
                               }
                             },
-                            str: "password",
+                            str: "Password",
                           ),
                         ],
                       ),
@@ -152,16 +151,40 @@ UserService _service=UserService();
                           height:
                               LayoutManager.widthNHeight0(context, 0) * 0.06,
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
-                                _service.signIn(textController.controllerEmail.text,
-                                    textController.controllerPass.text).whenComplete(() =>   Navigator.of(context)
-                                    .pushReplacementNamed(bottomNavRoute) );
+                                bool signInSuccess = await userService.signIn(
+                                  textController.controllerEmail.text,
+                                  textController.controllerPass.text,
+                                );
+                                if (signInSuccess) {
+                                  Navigator.of(context)
+                                      .pushReplacementNamed(bottomNavRoute);
+                                } else {
+                                  print("error is happened");
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Error"),
+                                        content: Text(
+                                            "An error has occurred. Don't have an account?"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text("OK"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
-
                             },
                             child: Container(
                               height:
@@ -193,13 +216,10 @@ UserService _service=UserService();
                                     if (result == null) {
                                       print('error signing in');
                                     } else {
-
                                       print('sign in');
                                       print(result);
                                       Navigator.of(context)
                                           .pushReplacementNamed(bottomNavRoute);
-
-                          
                                     }
                                   },
                                   child: Text(
@@ -248,6 +268,4 @@ UserService _service=UserService();
       ),
     );
   }
-
-
 }

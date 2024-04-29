@@ -15,16 +15,16 @@ return credential.user;
 return null;
   }
 
-Future<User?> signinwithemailandpassword(String email, String password) async {
-  try {
-    UserCredential credential = await _auth.signInWithEmailAndPassword(email: email, password: password);
-    return credential.user;
-  } catch (e) {
-    print("Sign-in error: $e"); 
-  }
-  return null;
-}
+ Future<User?> signinwithemailandpassword(String email ,String password)async {
+try{
+  UserCredential credential= await _auth.signInWithEmailAndPassword(email: email, password: password);
+return credential.user;
+} catch(e){
+  print("some error occured");
 
+}
+return null;
+  }
 
   Future signinAnon ()async{
     try{
