@@ -18,7 +18,7 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
-UserService _service=UserService();
+
   final FirebaseAuthService _auth = FirebaseAuthService();
   bool flag = false;
 
@@ -76,7 +76,7 @@ UserService _service=UserService();
                                     fontSize: LayoutManager.widthNHeight0(
                                             context, 1) *
                                         0.084,
-                                    color:  ThemeManager.second,
+                                    color: ThemeManager.second,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: ThemeManager.fontFamily),
                               ),
@@ -152,16 +152,31 @@ UserService _service=UserService();
                           height:
                               LayoutManager.widthNHeight0(context, 0) * 0.06,
                           child: InkWell(
-                            onTap: () {
+                            onTap: ()  {
+                           
                               if (textController.formField.currentState!
                                   .validate()) {
-                                _service.signIn(textController.controllerEmail.text,
-                                    textController.controllerPass.text).whenComplete(() =>   Navigator.of(context)
-                                    .pushReplacementNamed(bottomNavRoute) );
+                                _signIp();
                                 textController.controllerEmail.clear();
                                 textController.controllerPass.clear();
                               }
-
+                         
+//                               if (textController.formField.currentState!
+//                                   .validate()) {
+// // _signIp();
+//                                 if (textController.formField.currentState!
+//                                     .validate()) {
+//                                   if (_service.signIn(
+//                                           textController.controllerEmail.text,
+//                                           textController.controllerPass.text) =="Done") {
+//                                     Navigator.of(context)
+//                                         .pushReplacementNamed(bottomNavRoute);
+//                                     textController.controllerEmail.clear();
+//                                     textController.controllerPass.clear();
+//                                   } else
+//                                     print("Big problem");
+//                                 }
+//                               }
                             },
                             child: Container(
                               height:
@@ -193,13 +208,10 @@ UserService _service=UserService();
                                     if (result == null) {
                                       print('error signing in');
                                     } else {
-
                                       print('sign in');
                                       print(result);
                                       Navigator.of(context)
                                           .pushReplacementNamed(bottomNavRoute);
-
-                          
                                     }
                                   },
                                   child: Text(
@@ -249,5 +261,42 @@ UserService _service=UserService();
     );
   }
 
+  void _signIp() async {
+    String email = textController.controllerEmail.text;
+    String pass = textController.controllerPass.text;
 
+    User? user = await _auth.signinwithemailandpassword(email, pass);
+
+    if (user != null) {
+      print("User is successfully Signin");
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+      }
+      //  Navigator.pushReplacement(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (context) => const CustomeBottomNavBar(),
+      //     ));
+    } else {
+      print("error is happend");
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("An error has occurred.  don't have an account?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 }
