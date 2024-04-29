@@ -14,19 +14,26 @@ class QuestionService {
   final FilesStorageService _filesStorageService = FilesStorageService();
 
 
-  Future<String> addQuestion(QuestionModel model, List<XFile> images) async {
+  Future<QuestionModel> addQuestion(QuestionModel model, List<XFile> images) async {
     _fireStore
         .collection(_collectionName)
         .add(model.toJson())
         .whenComplete(() async {
-      _filesStorageService.uploadImages(
+      await _filesStorageService.uploadImages(
           imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!);
+
+
+      model.images =await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
+          folderName: model.title!);
+      log("*******************111****************");
+      log(model.images!.first);
+
     })
         .catchError((error) {
       log(error.toString());
-      return "Failed";
+
     });
-    return "Done";
+    return model;
   }
 
   Future<QuestionList> getQuestions() async {
@@ -54,6 +61,26 @@ class QuestionService {
     }
 
     return questionList;
+  }
+  Future<QuestionModel> getQuestion(String id) async{
+    QuerySnapshot questionData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: id)
+        .get();
+    Map<String, dynamic> data = {};
+
+    QuestionModel tempModel;
+    data["id"] = questionData.docs[0].get("id");
+    data["title"] = questionData.docs[0].get("title");
+    data["questionTxt"] = questionData.docs[0].get("questionTxt");
+    data["writer"] = questionData.docs[0].get("writer");
+
+    tempModel = QuestionModel.fromJson(data);
+    tempModel.images =
+    await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
+        folderName: tempModel.title!);
+
+    return tempModel;
   }
 }
 
