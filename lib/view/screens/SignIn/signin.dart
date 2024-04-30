@@ -155,6 +155,7 @@ class _LogInState extends State<LogIn> {
                             onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
+
                                     
                                 bool signInSuccess = await userService.signIn(
                                   textController.controllerEmail.text,
@@ -164,13 +165,16 @@ class _LogInState extends State<LogIn> {
                                 if (signInSuccess) {
                                   Navigator.of(context)
                                       .pushReplacementNamed(bottomNavRoute);
-                               
+
                                   ////here to get the userInfo
 
-                                usershared=   await userService.getUserByEmail(
-                                          textController.controllerEmail.text);
+                                  usershared = await userService.getUserByEmail(
+                                      textController.controllerEmail.text);
+
                                 
-                                
+
+
+                                      
                                 } else {
                                   print("error is happened");
                                   showDialog(
@@ -192,11 +196,10 @@ class _LogInState extends State<LogIn> {
                                     },
                                   );
                                 }
-                            
                               }
 
-                                //   textController.controllerEmail.clear();
-                                // textController.controllerPass.clear();
+                              //   textController.controllerEmail.clear();
+                              // textController.controllerPass.clear();
                             },
                             child: Container(
                               height:

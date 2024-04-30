@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+   
         print("ddddd ${usershared.name}");
   EventProvider eventProvider= Provider.of<EventProvider>(context);
     return Scaffold(
