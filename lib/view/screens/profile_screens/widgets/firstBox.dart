@@ -36,7 +36,7 @@ class FirstBox extends State<firstBox> {
                 onTap: () {
                   final currentUser = UserService().auth.currentUser;
 
-                  if ( currentUser!.isAnonymous) {//currentUser != null
+                  if (currentUser != null && currentUser.isAnonymous) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
