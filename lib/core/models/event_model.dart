@@ -24,7 +24,7 @@ class EventModel {
         this.ticketPrice = 0,
       }){
     id= uuid.v4();
-    creatorName = user.name;
+    creatorName = usershared.name;
 
   }
 

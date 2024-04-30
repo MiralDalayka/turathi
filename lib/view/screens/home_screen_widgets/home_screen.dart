@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+        print("ddddd ${usershared.name}");
   EventProvider eventProvider= Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -73,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi ${user.name??"Guest"}".toUpperCase(),
+         
+                "Hi ${usershared.name??"Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,

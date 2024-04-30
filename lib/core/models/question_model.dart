@@ -10,7 +10,7 @@ class QuestionModel {
   QuestionModel(
       {  required this.title, required this.questionTxt}){
     id=uuid.v4();
-    writerName = user.name;
+    writerName = usershared.name;
 
   }
 

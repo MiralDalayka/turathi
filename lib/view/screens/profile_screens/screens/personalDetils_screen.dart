@@ -155,7 +155,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.firstName,
-                      str: user.name.toString(),
+                      str: usershared.name.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -179,7 +179,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.secondName,
-                      str:  user.role.toString(),
+                      str:  usershared.role.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -203,7 +203,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.email,
-                      str:  user.email.toString(),
+                      str:  usershared.email.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -227,7 +227,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       width: double.infinity,
                       passToggle: false,
                       passController: signUpController.phone,
-                      str:   user.phone.toString(),
+                      str:   usershared.phone.toString(),
                     ),
                   ],
                 ),
