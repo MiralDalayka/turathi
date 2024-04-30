@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -36,58 +37,7 @@ class _secondBox extends State<SecondBox> {
                   if (currentUser != null && currentUser.isAnonymous) {
                     showDialog(
                       context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          backgroundColor: ThemeManager.primary,
-                          content: Text(
-                            'You Have To Sign In First \nTo View Your Added Places!',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize:
-                                    LayoutManager.widthNHeight0(context, 1) *
-                                        0.035,
-                                fontFamily: ThemeManager.fontFamily),
-                            textAlign: TextAlign.center,
-                          ),
-                          actions: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    usershared = UserModel(
-                                        name: null,
-                                        pass: null,
-                                        email: null,
-                                        phone: null,
-                                        longitude: null,
-                                        latitude: null);
-
-                                    Navigator.of(context).pop();
-                                    UserService().signOut();
-
-                                   
-                               
-
-                                    Navigator.of(context).pushNamed(signIn);
-                                  },
-                                  child: Text(
-                                    'SignIn',
-                                    style: TextStyle(
-                                      fontFamily: ThemeManager.fontFamily,
-                                      color: Colors.white,
-                                      fontSize: LayoutManager.widthNHeight0(
-                                              context, 1) *
-                                          0.035,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
+                      builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To Sign In First \nTo View Your Added Places!"),
                     );
                   } else {
                      Navigator.of(context).pushNamed(addedPlacesRoute);
@@ -118,7 +68,7 @@ class _secondBox extends State<SecondBox> {
                                 fontSize:
                                     LayoutManager.widthNHeight0(context, 1) *
                                         0.038,
-                                fontFamily: 'KohSantepheap',
+                                fontFamily:ThemeManager.fontFamily,
                                 color: ThemeManager.primary,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -132,9 +82,19 @@ class _secondBox extends State<SecondBox> {
                 height: LayoutManager.widthNHeight0(context, 1) * 0.05,
               ),
               InkWell(
-                onTap: () {
-                  Navigator.of(context).pushNamed(requestToBeExpertRoute);
+                 onTap: () {
+                  final currentUser = UserService().auth.currentUser;
+                  if (currentUser != null && currentUser.isAnonymous) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To SignIn First \nTo Rquest To Be An Expert!"),
+                    );
+                  } else {
+                    Navigator.of(context).pushNamed(requestToBeExpertRoute);
+                  }
                 },
+
+               
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
                   child: Row(
@@ -158,7 +118,7 @@ class _secondBox extends State<SecondBox> {
                                 fontSize:
                                     LayoutManager.widthNHeight0(context, 1) *
                                         0.038,
-                                fontFamily: 'KohSantepheap',
+                                fontFamily: ThemeManager.fontFamily,
                                 color: ThemeManager.primary,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -173,3 +133,7 @@ class _secondBox extends State<SecondBox> {
     );
   }
 }
+
+
+
+                  
