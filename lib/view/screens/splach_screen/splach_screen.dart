@@ -28,16 +28,17 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () async {
         User? currentUser = auth.currentUser;
-        // print(currentUser?.email);
+        print(currentUser?.email);
      String? emmail=currentUser?.email;
-     if(emmail!=null){
+     if(emmail !=null){
     if(currentUser?.displayName==null){
       usershared = (await userService.getUserByEmail(
                                      emmail ))!;
     }
      }
+   print(currentUser?.email);
 
-        if (currentUser != null && !currentUser.isAnonymous) {
+        if (currentUser != null ) {
 
           currentUser.reload().then((_) {
 
