@@ -57,7 +57,17 @@ class AddedPlaces extends StatelessWidget {
                 return Center(
                   child: Text('Error: ${snapshot.error}'),
                 );
-              } else if (snapshot.hasData && snapshot.data!.places.isEmpty) {
+              } 
+               else {
+                final currentUserID = usershared.id;
+                print("!!!!!!!!!!!!!!!!!!$currentUserID");
+
+                final userPlaces = snapshot.data!.places
+                    .where((place) => place.userID == currentUserID)
+                    .toList();
+
+                    if(userPlaces.isEmpty){
+
                 return Center(
                   child: Column(
                     children: [
@@ -94,15 +104,11 @@ class AddedPlaces extends StatelessWidget {
                     ],
                   ),
                 );
-              } else {
-                final currentUserID = usershared.id;
-                print("!!!!!!!!!!!!!!!!!!$currentUserID");
 
-                final userPlaces = snapshot.data!.places
-                    .where((place) => place.userID == currentUserID)
-                    .toList();
+                    }
 
-                return Padding(
+               else {
+                      return Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal:
                         LayoutManager.widthNHeight0(context, 1) * 0.05,
@@ -165,6 +171,7 @@ class AddedPlaces extends StatelessWidget {
                     },
                   ),
                 );
+                    }
               }
             },
           );
