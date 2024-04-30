@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 
@@ -69,62 +70,54 @@ class UserService {
     return model;
   }
 
-// Future<String>  signIn(String email, String password) async {
-//    User? user = await _auth.signinwithemailandpassword(email, password);
+  // Future<bool> signIn(String email, String password) async {
+  //   UserModel userModel = await getUserByEmail(email);
 
-//     if (user != null) {
-//       print("User is successfully Signin");
-//       return "Done";
+  //   String? str = userModel.password;
+  //   if (str != null) if (Crypt(str).match(password)) {
+  //     print("User is successfully in match");
 
-//       //  Navigator.pushReplacement(
-//       //     context,
-//       //     MaterialPageRoute(
-//       //       builder: (context) => const CustomeBottomNavBar(),
-//       //     ));
-//     } else {
-//       print("error is happend");
-//        return "error";
-//     }
-// }
+  //     return true;
+  //   }
 
-  Future<bool> signIn(String email, String password) async {
-    // UserModel userModel=UserModel(
-    //                             name: signUpController.firstName.text,
-    //                             email: signUpController.email.text,
-    //                             pass: signUpController.password.text,
-    //                             phone: signUpController.phone.text,
-    //                             longitude: p?.longitude,
-    //                             latitude: p?.latitude);
+  //   User? user = await _auth.signinwithemailandpassword(email, password);
 
-    User? user = await _auth.signinwithemailandpassword(email, password);
+  //   if (user != null) {
+  //     print("User is successfully Signin");
 
-    if (user != null) {
-      print("User is successfully Signin");
-
-      return true;
-    } else {
-      print("error is happend");
-      checkUser = false;
-      return false;
-    }
-  }
-  // print("Email: $email, Password: $password");
-  // try {
-  //   await _auth.signinwithemailandpassword(email, password);
-  //   print("SIGN IN DONE");
-
-  // } catch (e) {
-  //   print("Error occurred: $e");
-  //   return "An error occurred during sign in";
+  //     return true;
+  //   } else {
+  //     print("error is happend 3");
+  //     checkUser = false;
+  //     return false;
+  //   }
   // }
 
-  // //here to retrieve the user info based on email
-  // user = await getUserByEmail(email);
-  // return "Sign in successful";
+Future<bool> signIn(String email, String password) async {
+  UserModel userModel = await getUserByEmail(email);
+
+  String? str = userModel.password;
+  print("@@@@@@@@@@@@@@@@@$str");
+  if (str != null) if (Crypt(str).match(password)) {
+    print("User is successfully in match");
+    return true;
+  }
+
+  User? user = await _auth.signinwithemailandpassword(
+       email, password);
+
+  if (user != null) {
+    print("User is successfully Signin");
+    return true;
+  } else {
+    print("error is happend 3");
+    checkUser = false;
+    return false;
+  }
+}
+
 
   signOut() async {
-
-
     usershared = UserModel(
         name: null,
         pass: null,
@@ -132,7 +125,6 @@ class UserService {
         phone: null,
         longitude: null,
         latitude: null);
-        
 
     await auth.signOut();
     // log("testttttt ${usershared.name}");
@@ -153,6 +145,7 @@ class UserService {
     data["latitude"] = userData.docs[0].get("latitude");
     data["email"] = userData.docs[0].get("email");
     data["phone"] = userData.docs[0].get("phone");
+    data["password"] = userData.docs[0].get("password");
 
     tempModel = UserModel.fromJson(data);
 
