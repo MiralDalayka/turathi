@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -16,9 +17,7 @@ class thirdBox extends StatefulWidget {
 
 class _thirdBox extends State<thirdBox> {
   FirebaseAuth auth = FirebaseAuth.instance;
-  signOut() async {
-    await auth.signOut();
-  }
+  UserService userService = UserService();
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +85,9 @@ class _thirdBox extends State<thirdBox> {
                   padding: EdgeInsets.only(right: 17),
                   child: GestureDetector(
                     onTap: () async {
-                      // await  FirebaseAuth.instance.signOut();
-                      signOut();
+
+
+                      userService.signOut();
 
                       print("sign out");
 

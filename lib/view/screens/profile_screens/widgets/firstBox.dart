@@ -57,18 +57,17 @@ class FirstBox extends State<firstBox> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                     usershared = UserModel(
-                                        name: 'null',
+                                    usershared = UserModel(
+                                        name: null,
                                         pass: null,
-                                        email: '',
-                                        phone: '',
+                                        email: null,
+                                        phone: null,
                                         longitude: null,
                                         latitude: null);
-
+                                        
                                     Navigator.of(context).pop();
                                     UserService().signOut();
 
-                                   
                                     log("sign out");
 
                                     Navigator.of(context).pushNamed(signIn);

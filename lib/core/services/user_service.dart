@@ -126,10 +126,10 @@ class UserService {
 
 
     usershared = UserModel(
-        name: '',
+        name: null,
         pass: null,
-        email: '',
-        phone: '',
+        email: null,
+        phone: null,
         longitude: null,
         latitude: null);
         
