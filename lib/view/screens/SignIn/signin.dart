@@ -1,6 +1,8 @@
+import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
+import 'package:turathi/core/functions/modify_data.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
@@ -160,6 +162,13 @@ class _LogInState extends State<LogIn> {
                                   textController.controllerPass.text,
                                 );
 
+                            
+
+                                print(
+                                    "------>${usershared.password.toString()}");
+
+
+                                //   print("wowowowowowow ${hashPassword(textController.controllerPass.text)}");
                                 if (signInSuccess) {
                                   Navigator.of(context)
                                       .pushReplacementNamed(bottomNavRoute);
@@ -168,9 +177,6 @@ class _LogInState extends State<LogIn> {
 
                                   usershared = await userService.getUserByEmail(
                                       textController.controllerEmail.text);
-
-                                  
-
                                 } else {
                                   print("error is happened");
                                   showDialog(
