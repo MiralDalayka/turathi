@@ -30,7 +30,7 @@ class UserModel {
       this.certificate}){
     role=UsersRole.user.name;
     id =uuid.v4();
-   password= hashPassword(pass);
+   password= (pass);
   }
 
   UserModel.fromJson(Map<String, dynamic> json) {

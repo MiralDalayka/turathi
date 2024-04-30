@@ -30,10 +30,12 @@ class _SplashScreenState extends State<SplashScreen> {
         User? currentUser = auth.currentUser;
         // print(currentUser?.email);
      String? emmail=currentUser?.email;
+     if(emmail!=null){
     if(currentUser?.displayName==null){
       usershared = await userService.getUserByEmail(
-                                     emmail! );
+                                     emmail );
     }
+     }
 
         if (currentUser != null && !currentUser.isAnonymous) {
 

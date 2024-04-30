@@ -20,14 +20,12 @@ class UserService {
       print(
           "email in adduser${model.email.toString()} pass in adduser ${model.password.toString()}");
 
-      if(await _auth.signupwithemailandpassword(model.email.toString(), model.password.toString())==null)
-          {
-            return "The email address is already in use by another account.";
-          }
-        
-
-    } 
-    catch (e) {
+      if (await _auth.signupwithemailandpassword(
+              model.email.toString(), model.password.toString()) ==
+          null) {
+        return "The email address is already in use by another account.";
+      }
+    } catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
         mounted = true;
@@ -98,16 +96,10 @@ class UserService {
     //                             longitude: p?.longitude,
     //                             latitude: p?.latitude);
 
-
-
     User? user = await _auth.signinwithemailandpassword(email, password);
 
     if (user != null) {
       print("User is successfully Signin");
-
-
-  
-
 
       return true;
     } else {
@@ -131,7 +123,19 @@ class UserService {
   // return "Sign in successful";
 
   signOut() async {
+
+
+    usershared = UserModel(
+        name: '',
+        pass: null,
+        email: '',
+        phone: '',
+        longitude: null,
+        latitude: null);
+        
+
     await auth.signOut();
+    // log("testttttt ${usershared.name}");
   }
 
   Future<UserModel> getUserByEmail(String email) async {
@@ -154,6 +158,4 @@ class UserService {
 
     return tempModel;
   }
-
-  
 }

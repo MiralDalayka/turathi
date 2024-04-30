@@ -202,8 +202,8 @@ class _SingUpState extends State<SingUp> {
                                 phone: signUpController.phone.text,
                                 longitude: p?.longitude,
                                 latitude: p?.latitude);
-                                
-                                print("object ${signUpController.firstName.text}");
+
+                              //  print("object ${signUpController.firstName.text}");
 
                             _signUp(context, user, p!);
                           }
