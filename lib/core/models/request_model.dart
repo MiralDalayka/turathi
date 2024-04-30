@@ -9,7 +9,7 @@ class RequestModel {
   RequestModel()
   {
     requestId = uuid.v4();
-    userId = user.id;
+    userId = usershared.id;
     status = 'unapproved';
   }
 

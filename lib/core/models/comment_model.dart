@@ -17,8 +17,8 @@ class CommentModel {
         this.questionId}){
           id=uuid.v4();
           date = DateTime.now();
-          writerName = user.name;
-          writtenByExpert = user.role == UsersRole.expert.name ? 1 : 0;
+          writerName = usershared.name;
+          writtenByExpert = usershared.role == UsersRole.expert.name ? 1 : 0;
 
   }
 

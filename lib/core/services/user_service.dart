@@ -10,16 +10,24 @@ import 'firebase_auth.dart';
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final FirebaseAuthService _auth = FirebaseAuthService();
-    FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   final String _collectionName = "users";
-  
+
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
     try {
-      await _auth.signupwithemailandpassword(
-          model.email.toString(), model.password.toString());
-    } catch (e) {
+      print(
+          "email in adduser${model.email.toString()} pass in adduser ${model.password.toString()}");
+
+      if(await _auth.signupwithemailandpassword(model.email.toString(), model.password.toString())==null)
+          {
+            return "The email address is already in use by another account.";
+          }
+        
+
+    } 
+    catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
         mounted = true;
@@ -63,18 +71,13 @@ class UserService {
     return model;
   }
 
-
-
-
-
-
 // Future<String>  signIn(String email, String password) async {
 //    User? user = await _auth.signinwithemailandpassword(email, password);
 
 //     if (user != null) {
 //       print("User is successfully Signin");
 //       return "Done";
-    
+
 //       //  Navigator.pushReplacement(
 //       //     context,
 //       //     MaterialPageRoute(
@@ -86,31 +89,38 @@ class UserService {
 //     }
 // }
 
+  Future<bool> signIn(String email, String password) async {
+    // UserModel userModel=UserModel(
+    //                             name: signUpController.firstName.text,
+    //                             email: signUpController.email.text,
+    //                             pass: signUpController.password.text,
+    //                             phone: signUpController.phone.text,
+    //                             longitude: p?.longitude,
+    //                             latitude: p?.latitude);
 
-Future<bool> signIn(String email, String password) async {
-    
+
 
     User? user = await _auth.signinwithemailandpassword(email, password);
 
     if (user != null) {
-   
       print("User is successfully Signin");
+
+
+  
+
+
       return true;
-    
-     
     } else {
       print("error is happend");
-     checkUser=false;
-           return false;
-
-     
+      checkUser = false;
+      return false;
     }
   }
   // print("Email: $email, Password: $password");
   // try {
   //   await _auth.signinwithemailandpassword(email, password);
   //   print("SIGN IN DONE");
-    
+
   // } catch (e) {
   //   print("Error occurred: $e");
   //   return "An error occurred during sign in";
@@ -120,21 +130,11 @@ Future<bool> signIn(String email, String password) async {
   // user = await getUserByEmail(email);
   // return "Sign in successful";
 
-
-
-
-
-
-
-
-
-
-    
-    signOut() async {
+  signOut() async {
     await auth.signOut();
   }
 
-  Future<UserModel> getUserByEmail(String email) async{
+  Future<UserModel> getUserByEmail(String email) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('email', isEqualTo: email)
@@ -150,13 +150,10 @@ Future<bool> signIn(String email, String password) async {
     data["email"] = userData.docs[0].get("email");
     data["phone"] = userData.docs[0].get("phone");
 
-
     tempModel = UserModel.fromJson(data);
 
     return tempModel;
   }
 
-
-
+  
 }
-

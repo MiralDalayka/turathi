@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:turathi/core/services/user_service.dart';
+import 'package:turathi/utils/shared.dart';
 
 import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
@@ -13,27 +15,38 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late FirebaseAuth auth; // Initialize the FirebaseAuth instance
+  late FirebaseAuth auth; 
+   UserService userService=UserService();
 
   @override
   void initState() {
     super.initState();
-    auth = FirebaseAuth.instance; // Initialize the FirebaseAuth instance
+    auth = FirebaseAuth.instance; 
 
-    // Delay for 3 seconds before navigating
+
     Timer(
       const Duration(seconds: 3),
-      () {
+      () async {
         User? currentUser = auth.currentUser;
-        if (currentUser != null) {
+        // print(currentUser?.email);
+     String? emmail=currentUser?.email;
+    if(currentUser?.displayName==null){
+      usershared = await userService.getUserByEmail(
+                                     emmail! );
+    }
+
+        if (currentUser != null && !currentUser.isAnonymous) {
+
           currentUser.reload().then((_) {
+
             if (FirebaseAuth.instance.currentUser != null) {
               Navigator.of(context).pushReplacementNamed(bottomNavRoute);
-            } else {
-              Navigator.of(context).pushReplacementNamed(signIn);
-            }
+            } 
+            
+           
           });
-        } else {
+        } 
+        else {
           Navigator.of(context).pushReplacementNamed(signIn);
         }
       },

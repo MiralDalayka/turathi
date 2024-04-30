@@ -42,7 +42,7 @@ class PlaceModel {
       required this.longitude,
       required this.latitude}) {
     id = uuid.v4();
-    userID = user.id;
+    userID = usershared.id;
     status = PlaceStatus.Open.name;
     state = PlaceState.NewPlace.name;
     commentsPlace = [];

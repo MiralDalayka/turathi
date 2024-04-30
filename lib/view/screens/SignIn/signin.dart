@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
+import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
@@ -154,13 +155,26 @@ class _LogInState extends State<LogIn> {
                             onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
+
+                                    
                                 bool signInSuccess = await userService.signIn(
                                   textController.controllerEmail.text,
                                   textController.controllerPass.text,
                                 );
+
                                 if (signInSuccess) {
                                   Navigator.of(context)
                                       .pushReplacementNamed(bottomNavRoute);
+
+                                  ////here to get the userInfo
+
+                                  usershared = await userService.getUserByEmail(
+                                      textController.controllerEmail.text);
+
+                                
+
+
+                                      
                                 } else {
                                   print("error is happened");
                                   showDialog(
@@ -182,9 +196,10 @@ class _LogInState extends State<LogIn> {
                                     },
                                   );
                                 }
-                                textController.controllerEmail.clear();
-                                textController.controllerPass.clear();
                               }
+
+                              //   textController.controllerEmail.clear();
+                              // textController.controllerPass.clear();
                             },
                             child: Container(
                               height:

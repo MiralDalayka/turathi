@@ -52,50 +52,17 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
     }
   }
 
-  Future<void> fetchUserData() async {
-    String currentEmail = FirebaseAuth.instance.currentUser?.email ?? '';
-
-    try {
-      QuerySnapshot<Object?> querySnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: currentEmail)
-          .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        DocumentSnapshot<Object?> userSnapshot = querySnapshot.docs.first;
-
-        Map<String, dynamic>? userData =
-            userSnapshot.data() as Map<String, dynamic>?;
-
-        if (userData != null) {
-          setState(() {
-            name = userData['name'] ?? "";
-            role = userData['role'] ?? "";
-            emailAddress = userData['email'] ?? "";
-            phoneNu = userData['phone'] ?? "";
-          });
-        } else {
-          print('User data is null.');
-        }
-      } else {
-        print('No user found with the current email.....');
-      }
-    } catch (error) {
-      print('Error querying user document: $error');
-    }
-  }
+  
 
   @override
   void initState() {
     super.initState();
-    fetchUserData();
+
   }
 
   @override
   Widget build(BuildContext context) {
-    if (mounted) {
-      fetchUserData();
-    }
+ 
 
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -155,7 +122,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.firstName,
-                      str: user.name.toString(),
+                      str: usershared.name.toString().toUpperCase(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -179,7 +146,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.secondName,
-                      str:  user.role.toString(),
+                      str:  usershared.role.toString().toUpperCase(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -203,7 +170,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.email,
-                      str:  user.email.toString(),
+                      str:  usershared.email.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -227,7 +194,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       width: double.infinity,
                       passToggle: false,
                       passController: signUpController.phone,
-                      str:   user.phone.toString(),
+                      str:   usershared.phone.toString(),
                     ),
                   ],
                 ),

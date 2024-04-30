@@ -17,7 +17,6 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 
-
 class SingUp extends StatefulWidget {
   const SingUp({super.key});
 
@@ -27,6 +26,7 @@ class SingUp extends StatefulWidget {
 
 class _SingUpState extends State<SingUp> {
   late SignUpController signUpController;
+  UserService _service = UserService();
 
   bool flag = false;
 
@@ -48,7 +48,6 @@ class _SingUpState extends State<SingUp> {
   GetCurrentLocation currentLocation = GetCurrentLocation();
 
   Widget build(BuildContext context) {
-    UserService _service = UserService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -73,7 +72,7 @@ class _SingUpState extends State<SingUp> {
                             'assets/images/img_png/profile.png',
                             width: double.infinity,
                             height:
-                            LayoutManager.widthNHeight0(context, 1) * 0.54,
+                                LayoutManager.widthNHeight0(context, 1) * 0.54,
                             fit: BoxFit.fitWidth,
                           ),
                         ),
@@ -89,8 +88,8 @@ class _SingUpState extends State<SingUp> {
                               "Turathi",
                               style: TextStyle(
                                   fontSize:
-                                  LayoutManager.widthNHeight0(context, 1) *
-                                      0.084,
+                                      LayoutManager.widthNHeight0(context, 1) *
+                                          0.084,
                                   color: ThemeManager.second,
                                   fontWeight: FontWeight.bold,
                                   fontFamily: ThemeManager.fontFamily),
@@ -120,7 +119,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                          LayoutManager.widthNHeight0(context, 1) * 0.07,
+                              LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: false,
@@ -131,7 +130,7 @@ class _SingUpState extends State<SingUp> {
                                 return 'Email must not be empty ';
                               }
                               bool emailValid = RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value);
                               if (!emailValid) {
                                 return "Enter valid Email";
@@ -141,7 +140,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                          LayoutManager.widthNHeight0(context, 1) * 0.07,
+                              LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: false,
@@ -152,7 +151,7 @@ class _SingUpState extends State<SingUp> {
                                 return 'Phone must not be empty ';
                               }
                               bool phoneExp =
-                              RegExp(r'^\d{10}$').hasMatch(value);
+                                  RegExp(r'^\d{10}$').hasMatch(value);
 
                               if (!phoneExp) {
                                 return 'Phone number is not valid ';
@@ -163,7 +162,7 @@ class _SingUpState extends State<SingUp> {
                             str: ''),
                         SizedBox(
                           height:
-                          LayoutManager.widthNHeight0(context, 1) * 0.07,
+                              LayoutManager.widthNHeight0(context, 1) * 0.07,
                         ),
                         TextFormFieldWidgetSign(
                             passToggle: true,
@@ -193,19 +192,20 @@ class _SingUpState extends State<SingUp> {
                         onTap: () async {
                           if (signUpController.formKey.currentState!
                               .validate()) {
-                            Position? p = await currentLocation.getCurrentLocation();
+                            Position? p =
+                                await currentLocation.getCurrentLocation();
+
                             final user = UserModel(
                                 name: signUpController.firstName.text,
                                 email: signUpController.email.text,
                                 pass: signUpController.password.text,
                                 phone: signUpController.phone.text,
                                 longitude: p?.longitude,
-                                latitude: p?.latitude
+                                latitude: p?.latitude);
+                                
+                                print("object ${signUpController.firstName.text}");
 
-                            );
-                            _service.addUser(user);
-                            //move 
-                                   Navigator.of(context).pushReplacementNamed(signIn);
+                            _signUp(context, user, p!);
                           }
                         },
                         child: Container(
@@ -233,10 +233,7 @@ class _SingUpState extends State<SingUp> {
                       Text(
                         "Already a member?",
                         style: TextStyle(
-                            fontSize: MediaQuery
-                                .of(context)
-                                .size
-                                .width * .033,
+                            fontSize: MediaQuery.of(context).size.width * .033,
                             fontFamily: ThemeManager.fontFamily,
                             color: Colors.grey[600]),
                       ),
@@ -248,10 +245,7 @@ class _SingUpState extends State<SingUp> {
                             "Sign In",
                             style: TextStyle(
                                 fontSize:
-                                MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width * .033,
+                                    MediaQuery.of(context).size.width * .033,
                                 fontFamily: ThemeManager.fontFamily,
                                 color: Colors.grey[700]),
                           ))
@@ -266,26 +260,41 @@ class _SingUpState extends State<SingUp> {
     );
   }
 
+  void _signUp(BuildContext context, UserModel user, Position p) async {
 
+   
 
+String str=await _service.addUser(user);
+
+      if (str=="Done" ) {
+        print("User is successfully created");
+
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed(signIn);
+        }
+      }
+       else {
+        print("Error occurred during sign up");
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                str,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 3),
+              action: SnackBarAction(
+                label: '',
+                textColor: Colors.white,
+                onPressed: () {},
+              ),
+            ),
+          );
+        }
+      }
+
+  }
 }
-
-
-  // onTap: () async {
-  //                         if (signUpController.formKey.currentState!
-  //                             .validate()) {
-  //                           Position? p = await currentLocation.getCurrentLocation();
-  //                           final user = UserModel(
-  //                               name: signUpController.firstName.text,
-  //                               email: signUpController.email.text,
-  //                               pass: signUpController.password.text,
-  //                               phone: signUpController.phone.text,
-  //                               longitude: p?.longitude,
-  //                               latitude: p?.latitude
-
-  //                           );
-  //                           _service.addUser(user);
-  //                           //move 
-  //                                  Navigator.of(context).pushReplacementNamed(signIn);
-  //                         }
-  //                       },
