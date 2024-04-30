@@ -35,7 +35,8 @@ class FirstBox extends State<firstBox> {
               InkWell(
                 onTap: () {
                   final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
+
+                  if ( currentUser!.isAnonymous) {//currentUser != null
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -64,7 +65,7 @@ class FirstBox extends State<firstBox> {
                                         phone: null,
                                         longitude: null,
                                         latitude: null);
-                                        
+
                                     Navigator.of(context).pop();
                                     UserService().signOut();
 

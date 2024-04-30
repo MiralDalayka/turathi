@@ -1,80 +1,25 @@
-// ignore_for_file: file_names
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/providers/place_provider.dart';
+import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
-import 'package:turathi/view/widgets/added_card.dart';
+import 'package:turathi/view/widgets/place_card.dart';
 
-class AddedPlaces extends StatefulWidget {
-  const AddedPlaces({super.key});
-
-  @override
-  State<AddedPlaces> createState() => _AddedPlaces();
-}
-
-class _AddedPlaces extends State<AddedPlaces> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  late String uid;
-  bool moon = false;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserUid();
-  }
-
-  void fetchUserUid() {
-    final User? user = auth.currentUser;
-    if (user != null) {
-      uid = user.uid;
-    } else {
-      print('User is not authenticated');
-    }
-  }
-
-  void onDeletePressed(PlaceModel deletedProduct) {
-    setState(() {
-      demoPlaces.remove(deletedProduct);
-    });
-  }
-
-  bool haveOfnot = false;
+class AddedPlaces extends StatelessWidget {
+  const AddedPlaces({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> homeWidgets = List.generate(
-      demoPlaces.length,
-      (index) {
-        if (demoPlaces[index].userID == uid) {
-          haveOfnot = true;
-          return Padding(
-            padding: const EdgeInsets.all(0),
-            child: AddedCard(
-              placeModel: demoPlaces[index],
-              onPress: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DetailsScreen(
-                      placeModel: demoPlaces[index],
-                    ),
-                  ),
-                );
-              },
-              onFavoriteChanged: (bool isFavorite) {},
-              onDeletePressed: () {
-                onDeletePressed(demoPlaces[index]);
-              },
-            ),
-          );
-        } else {
-          return Container();
-        }
-      },
-    );
+    double cardWidth = 150;
+    double spacingWidth = 10;
+    double totalWidth = cardWidth + spacingWidth;
+
+    int crossAxisCount =
+        MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -90,7 +35,6 @@ class _AddedPlaces extends State<AddedPlaces> {
             color: ThemeManager.primary,
           ),
         ),
-        // automaticallyImplyLeading: false,
         bottom: PreferredSize(
           preferredSize:
               Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
@@ -100,48 +44,131 @@ class _AddedPlaces extends State<AddedPlaces> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-           
-            if (homeWidgets.isNotEmpty) ...homeWidgets,
-            if (homeWidgets.isEmpty || haveOfnot == false)
-              Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        top: LayoutManager.widthNHeight0(context, 1) * 0.5),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            "Add any historical place u know now",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: ThemeManager.primary,
-                              fontFamily: ThemeManager.fontFamily,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
+      body: Consumer<PlaceProvider>(
+        builder: (context, placeProvider, child) {
+          return FutureBuilder<PlaceList>(
+            future: placeProvider.placeList,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              } else if (snapshot.hasData && snapshot.data!.places.isEmpty) {
+                return Center(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top:
+                                LayoutManager.widthNHeight0(context, 1) * 0.5),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                "Add any historical place u know now",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: ThemeManager.primary,
+                                  fontFamily: ThemeManager.fontFamily,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "It looks like you haven’t add \nany Place just yet.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: ThemeManager.fontFamily,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            "It looks like you haven’t add \nany Place just yet.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: ThemeManager.fontFamily,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else {
+                final currentUserID = usershared.id;
+                print("!!!!!!!!!!!!!!!!!!$currentUserID");
+
+                final userPlaces = snapshot.data!.places
+                    .where((place) => place.userID == currentUserID)
+                    .toList();
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal:
+                        LayoutManager.widthNHeight0(context, 1) * 0.05,
+                  ),
+                  child: GridView.builder(
+                    itemCount: userPlaces.length,
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      childAspectRatio: cardWidth / (cardWidth + 65),
+                      mainAxisSpacing: 1,
+                      crossAxisSpacing: 10,
                     ),
-                  )
-                ],
-              )
-          ],
-        ),
+                    itemBuilder: (context, index) {
+                      final placeModel = userPlaces[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            placeDetailsRoute,
+                            arguments: placeModel,
+                          );
+                        },
+                        child: SizedBox(
+                          width: cardWidth,
+                          child: PlaceCard(
+                            placeModel: placeModel,
+                            onFavoriteChanged: (bool isFavourite) {
+                              // setState(() {
+                              //   final productIndex = demoPlaces
+                              //       .indexWhere((p) => p.id == placeModel.id);
+
+                              //   if (isFavourite) {
+                              //     if (productIndex != -1) {
+                              //       // demoPlaces[productIndex].isFavourite = true;
+                              //       favoritePlaces
+                              //           .add(demoPlaces[productIndex]);
+                              //     }
+                              //   } else {
+                              //     if (productIndex != -1) {
+                              //       // demoPlaces[productIndex].isFavourite = false;
+                              //       favoritePlaces.removeWhere(
+                              //           (p) => p.id == placeModel.id);
+                              //     }
+                              //   }
+                              // });
+                            },
+                            onPress: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsScreen(
+                                    placeModel: placeModel,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+            },
+          );
+        },
       ),
     );
   }

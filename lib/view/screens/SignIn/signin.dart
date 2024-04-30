@@ -157,17 +157,13 @@ class _LogInState extends State<LogIn> {
                             onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
-
                                 bool signInSuccess = await userService.signIn(
                                   textController.controllerEmail.text,
                                   textController.controllerPass.text,
                                 );
 
-                            
-
                                 print(
                                     "------>${usershared.password.toString()}");
-
 
                                 //   print("wowowowowowow ${hashPassword(textController.controllerPass.text)}");
                                 if (signInSuccess) {
@@ -176,8 +172,9 @@ class _LogInState extends State<LogIn> {
 
                                   ////here to get the userInfo
 
-                                  usershared = (await userService.getUserByEmail(
-                                      textController.controllerEmail.text))!;
+                                  usershared = (await userService
+                                      .getUserByEmail(textController
+                                          .controllerEmail.text))!;
                                 } else {
                                   print("error is happened");
                                   showDialog(
