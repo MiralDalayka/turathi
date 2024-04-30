@@ -50,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
    
-        print("ddddd ${usershared.name}");
+        // print("ddddd ${usershared.name}");
+        
   EventProvider eventProvider= Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-         
+
                 "Hi ${usershared.name??"Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,

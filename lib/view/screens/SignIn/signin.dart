@@ -155,8 +155,6 @@ class _LogInState extends State<LogIn> {
                             onTap: () async {
                               if (textController.formField.currentState!
                                   .validate()) {
-
-                                    
                                 bool signInSuccess = await userService.signIn(
                                   textController.controllerEmail.text,
                                   textController.controllerPass.text,
@@ -171,10 +169,8 @@ class _LogInState extends State<LogIn> {
                                   usershared = await userService.getUserByEmail(
                                       textController.controllerEmail.text);
 
-                                
+                                  
 
-
-                                      
                                 } else {
                                   print("error is happened");
                                   showDialog(
@@ -195,11 +191,10 @@ class _LogInState extends State<LogIn> {
                                       );
                                     },
                                   );
+                                  textController.controllerEmail.clear();
+                                  textController.controllerPass.clear();
                                 }
                               }
-
-                              //   textController.controllerEmail.clear();
-                              // textController.controllerPass.clear();
                             },
                             child: Container(
                               height:
@@ -233,6 +228,8 @@ class _LogInState extends State<LogIn> {
                                     } else {
                                       print('sign in');
                                       print(result);
+                                      // usershared.name="Guest";
+                                      print("llolololloolol${usershared.name}");
                                       Navigator.of(context)
                                           .pushReplacementNamed(bottomNavRoute);
                                     }
