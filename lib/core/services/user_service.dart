@@ -94,14 +94,8 @@ class UserService {
   // }
 
 Future<bool> signIn(String email, String password) async {
-  UserModel userModel = await getUserByEmail(email);
-
-  String? str = userModel.password;
-  print("@@@@@@@@@@@@@@@@@$str");
-  if (str != null) if (Crypt(str).match(password)) {
-    print("User is successfully in match");
-    return true;
-  }
+  
+  
 
   User? user = await _auth.signinwithemailandpassword(
        email, password);
@@ -110,10 +104,23 @@ Future<bool> signIn(String email, String password) async {
     print("User is successfully Signin");
     return true;
   } else {
-    print("error is happend 3");
+UserModel? userModel = await getUserByEmail(email);
+
+  String? str = userModel?.password;
+  print("@@@@@@@@@@@@@@@@@$str");
+  if (str != null) if (Crypt(str).match(password)) {
+    print("User is successfully in match");
+    return true;
+  }
+  else {
+     print("error is happend 3");
     checkUser = false;
     return false;
   }
+
+   
+  }
+   return false;
 }
 
 
@@ -130,25 +137,31 @@ Future<bool> signIn(String email, String password) async {
     // log("testttttt ${usershared.name}");
   }
 
-  Future<UserModel> getUserByEmail(String email) async {
-    QuerySnapshot userData = await _fireStore
-        .collection(_collectionName)
-        .where('email', isEqualTo: email)
-        .get();
-    Map<String, dynamic> data = {};
+ 
+  Future<UserModel?> getUserByEmail(String email) async {
+  QuerySnapshot userData = await _fireStore
+      .collection(_collectionName)
+      .where('email', isEqualTo: email)
+      .get();
 
-    UserModel tempModel;
-    data["id"] = userData.docs[0].get("id");
-    data["name"] = userData.docs[0].get("name");
-    data["role"] = userData.docs[0].get("role");
-    data["longitude"] = userData.docs[0].get("longitude");
-    data["latitude"] = userData.docs[0].get("latitude");
-    data["email"] = userData.docs[0].get("email");
-    data["phone"] = userData.docs[0].get("phone");
-    data["password"] = userData.docs[0].get("password");
-
-    tempModel = UserModel.fromJson(data);
-
-    return tempModel;
+  if (userData.docs.isEmpty) {
+    // Email not found in the database
+    return null;
   }
+
+  // Retrieve data from the first document (assuming email is unique)
+  Map<String, dynamic> data = {};
+
+  data["id"] = userData.docs[0].get("id");
+  data["name"] = userData.docs[0].get("name");
+  data["role"] = userData.docs[0].get("role");
+  data["longitude"] = userData.docs[0].get("longitude");
+  data["latitude"] = userData.docs[0].get("latitude");
+  data["email"] = userData.docs[0].get("email");
+  data["phone"] = userData.docs[0].get("phone");
+  data["password"] = userData.docs[0].get("password");
+
+  return UserModel.fromJson(data);
+}
+
 }
