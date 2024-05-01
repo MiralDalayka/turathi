@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(
-                height: LayoutManager.widthNHeight0(context, 1) * 0.02,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.03,
               ),
               FutureBuilder(
                future: eventProvider.eventList,

@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
-
 import '../../utils/shared.dart';
 import 'firebase_auth.dart';
 
@@ -144,13 +142,13 @@ UserModel? userModel = await getUserByEmail(email);
       .where('email', isEqualTo: email)
       .get();
 
-  if (userData.docs.isEmpty) {
-    // Email not found in the database
+  if (userData.docs.isEmpty) {  // Email not found in the DB
+  
     return null;
   }
 
-  // Retrieve data from the first document (assuming email is unique)
-  Map<String, dynamic> data = {};
+
+  Map<String, dynamic> data = {};  // Retrieve data from the first document (assuming email is unique)
 
   data["id"] = userData.docs[0].get("id");
   data["name"] = userData.docs[0].get("name");

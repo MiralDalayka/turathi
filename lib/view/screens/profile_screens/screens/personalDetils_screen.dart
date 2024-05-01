@@ -1,7 +1,3 @@
-// ignore_for_file: file_names
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
@@ -22,55 +18,20 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
   TextController textController = TextController();
   String name = "", role = "", emailAddress = "", phoneNu = "";
 
-  Future<String> resetEmail(String newEmail) async {
-    try {
-      User? firebaseUser = FirebaseAuth.instance.currentUser;
-
-      if (firebaseUser != null) {
-        await firebaseUser.updateEmail(newEmail);
-        return 'Success';
-      } else {
-        return 'User not signed in.';
-      }
-    } catch (error) {
-      return 'Error: $error';
-    }
-  }
-
-  Future<String> resetPassword(String newPassword) async {
-    try {
-      User? firebaseUser = FirebaseAuth.instance.currentUser;
-
-      if (firebaseUser != null) {
-        await firebaseUser.updatePassword(newPassword);
-        return 'Success';
-      } else {
-        return 'User not signed in.';
-      }
-    } catch (error) {
-      return 'Error: $error';
-    }
-  }
-
-  
-
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
- 
-
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
-          'Added Places',
+          'Personal Details',
           style: ThemeManager.textStyle.copyWith(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
             fontWeight: FontWeight.bold,
@@ -78,7 +39,6 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
             color: ThemeManager.primary,
           ),
         ),
-        // automaticallyImplyLeading: false,
         bottom: PreferredSize(
           preferredSize:
               Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
@@ -146,7 +106,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.secondName,
-                      str:  usershared.role.toString().toUpperCase(),
+                      str: usershared.role.toString().toUpperCase(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -170,7 +130,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                         return null;
                       },
                       passController: signUpController.email,
-                      str:  usershared.email.toString(),
+                      str: usershared.email.toString(),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.008,
@@ -194,7 +154,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       width: double.infinity,
                       passToggle: false,
                       passController: signUpController.phone,
-                      str:   usershared.phone.toString(),
+                      str: usershared.phone.toString(),
                     ),
                   ],
                 ),

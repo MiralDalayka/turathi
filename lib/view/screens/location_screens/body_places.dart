@@ -111,8 +111,9 @@ log("$selectedNearestLat,$selectedNearestLog");
           if (placesList!.places.isNotEmpty) {
             return Padding(
               padding: EdgeInsets.only(
-                left: LayoutManager.widthNHeight0(context, 1) * 0.05,
-                right: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                   top: LayoutManager.widthNHeight0(context, 1)*0.04,
+                left: LayoutManager.widthNHeight0(context, 1) * 0.035,
+                right: LayoutManager.widthNHeight0(context, 1) * 0.035,
               ),
               child: GridView.builder(
                 itemCount: placesList!.places.length,
@@ -120,8 +121,8 @@ log("$selectedNearestLat,$selectedNearestLog");
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,
                   childAspectRatio: cardWidth / (cardWidth + 65),
-                  mainAxisSpacing: 1,
-                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 8,//between top
+                  crossAxisSpacing: 16,//between 
                 ),
                 itemBuilder: (context, index) {
                   final placeModel = placesList!.places[index];
