@@ -39,7 +39,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
   @override
   Widget build(BuildContext context) {
 
-    log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
+    // log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
     double cardWidth = 150;
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;
@@ -51,16 +51,16 @@ class _BodyPlacesState extends State<BodyPlaces> {
     var dataList =[];
     if(isMyLocationTab)
 {
-  log("%%%%%%%%%%%%%");
+
   userNearestLat=  32.55390782924759;
   userNearestLog=35.8474562689662;
   dataList.addAll({userNearestLat,userNearestLog});//userNearestLat == 0.0 || userNearestLog == 0.0)
 }
     else{
-      log("**********");
+
 
       dataList.addAll({selectedNearestLat,selectedNearestLog});//((selectedNearestLat
-log("$selectedNearestLat,$selectedNearestLog");
+// log("$selectedNearestLat,$selectedNearestLog");
     }
 
     if ( dataList.first==0.0|| dataList.last==0.0) {

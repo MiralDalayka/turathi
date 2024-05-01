@@ -1,10 +1,9 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/core/providers/question_provider.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 import 'package:turathi/utils/shared.dart';
 
@@ -16,25 +15,17 @@ class QuestionService {
   final FilesStorageService _filesStorageService = FilesStorageService();
 
 
-  Future<List<String>> addQuestion(QuestionModel model, List<XFile> images) async {
-    List<String> url =[];
-    _fireStore
-        .collection(_collectionName)
-        .add(model.toJson())
-        .whenComplete(() async {
-      url= await _filesStorageService.uploadImages(
-          imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!);
-      log("*******************111****************");
-    })
-        .catchError((error) {
-      log(error.toString());
-
+  Future<QuestionModel> addQuestion(QuestionModel model, List<XFile> images) async {
+    model.images = await _filesStorageService.uploadImages(
+        imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!)
+        .whenComplete(() => {
+      _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
+      {
+      })
     });
-if(url.isNotEmpty) {
-  log("Not empty");
-}
-    return url;
 
+
+    return model;
   }
 
   Future<QuestionList> getQuestions() async {

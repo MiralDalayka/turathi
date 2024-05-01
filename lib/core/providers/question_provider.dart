@@ -8,6 +8,7 @@ import 'package:turathi/core/services/question_service.dart';
 class QuestionProvider extends ChangeNotifier {
   final QuestionService _questionService = QuestionService();
   QuestionList _questionList=QuestionList(questions: []);
+  
   Future<QuestionList> get questionList  async{
     if(_questionList.questions.isEmpty){
       await  _getQuestions();
@@ -19,12 +20,13 @@ class QuestionProvider extends ChangeNotifier {
 
 
   Future<String> addQuestion(QuestionModel model, List<XFile> images) async {
-    model.images=await _questionService.addQuestion(model,images);
-    _questionList.questions.add (model);
-    notifyListeners();
-    log("*******************333****************");
-
-    return "done";
+    _questionList.questions.add (await _questionService
+        .addQuestion( model, images)
+        .whenComplete(() async {
+      log("TRUE111111111111111111111111111");
+      notifyListeners();
+    }));
+    return "Done";
   }
 
   Future<void> _getQuestions() async {

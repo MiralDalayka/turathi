@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/services/file_storage_service.dart';
 import 'package:turathi/core/services/place_service.dart';
 
 import '../../utils/shared.dart';
@@ -11,36 +12,47 @@ import '../models/place_model.dart';
 
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
+  FilesStorageService _filesStorageService = FilesStorageService();
    PlaceList _placeList=PlaceList(places: []);
 
 PlaceProvider() {
   // _placeList = PlaceList(places: []); //this to fix eror
-  // _getPlaces();
+
 
 }
 
-  
+
 
   Future<PlaceList> get placeList async {
     if (_placeList.places.isEmpty) {
       await _getPlaces();
     }
+    log(_placeList.places.length.toString());
     return _placeList;
   }
 
   Future<String> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
-    String msg = (await _placeService
-        .addPlace(model: model, images: images)
-        .whenComplete(() {
-      _getPlaces();
-      notifyListeners();
-    }));
-    return msg;
+
+  _placeList.places.add( await _placeService
+      .addPlace(model: model, images: images)
+      .whenComplete(() async {
+    log("Add place successfully");
+    notifyListeners();
+
+  })
+  );
+
+
+    log(_placeList.places.length.toString());
+
+    return "Done";
   }
 
   Future<void> _getPlaces() async {
-    _placeList = await _placeService.getPlaces();
+    _placeList= await _placeService.getPlaces().whenComplete(() => {
+      log("Provider get places")
+    });
   }
 
   Future<PlaceModel> updatePlace(PlaceModel model) async {
@@ -51,10 +63,10 @@ PlaceProvider() {
 
   Future<PlaceList> getNearestPlaceList(
       selectedNearestLat, selectedNearestLog) async {
-    List<PlaceModel> nearestPlaces = [];
-    PlaceList places = _placeList;
 
-    nearestPlaces = places.places.where((place) {
+    // PlaceList places =_placeList;
+
+    List<PlaceModel> nearestPlaces = _placeList.places.where((place) {
       double distanceInKm = getFormattedDistance(calculateDistanceInKm(
         lat1: place.latitude!,
         lon1: place.longitude!,

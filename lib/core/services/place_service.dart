@@ -18,19 +18,47 @@ class PlaceService {
 
   //add -get - update visibility,modify info
 
-  Future<String> addPlace({required PlaceModel model, required List<XFile> images}) async {
-    _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() async {
-      _filesStorageService.uploadImages(
-          imageType: ImageType.placesImages.name,folderName: model.title!, pickedImages: images!);
-
-
-    }).catchError((error) {
-      log("$error%%%");
-      return "Failed";
+  Future<PlaceModel> addPlace({required PlaceModel model, required List<XFile> images}) async {
+    model.images = await _filesStorageService.uploadImages(
+        imageType: ImageType.placesImages.name,folderName: model.title!, pickedImages: images!)
+    .whenComplete(() => {
+     _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
+     {
+     })
     });
-    return "Done";
-  }
 
+
+    return model;
+  }
+  Future<PlaceModel> getPlaceByUserId(String userID) async{
+    QuerySnapshot placeData = await _fireStore
+        .collection(_collectionName)
+        .where('userID', isEqualTo: userID)
+        .get();
+    Map<String, dynamic> data = {};
+
+    PlaceModel tempModel;
+    data["id"] = placeData.docs[0].get("id");
+    data["userID"] = placeData.docs[0].get("userID");
+    data["state"] = placeData.docs[0].get("state");
+    data["address"] = placeData.docs[0].get("address");
+    data["status"] = placeData.docs[0].get("status");
+    data["description"] = placeData.docs[0].get("description");
+    data["title"] = placeData.docs[0].get("title");
+    data["latitude"] = placeData.docs[0].get("latitude");
+    data["longitude"] = placeData.docs[0].get("longitude");
+    data["isVisible"] = placeData.docs[0].get("isVisible");
+    data["disLike"] = placeData.docs[0].get("disLike");
+    data["like"] = placeData.docs[0].get("like");
+
+    tempModel = PlaceModel.fromJson(data);
+    tempModel.images =
+        tempModel.images =
+    await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
+        folderName: tempModel.title!);
+
+    return tempModel;
+  }
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData =
         await _fireStore.collection(_collectionName).orderBy('like',descending: true).get().whenComplete(() {

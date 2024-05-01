@@ -39,7 +39,7 @@ class _Location_PageState extends State<LocationPage>
       setState(() {
         isTabControllerInitialized = true;
 
-        log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
+        // log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
       });
     }
   }
