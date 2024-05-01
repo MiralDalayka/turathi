@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/models/report_model.dart';
+import 'package:turathi/core/providers/report_provider.dart';
 
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
@@ -21,6 +23,7 @@ class _ReportPlaceState extends State<ReportPlace> {
 
   @override
   Widget build(BuildContext context) {
+    ReportProvider reportProvider = ReportProvider();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -39,7 +42,7 @@ class _ReportPlaceState extends State<ReportPlace> {
                 TextFormFieldWidget(
                   hintText: 'Enter Report Description',
                   labelText: '',
-                  maxLine: 15,
+                  maxLine: 5,
                   controller: reasons,
                 ),
                 ElevatedButton(
@@ -47,6 +50,7 @@ class _ReportPlaceState extends State<ReportPlace> {
                     setState(() {
                       if (formKey.currentState!.validate()) {
                         //call controller
+                        reportProvider.addReport(ReportModel(reasons: reasons.text));
                         reasons.clear();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

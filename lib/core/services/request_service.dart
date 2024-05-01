@@ -23,10 +23,10 @@ class RequestService {
     return "Done";
   }
 
-  Future<RequestModel> getRequestById(String requestId) async{
+  Future<RequestModel> getRequestByUserId(String userId) async{
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)
-        .where('requestId', isEqualTo: requestId)
+        .where('userId', isEqualTo: userId)
         .get();
     Map<String, dynamic> data = {};
 

@@ -12,15 +12,8 @@ import '../models/place_model.dart';
 
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
-  FilesStorageService _filesStorageService = FilesStorageService();
+
    PlaceList _placeList=PlaceList(places: []);
-
-PlaceProvider() {
-  // _placeList = PlaceList(places: []); //this to fix eror
-
-
-}
-
 
 
   Future<PlaceList> get placeList async {
@@ -42,7 +35,6 @@ PlaceProvider() {
 
   })
   );
-
 
     log(_placeList.places.length.toString());
 
