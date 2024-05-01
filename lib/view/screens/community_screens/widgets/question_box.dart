@@ -36,7 +36,7 @@ class QuestionBox extends StatelessWidget {
                       question.images![0],
                       fit: BoxFit.cover,
                       height: 150,
-                    ),
+                    ):Image.asset("assets/images/img_png/imageProfile.png"),
                   ),
                 ),
               const SizedBox(
