@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/dialog_signin.dart';
@@ -26,6 +28,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
       floatingActionButton: AddButton(

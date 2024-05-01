@@ -21,8 +21,6 @@ class _QuestionViewState extends State<QuestionView> {
   @override
   Widget build(BuildContext context) {
     var height = LayoutManager.widthNHeight0(context, 0) * 0.35;
-    //controller
-    // comments.sort((a, b) => b.writtenByExpert!.compareTo(a.writtenByExpert!));
     double left = 15;
     double iconLeft = 10;
     return Stack(

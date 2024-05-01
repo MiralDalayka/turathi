@@ -19,16 +19,14 @@ class QuestionService {
         .collection(_collectionName)
         .add(model.toJson())
         .whenComplete(() async {
-      await _filesStorageService.uploadImages(
-          imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!).whenComplete(() async {
-        model.images =await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
-            folderName: model.title!);
-        log("*******************111****************");
-        log(model.images!.first);
-      });
+      model.images =  await _filesStorageService.uploadImages(
+          imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!);
 
 
-
+      // model.images =await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
+      //     folderName: model.title!);
+      log("*******************111****************");
+      log(model.images!.first);
 
     })
         .catchError((error) {
