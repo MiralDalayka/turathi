@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
     print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
-    return MultiProvider(
+    return MultiProvider(//Duke's Diwan  Amman , Downtown 
       providers: [
         ChangeNotifierProvider.value(value: PlaceProvider()),
         ChangeNotifierProvider.value(value: EventProvider()),

@@ -81,7 +81,8 @@ class _PlaceCardState extends State<PlaceCard> {
                   right: LayoutManager.widthNHeight0(context, 1) * 0.0002,
                   child: IconButton(
                     //BACK
-                    icon: Icon(Icons.add),
+                    icon: Icon( Icons.favorite, color:ThemeManager.second,),
+
                     // icon: Icon(
                     //   widget.placeModel.isFavourite!
                     //       ? Icons.favorite
