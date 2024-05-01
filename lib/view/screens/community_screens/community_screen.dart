@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/question_provider.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/add_button.dart';
 
@@ -20,22 +22,29 @@ class CommunityScreen extends StatefulWidget {
 class _CommunityScreenState extends State<CommunityScreen> {
   // Function to refresh the list of questions
   QuestionList? questionList;
-
-
+  UserService userService = UserService();
 
   @override
   Widget build(BuildContext context) {
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
-
       floatingActionButton: AddButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return QuestionDialog();
-            },
-          );
+          final currentUser = UserService().auth.currentUser;
+          if (currentUser != null && currentUser.isAnonymous) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => showCustomAlertDialog(context,
+                  "You Have To SignIn First \nTo Ask Question!"),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return QuestionDialog();
+              },
+            );
+          }
         },
       ),
       backgroundColor: ThemeManager.background,
@@ -58,15 +67,17 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ),
         centerTitle: true,
-
       ),
-      body:FutureBuilder(
-        future: questionProvider.questionList ,
-        builder: (context,snapshot){
-          var data= snapshot.data;
-          if(data==null) return const Center(child: CircularProgressIndicator(),);
-          questionList=data ;
-          return  Padding(
+      body: FutureBuilder(
+        future: questionProvider.questionList,
+        builder: (context, snapshot) {
+          var data = snapshot.data;
+          if (data == null)
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          questionList = data;
+          return Padding(
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               height: LayoutManager.widthNHeight0(context, 0),
@@ -79,13 +90,11 @@ class _CommunityScreenState extends State<CommunityScreen> {
                   separatorBuilder: (context, index) => const SizedBox(
                         height: 5,
                       ),
-                  itemCount :questionList!.questions.length),
+                  itemCount: questionList!.questions.length),
             ),
           );
-
         },
       ),
     );
   }
 }
-

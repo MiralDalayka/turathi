@@ -40,8 +40,8 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
             return ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: ImageSlideshow(
-                width: double.infinity,
-                height: 210,
+                width:LayoutManager.widthNHeight0(context, 1)*1,
+                height: LayoutManager.widthNHeight0(context, 1)*0.58,
                 initialPage: 0,
                 indicatorRadius: 6,
                 indicatorColor: ThemeManager.second,

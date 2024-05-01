@@ -37,6 +37,7 @@ class FirstBox extends State<firstBox> {
                           context,
                           "You Have To SignIn First \nTo See Your Personal Details!"),
                     );
+                    
                   } else {
                     Navigator.of(context).pushNamed(personalDetilsScreen);
                   }
