@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/event_provider.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
 import '../../../core/models/event_model.dart';
@@ -21,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   EventList? eventsList;
-
+UserService userService =UserService();
   String _greeting = '';
 
   @override
@@ -49,10 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-   
-        // print("ddddd ${usershared.name}");
-        
-  EventProvider eventProvider= Provider.of<EventProvider>(context);
+    // print("ddddd ${usershared.name}");
+
+    EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
@@ -62,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               Icons.notifications_none_outlined,
               color: ThemeManager.primary,
+              // size:LayoutManager.widthNHeight0(context, 0) * 2,//here
             ),
             onPressed: () {},
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
@@ -77,13 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-
-                "Hi ${usershared.name??"Guest"}".toUpperCase(),
+                "Hi ${usershared.name ?? "Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontWeight: FontWeight.bold,
-                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
+                  fontSize: LayoutManager.widthNHeight0(context, 0) * 0.03,
                   shadows: const [
                     Shadow(
                       color: Colors.grey,
@@ -99,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
-                  letterSpacing: 4,
+                  letterSpacing: 4.5,
                   fontWeight: FontWeight.bold,
                   shadows: const [
                     Shadow(
@@ -114,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: LayoutManager.widthNHeight0(context, 1) * 0.026,
               ),
               Container(
-                height: LayoutManager.widthNHeight0(context, 1) * 0.16,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.15,
                 width: LayoutManager.widthNHeight0(context, 0),
                 decoration: BoxDecoration(
                   color: ThemeManager.second,
@@ -134,7 +135,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     AddButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(addNewPlaceRoute);
+                        final currentUser = UserService().auth.currentUser;
+                        if (currentUser != null && currentUser.isAnonymous) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                showCustomAlertDialog(context,
+                                    "You Have To SignIn First \nTo Add Place!"),
+                          );
+                        } else {
+                          Navigator.of(context).pushNamed(addNewPlaceRoute);
+                        }
                       },
                     )
                   ],
@@ -175,7 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold,
                       fontFamily: ThemeManager.fontFamily,
                       color: ThemeManager.primary,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                      fontSize:
+                          LayoutManager.widthNHeight0(context, 0) * 0.0165,
                       shadows: const [
                         Shadow(
                           color: Colors.grey,
@@ -188,8 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   InkWell(
                     onTap: () {
                       //nav to all events
-                      Navigator.of(context)
-                          .pushNamed(eventsRoute, arguments: eventsList!.events);
+                      Navigator.of(context).pushNamed(eventsRoute,
+                          arguments: eventsList!.events);
                     },
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -202,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontSize:
-                              LayoutManager.widthNHeight0(context, 0) * 0.015,
+                              LayoutManager.widthNHeight0(context, 0) * 0.0165,
                           shadows: const [
                             Shadow(
                               color: Colors.grey,
@@ -217,35 +229,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(
-                height: LayoutManager.widthNHeight0(context, 1) * 0.02,
+                height: LayoutManager.widthNHeight0(context, 1) * 0.03,
               ),
               FutureBuilder(
-               future: eventProvider.eventList,
-                builder: (context,snapshot){
-             var    data = snapshot.data;
-                 if(data ==null) {
-                   return const Center(child: CircularProgressIndicator(),);
-                 }
-                 eventsList = data;
-                 return  Expanded(
-                   child: SingleChildScrollView(
-                     child: Column(
-                       children: [
-                         ViewEvent(
-                           eventModel: eventsList!.events[0],
-                           flag: false,
-                         ),
-                         SizedBox(
-                           height: LayoutManager.widthNHeight0(context, 1) * 0.04,
-                         ),
-                         ViewEvent(
-                           eventModel: eventsList!.events[1],
-                           flag: false,
-                         ),
-                       ],
-                     ),
-                   ),
-                 );
+                future: eventProvider.eventList,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    var data = snapshot.data;
+                    if (data == null || (data as EventList).events.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No Events are available',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: ThemeManager.fontFamily,
+                            color: ThemeManager.primary,
+                            shadows: const [
+                              Shadow(
+                                color: Colors.grey,
+                                blurRadius: 0.01,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    eventsList = data;
+                    return Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ViewEvent(
+                              eventModel: eventsList!.events[0],
+                              flag: false,
+                            ),
+                            SizedBox(
+                              height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.04,
+                            ),
+                            ViewEvent(
+                              eventModel: eventsList!.events[1],
+                              flag: false,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             ],

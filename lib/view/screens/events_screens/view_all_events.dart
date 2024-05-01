@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
+import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/widgets/add_button.dart';
@@ -8,21 +10,29 @@ import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
 
 class EventsScreen extends StatefulWidget {
-  const EventsScreen({super.key
-    , required this.eventsList
-  });
- final List<EventModel> eventsList;
+  const EventsScreen({super.key, required this.eventsList});
+  final List<EventModel> eventsList;
   @override
   State<EventsScreen> createState() => _EventsScreenState();
 }
 
 class _EventsScreenState extends State<EventsScreen> {
+  UserService userService = UserService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: AddButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(addNewEventRoute);
+          final currentUser = UserService().auth.currentUser;
+          if (currentUser != null && currentUser.isAnonymous) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => showCustomAlertDialog(
+                  context, "You Have To SignIn First \nTo Add Event!"),
+            );
+          } else {
+            Navigator.of(context).pushNamed(addNewEventRoute);
+          }
         },
       ),
       backgroundColor: ThemeManager.background,

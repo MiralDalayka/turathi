@@ -43,18 +43,23 @@ class _PlaceCardState extends State<PlaceCard> {
             child: Stack(
               children: [
                 ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
                     child: Image.network(
                       widget.placeModel.images![0],
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                       color: Colors.black.withOpacity(0.15),
                       colorBlendMode: BlendMode.darken,
-                    )),
+                    ),
+                  ),
+                ),
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 0)*0.045,
-                  left: LayoutManager.widthNHeight0(context, 0)*0.04,
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.045,
+                  left: LayoutManager.widthNHeight0(context, 0) * 0.04,
                   child: Text(
-                    widget.placeModel.title!,
+                    widget.placeModel.title!.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       shadows: const [
@@ -67,13 +72,13 @@ class _PlaceCardState extends State<PlaceCard> {
                       color: ThemeManager.second,
                       fontFamily: ThemeManager.fontFamily,
                       fontWeight: FontWeight.w900,
-                      fontSize: LayoutManager.widthNHeight0(context, 0)*0.017
+                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.017,
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom:  LayoutManager.widthNHeight0(context, 0)*0.001,
-                  right:  LayoutManager.widthNHeight0(context, 1)*0.0002,
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.001,
+                  right: LayoutManager.widthNHeight0(context, 1) * 0.0002,
                   child: IconButton(
                     //BACK
                     icon: Icon(Icons.add),
