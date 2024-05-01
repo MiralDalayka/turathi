@@ -35,9 +35,7 @@ List<String> urlList =[];
         String fileName = basename(image.path);
         Reference storageReference =
             _storageInstance.ref().child('$imageType/$folderName/$fileName');
-        await storageReference.putFile(File(file.path)).then((p0) async {
-          urlList.add(await p0.ref.getDownloadURL());
-        });
+        await storageReference.putFile(File(file.path));
 
       }
     } else {

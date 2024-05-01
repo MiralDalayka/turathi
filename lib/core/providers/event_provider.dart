@@ -11,7 +11,7 @@ class EventProvider extends ChangeNotifier {
 
 
   EventProvider(){
-    _getEvents();
+    // _getEvents();
      
   }
   

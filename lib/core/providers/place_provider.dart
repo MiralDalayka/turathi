@@ -15,7 +15,7 @@ class PlaceProvider extends ChangeNotifier {
 
 PlaceProvider() {
   // _placeList = PlaceList(places: []); //this to fix eror
-  _getPlaces();
+  // _getPlaces();
 
 }
 

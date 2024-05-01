@@ -22,8 +22,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
 
   List<XFile>? images;
 
-
-  String txt='';
+  String txt = '';
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,6 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 ),
               ),
               const SizedBox(height: 20),
-
               TextField(
                 maxLines: 5,
                 controller: text,
@@ -73,9 +71,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 20),
-
               ElevatedButton(
                 onPressed: () async {
                   images = await pickImages();
@@ -83,15 +79,18 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 style: ThemeManager.buttonStyle,
                 child: Text(
                   'Pick Image',
-                  style: ThemeManager.textStyle.copyWith(fontWeight: FontWeight.w300),
+                  style: ThemeManager.textStyle
+                      .copyWith(fontWeight: FontWeight.w300),
                 ),
               ),
               const SizedBox(height: 10),
-
               Center(
                 child: Text(
-                 txt,
-                  style: ThemeManager.textStyle.copyWith(fontWeight: FontWeight.w200,color: Colors.red, fontSize: 10),
+                  txt,
+                  style: ThemeManager.textStyle.copyWith(
+                      fontWeight: FontWeight.w200,
+                      color: Colors.red,
+                      fontSize: 10),
                 ),
               ),
               const SizedBox(height: 10),
@@ -109,20 +108,23 @@ class _QuestionDialogState extends State<QuestionDialog> {
                   ),
                   const SizedBox(width: 10),
                   TextButton(
-                    onPressed: () {
-                      if (text.text.isNotEmpty &&title.text.isNotEmpty&& images != null) {
+                    onPressed: () async {
+                      if (text.text.isNotEmpty &&
+                          title.text.isNotEmpty &&
+                          images != null) {
                         setState(() {
-                          txt="";
+                          txt = "";
                         });
-                        questionProvider.addQuestion(
-                           QuestionModel(title: title.text, questionTxt: text.text),images!);
-                        Navigator.of(context).pop();
-
-                      }
-                      else {
-                      setState(() {
-                        txt="*All field are required";
-                      });
+                        await questionProvider
+                            .addQuestion(
+                                QuestionModel(
+                                    title: title.text, questionTxt: text.text),
+                                images!)
+                            .whenComplete(() => Navigator.of(context).pop());
+                      } else {
+                        setState(() {
+                          txt = "*All field are required";
+                        });
                         log('add Question failed');
                       }
                     },
