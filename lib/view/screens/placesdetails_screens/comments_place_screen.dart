@@ -1,12 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/comment_model.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/models/comment_place_model.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/services/user_service.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/widgets/comment_place_card.dart';
-import 'package:turathi/view/widgets/deff_button%203.dart';
+
 
 import '../../../core/services/comment_service.dart';
 
@@ -25,26 +23,23 @@ class _CommentsPlaceState extends State<CommentsPlace> {
 
   int _commentId = 1;
 
-  bool placeHasComments=false;
+  bool placeHasComments = false;
 
   @override
   Widget build(BuildContext context) {
-    CommentService commentService =CommentService();
+    CommentService commentService = CommentService();
     // List<CommentModel> comments = await commentService.getPlaceComments();
     //BACK
     List<Widget> commentWidgets = List.generate(
       demoComments.length,
       (index) {
         if (demoComments[index].placeID == widget.place.id) {
-            placeHasComments=true;
+          placeHasComments = true;
           return Padding(
-           
             padding: const EdgeInsets.all(0),
             child: CommentCard(
               commentModel: demoComments[index],
-              
             ),
-         
           );
         } else {
           return SizedBox();
@@ -78,13 +73,12 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
-                        width:
-                            LayoutManager.widthNHeight0(context, 1) * 0.005,
+                        width: LayoutManager.widthNHeight0(context, 1) * 0.005,
                         color: ThemeManager.primary),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding:
-                      EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.01),
+                  padding: EdgeInsets.all(
+                      LayoutManager.widthNHeight0(context, 1) * 0.01),
                   child: Column(
                     children: [
                       TextField(
@@ -114,19 +108,32 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                           background: ThemeManager.primary,
                           textColor: ThemeManager.second,
                           onPressed: () {
-                            setState(() {
-                              _commentId++;
-                              demoComments.add(PlaceCommentModel(
-                                id: _commentId.toString(),
-                                date: DateTime.now(),
-                                commentTxt: _textEditingController.text,
-                                writerName: "Alaa Jamal",////this is should be change to the current user name
-                                writtenByExpert: 0,////this is should be change to the current user status
-                                placeID: widget.place.id, 
-                              ));
+                            final currentUser = UserService().auth.currentUser;
+                            if (currentUser != null &&
+                                currentUser.isAnonymous) {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    showCustomAlertDialog(context,
+                                        "You Have To SignIn First \nTo Write Comments!"),
+                              );
+                            } else {
+                              setState(() {
+                                _commentId++;
+                                demoComments.add(PlaceCommentModel(
+                                  id: _commentId.toString(),
+                                  date: DateTime.now(),
+                                  commentTxt: _textEditingController.text,
+                                  writerName:
+                                      "${usershared.name}",
+                                  writtenByExpert:
+                                      0, ////this is should be change to the current user status
+                                  placeID: widget.place.id,
+                                ));
 
-                              _textEditingController.clear();
-                            });
+                                _textEditingController.clear();
+                              });
+                            }
                           },
                           borderWidth: 23,
                         ),
@@ -147,10 +154,11 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                   children: [
                     Divider(height: 1, color: Colors.grey[300]),
                     if (placeHasComments) ...commentWidgets,
-                    if (placeHasComments==false)
+                    if (placeHasComments == false)
                       Padding(
                         padding: EdgeInsets.only(
-                            top: LayoutManager.widthNHeight0(context, 1) * 0.35),
+                            top:
+                                LayoutManager.widthNHeight0(context, 1) * 0.35),
                         child: Center(
                           child: Column(
                             children: [
@@ -161,16 +169,23 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                                   color: ThemeManager.primary,
                                   fontFamily: ThemeManager.fontFamily,
                                   fontWeight: FontWeight.bold,
-                                  fontSize:  LayoutManager.widthNHeight0(context, 0)*0.021,
+                                  fontSize:
+                                      LayoutManager.widthNHeight0(context, 0) *
+                                          0.021,
                                 ),
                               ),
-                              SizedBox(height: LayoutManager.widthNHeight0(context, 0)*0.01),
+                              SizedBox(
+                                  height:
+                                      LayoutManager.widthNHeight0(context, 0) *
+                                          0.01),
                               Text(
                                 "You're welcome to share your\n thoughts and comments!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontFamily: ThemeManager.fontFamily,
-                                  fontSize:  LayoutManager.widthNHeight0(context, 0)*0.02,
+                                  fontSize:
+                                      LayoutManager.widthNHeight0(context, 0) *
+                                          0.02,
                                 ),
                               ),
                             ],
