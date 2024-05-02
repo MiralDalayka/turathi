@@ -20,7 +20,7 @@ class PlaceService {
 
   Future<PlaceModel> addPlace({required PlaceModel model, required List<XFile> images}) async {
     model.images = await _filesStorageService.uploadImages(
-        imageType: ImageType.placesImages.name,folderName: model.title!, pickedImages: images!)
+        imageType: ImageType.placesImages.name,folderName: model.id!, pickedImages: images!)
     .whenComplete(() => {
      _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
      {
@@ -55,7 +55,7 @@ class PlaceService {
     tempModel.images =
         tempModel.images =
     await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
-        folderName: tempModel.title!);
+        folderName: tempModel.id!);
 
     return tempModel;
   }
@@ -91,7 +91,7 @@ class PlaceService {
       tempModel = PlaceModel.fromJson(data);
       tempModel.images =
       await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
-          folderName: tempModel.title!);
+          folderName: tempModel.id!);
 
       placeList.places.add(tempModel);
     }
@@ -105,9 +105,10 @@ class PlaceService {
         .where('id', isEqualTo: placeModel.id)
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
+    log(images.toString());
     if(images != null) {
       placeModel.images!.addAll( await _filesStorageService.uploadImages(
-          imageType: ImageType.placesImages.name,folderName: placeModel.title!, pickedImages: images!)
+          imageType: ImageType.placesImages.name,folderName: placeModel.id!, pickedImages: images!)
     );
     }
     _fireStore

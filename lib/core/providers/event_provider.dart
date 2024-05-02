@@ -18,7 +18,7 @@ class EventProvider extends ChangeNotifier {
 
   Future<EventList> get eventList async{
     if(_eventList.events.isEmpty){
-      _getEvents();
+      await _getEvents();
     }
     return _eventList;
   }

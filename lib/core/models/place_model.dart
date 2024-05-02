@@ -41,7 +41,12 @@ class PlaceModel {
       required this.address,
       required this.longitude,
       required this.latitude,
-      this.status}) {
+      this.status,
+      // this.id,
+      // this.like,
+      // this.disLike,
+      // this.state,
+      }) {
     id = uuid.v4();
     userID = usershared.id;
     status = "Open";

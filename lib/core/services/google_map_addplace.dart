@@ -129,8 +129,8 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-                    log("From done button ");
-log("$addPlaceLocatonLat and $addPlaceLocatonLong");
+//                     log("From done button ");
+// log("$addPlaceLocatonLat and $addPlaceLocatonLong");
                     // placesProvider.createAddPlacesList(
                     //     addPlaceLocatonLat, addPlaceLocatonLong);
 

@@ -17,7 +17,7 @@ class QuestionService {
 
   Future<QuestionModel> addQuestion(QuestionModel model, List<XFile> images) async {
     model.images = await _filesStorageService.uploadImages(
-        imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!)
+        imageType: ImageType.questionImages.name,folderName: model.id!, pickedImages: images!)
         .whenComplete(() => {
       _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
       {
@@ -47,7 +47,7 @@ class QuestionService {
       tempModel = QuestionModel.fromJson(data);
       tempModel.images =
       await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
-          folderName: tempModel.title!);
+          folderName: tempModel.id!);
 
       questionList.questions.add(tempModel);
     }
@@ -70,7 +70,7 @@ class QuestionService {
     tempModel = QuestionModel.fromJson(data);
     tempModel.images =
     await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
-        folderName: tempModel.title!);
+        folderName: tempModel.id!);
 
     return tempModel;
   }

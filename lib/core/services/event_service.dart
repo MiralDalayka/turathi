@@ -20,7 +20,7 @@ class EventService {
         .add(model.toJson())
         .whenComplete(() async {
       _filesStorageService.uploadImages(
-          imageType: ImageType.eventImages.name,folderName: model.name!, pickedImages: images!);
+          imageType: ImageType.eventImages.name,folderName: model.id!, pickedImages: images!);
       log("Event Done -------------------------");
     })
         .catchError((error) {
@@ -54,7 +54,7 @@ log("get events done");
 
       tempModel.images =
       await _filesStorageService.getImages(imageType:ImageType.eventImages.name,
-          folderName: tempModel.name!);
+          folderName: tempModel.id!);
 
       eventList.events.add(tempModel);
     }

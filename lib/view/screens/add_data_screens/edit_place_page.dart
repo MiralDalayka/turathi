@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -29,14 +30,25 @@ class _EditPlaceState extends State<EditPlace> {
   DateTime selectedDate = DateTime.now();
   List<double>? data;
   List<XFile>? images;
+  TextEditingController? title;
+  TextEditingController? description;
+  TextEditingController? address;
+  TextEditingController? status;
+
+
+
 
   @override
+  void initState() {
+    super.initState();
+     title = TextEditingController(text: widget.placeModel.title);
+    description = TextEditingController(text: widget.placeModel.description);
+     address = TextEditingController(text: widget.placeModel.address);
+     status = TextEditingController(text: widget.placeModel.status);
+  }
+  @override
   Widget build(BuildContext context) {
-    final title = TextEditingController(text: widget.placeModel.title);
-    final disc = TextEditingController(text: widget.placeModel.description);
-    final address = TextEditingController(text: widget.placeModel.address);
-    final status = TextEditingController(text: widget.placeModel.status);
-
+log(widget.placeModel.title!);
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -44,7 +56,7 @@ class _EditPlaceState extends State<EditPlace> {
         backgroundColor: ThemeManager.background,
         centerTitle: true,
         title: Text(
-          'Add Place',
+          'Edit Place',
           style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
         ),
         bottom: PreferredSize(
@@ -64,24 +76,24 @@ class _EditPlaceState extends State<EditPlace> {
             child: Column(
               children: [
                 TextFormFieldWidget(
-                  controller: title,
-                  hintText: 'Edit place name',
+                  controller: title!,
                   labelText: 'Name',
+                  hintText: "edit title",
                 ),
                 TextFormFieldWidget(
-                  controller: address,
-                  hintText: 'Edit place address in your words',
+                  controller: address!,
+                  hintText: "edit addredd",
                   labelText: 'Address',
                 ),
                 TextFormFieldWidget(
-                  hintText: 'Edit place description',
+                  hintText: "edit description",
                   labelText: 'Description',
                   maxLine: 3,
-                  controller: disc,
+                  controller: description!,
                 ),
                 TextFormFieldWidget(
-                  controller: status,
-                  hintText: 'Edit place status',
+                  controller: status!,
+                  hintText: "edit status",
                   labelText: 'Status',
                 ),
                 SizedBox(
@@ -142,17 +154,36 @@ class _EditPlaceState extends State<EditPlace> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
+                    if(data ==null){
+                      data = [widget.placeModel.latitude!,widget.placeModel.longitude!];
+                    }
+                    log("images.toString()");
 
+
+                    if(images ==null){
+                      images = [];
+                    }
                     if (formKey.currentState!.validate() && images != null &&data!.isNotEmpty) {
+                      log(title!.text);
+                      widget.placeModel.title = title!.text;
+                      widget.placeModel.status = status!.text;
+                      widget.placeModel.description = description!.text;
+                      widget.placeModel.address = address!.text;
+                      widget.placeModel.latitude = data![0];
+                      widget.placeModel.longitude = data![1];
+
                       placesProvider.updatePlace(
-                         model:  PlaceModel(
-                            title: title.text,
-                            description: disc.text,
-                            address: address.text,
-                            latitude: data![0],
-                            longitude: data![1],
-                           status: status.text
-                          ),
+                          placeModel:  widget.placeModel,
+                         // placeModel:  PlaceModel(
+                         //
+                         //    title: title!.text,
+                         //    description: description!.text,
+                         //    address: address!.text,
+                         //    latitude: data![0],
+                         //    longitude: data![1],
+                         //   status: status!.text,
+                         //
+                         //  ),
                         images:   images!);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Place Updated Successfully")));
@@ -163,7 +194,7 @@ class _EditPlaceState extends State<EditPlace> {
                   },
                   style: ThemeManager.buttonStyle,
                   child: Text(
-                    'Add Place',
+                    'Edit Place',
                     style: ThemeManager.textStyle
                         .copyWith(color: ThemeManager.textColor),
                   ),

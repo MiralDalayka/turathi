@@ -149,7 +149,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                           ),
                         images:   images!);
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Place Successfully")));
+                          const SnackBar(content: Text("Place Added Successfully")));
                       Navigator.pop(context); //BACK
                     } else {
                       log('add place failed');

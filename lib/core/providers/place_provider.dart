@@ -47,10 +47,13 @@ class PlaceProvider extends ChangeNotifier {
     });
   }
 
-  Future<PlaceModel> updatePlace({required PlaceModel model, required List<XFile> images}) async {
-    return await _placeService.updatePlace(placeModel: model,images: images).whenComplete(() {
+  Future<PlaceModel> updatePlace({required PlaceModel placeModel, required List<XFile> images}) async {
+    log(placeModel.toJson().toString());
+    int index = _placeList.places.indexOf(placeModel);
+    _placeList.places[index] = await _placeService.updatePlace(placeModel: placeModel,images: images).whenComplete(() {
       notifyListeners();
     });
+    return placeModel;
   }
 
   Future<String> addLike(PlaceModel placeModel) async {
