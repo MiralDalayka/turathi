@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 
 import 'package:turathi/utils/lib_organizer.dart';
+import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 
 import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
 import 'package:turathi/view/widgets/place_card.dart';
@@ -159,7 +160,7 @@ class AddedPlaces extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => DetailsScreen(
+                                        builder: (context) => EditPlace(
                                           placeModel: placeModel,
                                         ),
                                       ),
