@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/location_screens/body_Places.dart';
+import 'package:turathi/view/screens/location_screens/body_places.dart';
 import 'package:turathi/view/screens/location_screens/location_header.dart';
 
 class LocationPage extends StatefulWidget {
-  const LocationPage({super.key});
+  const LocationPage({Key? key}) : super(key: key);
 
   @override
   State<LocationPage> createState() => _Location_PageState();
@@ -18,8 +18,7 @@ class _Location_PageState extends State<LocationPage>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
   bool isTabControllerInitialized = false;
-
-//here
+  int selectedDistance = 10;
 
   @override
   void initState() {
@@ -58,15 +57,68 @@ class _Location_PageState extends State<LocationPage>
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const HeaderPart(),
+            Container(
+              height: LayoutManager.widthNHeight0(context, 1) * 0.1,
+              width: LayoutManager.widthNHeight0(context, 1) * 0.2,
+              decoration: BoxDecoration(
+                color: ThemeManager.second,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    blurRadius: 2,
+                    offset: const Offset(-1, -1),
+                    spreadRadius: 0,
+                  ),
+                ],
+                border: Border.all(
+                  color: ThemeManager.primary,
+                  width: 1,
+                ),
+              ),
+              child: Center(
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<int>(
+                    value: selectedDistance,
+                    icon: SizedBox.shrink(), // Hide the dropdown arrow
+                    onChanged: (int? newValue) {
+                      setState(() {
+                        selectedDistance = newValue!;
+                      });
+                    },
+                    items: <int>[10, 20, 30, 40, 50]
+                        .map<DropdownMenuItem<int>>((int value) {
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(value.toString(),style: TextStyle(color: ThemeManager.primary),),
+                            const SizedBox(
+                                width:
+                                    4), // Add spacing between number and "Km"
+                            Text("Km",style: TextStyle(color: ThemeManager.primary)),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+            ),
+
+      
+
             Padding(
               padding: const EdgeInsets.only(right: 0), //50//
               child: TabBar(
                 controller: tabController,
                 labelStyle: TextStyle(
-                    fontSize: LayoutManager.widthNHeight0(context, 1) * 0.035,
-                    color: ThemeManager.primary,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: ThemeManager.fontFamily),
+                  fontSize: LayoutManager.widthNHeight0(context, 1) * 0.035,
+                  color: ThemeManager.primary,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: ThemeManager.fontFamily,
+                ),
                 indicatorColor: ThemeManager.primary,
                 labelColor: ThemeManager.primary,
                 unselectedLabelColor: Colors.grey,
@@ -78,15 +130,17 @@ class _Location_PageState extends State<LocationPage>
               ),
             ),
             Expanded(
-                child: TabBarView(
-              controller: tabController,
-              children: [
-                BodyPlaces(tab: 'My Location'),
-                isTabControllerInitialized
-                    ? BodyPlaces(tab: 'Nearest Place')
-                    : const Center(child: CircularProgressIndicator()),
-              ],
-            )),
+              child: TabBarView(
+                controller: tabController,
+                children: [
+                  BodyPlaces(tab: 'My Location', dis_num: selectedDistance),
+                  isTabControllerInitialized
+                      ? BodyPlaces(
+                          tab: 'Nearest Place', dis_num: selectedDistance)
+                      : const Center(child: CircularProgressIndicator()),
+                ],
+              ),
+            ),
           ],
         ),
       ),

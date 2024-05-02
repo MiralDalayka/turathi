@@ -61,17 +61,21 @@ class PlaceProvider extends ChangeNotifier {
   }
 
   Future<PlaceList> getNearestPlaceList(
-      selectedNearestLat, selectedNearestLog) async {
+      selectedNearestLat, selectedNearestLog,  dis_num) async {
+    List<PlaceModel> nearestPlaces = [];
+    PlaceList places = _placeList;
 
-    // PlaceList places =_placeList;
+    nearestPlaces = places.places.where((place) {
 
-    List<PlaceModel> nearestPlaces = _placeList.places.where((place) {
       double distanceInKm = getFormattedDistance(calculateDistanceInKm(
         lat1: place.latitude!,
         lon1: place.longitude!,
         lat2: selectedNearestLat,
         lon2: selectedNearestLog,
-      ));
+      ),
+   dis_num
+      
+      );
       log(distanceInKm.toString());
       return distanceInKm <= 10;
     }).toList();
