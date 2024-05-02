@@ -61,7 +61,9 @@ class PlaceService {
   }
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData =
-        await _fireStore.collection(_collectionName).orderBy('like',descending: true).get().whenComplete(() {
+        await _fireStore.collection(_collectionName)
+            .where('isVisible', isEqualTo:true)
+            .orderBy('like',descending: true).get().whenComplete(() {
       log("getPlaces done");
     }).catchError((error) {
       log(error.toString());
@@ -96,12 +98,18 @@ class PlaceService {
     return placeList;
   }
 
-  Future<PlaceModel> updatePlace(PlaceModel placeModel) async {
+  Future<PlaceModel> updatePlace(
+      {required PlaceModel placeModel, List<XFile>? images}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: placeModel.id)
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
+    if(images != null) {
+      placeModel.images!.addAll( await _filesStorageService.uploadImages(
+          imageType: ImageType.placesImages.name,folderName: placeModel.title!, pickedImages: images!)
+    );
+    }
     _fireStore
         .collection(_collectionName)
         .doc(placeId)
@@ -113,6 +121,27 @@ class PlaceService {
     });
     return placeModel;
   }
+  // Future<PlaceModel> updatePlaceFiled(
+  //     {required String id ,
+  //       required String placeFieldName ,
+  //       required Object placeFieldValue}) async {
+  //   QuerySnapshot placesData = await _fireStore
+  //       .collection(_collectionName)
+  //       .where('id', isEqualTo: id)
+  //       .get();
+  //   String placeId = placesData.docs[0].id; //id for the ref
+  //
+  //   _fireStore
+  //       .collection(_collectionName)
+  //       .doc(placeId)
+  //       .update({placeFieldName: placeFieldValue})
+  //       .whenComplete(() {
+  //     log("UPDATE done");
+  //   }).catchError((error) {
+  //     log(error.toString());
+  //   });
+  //   return placeModel;
+  // }
 
 
 }

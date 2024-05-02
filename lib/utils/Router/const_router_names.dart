@@ -32,7 +32,9 @@ const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
 
 
 
+
 const String requestToBeExpertRoute = '/bottomScreen/Profile/RequestToBeExpert';
+const String editPlaceRoute = '/bottomScreen/profileScreen/AddedPlaces/EditPlace';
 
 
 

@@ -47,8 +47,8 @@ class PlaceProvider extends ChangeNotifier {
     });
   }
 
-  Future<PlaceModel> updatePlace(PlaceModel model) async {
-    return await _placeService.updatePlace(model).whenComplete(() {
+  Future<PlaceModel> updatePlace({required PlaceModel model, required List<XFile> images}) async {
+    return await _placeService.updatePlace(placeModel: model,images: images).whenComplete(() {
       notifyListeners();
     });
   }
@@ -60,7 +60,7 @@ class PlaceProvider extends ChangeNotifier {
       placeModel.state = PlaceState.TrustWorthy.name;
     }
     int index = _placeList.places.indexOf(placeModel);
-    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+    _placeList.places[index] = await _placeService.updatePlace(placeModel: placeModel).whenComplete(() async {
      await getMostPopularPlaces();
     });
     return "Done";
@@ -73,7 +73,7 @@ class PlaceProvider extends ChangeNotifier {
     placeModel.disLike = dilikes;
 
     int index = _placeList.places.indexOf(placeModel);
-    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+    _placeList.places[index] = await _placeService.updatePlace(placeModel: placeModel).whenComplete(() async {
       await getMostPopularPlaces();
     });
     return "Done";
@@ -82,7 +82,7 @@ class PlaceProvider extends ChangeNotifier {
     placeModel.disLike = placeModel.disLike! + 1;
 
     int index = _placeList.places.indexOf(placeModel);
-    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+    _placeList.places[index] = await _placeService.updatePlace(placeModel: placeModel).whenComplete(() async {
       await getMostPopularPlaces();
     });
     return "Done";
@@ -95,7 +95,7 @@ class PlaceProvider extends ChangeNotifier {
     placeModel.disLike = dislikes;
 
     int index = _placeList.places.indexOf(placeModel);
-    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+    _placeList.places[index] = await _placeService.updatePlace(placeModel: placeModel).whenComplete(() async {
       await getMostPopularPlaces();
     });
     return "Done";

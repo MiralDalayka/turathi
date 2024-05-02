@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
+import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
 
@@ -86,6 +87,15 @@ class MyRouter {
       case addNewPlaceRoute:
         {
           return _route(const AddNewPlace());
+        }
+      case editPlaceRoute:
+        {
+          final arg = settings.arguments as PlaceModel;
+
+          return _route(EditPlace(
+            placeModel: arg,
+          ));
+
         }
       case addNewEventRoute:
         {

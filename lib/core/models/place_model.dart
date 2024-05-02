@@ -7,10 +7,10 @@ import 'package:turathi/core/models/comment_model.dart';
 import '../../utils/shared.dart';
 import '../functions/calculate_distanceInKm.dart';
 
-enum PlaceStatus {
-  Closed_For_Maintenance,
-  Open,
-} //
+// enum PlaceStatus {
+//   Closed_For_Maintenance,
+//   Open,
+// } //
 
 enum PlaceState { NewPlace, TrustWorthy } //
 
@@ -40,10 +40,11 @@ class PlaceModel {
       required this.description,
       required this.address,
       required this.longitude,
-      required this.latitude}) {
+      required this.latitude,
+      this.status}) {
     id = uuid.v4();
     userID = usershared.id;
-    status = PlaceStatus.Open.name;
+    status = "Open";
     state = PlaceState.NewPlace.name;
     commentsPlace = [];
     like = 0;
