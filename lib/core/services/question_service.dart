@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,24 +16,15 @@ class QuestionService {
 
 
   Future<QuestionModel> addQuestion(QuestionModel model, List<XFile> images) async {
-    _fireStore
-        .collection(_collectionName)
-        .add(model.toJson())
-        .whenComplete(() async {
-      model.images =  await _filesStorageService.uploadImages(
-          imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!);
-
-
-      // model.images =await _filesStorageService.getImages(imageType:ImageType.questionImages.name,
-      //     folderName: model.title!);
-      log("*******************111****************");
-      log(model.images!.first);
-
-    })
-        .catchError((error) {
-      log(error.toString());
-
+    model.images = await _filesStorageService.uploadImages(
+        imageType: ImageType.questionImages.name,folderName: model.title!, pickedImages: images!)
+        .whenComplete(() => {
+      _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
+      {
+      })
     });
+
+
     return model;
   }
 

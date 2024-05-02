@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/picking_files.dart';
 import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/providers/event_provider.dart';
@@ -49,7 +50,7 @@ class _AddNewEventState extends State<AddNewEvent> {
 
   @override
   Widget build(BuildContext context) {
-    EventProvider eventProvider = EventProvider();
+    final EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(

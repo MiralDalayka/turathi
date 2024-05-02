@@ -68,59 +68,56 @@ class UserService {
     return model;
   }
 
+  Future<bool> signIn(String email, String password) async {
+    UserModel? userModel = await getUserByEmail(email);
+
+    String? str = userModel!.password;
+    if (str != null) if (Crypt(str).match(password)) {
+      print("User is successfully in match");
+
+      return true;
+    }
+
+    User? user = await _auth.signinwithemailandpassword(email, password);
+
+    if (user != null) {
+      print("User is successfully Signin");
+
+      return true;
+    } else {
+      print("error is happend 3");
+      checkUser = false;
+      return false;
+    }
+  }
+
   // Future<bool> signIn(String email, String password) async {
-  //   UserModel userModel = await getUserByEmail(email);
-
-  //   String? str = userModel.password;
-  //   if (str != null) if (Crypt(str).match(password)) {
-  //     print("User is successfully in match");
-
-  //     return true;
-  //   }
-
-  //   User? user = await _auth.signinwithemailandpassword(email, password);
-
+  //
+  //   User? user = await _auth.signinwithemailandpassword(
+  //       email, password);
+  //
   //   if (user != null) {
   //     print("User is successfully Signin");
-
   //     return true;
   //   } else {
-  //     print("error is happend 3");
-  //     checkUser = false;
-  //     return false;
+  //     UserModel? userModel = await getUserByEmail(email);
+  //
+  //     String? str = userModel?.password;
+  //     print("@@@@@@@@@@@@@@@@@$str");
+  //     if (str != null) if (Crypt(str).match(password)) {
+  //       print("User is successfully in match");
+  //       return true;
+  //     }
+  //     else {
+  //       print("error is happend 3");
+  //       checkUser = false;
+  //       return false;
+  //     }
+  //
+  //
   //   }
+  //   return false;
   // }
-
-Future<bool> signIn(String email, String password) async {
-  
-  
-
-  User? user = await _auth.signinwithemailandpassword(
-       email, password);
-
-  if (user != null) {
-    print("User is successfully Signin");
-    return true;
-  } else {
-UserModel? userModel = await getUserByEmail(email);
-
-  String? str = userModel?.password;
-  print("@@@@@@@@@@@@@@@@@$str");
-  if (str != null) if (Crypt(str).match(password)) {
-    print("User is successfully in match");
-    return true;
-  }
-  else {
-     print("error is happend 3");
-    checkUser = false;
-    return false;
-  }
-
-   
-  }
-   return false;
-}
-
 
   signOut() async {
     usershared = UserModel(

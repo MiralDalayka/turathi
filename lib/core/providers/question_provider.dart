@@ -20,13 +20,13 @@ class QuestionProvider extends ChangeNotifier {
 
 
   Future<String> addQuestion(QuestionModel model, List<XFile> images) async {
-    _questionList.questions.add (await _questionService.addQuestion(model,images).whenComplete(()  {
-      log("*******************222****************");
+    _questionList.questions.add (await _questionService
+        .addQuestion( model, images)
+        .whenComplete(() async {
+      log("TRUE111111111111111111111111111");
       notifyListeners();
     }));
-    log("*******************333****************");
-
-    return "done";
+    return "Done";
   }
 
   Future<void> _getQuestions() async {

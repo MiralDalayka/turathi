@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -36,7 +37,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
   @override
   Widget build(BuildContext context) {
 
-    PlaceProvider placeProvider = PlaceProvider();
+    final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -138,7 +139,7 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                   onPressed: () async {
 
                     if (formKey.currentState!.validate() && images != null &&data!.isNotEmpty) {
-                      placeProvider.addPlace(
+                      placesProvider.addPlace(
                          model:  PlaceModel(
                             title: name.text,
                             description: disc.text,

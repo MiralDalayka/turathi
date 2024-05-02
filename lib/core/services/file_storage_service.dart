@@ -38,6 +38,9 @@ List<String> urlList =[];
         await storageReference.putFile(File(file.path)).then((p0) async {
           urlList.add(await p0.ref.getDownloadURL());
         });
+        log(urlList.first);
+        log(urlList.last);
+
 
       }
     } else {

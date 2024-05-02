@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/services/user_service.dart';
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
       () async {
         User? currentUser = auth.currentUser;
-        print(currentUser?.email);
+        // log(currentUser!.email.toString());
      String? emmail=currentUser?.email;
      if(emmail !=null){
     if(currentUser?.displayName==null){
@@ -36,7 +37,8 @@ class _SplashScreenState extends State<SplashScreen> {
                                      emmail ))!;
     }
      }
-   print(currentUser?.email);
+        // log(currentUser!.email.toString());
+
 
         if (currentUser != null ) {
 
