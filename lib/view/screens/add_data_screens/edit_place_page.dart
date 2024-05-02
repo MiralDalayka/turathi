@@ -36,8 +36,10 @@ class _EditPlaceState extends State<EditPlace> {
     final disc = TextEditingController(text: widget.placeModel.description);
     final address = TextEditingController(text: widget.placeModel.address);
     final status = TextEditingController(text: widget.placeModel.status);
+   
 
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
+    
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -154,6 +156,7 @@ class _EditPlaceState extends State<EditPlace> {
                            status: status.text
                           ),
                         images:   images!);
+
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Place Updated Successfully")));
                       Navigator.pop(context);
