@@ -51,20 +51,62 @@ class UserService {
   }
 
   Future<UserModel> updateUser(UserModel model) async {
+
+// //  await FirebaseAuth.instance.currentUser?.updateEmail(usershared.email);
+    
+//     String? email = usershared.email;
+
+//     if (email != null) {
+//       try {
+//         await FirebaseAuth.instance.currentUser?.updateEmail(email);
+//       } catch (error) {
+//         print("Error updating email: $error");
+//       }
+//     } else {
+//       print("Email address is null. Cannot update.");
+//     }
+
+  String? newEmail = model.email;
+
+  if (newEmail != null) {
+    try {
+      await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
+      print("Email updated successfully");
+    } catch (error) {
+      print("Error updating email: $error");
+      // Handle error here
+    }
+  } else {
+    print("New email address is null. Cannot update.");
+    // Handle null email case here
+  }
+
+  // Continue with updating user data in Firestore
+
+
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: model.id)
+        .where('id', isEqualTo: usershared.id)
         .get();
-    String userId = userData.docs[0].id;
-    _fireStore
-        .collection(_collectionName)
-        .doc(userId)
-        .update(model.toJson())
-        .whenComplete(() {
-      log("user data updated successfully");
-    }).catchError((error) {
-      log(error.toString());
-    });
+
+    if (userData.docs.isNotEmpty) {
+      String userId = userData.docs[0].id;
+      print("Hhhhhhhh ${userId}");
+
+      _fireStore
+          .collection(_collectionName)
+          .doc(userId)
+          .update(model.toJson())
+          .whenComplete(() {
+        log("user data updated successfully");
+      }).catchError((error) {
+        log(error.toString());
+        print("object12");
+      });
+    } else {
+      log("No user data found for the provided ID");
+    }
+
     return model;
   }
 
@@ -72,6 +114,7 @@ class UserService {
     UserModel? userModel = await getUserByEmail(email);
 
     String? str = userModel!.password;
+
     if (str != null) if (Crypt(str).match(password)) {
       print("User is successfully in match");
 
@@ -132,31 +175,30 @@ class UserService {
     // log("testttttt ${usershared.name}");
   }
 
- 
   Future<UserModel?> getUserByEmail(String email) async {
-  QuerySnapshot userData = await _fireStore
-      .collection(_collectionName)
-      .where('email', isEqualTo: email)
-      .get();
+    QuerySnapshot userData = await _fireStore
+        .collection(_collectionName)
+        .where('email', isEqualTo: email)
+        .get();
 
-  if (userData.docs.isEmpty) {  // Email not found in the DB
-  
-    return null;
+    if (userData.docs.isEmpty) {
+      // Email not found in the DB
+
+      return null;
+    }
+
+    Map<String, dynamic> data =
+        {}; // Retrieve data from the first document (assuming email is unique)
+
+    data["id"] = userData.docs[0].get("id");
+    data["name"] = userData.docs[0].get("name");
+    data["role"] = userData.docs[0].get("role");
+    data["longitude"] = userData.docs[0].get("longitude");
+    data["latitude"] = userData.docs[0].get("latitude");
+    data["email"] = userData.docs[0].get("email");
+    data["phone"] = userData.docs[0].get("phone");
+    data["password"] = userData.docs[0].get("password");
+
+    return UserModel.fromJson(data);
   }
-
-
-  Map<String, dynamic> data = {};  // Retrieve data from the first document (assuming email is unique)
-
-  data["id"] = userData.docs[0].get("id");
-  data["name"] = userData.docs[0].get("name");
-  data["role"] = userData.docs[0].get("role");
-  data["longitude"] = userData.docs[0].get("longitude");
-  data["latitude"] = userData.docs[0].get("latitude");
-  data["email"] = userData.docs[0].get("email");
-  data["phone"] = userData.docs[0].get("phone");
-  data["password"] = userData.docs[0].get("password");
-
-  return UserModel.fromJson(data);
-}
-
 }

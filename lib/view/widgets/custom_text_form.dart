@@ -47,6 +47,8 @@ class TextFormWidgetRead extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
+     final readly;
+     final labely;
   final IconData iconSufData;
     final int maxlin,maxlog;
 
@@ -54,14 +56,17 @@ class TextFormWidgetRead extends StatelessWidget {
       {super.key,
       required this.passToggle,
       required this.passController,
+      required this.readly,
+
       required this.str,
       this.width = 0,
       this.height = 0,
+    this.labely="",
       
       this.color = Colors.lime,
       this.iconSufData = Icons.add,
        this.maxlin = 1,
-       this.maxlog = 12,
+       this.maxlog = 28,
       required String? Function(dynamic value) validator});
 
   @override
@@ -74,7 +79,7 @@ class TextFormWidgetRead extends StatelessWidget {
           
               maxLines: maxlin,
                 maxLength:maxlog,
-        readOnly: true,
+        readOnly: readly,
           textAlign: TextAlign.left,
           keyboardType: TextInputType.emailAddress,
           obscureText: passToggle,
@@ -115,6 +120,8 @@ class TextFormWidgetRead extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(5))),
             isDense: true,
             hintText: str,
+            
+            labelText: labely,
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
         ));

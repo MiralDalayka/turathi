@@ -28,32 +28,34 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 3),
       () async {
-        User? currentUser = auth.currentUser;
+    //     User? currentUser = auth.currentUser;
+    //     // log(currentUser!.email.toString());
+    //  String? emmail=currentUser?.email;
+    //  if(emmail !=null){
+    // if(currentUser?.displayName==null){
+    //   usershared = (await userService.getUserByEmail(
+                                    //  emmail ))!;
+    // }
+    //  }
+     
         // log(currentUser!.email.toString());
-     String? emmail=currentUser?.email;
-     if(emmail !=null){
-    if(currentUser?.displayName==null){
-      usershared = (await userService.getUserByEmail(
-                                     emmail ))!;
-    }
-     }
-        // log(currentUser!.email.toString());
 
 
-        if (currentUser != null ) {
+        // if (currentUser != null ) {
 
-          currentUser.reload().then((_) {
+        //   currentUser.reload().then((_) {
 
-            if (FirebaseAuth.instance.currentUser != null) {
-              Navigator.of(context).pushReplacementNamed(bottomNavRoute);
-            } 
+        //     if (FirebaseAuth.instance.currentUser != null) {
+        //       Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+        //     } 
             
            
-          });
-        } 
-        else {
+        //   });
+        // } 
+        // else {
+        //   Navigator.of(context).pushReplacementNamed(signIn);
+        // }
           Navigator.of(context).pushReplacementNamed(signIn);
-        }
       },
     );
   }

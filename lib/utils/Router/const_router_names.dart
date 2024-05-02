@@ -23,6 +23,7 @@ const String addedPlacesRoute = '/bottomScreen/profileScreen/AddedPlaces';
 
 const String personalDetilsScreen = '/bottomScreen/profileScreen/PersdonalDetilsScreen';
 
+const String changeInfo= '/bottomScreen/profileScreen/ChangeInfo';
 const String signIn = '/LogIn';
 const String signUp= '/SingUp';
 
