@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/view/screens/location_screens/body_places.dart';
 import '../../../utils/lib_organizer.dart';
 
@@ -6,6 +8,7 @@ class DetailsScreen extends StatefulWidget {
   const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
 
   final PlaceModel placeModel;
+  
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -18,6 +21,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+  final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
+    
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
     double left = 20;
     return Stack(
@@ -253,9 +259,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             icon: Image.asset(
                                                 "assets/images/img_png/like.png"),
                                             onPressed: () {
+                                                    placesProvider.addLike(widget.placeModel);
                                               setState(() {
+                                              
                                                 widget.placeModel.like =
                                                     widget.placeModel.like! + 1;
+
+                                                
                                               });
                                               print("Thumbs-up clicked ");
                                             },
