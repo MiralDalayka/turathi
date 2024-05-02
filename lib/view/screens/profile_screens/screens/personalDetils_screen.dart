@@ -72,6 +72,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       ),
                     ),
                     TextFormWidgetRead(
+                      readly:true,
                       height: LayoutManager.widthNHeight0(context, 1) * 0.2,
                       width: double.infinity,
                       passToggle: false,
@@ -96,6 +97,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       ),
                     ),
                     TextFormWidgetRead(
+                        readly:true,
                       height: LayoutManager.widthNHeight0(context, 1) * 0.2,
                       width: double.infinity,
                       passToggle: false,
@@ -120,6 +122,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       ),
                     ),
                     TextFormWidgetRead(
+                        readly:true,
                       height: LayoutManager.widthNHeight0(context, 1) * 0.2,
                       width: double.infinity,
                       passToggle: false,
@@ -144,6 +147,7 @@ class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
                       ),
                     ),
                     TextFormWidgetRead(
+                        readly:true,
                       height: LayoutManager.widthNHeight0(context, 1) * 0.2,
                       validator: (value) {
                         if (value!.isEmpty) {

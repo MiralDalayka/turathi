@@ -81,9 +81,21 @@ class FirstBox extends State<firstBox> {
               ),
 
               InkWell(
-                onTap: () {
-                  // Navigator.of(context).pushNamed("Change Info");
+               onTap: () {
+                  final currentUser = UserService().auth.currentUser;
+                  if (currentUser != null && currentUser.isAnonymous) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) => showCustomAlertDialog(
+                          context,
+                          "You Have To SignIn First \nTo See Your Personal Details!"),
+                    );
+                    
+                  } else {
+                    Navigator.of(context).pushNamed(changeInfo);
+                  }
                 },
+
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
                   child: Row(
