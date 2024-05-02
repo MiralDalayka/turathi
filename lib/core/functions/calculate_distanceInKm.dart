@@ -26,11 +26,12 @@ double calculateDistanceInKm(
 double _degreesToRadians(double degrees) {
   return degrees * (pi / 180);
 }
-double getFormattedDistance(double distance) {
+
+double getFormattedDistance(double distance,int distance_chos) {
   if (distance < 1) {
     return -1;
-  } else if (distance < 10) {
-    return -10;
+  } else if (distance < distance_chos) {
+    return -distance_chos*0.0;
   } else {
     return distance;
   }
