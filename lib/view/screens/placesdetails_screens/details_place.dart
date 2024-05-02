@@ -321,6 +321,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             icon: new Image.asset(
                                                 "assets/images/img_png/dislike.png"),
                                             onPressed: () {
+                                                placesProvider.addDislike(widget.placeModel);
+                                                
                                               setState(() {
                                                 widget.placeModel.disLike =
                                                     widget.placeModel.disLike! +
