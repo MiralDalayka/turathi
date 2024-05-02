@@ -52,6 +52,13 @@ class PlaceProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+  Future<String> addLike(PlaceModel placeModel) async {
+    int index = _placeList.places.indexOf(placeModel);
+    _placeList.places[index] = await _placeService.addLike(placeModel).whenComplete(() async {
+     await getMostPopularPlaces();
+    });
+    return "Done";
+  }
 
   Future<PlaceList> getNearestPlaceList(
       selectedNearestLat, selectedNearestLog) async {
