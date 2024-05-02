@@ -149,7 +149,9 @@ class _BodyPlacesState extends State<BodyPlaces> {
                           MaterialPageRoute(
                             builder: (context) => DetailsScreen(
                               placeModel: placeModel,
+                              // dis_num
                             ),
+                            ////
                           ),
                         );
                       },

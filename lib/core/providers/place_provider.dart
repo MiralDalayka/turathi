@@ -118,7 +118,7 @@ class PlaceProvider extends ChangeNotifier {
       
       );
       log(distanceInKm.toString());
-      return distanceInKm <= 10;
+      return distanceInKm <= dis_num;
     }).toList();
 
     return PlaceList(places: nearestPlaces);
