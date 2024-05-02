@@ -52,8 +52,6 @@ UserService userService =UserService();
 
   @override
   Widget build(BuildContext context) {
-    // print("ddddd ${usershared.name}");
-
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -235,57 +233,61 @@ UserService userService =UserService();
               FutureBuilder(
                 future: eventProvider.eventList,
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    var data = snapshot.data;
-                    if (data == null || (data as EventList).events.isEmpty) {
+                  var data = snapshot.data;
+                  if (data == null) {
+                    return Center(child: CircularProgressIndicator(backgroundColor: ThemeManager.primary,color: ThemeManager.second,));
+                  }
+                  // if (snapshot.connectionState == ConnectionState.waiting) {
+                  //   return Center(child: CircularProgressIndicator());
+                  // } else if (snapshot.hasError) {
+                  //   return Center(child: Text('Error: ${snapshot.error}'));
+                  // } else
+                  eventsList =  data;
 
-                      return Padding(
-                        padding:  EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1)*0.2),
-                        child: Center(
-                          child: Text(
-                            'No Events are available',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: ThemeManager.fontFamily,
-                              color: ThemeManager.primary,
-                              shadows: const [
-                                Shadow(
-                                  color: Colors.grey,
-                                  blurRadius: 0.01,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
+                    if (data.events.isNotEmpty) {
+                      return Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              ViewEvent(
+                                eventModel: eventsList!.events[0],
+                                flag: false,
+                              ),
+                              SizedBox(
+                                height: LayoutManager.widthNHeight0(context, 1) *
+                                    0.04,
+                              ),
+                              ViewEvent(
+                                eventModel: eventsList!.events[1],
+                                flag: false,
+                              ),
+                            ],
                           ),
                         ),
                       );
+
                     }
-                    eventsList = data;
-                    return Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ViewEvent(
-                              eventModel: eventsList!.events[0],
-                              flag: false,
-                            ),
-                            SizedBox(
-                              height: LayoutManager.widthNHeight0(context, 1) *
-                                  0.04,
-                            ),
-                            ViewEvent(
-                              eventModel: eventsList!.events[1],
-                              flag: false,
+
+                  return Padding(
+                    padding:  EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1)*0.2),
+                    child: Center(
+                      child: Text(
+                        'No Events are available',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: ThemeManager.fontFamily,
+                          color: ThemeManager.primary,
+                          shadows: const [
+                            Shadow(
+                              color: Colors.grey,
+                              blurRadius: 0.01,
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),
                       ),
-                    );
-                  }
+                    ),
+                  );
                 },
               ),
             ],
