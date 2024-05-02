@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/view/screens/location_screens/body_places.dart';
 import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -161,6 +162,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       lon1: widget.placeModel.longitude!,
                                       lat2: userNearestLat,
                                       lon2: userNearestLog),
+                                      10
+                                    
+                                      
                                 ).toInt()}km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
