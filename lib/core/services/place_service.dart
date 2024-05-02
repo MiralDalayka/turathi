@@ -8,7 +8,7 @@ import 'package:turathi/core/services/comment_service.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
-import 'file_storage_service.dart';
+
 
 class PlaceService {
   //create instance

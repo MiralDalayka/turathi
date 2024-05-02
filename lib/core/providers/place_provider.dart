@@ -52,7 +52,9 @@ class PlaceProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
   Future<String> addLike(PlaceModel placeModel) async {
+
     int index = _placeList.places.indexOf(placeModel);
     _placeList.places[index] = await _placeService.addLike(placeModel).whenComplete(() async {
      await getMostPopularPlaces();
@@ -77,7 +79,7 @@ class PlaceProvider extends ChangeNotifier {
       
       );
       log(distanceInKm.toString());
-      return distanceInKm <= 10;
+      return distanceInKm <= dis_num;
     }).toList();
 
     return PlaceList(places: nearestPlaces);
