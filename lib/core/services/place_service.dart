@@ -113,37 +113,6 @@ class PlaceService {
     });
     return placeModel;
   }
-  Future<PlaceModel> addLike(PlaceModel placeModel) async {
-    QuerySnapshot placesData = await _fireStore
-        .collection(_collectionName)
-        .where('id', isEqualTo: placeModel.id)
-        .get();
-    String placeId = placesData.docs[0].id;
-    int likes = placeModel.like! + 1;
-    if(likes>5)
-    {
-      placeModel.state = PlaceState.TrustWorthy.name;
-    }
 
-    _fireStore
-        .collection(_collectionName)
-        .doc(placeId)
-        .update(placeModel.toJson())
-        .whenComplete(() {
-      log("Add likes done");
-    }).catchError((error) {
-      log(error.toString());
-    });
 
-    // _fireStore
-    //     .collection(_collectionName)
-    //     .doc(placeId)
-    //     .update({'likes': likes})
-    //     .whenComplete(() {
-    //   log("Add likes done");
-    // }).catchError((error) {
-    //   log(error.toString());
-    // });
-    return placeModel;
-  }
 }

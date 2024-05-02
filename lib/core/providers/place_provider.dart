@@ -52,10 +52,51 @@ class PlaceProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
+
   Future<String> addLike(PlaceModel placeModel) async {
+    placeModel.like = placeModel.like! + 1;
+    if( placeModel.like!>5)
+    {
+      placeModel.state = PlaceState.TrustWorthy.name;
+    }
     int index = _placeList.places.indexOf(placeModel);
-    _placeList.places[index] = await _placeService.addLike(placeModel).whenComplete(() async {
+    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
      await getMostPopularPlaces();
+    });
+    return "Done";
+  }
+  Future<String> deleteLike(PlaceModel placeModel) async {
+    int dilikes = placeModel.like! -1;
+    if(dilikes<0) {
+      return "Failed";
+    }
+    placeModel.disLike = dilikes;
+
+    int index = _placeList.places.indexOf(placeModel);
+    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+      await getMostPopularPlaces();
+    });
+    return "Done";
+  }
+  Future<String> addDislike(PlaceModel placeModel) async {
+    placeModel.disLike = placeModel.disLike! + 1;
+
+    int index = _placeList.places.indexOf(placeModel);
+    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+      await getMostPopularPlaces();
+    });
+    return "Done";
+  }
+  Future<String> deleteDislike(PlaceModel placeModel) async {
+    int dislikes = placeModel.disLike! -1;
+    if(dislikes <0) {
+      return "Failed";
+    }
+    placeModel.disLike = dislikes;
+
+    int index = _placeList.places.indexOf(placeModel);
+    _placeList.places[index] = await _placeService.updatePlace(placeModel).whenComplete(() async {
+      await getMostPopularPlaces();
     });
     return "Done";
   }
