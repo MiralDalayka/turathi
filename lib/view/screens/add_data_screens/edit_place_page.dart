@@ -174,16 +174,7 @@ log(widget.placeModel.title!);
 
                       placesProvider.updatePlace(
                           placeModel:  widget.placeModel,
-                         // placeModel:  PlaceModel(
-                         //
-                         //    title: title!.text,
-                         //    description: description!.text,
-                         //    address: address!.text,
-                         //    latitude: data![0],
-                         //    longitude: data![1],
-                         //   status: status!.text,
-                         //
-                         //  ),
+
                         images:   images!);
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Place Updated Successfully")));
