@@ -26,6 +26,7 @@ class PlaceModel {
 
   List<CommentModel>? commentsPlace;
   List<String>? images;
+  List<String>? likesList;
   int? like;
 
   int? disLike;
@@ -48,10 +49,11 @@ class PlaceModel {
       // this.state,
       }) {
     id = uuid.v4();
-    userID = usershared.id;
+    userID = sharedUser.id;
     status = "Open";
     state = PlaceState.NewPlace.name;
     commentsPlace = [];
+    likesList=[];
     like = 0;
     disLike = 0;
     isVisible = true;
@@ -66,6 +68,7 @@ class PlaceModel {
     address = json['address'];
     state = json['state'];
     like = json['like'];
+    likesList = json['likesList'].cast<String>();
     disLike = json['disLike'];
     isVisible = json['isVisible'];
     longitude = json['longitude'];
@@ -82,6 +85,7 @@ class PlaceModel {
     data['address'] = this.address;
     data['state'] = this.state;
     data['like'] = this.like;
+    data['likesList'] = this.likesList;
     data['disLike'] = this.disLike;
     data['isVisible'] = this.isVisible;
     data['longitude'] = this.longitude;

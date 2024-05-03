@@ -164,7 +164,7 @@ class _LogInState extends State<LogIn> {
                                 );
 
                                 print(
-                                    "------>${usershared.password.toString()}");
+                                    "------>${sharedUser.password.toString()}");
 
                                 //   print("wowowowowowow ${hashPassword(textController.controllerPass.text)}");
                                 if (signInSuccess) {
@@ -173,7 +173,7 @@ class _LogInState extends State<LogIn> {
 
                                   ////here to get the userInfo
 
-                                  usershared = (await userService
+                                  sharedUser = (await userService
                                       .getUserByEmail(textController
                                           .controllerEmail.text))!;
                                 } else {
@@ -234,7 +234,7 @@ class _LogInState extends State<LogIn> {
                                       print('sign in');
                                       print(result);
                                       // usershared.name="Guest";
-                                      print("llolololloolol${usershared.name}");
+                                      print("llolololloolol${sharedUser.name}");
                                       Navigator.of(context)
                                           .pushReplacementNamed(bottomNavRoute);
                                     }

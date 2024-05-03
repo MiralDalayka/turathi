@@ -8,7 +8,7 @@ class ReportModel {
   ReportModel({required this.reasons})
   {
     reportId = uuid.v4();
-    userId = usershared.id;
+    userId = sharedUser.id;
   }
 
   ReportModel.fromJson(Map<String, dynamic> json) {

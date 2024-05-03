@@ -27,7 +27,7 @@ enum ImageType {
 }
 Uuid uuid = const Uuid();
 
-UserModel usershared = UserModel.empty() ;
+UserModel sharedUser = UserModel.empty() ;
 
 
 

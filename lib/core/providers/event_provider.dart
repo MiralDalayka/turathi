@@ -10,15 +10,12 @@ class EventProvider extends ChangeNotifier {
    EventList _eventList=EventList(events: []);
 
 
-  EventProvider(){
-    // _getEvents();
-     
-  }
+
   
 
   Future<EventList> get eventList async{
     if(_eventList.events.isEmpty){
-      await _getEvents();
+    await  _getEvents();
     }
     return _eventList;
   }

@@ -57,6 +57,7 @@ dependencies:
   uuid: ^4.4.0
   http: ^1.2.1
   shared_preferences: ^2.2.3
+  ionicons: ^0.2.2
 
 
 

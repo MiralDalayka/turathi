@@ -24,7 +24,7 @@ Widget showCustomAlertDialog(BuildContext context, String message) {
         children: [
           TextButton(
             onPressed: () {
-              usershared = UserModel(
+              sharedUser = UserModel(
                 name: null,
                 pass: null,
                 email: null,
