@@ -16,7 +16,7 @@ import 'package:turathi/utils/Router/router_class.dart';
 import 'package:turathi/utils/shared.dart';
 
 import 'core/functions/get_current_location.dart';
-//test
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
     print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
-    return MultiProvider(//Duke's Diwan  Amman , Downtown 
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: PlaceProvider()),
         ChangeNotifierProvider.value(value: EventProvider()),
@@ -57,14 +57,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return  MaterialApp(
-//       home: ImageUploader(),
-//     );
-//   }
-// }
