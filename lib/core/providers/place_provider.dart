@@ -122,4 +122,16 @@ class PlaceProvider extends ChangeNotifier {
     selectedNearestLog = long;
     notifyListeners();
   }
+  //test this function
+  PlaceList getFavPlaces(places){
+    List<PlaceModel> tempList=[];
+
+    for(String id in sharedUser.favList!){
+      var tempModel =places.firstWhere((element) => element.id==id,orElse:()=>PlaceModel.empty());
+
+   tempList.add(tempModel);
+
+    }
+    return PlaceList(places: tempList);
+  }
 }

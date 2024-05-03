@@ -35,7 +35,7 @@ class PlaceModel {
 
   double? longitude;
   double? latitude;
-
+  PlaceModel.empty();
   PlaceModel(
       {required this.title,
       required this.description,

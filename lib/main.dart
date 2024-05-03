@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/providers/question_provider.dart';
+import 'package:turathi/core/providers/user_provider.dart';
 import 'package:turathi/firebase_options.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/Router/router_class.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: PlaceProvider()),
         ChangeNotifierProvider.value(value: EventProvider()),
         ChangeNotifierProvider.value(value: QuestionProvider()),
+        ChangeNotifierProvider.value(value: UserProvider()),
 
       ],
       child: const MaterialApp(

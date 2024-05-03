@@ -5,6 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/models/place_likes_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
+import 'package:turathi/core/providers/user_provider.dart';
 import 'package:turathi/core/services/place_service.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/body_places.dart';
@@ -28,7 +29,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
 final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
-
+final userProvider=  Provider.of<UserProvider>(context);
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
     double left = 20;
     return   Stack(
@@ -478,8 +479,7 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      //BACK
-                      // widget.placeModel.toggleFavorite();
+
                     });
                   },
                   child: Container(
@@ -489,16 +489,30 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                       borderRadius: BorderRadius.circular(20),
                       color: ThemeManager.second.withOpacity(0.25),
                     ),
-                    child: Icon(
-                      Icons.favorite,
-                      size: 25,
-                      /*
-                        BACK
-                         widget.placeModel.isFavourite!
-                            ? ThemeManager.favIcon:
-                         */
+                    // child: Icon(
+                    //   Icons.favorite,
+                    //   size: 25,
+                    //
+                    //   color: ThemeManager.second,
+                    // ),
+                    child: IconButton(
+                      onPressed: () async {
+                        if (sharedUser.favList!.contains(widget.placeModel.id!)) {
+                       await   userProvider.removeFavPlace(widget.placeModel.id!);
+                        } else {
+                          await   userProvider.favPlace(widget.placeModel.id!);
+                        }
 
-                      color: ThemeManager.second,
+                      },
+                      icon:Icon(
+
+                        sharedUser.favList!.contains(widget.placeModel.id!)
+                            ?  Icons.favorite
+                            :  Icons.favorite_border_outlined,
+                        color: ThemeManager.primary,
+                      ),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                     ),
                   ),
                 ),

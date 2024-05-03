@@ -143,7 +143,7 @@ class PlaceService {
             'state': PlaceState.TrustWorthy.name
         },
       ).whenComplete(() {
-        log("LIKE POST : ${placeId}");
+        log("LIKE place : $placeId");
 
       });
     } on FirebaseException catch (e) {
@@ -168,7 +168,7 @@ class PlaceService {
         },
       );
     } on FirebaseException {
-      log('Error dislikePost');
+      log('Error dislikeplace');
     }
     return await getPlaceById( id);
 
