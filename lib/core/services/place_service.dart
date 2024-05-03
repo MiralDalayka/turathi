@@ -130,8 +130,6 @@ class PlaceService {
     tempModel.images = tempModel.images = await _filesStorageService.getImages(
         imageType: ImageType.placesImages.name, folderName: tempModel.id!);
 
-    tempModel.distance = getDistanceInKm(lat1: sharedUser.latitude!, lon1: sharedUser.longitude!,
-        lat2: tempModel.latitude!, lon2: tempModel.longitude!);
     return tempModel;
   }
   Future<PlaceModel> likePlace(String id) async {

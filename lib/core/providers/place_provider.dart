@@ -89,25 +89,21 @@ class PlaceProvider extends ChangeNotifier {
     List<PlaceModel> nearestPlaces = [];
     PlaceList places = _placeList;
 
-   // nearestPlaces = places.places.where((element) => element.distance! <= distanceValue).toList();
-    
-    nearestPlaces = places.places.where((element) => element.distance != null && element.distance! <= distanceValue).toList();
-
-    // nearestPlaces = places.places.where((place) {
-    //   double distanceInKm = getFormattedDistance(
-    //       calculateDistanceInKm(
-    //         lat1: place.latitude!,
-    //         lon1: place.longitude!,
-    //         lat2: selectedNearestLat,
-    //         lon2: selectedNearestLog,
-    //       ),
-    //       dis_num);
-    //   log(distanceInKm.toString());
-    //   return distanceInKm <= dis_num;
-    // }).toList();
+    nearestPlaces = places.places.where((place) {
+      double distanceInKm =
+          getDistanceInKm(
+            lat1: place.latitude!,
+            lon1: place.longitude!,
+            lat2: selectedNearestLat,
+            lon2: selectedNearestLog,
+          );
+      log(distanceInKm.toString());
+      return distanceInKm <= distanceValue;
+    }).toList();
 
     return PlaceList(places: nearestPlaces);
   }
+
 
   Future<PlaceList> getMostPopularPlaces() async {
     PlaceList places = _placeList;

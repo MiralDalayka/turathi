@@ -25,7 +25,6 @@ class BodyPlaces extends StatefulWidget {
 }
 
 class _BodyPlacesState extends State<BodyPlaces> {
-  List<PlaceModel> favoritePlaces = demoPlaces.where((placeModel) => true).toList();
 
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
 

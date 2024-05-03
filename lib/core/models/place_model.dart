@@ -42,7 +42,6 @@ class PlaceModel {
       required this.longitude,
       required this.latitude,
       this.status,
-        this.distance,
       }) {
     id = uuid.v4();
     userID = sharedUser.id;
@@ -90,16 +89,7 @@ class PlaceModel {
   }
 }
 
-List<PlaceModel> demoPlaces = [
-  PlaceModel(
-    longitude: 35.890933,
-    latitude: 31.900762,
-    address: "Amman , Downtown ",
-    title: "Duke's Diwan",
-    description:
-        "The Duke's Diwan is an arts and cultural center and historic house museum. Located on King Faisal Street in downtown Amman, it is housed in one of the city's oldest buildings. Built in 1924 as Amman's first post office, the building later became the Finance Ministry, and then the Haifa Hotel from 1948 to 1998 it was rented by Mamdouh Bisharat, a Jordanian heritage conservationist and businessman, at double its price to prevent the building's owners from knocking it down. Bisharat",
-  ),
-];
+
 
 class PlaceList {
   List<PlaceModel> places;
