@@ -12,10 +12,9 @@ import 'package:turathi/view/screens/location_screens/body_places.dart';
 import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {
-   DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
+  DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
 
   PlaceModel placeModel;
-
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -28,11 +27,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
-final userProvider=  Provider.of<UserProvider>(context);
+    final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
     double left = 20;
-    return   Stack(
+    return Stack(
       children: <Widget>[
         SizedBox(
           height: height,
@@ -122,7 +121,7 @@ final userProvider=  Provider.of<UserProvider>(context);
             decoration: BoxDecoration(
                 color: Color(0xffFFFFFF),
                 borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(35))),
+                    const BorderRadius.vertical(top: Radius.circular(35))),
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 25.0, right: 25, top: 20, bottom: 15),
@@ -157,7 +156,7 @@ final userProvider=  Provider.of<UserProvider>(context);
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color:
-                                  ThemeManager.textColor.withOpacity(0.7),
+                                      ThemeManager.textColor.withOpacity(0.7),
                                   fontFamily: ThemeManager.fontFamily,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -168,12 +167,12 @@ final userProvider=  Provider.of<UserProvider>(context);
                                 height: 3,
                               ),
                               Text(
-                                "${widget.placeModel.distance!.toInt().toString()}km",
+                                "${widget.placeModel.distance != null ? widget.placeModel.distance!.toInt().toString() + 'km' : 'Unknown distance'}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,
                                   fontFamily: ThemeManager.fontFamily,
-                                  fontSize: 15,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.none,
                                 ),
@@ -182,7 +181,7 @@ final userProvider=  Provider.of<UserProvider>(context);
                           ),
                           SizedBox(
                             width:
-                            LayoutManager.widthNHeight0(context, 1) * 0.1,
+                                LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -227,19 +226,18 @@ final userProvider=  Provider.of<UserProvider>(context);
                                     Icons.comment_outlined,
                                     color: ThemeManager.primary,
                                     size: LayoutManager.widthNHeight0(
-                                        context, 1) *
+                                            context, 1) *
                                         0.05,
                                   )),
                             ],
                           ),
                           SizedBox(
                             width:
-                            LayoutManager.widthNHeight0(context, 1) * 0.1,
+                                LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                           
                             children: [
                               /*
                                   height: LayoutManager.widthNHeight0(
@@ -252,19 +250,25 @@ final userProvider=  Provider.of<UserProvider>(context);
                               Expanded(
                                 child: IconButton(
                                   onPressed: () async {
-                                    if (widget.placeModel.likesList!.contains(sharedUser.id)) {
-                                      widget.placeModel= await placeProvider.dislikePlace(widget.placeModel.id!);
+                                    if (widget.placeModel.likesList!
+                                        .contains(sharedUser.id)) {
+                                      widget.placeModel = await placeProvider
+                                          .dislikePlace(widget.placeModel.id!);
                                     } else {
-                                      widget.placeModel  =await   placeProvider.likePlace(widget.placeModel.id!);
+                                      widget.placeModel = await placeProvider
+                                          .likePlace(widget.placeModel.id!);
                                     }
-
                                   },
-                                  icon: Image.asset(
-
-                                    widget.placeModel.likesList!.contains(sharedUser.id)
-                                        ? "assets/images/img_png/like_filled.png"
-                                        : "assets/images/img_png/like.png",
-                                    color: ThemeManager.primary,
+                                  icon: SizedBox(
+                                    width: LayoutManager.widthNHeight0(context, 1)*0.055,
+                                    height:LayoutManager.widthNHeight0(context, 1)*0.055,
+                                    child: Image.asset(
+                                      widget.placeModel.likesList!
+                                              .contains(sharedUser.id)
+                                          ? "assets/images/img_png/like_filled.png"
+                                          : "assets/images/img_png/like.png",
+                                      color: ThemeManager.primary,
+                                    ),
                                   ),
                                   splashColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
@@ -295,14 +299,13 @@ final userProvider=  Provider.of<UserProvider>(context);
                               //       },
                               //     )),
 
-
                               Text(
                                 "${widget.placeModel.like}",
                                 style: TextStyle(
                                   fontSize: 10,
                                   fontFamily: ThemeManager.fontFamily,
-                                  color: ThemeManager.textColor
-                                      .withOpacity(0.7),
+                                  color:
+                                      ThemeManager.textColor.withOpacity(0.7),
                                   decoration: TextDecoration.none,
                                 ),
                               )
@@ -322,7 +325,7 @@ final userProvider=  Provider.of<UserProvider>(context);
                         color: ThemeManager.textColor.withOpacity(0.7),
                         fontFamily: ThemeManager.fontFamily,
                         fontSize:
-                        LayoutManager.widthNHeight0(context, 1) * 0.0357,
+                            LayoutManager.widthNHeight0(context, 1) * 0.0357,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.none,
                       ),
@@ -469,9 +472,7 @@ final userProvider=  Provider.of<UserProvider>(context);
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                   child: Container(
                     width: 40,
@@ -488,18 +489,18 @@ final userProvider=  Provider.of<UserProvider>(context);
                     // ),
                     child: IconButton(
                       onPressed: () async {
-                        if (sharedUser.favList!.contains(widget.placeModel.id!)) {
-                       await   userProvider.removeFavPlace(widget.placeModel.id!);
+                        if (sharedUser.favList!
+                            .contains(widget.placeModel.id!)) {
+                          await userProvider
+                              .removeFavPlace(widget.placeModel.id!);
                         } else {
-                          await   userProvider.favPlace(widget.placeModel.id!);
+                          await userProvider.favPlace(widget.placeModel.id!);
                         }
-
                       },
-                      icon:Icon(
-
+                      icon: Icon(
                         sharedUser.favList!.contains(widget.placeModel.id!)
-                            ?  Icons.favorite
-                            :  Icons.favorite_border_outlined,
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined,
                         color: ThemeManager.primary,
                       ),
                       splashColor: Colors.transparent,
@@ -515,8 +516,8 @@ final userProvider=  Provider.of<UserProvider>(context);
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     for (int index = 0;
-                    index < widget.placeModel.images!.length;
-                    index++)
+                        index < widget.placeModel.images!.length;
+                        index++)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SmallImage(

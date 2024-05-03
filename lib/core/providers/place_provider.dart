@@ -89,7 +89,10 @@ class PlaceProvider extends ChangeNotifier {
     List<PlaceModel> nearestPlaces = [];
     PlaceList places = _placeList;
 
-    nearestPlaces = places.places.where((element) => element.distance! <= distanceValue).toList();
+   // nearestPlaces = places.places.where((element) => element.distance! <= distanceValue).toList();
+    
+    nearestPlaces = places.places.where((element) => element.distance != null && element.distance! <= distanceValue).toList();
+
     // nearestPlaces = places.places.where((place) {
     //   double distanceInKm = getFormattedDistance(
     //       calculateDistanceInKm(

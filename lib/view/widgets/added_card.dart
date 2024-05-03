@@ -83,8 +83,6 @@ class _ProductCardState extends State<AddedCard> {
     print('Edit button pressed');
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -121,12 +119,16 @@ class _ProductCardState extends State<AddedCard> {
                               ),
                             ),
                             Positioned(
-                              top: LayoutManager.widthNHeight0(context, 0) * 0.01,
-                              left: LayoutManager.widthNHeight0(context, 1) * 0.02,
-                              height: LayoutManager.widthNHeight0(context, 1) * 0.084,
+                              top: LayoutManager.widthNHeight0(context, 0) *
+                                  0.01,
+                              left: LayoutManager.widthNHeight0(context, 1) *
+                                  0.02,
+                              height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.084,
                               child: Container(
                                 padding: EdgeInsets.all(
-                                    LayoutManager.widthNHeight0(context, 1) * 0.01),
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.01),
                                 decoration: BoxDecoration(
                                   color: Color(0xffF0F2F6),
                                   shape: BoxShape.rectangle,
@@ -136,66 +138,75 @@ class _ProductCardState extends State<AddedCard> {
                                   "checked",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontFamily:ThemeManager.fontFamily,
+                                    fontFamily: ThemeManager.fontFamily,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
                             ),
-                          
                           ],
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.05),
+                SizedBox(
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.05),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                      
-                       
-                      ],
+                      children: [],
                     ),
                     Container(
                       child: Row(
                         children: [
                           ElevatedButton(
-                            onPressed:(){
-
-
-                               showDialog(
-                                  
-                                    context: context,
-                                    builder: (BuildContext context) {
-
-                                      return AlertDialog(
-                                       backgroundColor: ThemeManager.primary,
-                                        title: Text('Confirm Deletion',style: TextStyle(color: Colors.white),),
-                                        content: Text(
-                                            'Are you sure you want to delete this Home?',style: TextStyle(color: Colors.white),),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Cancel',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              onDeletePressed();
-                                              widget.onDeletePressed();
-                                            },
-                                            child: Text('OK',style: TextStyle(color: Color.fromARGB(255, 255, 32, 16),fontWeight: FontWeight.bold),),
-                                          ),
-                                        ],
-                                      );
-                                    },
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    backgroundColor: ThemeManager.primary,
+                                    title: Text(
+                                      'Confirm Deletion',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    content: Text(
+                                      'Are you sure you want to delete this Home?',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          'Cancel',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          onDeletePressed();
+                                          widget.onDeletePressed();
+                                        },
+                                        child: Text(
+                                          'OK',
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 255, 32, 16),
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
                                   );
+                                },
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -212,8 +223,9 @@ class _ProductCardState extends State<AddedCard> {
                               ),
                             ),
                           ),
-                          SizedBox(width: LayoutManager.widthNHeight0(context, 1) * 0.02),
-                        
+                          SizedBox(
+                              width: LayoutManager.widthNHeight0(context, 1) *
+                                  0.02),
                         ],
                       ),
                     ),
