@@ -8,6 +8,8 @@ const String eventsRoute = '/bottomScreen/home/EventsScreen';
 const String addNewEventRoute = '/bottomScreen/home/AddNewEvent';
 const String addNewPlaceRoute = '/bottomScreen/home/AddNewPlace';
 
+const String notificationPage= '/bottomScreen/home/NotificationPage';//here
+
 const String eventDetailsRoute = '/bottomScreen/home/EventsScreen/EventDetailsScreen';
 
 const String locationRoute = '/bottomScreen/LocationPage';//LocationPage
@@ -26,6 +28,7 @@ const String personalDetilsScreen = '/bottomScreen/profileScreen/PersdonalDetils
 const String changeInfo= '/bottomScreen/profileScreen/ChangeInfo';
 const String signIn = '/LogIn';
 const String signUp= '/SingUp';
+
 
 
 const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
