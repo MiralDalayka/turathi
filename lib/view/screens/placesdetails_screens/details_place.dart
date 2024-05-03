@@ -261,9 +261,9 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                                 child: IconButton(
                                   onPressed: () async {
                                     if (widget.placeModel.likesList!.contains(sharedUser.id)) {
-                                      widget.placeModel= await placeProvider.dislikePost(widget.placeModel.id!);
+                                     // widget.placeModel= await placeProvider.dislikePost(widget.placeModel.id!);
                                     } else {
-                                      widget.placeModel  =await   placeProvider.likePost(widget.placeModel.id!);
+                                   //   widget.placeModel  =await   placeProvider.likePost(widget.placeModel.id!);
                                     }
 
                                   },

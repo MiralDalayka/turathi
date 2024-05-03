@@ -24,7 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   EventList? eventsList;
-UserService userService =UserService();
+  UserService userService = UserService();
   String _greeting = '';
 
   @override
@@ -64,7 +64,9 @@ UserService userService =UserService();
               color: ThemeManager.primary,
               // size:LayoutManager.widthNHeight0(context, 0) * 2,//here
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(notificationPage);
+            },
             iconSize: LayoutManager.widthNHeight0(context, 0) * 0.034,
           ),
           SizedBox(width: LayoutManager.widthNHeight0(context, 0) * 0.015),
@@ -235,41 +237,45 @@ UserService userService =UserService();
                 builder: (context, snapshot) {
                   var data = snapshot.data;
                   if (data == null) {
-                    return Center(child: CircularProgressIndicator(backgroundColor: ThemeManager.primary,color: ThemeManager.second,));
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: ThemeManager.primary,
+                      color: ThemeManager.second,
+                    ));
                   }
                   // if (snapshot.connectionState == ConnectionState.waiting) {
                   //   return Center(child: CircularProgressIndicator());
                   // } else if (snapshot.hasError) {
                   //   return Center(child: Text('Error: ${snapshot.error}'));
                   // } else
-                  eventsList =  data;
+                  eventsList = data;
 
-                    if (data.events.isNotEmpty) {
-                      return Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ViewEvent(
-                                eventModel: eventsList!.events[0],
-                                flag: false,
-                              ),
-                              SizedBox(
-                                height: LayoutManager.widthNHeight0(context, 1) *
-                                    0.04,
-                              ),
-                              ViewEvent(
-                                eventModel: eventsList!.events[1],
-                                flag: false,
-                              ),
-                            ],
-                          ),
+                  if (data.events.isNotEmpty) {
+                    return Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ViewEvent(
+                              eventModel: eventsList!.events[0],
+                              flag: false,
+                            ),
+                            SizedBox(
+                              height: LayoutManager.widthNHeight0(context, 1) *
+                                  0.04,
+                            ),
+                            ViewEvent(
+                              eventModel: eventsList!.events[1],
+                              flag: false,
+                            ),
+                          ],
                         ),
-                      );
-
-                    }
+                      ),
+                    );
+                  }
 
                   return Padding(
-                    padding:  EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1)*0.2),
+                    padding: EdgeInsets.only(
+                        top: LayoutManager.widthNHeight0(context, 1) * 0.2),
                     child: Center(
                       child: Text(
                         'No Events are available',

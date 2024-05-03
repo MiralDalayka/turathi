@@ -4,6 +4,7 @@ import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
+import 'package:turathi/view/screens/notification/notification_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/screens/profile_screens/screens/change_info.dart';
 import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
@@ -31,23 +32,29 @@ class MyRouter {
           return _route(SplashScreen());
         }
 
-        case signIn:
+      case signIn:
         {
           return _route(LogIn());
         }
-        
-          case personalDetilsScreen:
+
+      case personalDetilsScreen:
         {
           return _route(PersdonalDetilsScreen());
         }
 
+      // NotificationPage
 
-           case changeInfo:
+      case notificationPage:
+        {
+          return _route(NotificationPage());
+        }
+
+      case changeInfo:
         {
           return _route(ChangeInfo());
         }
-        
-        case signUp:
+
+      case signUp:
         {
           return _route(SingUp());
         }
@@ -65,8 +72,6 @@ class MyRouter {
             placeModel: arg,
           ));
         }
-
-        
 
       case questionRoute:
         {
@@ -86,7 +91,6 @@ class MyRouter {
           final arg = settings.arguments as List<EventModel>;
 
           return _route(EventsScreen(eventsList: arg));
-
         }
       case eventDetailsRoute:
         {
@@ -105,7 +109,6 @@ class MyRouter {
           return _route(EditPlace(
             placeModel: arg,
           ));
-
         }
       case addNewEventRoute:
         {
@@ -122,10 +125,10 @@ class MyRouter {
             placeID: arg,
           ));
         }
-        // case commentsPlaceRoute:
-        // {
-        //   return _route(const CommentsPlace());
-        // }
+      // case commentsPlaceRoute:
+      // {
+      //   return _route(const CommentsPlace());
+      // }
       // case ex:
       //   {
       //     final arg = settings.arguments as modelName;
