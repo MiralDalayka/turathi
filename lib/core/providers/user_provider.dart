@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/models/user_model.dart';
+import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'dart:developer';
+
+import 'package:turathi/utils/lib_organizer.dart';
 
 class UserProvider extends ChangeNotifier {
   final UserService _userService = UserService();
@@ -30,5 +34,19 @@ class UserProvider extends ChangeNotifier {
       log("users");
     });
   }
+
+  Future<void> favPlace(String id) async{
+  await  _userService.favPlace(id).whenComplete(() {
+      sharedUser.favList?.add(id);
+    });
+   notifyListeners();
+  }
+  Future<void> removeFavPlace(String id) async{
+    await  _userService.removeFavPlace(id).whenComplete(() {
+      sharedUser.favList?.remove(id);
+    });
+    notifyListeners();
+  }
+
 
 }

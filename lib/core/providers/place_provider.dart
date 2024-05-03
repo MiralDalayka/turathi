@@ -89,7 +89,10 @@ class PlaceProvider extends ChangeNotifier {
     List<PlaceModel> nearestPlaces = [];
     PlaceList places = _placeList;
 
-    nearestPlaces = places.places.where((element) => element.distance! <= distanceValue).toList();
+   // nearestPlaces = places.places.where((element) => element.distance! <= distanceValue).toList();
+    
+    nearestPlaces = places.places.where((element) => element.distance != null && element.distance! <= distanceValue).toList();
+
     // nearestPlaces = places.places.where((place) {
     //   double distanceInKm = getFormattedDistance(
     //       calculateDistanceInKm(
@@ -122,5 +125,17 @@ class PlaceProvider extends ChangeNotifier {
     selectedNearestLat = lat;
     selectedNearestLog = long;
     notifyListeners();
+  }
+  //test this function
+  PlaceList getFavPlaces(places){
+    List<PlaceModel> tempList=[];
+
+    for(String id in sharedUser.favList!){
+      var tempModel =places.firstWhere((element) => element.id==id,orElse:()=>PlaceModel.empty());
+
+   tempList.add(tempModel);
+
+    }
+    return PlaceList(places: tempList);
   }
 }

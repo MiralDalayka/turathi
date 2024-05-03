@@ -3,6 +3,8 @@ import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+import '../../utils/shared.dart';
+
 class PlaceCard extends StatefulWidget {
   const PlaceCard({
     Key? key,
@@ -10,13 +12,12 @@ class PlaceCard extends StatefulWidget {
     this.aspectRatio = 0.7,
     required this.onPress,
     required this.placeModel,
-    required this.onFavoriteChanged,
+
   }) : super(key: key);
 
   final double width, aspectRatio;
   final PlaceModel placeModel;
   final VoidCallback onPress;
-  final Function(bool isFavourite) onFavoriteChanged;
 
   @override
   _PlaceCardState createState() => _PlaceCardState();
@@ -79,28 +80,9 @@ class _PlaceCardState extends State<PlaceCard> {
                 Positioned(
                   bottom: LayoutManager.widthNHeight0(context, 0) * 0.001,
                   right: LayoutManager.widthNHeight0(context, 1) * 0.0002,
-                  child: IconButton(
-                    //BACK
-                    icon: Icon( Icons.favorite, color:ThemeManager.second,),
-
-                    // icon: Icon(
-                    //   widget.placeModel.isFavourite!
-                    //       ? Icons.favorite
-                    //       : Icons.favorite_border_outlined,
-                    //   size: LayoutManager.widthNHeight0(context, 1) * 0.065,
-                    //   color: widget.placeModel.isFavourite!
-                    //       ? const Color(0xFFA74040)
-                    //       : ThemeManager.second,
-                    // ),
-                    onPressed: () {
-                      setState(() {
-                        // widget.placeModel.isFavourite =
-                        //     !widget.placeModel.isFavourite!;
-                        // widget.onFavoriteChanged(widget.placeModel.isFavourite!);
-                      });
-                    },
+                  child: Icon( sharedUser.favList!.contains(widget.placeModel.id!)?Icons.favorite:Icons.favorite_outline, color:ThemeManager.primary,)
                   ),
-                ),
+
               ],
             ),
           ),

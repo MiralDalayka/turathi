@@ -126,23 +126,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
                     width: cardWidth,
                     child: PlaceCard(
                       placeModel: placeModel,
-                      onFavoriteChanged: (bool isFavourite) {
-                        setState(() {
-                          final productIndex = demoPlaces.indexWhere((p) => p.id == placeModel.id);
 
-                          if (isFavourite) {
-                            if (productIndex != -1) {
-                              // demoPlaces[productIndex].isFavourite = true;
-                              favoritePlaces.add(demoPlaces[productIndex]);
-                            }
-                          } else {
-                            if (productIndex != -1) {
-                              // demoPlaces[productIndex].isFavourite = false;
-                              favoritePlaces.removeWhere((p) => p.id == placeModel.id);
-                            }
-                          }
-                        });
-                      },
                       onPress: () {
                         Navigator.push(
                           context,

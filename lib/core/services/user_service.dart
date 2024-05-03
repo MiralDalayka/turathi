@@ -51,9 +51,8 @@ class UserService {
   }
 
   Future<UserModel> updateUser(UserModel model) async {
-
 // //  await FirebaseAuth.instance.currentUser?.updateEmail(usershared.email);
-    
+
 //     String? email = usershared.email;
 
 //     if (email != null) {
@@ -66,23 +65,22 @@ class UserService {
 //       print("Email address is null. Cannot update.");
 //     }
 
-  String? newEmail = model.email;
+    String? newEmail = model.email;
 
-  if (newEmail != null) {
-    try {
-      await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
-      print("Email updated successfully");
-    } catch (error) {
-      print("Error updating email: $error");
-      // Handle error here
+    if (newEmail != null) {
+      try {
+        await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
+        print("Email updated successfully");
+      } catch (error) {
+        print("Error updating email: $error");
+        // Handle error here
+      }
+    } else {
+      print("New email address is null. Cannot update.");
+      // Handle null email case here
     }
-  } else {
-    print("New email address is null. Cannot update.");
-    // Handle null email case here
-  }
 
-  // Continue with updating user data in Firestore
-
+    // Continue with updating user data in Firestore
 
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
@@ -200,14 +198,12 @@ class UserService {
     data["password"] = userData.docs[0].get("password");
     data["favList"] = userData.docs[0].get("favList");
 
-
     return UserModel.fromJson(data);
   }
 
   Future<UserList> getUsers() async {
     QuerySnapshot usersData =
-    await _fireStore.collection(_collectionName)
-     .get().whenComplete(() {
+        await _fireStore.collection(_collectionName).get().whenComplete(() {
       log("get users done");
     }).catchError((error) {
       log(error.toString());
@@ -223,9 +219,8 @@ class UserService {
       data["latitude"] = item.get("latitude");
       data["email"] = item.get("email");
       data["phone"] = item.get("phone");
-      data["password"] =item.get("password");
-      data["favList"] =item.get("favList");
-
+      data["password"] = item.get("password");
+      data["favList"] = item.get("favList");
 
       tempModel = UserModel.fromJson(data);
       userList.users.add(tempModel);
@@ -233,5 +228,48 @@ class UserService {
     return userList;
   }
 
+  Future<void> favPlace(String id) async {
+    try {
+      QuerySnapshot userData = await _fireStore
+          .collection(_collectionName)
+          .where('id', isEqualTo: sharedUser.id)
+          .get();
+      String userId = userData.docs[0].id;
 
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update(
+        {
+          'favList': FieldValue.arrayUnion([id]),
+        },
+      ).whenComplete(() {
+        log("fav place  added : $id");
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString()+"&");
+    }
+  }
+
+  Future<void> removeFavPlace(String id) async {
+    try {
+      QuerySnapshot userData = await _fireStore
+          .collection(_collectionName)
+          .where('id', isEqualTo: sharedUser.id)
+          .get();
+      String userId = userData.docs[0].id;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update(
+        {
+          'favList': FieldValue.arrayRemove([id]),
+        },
+      ).whenComplete(() {
+        log("fav place   remove : $id");
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString()+"^");
+    }
+  }
 }
