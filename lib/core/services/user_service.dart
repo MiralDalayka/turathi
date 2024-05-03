@@ -198,6 +198,8 @@ class UserService {
     data["email"] = userData.docs[0].get("email");
     data["phone"] = userData.docs[0].get("phone");
     data["password"] = userData.docs[0].get("password");
+    data["favList"] = userData.docs[0].get("favList");
+
 
     return UserModel.fromJson(data);
   }
@@ -222,10 +224,14 @@ class UserService {
       data["email"] = item.get("email");
       data["phone"] = item.get("phone");
       data["password"] =item.get("password");
+      data["favList"] =item.get("favList");
+
 
       tempModel = UserModel.fromJson(data);
       userList.users.add(tempModel);
     }
     return userList;
   }
+
+
 }

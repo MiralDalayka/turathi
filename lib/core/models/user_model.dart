@@ -12,6 +12,8 @@ class UserModel {
   double? latitude;
   String? certificate;
   String? email;
+  List<String>? favList;
+
   String? phone;
   UserModel.empty();
   UserModel(
@@ -28,6 +30,7 @@ class UserModel {
     if (pass != null) {
       password = hashPassword(pass);//
     }
+    favList=[];
   }
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -40,6 +43,8 @@ class UserModel {
     certificate = json['certificate'];
     phone = json['phone'];
     email = json['email'];
+    favList = json['favList'].cast<String>();
+
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +58,8 @@ class UserModel {
     data['certificate'] = certificate;
     data['phone'] = phone;
     data['email'] = email;
+    data['favList'] = favList;
+
     return data;
   }
 }

@@ -245,7 +245,7 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                             LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
 
                             children: [
@@ -261,16 +261,17 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                                 child: IconButton(
                                   onPressed: () async {
                                     if (widget.placeModel.likesList!.contains(sharedUser.id)) {
-                                      widget.placeModel= await placeProvider.dislikePost(widget.placeModel.id!);
+                                      widget.placeModel= await placeProvider.dislikePlace(widget.placeModel.id!);
                                     } else {
-                                      widget.placeModel  =await   placeProvider.likePost(widget.placeModel.id!);
+                                      widget.placeModel  =await   placeProvider.likePlace(widget.placeModel.id!);
                                     }
 
                                   },
-                                  icon: Icon(
+                                  icon: Image.asset(
+
                                     widget.placeModel.likesList!.contains(sharedUser.id)
-                                        ? Ionicons.heart
-                                        : Ionicons.heart_outline,
+                                        ? "assets/images/img_png/like_filled.png"
+                                        : "assets/images/img_png/like.png",
                                     color: ThemeManager.primary,
                                   ),
                                   splashColor: Colors.transparent,
