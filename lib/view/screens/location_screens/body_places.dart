@@ -50,13 +50,12 @@ class _BodyPlacesState extends State<BodyPlaces> {
     var dataList = [];
     if (isMyLocationTab) {
       log("%%%%%%%%%%%%%");
-      userNearestLat = 32.55390782924759;
-      userNearestLog = 35.8474562689662;
-      dataList.addAll([userNearestLat, userNearestLog]); //userNearestLat == 0.0 || userNearestLog == 0.0)
+     
+      dataList.addAll([userNearestLat, userNearestLog]); 
     } else {
       log("**********");
 
-      dataList.addAll([selectedNearestLat, selectedNearestLog]); //((selectedNearestLat
+      dataList.addAll([selectedNearestLat, selectedNearestLog]);
       log("$selectedNearestLat,$selectedNearestLog");
     }
 

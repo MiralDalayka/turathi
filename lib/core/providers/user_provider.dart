@@ -49,4 +49,18 @@ class UserProvider extends ChangeNotifier {
   }
 
 
+Future<String> deleteUserprovider() async {
+  try {
+    await _userService.deleteUser();
+    notifyListeners(); 
+    return "User account and data deleted successfully"; 
+  } catch (e) {
+    print("Failed to delete user account and data: $e");
+    throw e; 
+  }
+}
+
+
+
+
 }
