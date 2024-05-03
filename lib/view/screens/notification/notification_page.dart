@@ -18,7 +18,7 @@ class NotificationPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
-          'Added Places',
+          'Notification ',
           style: ThemeManager.textStyle.copyWith(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
             fontWeight: FontWeight.bold,
