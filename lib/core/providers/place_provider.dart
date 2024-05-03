@@ -77,7 +77,7 @@ class PlaceProvider extends ChangeNotifier {
       await getMostPopularPlaces();
     });
     _placeList.places[index] =temp;
-
+///
 
     notifyListeners();
     return temp;
