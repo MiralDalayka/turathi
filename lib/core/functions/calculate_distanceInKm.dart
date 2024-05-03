@@ -1,5 +1,18 @@
 import 'dart:math';
 
+import 'package:flutter_map_math/flutter_geo_math.dart';
+double getDistanceInKm(
+    {required double lat1,required double lon1,required double lat2,required double lon2}){
+  return FlutterMapMath().distanceBetween(
+      lat1,
+      lon2,
+      lat2,
+      lon2,
+      "kilometers"
+  );
+
+}
+
 double calculateDistanceInKm(
     {required double lat1,required double lon1,required double lat2,required double lon2}) {
   const double earthRadius = 6371.0;//in km

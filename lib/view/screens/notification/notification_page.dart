@@ -3,14 +3,17 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/models/notification_model.dart';
 import 'package:turathi/core/providers/notification_provider.dart';
 import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class NotificationPage extends StatelessWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+  const NotificationPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
+    NotificationList? notificationList;
+    NotificationProvider notificationProvider = Provider.of<NotificationProvider>(context);
+
     return Scaffold(
 
      backgroundColor: ThemeManager.background,
@@ -36,59 +39,37 @@ class NotificationPage extends StatelessWidget {
         ),
       
       ),
-      body: Consumer<NotificationProvider>(
-        builder: (context, notificationProvider, child) {
-          return FutureBuilder<NotificationList>(
-            future: notificationProvider.notificationList,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
-                );
-              } else {
-                final currentUserID = sharedUser.id; 
-                print("!!!!!!!!!!!!!!!!!!$currentUserID");
-
-                final userNotification = snapshot.data!.notifications
-                    .where((notification) => notification.userId == currentUserID)
-                    .toList();
-
-                if (userNotification.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "There are no notifications for you",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return ListView(
-                    children: userNotification.map((notification) {
-                      return ListTile(
-                        title: Text(notification.text ?? ""),
-                        subtitle: Text(notification.date?.toString() ?? ""),
-                      );
-                    }).toList(),
-                  );
-                }
-              }
-            },
+      body: FutureBuilder(
+        future: notificationProvider.notificationList,
+        builder: (context, snapshot) {
+          var data = snapshot.data;
+          if (data == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          notificationList = data;
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              height: LayoutManager.widthNHeight0(context, 0),
+              child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(notificationList!.notifications[index].text ?? ""),
+                      subtitle: Text(notificationList!.notifications[index].date?.toString() ?? ""),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 5,
+                  ),
+                  itemCount: notificationList!.notifications.length),
+            ),
           );
         },
       ),
-    );
+
+      );
+
   }
 }

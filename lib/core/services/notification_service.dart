@@ -4,6 +4,7 @@ import 'package:turathi/core/functions/calculate_distanceInKm.dart';
 import 'package:turathi/core/models/notification_model.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/providers/user_provider.dart';
+import 'package:turathi/utils/shared.dart';
 
 class NotificationService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -11,25 +12,27 @@ class NotificationService {
   final UserProvider _userProvider = UserProvider();
   Future<void> notifyUsers(double placeLatitude, double placeLongitude) async {
     UserList userList = await _userProvider.userList;
-    for (var user in userList.users) {
-      double distanceInKm = getFormattedDistance(
-          calculateDistanceInKm(
+    for (var user in userList.users.where((element) => element.id!=sharedUser.id)) {
+      double distanceInKm =
+      getDistanceInKm(
             lat1: placeLatitude,
             lon1: placeLongitude,
             lat2: user.latitude!,
             lon2: user.longitude!,
-          ),
-          10);
-      //if distance == 10
+          );
+      log(distanceInKm.toString());
+      if (distanceInKm <= 10){
+        NotificationModel notificationModel =
+        NotificationModel(text: "place add", userId: user.id);
+        _fireStore
+            .collection(_collectionName)
+            .add(notificationModel.toJson())
+            .whenComplete(() {
+          log("Add Notification Done");
+        });
+      }
 
-      NotificationModel notificationModel =
-          NotificationModel(text: "place add", userId: user.id);
-      _fireStore
-          .collection(_collectionName)
-          .add(notificationModel.toJson())
-          .whenComplete(() {
-        log("Add Place Done");
-      });
+
     }
   }
 
@@ -39,7 +42,7 @@ class NotificationService {
         .where('userId', isEqualTo: userId)
         .get()
         .whenComplete(() {
-      log("get Notifications done");
+      log("Service get Notifications for user done");
     }).catchError((error) {
       log(error.toString());
     });
