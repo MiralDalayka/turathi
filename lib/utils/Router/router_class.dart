@@ -7,6 +7,7 @@ import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 import 'package:turathi/view/screens/notification/notification_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/screens/profile_screens/screens/change_info.dart';
+import 'package:turathi/view/screens/profile_screens/screens/delete_user.dart';
 import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
 
 import '../../core/models/event_model.dart';
@@ -35,6 +36,11 @@ class MyRouter {
       case signIn:
         {
           return _route(LogIn());
+        }
+
+         case deleteuserpage:
+        {
+          return _route(DeleteUser());
         }
 
       case personalDetilsScreen:
