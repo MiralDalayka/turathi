@@ -29,6 +29,7 @@ class PlaceService {
         _notificationService.notifyUsers(model.latitude!, model.longitude!);
         model.distance = getDistanceInKm(lat1: sharedUser.latitude!, lon1: sharedUser.longitude!,
             lat2: model.latitude!, lon2: model.longitude!);
+        /////
         log("Add Place Done");
       });
     });
