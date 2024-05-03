@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/core/functions/calculate_distanceInKm.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 import 'package:turathi/core/services/notification_service.dart';
@@ -125,6 +126,8 @@ class PlaceService {
     tempModel.images = tempModel.images = await _filesStorageService.getImages(
         imageType: ImageType.placesImages.name, folderName: tempModel.id!);
 
+    tempModel.distance = getDistanceInKm(lat1: sharedUser.latitude!, lon1: sharedUser.longitude!,
+        lat2: tempModel.latitude!, lon2: tempModel.longitude!);
     return tempModel;
   }
   Future<PlaceModel> likePlace(String id) async {
