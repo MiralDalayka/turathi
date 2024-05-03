@@ -20,21 +20,18 @@ class PlaceModel {
   String? title;
   String? description;
   String? status;
-
   String? address;
   String? state;
-
   List<CommentModel>? commentsPlace;
   List<String>? images;
   List<String>? likesList;
   int? like;
-
   int? disLike;
-
   bool? isVisible;
-
   double? longitude;
   double? latitude;
+
+  double? distance;
 
   PlaceModel(
       {required this.title,
@@ -43,10 +40,7 @@ class PlaceModel {
       required this.longitude,
       required this.latitude,
       this.status,
-      // this.id,
-      // this.like,
-      // this.disLike,
-      // this.state,
+        this.distance,
       }) {
     id = uuid.v4();
     userID = sharedUser.id;

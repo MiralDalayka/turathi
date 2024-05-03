@@ -167,16 +167,7 @@ final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                                 height: 3,
                               ),
                               Text(
-                                "${getFormattedDistance(
-                                    calculateDistanceInKm(
-                                        lat1: widget.placeModel.latitude!,
-                                        lon1: widget.placeModel.longitude!,
-                                        lat2: userNearestLat,
-                                        lon2: userNearestLog),
-                                    10
-
-
-                                ).toInt()}km",
+                                "${widget.placeModel.distance!.toInt().toString()}km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,
