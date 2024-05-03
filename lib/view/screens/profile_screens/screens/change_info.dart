@@ -98,7 +98,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                       ),
                     ),
                     SizedBox(
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.008,
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.05,
                     ),
                     Text(
                       'Email Address',

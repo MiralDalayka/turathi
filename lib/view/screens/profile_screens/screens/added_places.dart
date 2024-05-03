@@ -116,8 +116,8 @@ class AddedPlaces extends StatelessWidget {
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: crossAxisCount,
                             childAspectRatio: cardWidth / (cardWidth + 65),
-                            mainAxisSpacing: 1,
-                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 16,
                           ),
                           itemBuilder: (context, index) {
                             final placeModel = userPlaces[index];
