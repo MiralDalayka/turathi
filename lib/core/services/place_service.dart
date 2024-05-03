@@ -9,7 +9,6 @@ import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
 
-
 class PlaceService {
   //create instance
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -18,19 +17,24 @@ class PlaceService {
 
   //add -get - update visibility,modify info
 
-  Future<PlaceModel> addPlace({required PlaceModel model, required List<XFile> images}) async {
-    model.images = await _filesStorageService.uploadImages(
-        imageType: ImageType.placesImages.name,folderName: model.id!, pickedImages: images!)
-    .whenComplete(() => {
-     _fireStore.collection(_collectionName).add(model.toJson()).whenComplete(() =>
-     {
-     })
+  Future<PlaceModel> addPlace(
+      {required PlaceModel model, required List<XFile> images}) async {
+    model.images = await _filesStorageService
+        .uploadImages(
+            imageType: ImageType.placesImages.name,
+            folderName: model.id!,
+            pickedImages: images!)
+        .whenComplete(() {
+      _fireStore
+          .collection(_collectionName)
+          .add(model.toJson())
+          .whenComplete(() => {});
     });
-
 
     return model;
   }
-  Future<PlaceModel> getPlaceByUserId(String userID) async{
+
+  Future<PlaceModel> getPlaceByUserId(String userID) async {
     QuerySnapshot placeData = await _fireStore
         .collection(_collectionName)
         .where('userID', isEqualTo: userID)
@@ -50,20 +54,22 @@ class PlaceService {
     data["isVisible"] = placeData.docs[0].get("isVisible");
     data["disLike"] = placeData.docs[0].get("disLike");
     data["like"] = placeData.docs[0].get("like");
+    data["likesList"] = placeData.docs[0].get("likesList  ");
 
     tempModel = PlaceModel.fromJson(data);
-    tempModel.images =
-        tempModel.images =
-    await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
-        folderName: tempModel.id!);
+    tempModel.images = tempModel.images = await _filesStorageService.getImages(
+        imageType: ImageType.placesImages.name, folderName: tempModel.id!);
 
     return tempModel;
   }
+
   Future<PlaceList> getPlaces() async {
-    QuerySnapshot placesData =
-        await _fireStore.collection(_collectionName)
-            .where('isVisible', isEqualTo:true)
-            .orderBy('like',descending: true).get().whenComplete(() {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_collectionName)
+        .where('isVisible', isEqualTo: true)
+        .orderBy('like', descending: true)
+        .get()
+        .whenComplete(() {
       log("getPlaces done");
     }).catchError((error) {
       log(error.toString());
@@ -75,7 +81,6 @@ class PlaceService {
     //temp list
     PlaceList placeList = PlaceList(places: []);
     for (var item in placesData.docs) {
-
       data["id"] = item.get("id");
       data["userID"] = item.get("userID");
       data["state"] = item.get("state");
@@ -88,10 +93,11 @@ class PlaceService {
       data["isVisible"] = item.get("isVisible");
       data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
+      data["likesList"] = item.get("likesList");
+
       tempModel = PlaceModel.fromJson(data);
-      tempModel.images =
-      await _filesStorageService.getImages(imageType:ImageType.placesImages.name,
-          folderName: tempModel.id!);
+      tempModel.images = await _filesStorageService.getImages(
+          imageType: ImageType.placesImages.name, folderName: tempModel.id!);
 
       placeList.places.add(tempModel);
     }
@@ -106,10 +112,11 @@ class PlaceService {
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
     log(images.toString());
-    if(images != null) {
-      placeModel.images!.addAll( await _filesStorageService.uploadImages(
-          imageType: ImageType.placesImages.name,folderName: placeModel.id!, pickedImages: images!)
-    );
+    if (images != null) {
+      placeModel.images!.addAll(await _filesStorageService.uploadImages(
+          imageType: ImageType.placesImages.name,
+          folderName: placeModel.id!,
+          pickedImages: images!));
     }
     _fireStore
         .collection(_collectionName)
@@ -122,6 +129,7 @@ class PlaceService {
     });
     return placeModel;
   }
+
   // Future<PlaceModel> updatePlaceFiled(
   //     {required String id ,
   //       required String placeFieldName ,
@@ -143,6 +151,79 @@ class PlaceService {
   //   });
   //   return placeModel;
   // }
+  Future<PlaceModel> getPlaceById(String ID) async {
+    QuerySnapshot placeData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: ID)
+        .get();
+    Map<String, dynamic> data = {};
 
+    PlaceModel tempModel;
+    data["id"] = placeData.docs[0].get("id");
+    data["userID"] = placeData.docs[0].get("userID");
+    data["state"] = placeData.docs[0].get("state");
+    data["address"] = placeData.docs[0].get("address");
+    data["status"] = placeData.docs[0].get("status");
+    data["description"] = placeData.docs[0].get("description");
+    data["title"] = placeData.docs[0].get("title");
+    data["latitude"] = placeData.docs[0].get("latitude");
+    data["longitude"] = placeData.docs[0].get("longitude");
+    data["isVisible"] = placeData.docs[0].get("isVisible");
+    data["disLike"] = placeData.docs[0].get("disLike");
+    data["like"] = placeData.docs[0].get("like");
+    data["likesList"] = placeData.docs[0].get("likesList");
+
+    tempModel = PlaceModel.fromJson(data);
+    tempModel.images = tempModel.images = await _filesStorageService.getImages(
+        imageType: ImageType.placesImages.name, folderName: tempModel.id!);
+
+    return tempModel;
+  }
+  Future<PlaceModel> likePost(String id) async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: id)
+        .get();
+    String placeId = placesData.docs[0].id;
+
+    try {
+      await FirebaseFirestore.instance.collection('places').doc(placeId).update(
+        {
+          'likesList': FieldValue.arrayUnion([sharedUser.id]),
+          'like': FieldValue.increment(1),
+          if (placesData.docs[0].get("like") >= 5)
+            'state': PlaceState.TrustWorthy.name
+        },
+      ).whenComplete(() {
+        log("LIKE POST : ${placeId}");
+
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
+return await getPlaceById( id);
+  }
+
+  Future<PlaceModel> dislikePost(String id) async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: id)
+        .get();
+    String placeId = placesData.docs[0].id;
+    try {
+      await FirebaseFirestore.instance.collection('places').doc(placeId).update(
+        {
+          'likesList': FieldValue.arrayRemove([sharedUser.id]),
+          'like': FieldValue.increment(-1), //back
+          if (placesData.docs[0].get("like") < 5)
+            'state': PlaceState.NewPlace.name
+        },
+      );
+    } on FirebaseException {
+      log('Error dislikePost');
+    }
+    return await getPlaceById( id);
+
+  }
 
 }

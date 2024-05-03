@@ -125,7 +125,7 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                                   date: DateTime.now(),
                                   commentTxt: _textEditingController.text,
                                   writerName:
-                                      "${usershared.name}",
+                                      "${sharedUser.name}",
                                   writtenByExpert:
                                       0, ////this is should be change to the current user status
                                   placeID: widget.place.id,

@@ -1,14 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/models/place_likes_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
+import 'package:turathi/core/services/place_service.dart';
+import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/body_places.dart';
 import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
+   DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
 
-  final PlaceModel placeModel;
-  
+  PlaceModel placeModel;
+
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -21,12 +27,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
 
-  final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
-    
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
     double left = 20;
-    return Stack(
+    return   Stack(
       children: <Widget>[
         SizedBox(
           height: height,
@@ -116,7 +121,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             decoration: BoxDecoration(
                 color: Color(0xffFFFFFF),
                 borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(35))),
+                const BorderRadius.vertical(top: Radius.circular(35))),
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 25.0, right: 25, top: 20, bottom: 15),
@@ -151,7 +156,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color:
-                                      ThemeManager.textColor.withOpacity(0.7),
+                                  ThemeManager.textColor.withOpacity(0.7),
                                   fontFamily: ThemeManager.fontFamily,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -163,14 +168,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                               Text(
                                 "${getFormattedDistance(
-                                  calculateDistanceInKm(
-                                      lat1: widget.placeModel.latitude!,
-                                      lon1: widget.placeModel.longitude!,
-                                      lat2: userNearestLat,
-                                      lon2: userNearestLog),
-                                      10
-                                    
-                                      
+                                    calculateDistanceInKm(
+                                        lat1: widget.placeModel.latitude!,
+                                        lon1: widget.placeModel.longitude!,
+                                        lat2: userNearestLat,
+                                        lon2: userNearestLog),
+                                    10
+
+
                                 ).toInt()}km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -185,7 +190,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ),
                           SizedBox(
                             width:
-                                LayoutManager.widthNHeight0(context, 1) * 0.1,
+                            LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -230,111 +235,84 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     Icons.comment_outlined,
                                     color: ThemeManager.primary,
                                     size: LayoutManager.widthNHeight0(
-                                            context, 1) *
+                                        context, 1) *
                                         0.05,
                                   )),
                             ],
                           ),
                           SizedBox(
                             width:
-                                LayoutManager.widthNHeight0(context, 1) * 0.1,
+                            LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                          height: LayoutManager.widthNHeight0(
-                                                  context, 1) *
-                                              0.05, //30.0,
-                                          width: LayoutManager.widthNHeight0(
-                                                  context, 0) *
-                                              0.035, //18.0,
-                                          child: IconButton(
-                                            padding: EdgeInsets.all(0.0),
-                                            icon: Image.asset(
-                                                "assets/images/img_png/like.png"),
-                                            onPressed: () {
-                                                    placesProvider.addLike(widget.placeModel);
-                                              setState(() {
-                                              
-                                                widget.placeModel.like =
-                                                    widget.placeModel.like! + 1;
 
-                                                
-                                              });
-                                              print("Thumbs-up clicked ");
-                                            },
-                                          )),
-                                      SizedBox(
-                                        height: LayoutManager.widthNHeight0(
-                                                context, 1) *
-                                            0.015,
-                                      ),
-                                      Text(
-                                        "${widget.placeModel.like}",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontFamily: ThemeManager.fontFamily,
-                                          color: ThemeManager.textColor
-                                              .withOpacity(0.7),
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      )
-                                    ],
+                            children: [
+                              /*
+                                  height: LayoutManager.widthNHeight0(
+                                              context, 1) *
+                                          0.05, //30.0,
+                                      width: LayoutManager.widthNHeight0(
+                                              context, 0) *
+                                          0.035, //18.0,
+                                 */
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () async {
+                                    if (widget.placeModel.likesList!.contains(sharedUser.id)) {
+                                      widget.placeModel= await placeProvider.dislikePost(widget.placeModel.id!);
+                                    } else {
+                                      widget.placeModel  =await   placeProvider.likePost(widget.placeModel.id!);
+                                    }
+
+                                  },
+                                  icon: Icon(
+                                    widget.placeModel.likesList!.contains(sharedUser.id)
+                                        ? Ionicons.heart
+                                        : Ionicons.heart_outline,
+                                    color: ThemeManager.primary,
                                   ),
-                                  SizedBox(
-                                    width: LayoutManager.widthNHeight0(
-                                            context, 0) *
-                                        0.01,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "${widget.placeModel.disLike}",
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontFamily: ThemeManager.fontFamily,
-                                          color: ThemeManager.textColor
-                                              .withOpacity(0.7),
-                                          decoration: TextDecoration.none,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: LayoutManager.widthNHeight0(
-                                                context, 1) *
-                                            0.015,
-                                      ),
-                                      Container(
-                                          height: LayoutManager.widthNHeight0(
-                                                  context, 1) *
-                                              0.05, //30.0,
-                                          width: LayoutManager.widthNHeight0(
-                                                  context, 0) *
-                                              0.035, //18.0,
-                                          child: new IconButton(
-                                            padding: new EdgeInsets.all(0.0),
-                                            icon: new Image.asset(
-                                                "assets/images/img_png/dislike.png"),
-                                            onPressed: () {
-                                                placesProvider.addDislike(widget.placeModel);
-                                                
-                                              setState(() {
-                                                widget.placeModel.disLike =
-                                                    widget.placeModel.disLike! +
-                                                        1;
-                                              });
-                                              print("Thumbs-down clicked ");
-                                            },
-                                          )),
-                                    ],
-                                  ),
-                                ],
+                                  splashColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                ),
                               ),
+
+                              // Container(
+                              //     height: LayoutManager.widthNHeight0(
+                              //             context, 1) *
+                              //         0.05, //30.0,
+                              //     width: LayoutManager.widthNHeight0(
+                              //             context, 0) *
+                              //         0.035, //18.0,
+                              //     child: IconButton(
+                              //       padding: EdgeInsets.all(0.0),
+                              //       icon: Image.asset(
+                              //           "assets/images/img_png/like.png"),
+                              //       onPressed: () {
+                              //               placesProvider.addLike(widget.placeModel);
+                              //         setState(() {
+                              //           //
+                              //           // widget.placeModel.like =
+                              //           //     widget.placeModel.like! + 1;
+                              //
+                              //
+                              //         });
+                              //         print("Thumbs-up clicked ");
+                              //       },
+                              //     )),
+
+
+                              Text(
+                                "${widget.placeModel.like}",
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontFamily: ThemeManager.fontFamily,
+                                  color: ThemeManager.textColor
+                                      .withOpacity(0.7),
+                                  decoration: TextDecoration.none,
+                                ),
+                              )
                             ],
                           )
                         ],
@@ -351,7 +329,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         color: ThemeManager.textColor.withOpacity(0.7),
                         fontFamily: ThemeManager.fontFamily,
                         fontSize:
-                            LayoutManager.widthNHeight0(context, 1) * 0.0357,
+                        LayoutManager.widthNHeight0(context, 1) * 0.0357,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.none,
                       ),
@@ -514,10 +492,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       Icons.favorite,
                       size: 25,
                       /*
-                      BACK
-                       widget.placeModel.isFavourite!
-                          ? ThemeManager.favIcon:
-                       */
+                        BACK
+                         widget.placeModel.isFavourite!
+                            ? ThemeManager.favIcon:
+                         */
 
                       color: ThemeManager.second,
                     ),
@@ -531,8 +509,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     for (int index = 0;
-                        index < widget.placeModel.images!.length;
-                        index++)
+                    index < widget.placeModel.images!.length;
+                    index++)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SmallImage(

@@ -86,7 +86,7 @@ class UserService {
 
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: usershared.id)
+        .where('id', isEqualTo: sharedUser.id)
         .get();
 
     if (userData.docs.isNotEmpty) {
@@ -163,7 +163,7 @@ class UserService {
   // }
 
   signOut() async {
-    usershared = UserModel(
+    sharedUser = UserModel(
         name: null,
         pass: null,
         email: null,

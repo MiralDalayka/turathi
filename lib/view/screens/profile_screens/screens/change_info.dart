@@ -72,7 +72,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           name = value;
                         });
                       },
-                      initialValue: usershared.name.toString().toUpperCase(),
+                      initialValue: sharedUser.name.toString().toUpperCase(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Name must not be empty';
@@ -114,7 +114,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           emailAddress = value;
                         });
                       },
-                      initialValue: usershared.email.toString(),
+                      initialValue: sharedUser.email.toString(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Email must not be empty';
@@ -162,7 +162,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           phoneNu = value;
                         });
                       },
-                      initialValue: usershared.phone.toString(),
+                      initialValue: sharedUser.phone.toString(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Phone must not be empty';
@@ -200,15 +200,15 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           // All fields are valid, proceed with updating user info
                           userService.updateUser(UserModel(
                             name: name,
-                            pass: usershared.password,
+                            pass: sharedUser.password,
                             email: emailAddress,
                             phone: phoneNu,
-                            longitude: usershared.longitude,
-                            latitude: usershared.latitude,
+                            longitude: sharedUser.longitude,
+                            latitude: sharedUser.latitude,
                           ));
-                          usershared.name = name;
-                          usershared.email = emailAddress;
-                          usershared.phone = phoneNu;
+                          sharedUser.name = name;
+                          sharedUser.email = emailAddress;
+                          sharedUser.phone = phoneNu;
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text("User Info Updated Successfully")),
                           );

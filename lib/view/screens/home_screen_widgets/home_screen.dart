@@ -78,7 +78,7 @@ UserService userService =UserService();
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi ${usershared.name ?? "Guest"}".toUpperCase(),
+                "Hi ${sharedUser.name ?? "Guest"}".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
