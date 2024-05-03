@@ -31,7 +31,6 @@ class PlaceModel {
   double? longitude;
   double? latitude;
 
-  double? distance;
   PlaceModel.empty();
   
 

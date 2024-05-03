@@ -27,8 +27,7 @@ class PlaceService {
           .add(model.toJson())
           .whenComplete(() {
         _notificationService.notifyUsers(model.latitude!, model.longitude!);
-        model.distance = getDistanceInKm(lat1: sharedUser.latitude!, lon1: sharedUser.longitude!,
-            lat2: model.latitude!, lon2: model.longitude!);
+
         /////
         log("Add Place Done");
       });
@@ -71,8 +70,7 @@ class PlaceService {
       tempModel = PlaceModel.fromJson(data);
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.placesImages.name, folderName: tempModel.id!);
-      tempModel.distance = getDistanceInKm(lat1: sharedUser.latitude!, lon1: sharedUser.longitude!,
-          lat2: tempModel.latitude!, lon2: tempModel.longitude!);
+
       placeList.places.add(tempModel);
     }
     return placeList;
