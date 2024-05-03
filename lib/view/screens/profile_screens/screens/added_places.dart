@@ -56,8 +56,6 @@ class AddedPlaces extends StatelessWidget {
                 );
               } else {
                 final currentUserID = usershared.id;
-                print("!!!!!!!!!!!!!!!!!!$currentUserID");
-
                 final userPlaces = snapshot.data!.places
                     .where((place) => place.userID == currentUserID)
                     .toList();

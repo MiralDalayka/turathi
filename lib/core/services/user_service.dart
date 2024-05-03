@@ -201,4 +201,31 @@ class UserService {
 
     return UserModel.fromJson(data);
   }
+
+  Future<UserList> getUsers() async {
+    QuerySnapshot usersData =
+    await _fireStore.collection(_collectionName)
+     .get().whenComplete(() {
+      log("get users done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    Map<String, dynamic> data = {};
+    UserModel tempModel;
+    UserList userList = UserList(users: []);
+    for (var item in usersData.docs) {
+      data["id"] = item.get("id");
+      data["name"] = item.get("name");
+      data["role"] = item.get("role");
+      data["longitude"] = item.get("longitude");
+      data["latitude"] = item.get("latitude");
+      data["email"] = item.get("email");
+      data["phone"] = item.get("phone");
+      data["password"] =item.get("password");
+
+      tempModel = UserModel.fromJson(data);
+      userList.users.add(tempModel);
+    }
+    return userList;
+  }
 }
