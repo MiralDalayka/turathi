@@ -55,33 +55,33 @@ class PlaceProvider extends ChangeNotifier {
     return placeModel;
   }
 
-  Future<PlaceModel> likePost(String id) async {
-    // int index = _placeList.places.indexOf(placeModel);
-    var index = _placeList.places.indexWhere((element) => element.id == id);
-    log("INDEX $index");
+  // Future<PlaceModel> likePost(String id) async {
+  //   // int index = _placeList.places.indexOf(placeModel);
+  //   var index = _placeList.places.indexWhere((element) => element.id == id);
+  //   log("INDEX $index");
+  //
+  //   PlaceModel temp=   await _placeService.likePost(id!).whenComplete(() async {
+  //     await getMostPopularPlaces();
+  //   });
+  //   _placeList.places[index] =temp;
+  //
+  //   notifyListeners();
+  //   return temp;
+  // }
 
-    PlaceModel temp=   await _placeService.likePost(id!).whenComplete(() async {
-      await getMostPopularPlaces();
-    });
-    _placeList.places[index] =temp;
-
-    notifyListeners();
-    return temp;
-  }
-
-  Future<PlaceModel> dislikePost(String id) async {
-    var index = _placeList.places.indexWhere((element) => element.id == id);
-
-
-    PlaceModel temp=   await _placeService.dislikePost(id!).whenComplete(() async {
-      await getMostPopularPlaces();
-    });
-    _placeList.places[index] =temp;
-///
-
-    notifyListeners();
-    return temp;
-  }
+//   Future<PlaceModel> dislikePost(String id) async {
+//     var index = _placeList.places.indexWhere((element) => element.id == id);
+//
+//
+//     PlaceModel temp=   await _placeService.dislikePost(id!).whenComplete(() async {
+//       await getMostPopularPlaces();
+//     });
+//     _placeList.places[index] =temp;
+// ///
+//
+//     notifyListeners();
+//     return temp;
+//   }
 
   Future<String> addLike(PlaceModel placeModel) async {
     // placeModel.like = placeModel.like! + 1;
