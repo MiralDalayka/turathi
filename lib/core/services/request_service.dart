@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/request_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
+import '../../utils/shared.dart';
+
 class RequestService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -23,21 +25,23 @@ class RequestService {
     return "Done";
   }
 
-  Future<RequestModel> getRequestByUserId(String userId) async{
+  Future<RequestModel> getRequestByUserId() async{
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)
-        .where('userId', isEqualTo: userId)
+        .where('userId', isEqualTo: sharedUser.id)
         .get();
-    Map<String, dynamic> data = {};
+    RequestModel tempModel=RequestModel.empty();
 
-    RequestModel tempModel;
-    data["requestId"] = requestData.docs[0].get("requestId");
-    data["userId"] = requestData.docs[0].get("userId");
-    data["certificate"] = requestData.docs[0].get("certificate");
-    data["status"] = requestData.docs[0].get("status");
+    if(requestData.docs.isNotEmpty) {
+      Map<String, dynamic> data = {};
 
-    tempModel = RequestModel.fromJson(data);
+      data["requestId"] = requestData.docs[0].get("requestId");
+      data["userId"] = requestData.docs[0].get("userId");
+      data["certificate"] = requestData.docs[0].get("certificate");
+      data["status"] = requestData.docs[0].get("status");
 
+      tempModel = RequestModel.fromJson(data);
+    }
     return tempModel;
   }
 

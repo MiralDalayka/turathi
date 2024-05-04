@@ -220,34 +220,34 @@ class _LogInState extends State<LogIn> {
                             ),
                           ),
                         ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                  onPressed: () async {
-                                    dynamic result = await _auth.signinAnon();
-                                    if (result == null) {
-                                      print('error signing in');
-                                    } else {
-                                      print('sign in');
-                                      print(result);
-                                      // usershared.name="Guest";
-                                      print("llolololloolol${sharedUser.name}");
-                                      Navigator.of(context)
-                                          .pushReplacementNamed(bottomNavRoute);
-                                    }
-                                  },
-                                  child: Text(
-                                    "SignIn As Guest",
-                                    style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontFamily: ThemeManager.fontFamily),
-                                  ))
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   alignment: Alignment.center,
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       TextButton(
+                        //           onPressed: () async {
+                        //             dynamic result = await _auth.signinAnon();
+                        //             if (result == null) {
+                        //               print('error signing in');
+                        //             } else {
+                        //               print('sign in');
+                        //               print(result);
+                        //               // usershared.name="Guest";
+                        //               print("llolololloolol${sharedUser.name}");
+                        //               Navigator.of(context)
+                        //                   .pushReplacementNamed(bottomNavRoute);
+                        //             }
+                        //           },
+                        //           child: Text(
+                        //             "SignIn As Guest",
+                        //             style: TextStyle(
+                        //                 color: Colors.grey[600],
+                        //                 fontFamily: ThemeManager.fontFamily),
+                        //           ))
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                     SizedBox(

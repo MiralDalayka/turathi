@@ -183,7 +183,7 @@ class FirstBox extends State<firstBox> {
                       context: context,
                       builder: (BuildContext context) => showCustomAlertDialog(
                           context,
-                          "You Have To SignIn First \nTo See Your Personal Details!"),
+                          "You Have To SignIn First \nTo Delete Your Account!"),
                     );
                     
                   } else {

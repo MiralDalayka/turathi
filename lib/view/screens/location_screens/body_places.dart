@@ -52,11 +52,19 @@ class _BodyPlacesState extends State<BodyPlaces> {
       log("%%%%%%%%%%%%%");
      
       dataList.addAll([userNearestLat, userNearestLog]); 
+
+      print("dataList1 --->  ${dataList}");
+
+      log("userrrrr --> $userNearestLat,$userNearestLog");
+
+
     } else {
       log("**********");
 
       dataList.addAll([selectedNearestLat, selectedNearestLog]);
-      log("$selectedNearestLat,$selectedNearestLog");
+          log("selectttttttt --> $selectedNearestLat,$selectedNearestLog");
+      print("dataList2 --->  ${dataList}");
+
     }
 
     if (dataList.first == 0.0 || dataList.last == 0.0) {
