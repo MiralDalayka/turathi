@@ -31,7 +31,7 @@ class _DeleteUser extends State<DeleteUser> {
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
-          'Delete User',
+          'Delete Account',
           style: ThemeManager.textStyle.copyWith(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
             fontWeight: FontWeight.bold,
@@ -64,51 +64,52 @@ class _DeleteUser extends State<DeleteUser> {
                       Divider(height: 1, color: Colors.grey[300]),
                       InkWell(
                         onTap: () async {
-                          // showDialog(
-                          //   context: context,
-                          //   builder: (BuildContext context) {
-                          //     return AlertDialog(
-                          //       backgroundColor: ThemeManager.primary,
-                          //       title: Text(
-                          //         'Confirm Deletion',
-                          //         style: TextStyle(color: Colors.white),
-                          //       ),
-                          //       content: Text(
-                          //         'Are you sure you want to Your Account ?',
-                          //         style: TextStyle(color: Colors.white),
-                          //       ),
-                          //       actions: [
-                          //         TextButton(
-                          //           onPressed: () {
-                          //             Navigator.of(context).pop();
-                          //           },
-                          //           child: Text(
-                          //             'Cancel',
-                          //             style: TextStyle(
-                          //                 color:ThemeManager.second,
-                          //                 fontWeight: FontWeight.bold),
-                          //           ),
-                          //         ),
-                          //         TextButton(
-                          //           onPressed: () {
-                          //             userProvider.deleteUserprovider();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: ThemeManager.primary,
+                                title: Text(
+                                  'Confirm Deletion',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                content: Text(
+                                  // textAlign: TextAlign.start,
+                                  'Are you sure you want to delete your account ?',
+                                  style: TextStyle(color: Colors.white,fontSize: 16),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Cancel',
+                                      style: TextStyle(
+                                          color:ThemeManager.second,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      userProvider.deleteUserprovider();
 
-                          //             //log out
-                          //             Navigator.of(context)
-                          //                 .pushReplacementNamed(signIn);
-                          //           },
-                          //           child: Text(
-                          //             'OK',
-                          //             style: TextStyle(
-                          //                 color:
-                          //                     Color.fromARGB(255, 255, 32, 16),
-                          //                 fontWeight: FontWeight.bold),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     );
-                          //   },
-                          // );
+                                      //log out
+                                      Navigator.of(context)
+                                          .pushReplacementNamed(signIn);
+                                    },
+                                    child: Text(
+                                      'Delete',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 255, 32, 16),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         child: Center(
                           child: Container(
@@ -122,7 +123,7 @@ class _DeleteUser extends State<DeleteUser> {
                             ),
                             child: Center(
                               child: Text(
-                                "Delete User",
+                                "Delete My Account",
                                 style: TextStyle(
                                   color: ThemeManager.second,
                                   fontSize: 20,
