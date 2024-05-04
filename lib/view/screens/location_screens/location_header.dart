@@ -18,6 +18,7 @@ class HeaderPart extends StatefulWidget {
 
 class _HeaderPartState extends State<HeaderPart> {
    Address? _currentAddress;
+
    @override
   void initState() {
     super.initState();
@@ -71,7 +72,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                 ),
                 Text(
-                 _currentAddress != null ? "${_currentAddress!.countryName} ${_currentAddress!.city} , ${_currentAddress!.streetAddress} "  ?? 'Unknown' : 'Unknown',
+              _currentAddress != null ? _formatAddress(_currentAddress!) : 'Waiting',
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,
@@ -156,5 +157,23 @@ class _HeaderPartState extends State<HeaderPart> {
       ),
       /////here
     );
+  }
+}
+
+
+
+String _formatAddress(Address address) {
+  String fullAddress = '${address.countryName} ${address.city}, ${address.streetAddress}';
+  String halfAddress= '${address.countryName} ${address.city}';
+  if (fullAddress.length > 30) {
+   if(halfAddress.length>30)
+   {
+    return "Jordan";
+   }
+   else return halfAddress;
+  } 
+  
+  else {
+    return fullAddress;
   }
 }
