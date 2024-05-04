@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:turathi/core/models/user_model.dart';
 import '../../utils/shared.dart';
 import 'firebase_auth.dart';
@@ -16,7 +15,6 @@ class UserService {
 
   Future<String> addUser(UserModel model) async {
     bool mounted = false;
-    // String userid;
     try {
       print(
           "email in adduser${model.email.toString()} pass in adduser ${model.password.toString()}");
@@ -41,9 +39,6 @@ class UserService {
       }
     }
 
-
-
-
     _fireStore
         .collection(_collectionName)
         .add(model.toJson())
@@ -56,19 +51,7 @@ class UserService {
   }
 
   Future<UserModel> updateUser(UserModel model) async {
-// //  await FirebaseAuth.instance.currentUser?.updateEmail(usershared.email);
 
-//     String? email = usershared.email;
-
-//     if (email != null) {
-//       try {
-//         await FirebaseAuth.instance.currentUser?.updateEmail(email);
-//       } catch (error) {
-//         print("Error updating email: $error");
-//       }
-//     } else {
-//       print("Email address is null. Cannot update.");
-//     }
 
     String? newEmail = model.email;
 
@@ -78,14 +61,12 @@ class UserService {
         print("Email updated successfully");
       } catch (error) {
         print("Error updating email: $error");
-        // Handle error here
       }
     } else {
       print("New email address is null. Cannot update.");
-      // Handle null email case here
+
     }
 
-    // Continue with updating user data in Firestore
 
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
@@ -122,7 +103,7 @@ class UserService {
       print("User is successfully in match");
 
       return true;
-    }//kaQlJnXfGsbxxMpdhr4sWNXISxK2
+    } 
 
     User? user = await _auth.signinwithemailandpassword(email, password);
 
@@ -163,7 +144,7 @@ class UserService {
     }
 
     Map<String, dynamic> data =
-        {}; // Retrieve data from the first document (assuming email is unique)
+        {}; // Retrieve data from the first document 
 
     data["id"] = userData.docs[0].get("id");
     data["name"] = userData.docs[0].get("name");
@@ -257,64 +238,28 @@ class UserService {
     } catch (error) {
       print('Error deleting user 1: $error');
     }
-var db = FirebaseFirestore.instance;
-var currentUserUID = FirebaseAuth.instance.currentUser?.uid;
-var usersRef = db.collection('users');
 
-usersRef.where('id', isEqualTo: currentUserUID).get().then((querySnapshot) {
-  if (querySnapshot.docs.isNotEmpty) {
-    // Assuming there's only one document per UID, you can directly access the first document
-    var doc = querySnapshot.docs.first;
-    var docId = doc.id;
-    print("Document ID for current user: $docId");
+    //here delete from the firestore
+    var db = FirebaseFirestore.instance;
+    var usersRef = db.collection('users');
 
-    // No need for comparison here, the query already filtered documents by UID
-    print("Done user: $docId");
-    doc.reference.delete().then((_) {
-      print('Successfully deleted document');
+    usersRef.where('id', isEqualTo: sharedUser.id).get().then((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        var doc = querySnapshot.docs.first;
+        var docId = doc.id;
+        print("Document ID for current user: $docId");
+
+        print("Done user: $docId");
+        doc.reference.delete().then((_) {
+          print('Successfully deleted document');
+        }).catchError((error) {
+          print('Error deleting user: $error');
+        });
+      } else {
+        print("No documents found for current user.");
+      }
     }).catchError((error) {
-      print('Error deleting user: $error');
+      print("Error getting documents: $error");
     });
-  } else {
-    print("No documents found for current user.");
-  }
-}).catchError((error) {
-  print("Error getting documents: $error");
-});
-
-//delete from the firestore
-
-  //   var db = FirebaseFirestore.instance;
-
-  //   var currentUserUID = FirebaseAuth.instance.currentUser?.uid;
-
-  //   var usersRef = db.collection('users');
-
-  //   usersRef.where('id', isEqualTo: currentUserUID).get().then((querySnapshot) {
-  //     if (querySnapshot.docs.isNotEmpty) {
-  //       querySnapshot.docs.forEach((doc) async {
-  //         var docId = doc.id;
-  //         print("Document ID for current user: $docId");
-
-  //         if (docId==currentUserUID) {
-  //           print("Done user: $docId");
-  //           try {
-  //             await FirebaseFirestore.instance
-  //                 .collection('users')
-  //                 .doc(docId)
-  //                 .delete();
-
-  //             print('Successfully deleted document');
-  //           } catch (error) {
-  //             print('Error deleting user 2: $error');
-  //           }
-  //         }
-  //       });
-  //     } else {
-  //       print("No documents found for current user.");
-  //     }
-  //   }).catchError((error) {
-  //     print("Error getting documents: $error");
-  //   });
   }
 }
