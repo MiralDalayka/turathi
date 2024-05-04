@@ -45,7 +45,7 @@ dependencies:
   flutter_polyline_points: ^2.0.0
   google_maps_flutter: ^2.1.5
   geolocator: ^10.1.0
-  geocoding: ^2.0.4
+  geocoding: ^3.0.0
   # Firebase And Notification 
   firebase_auth: ^4.17.9
   firebase_messaging: ^14.7.4
@@ -67,6 +67,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   flutter_image_slideshow: ^0.1.6
   permission_handler: ^11.3.0
+  geocode: ^1.0.3
 
 dev_dependencies:
   flutter_test:

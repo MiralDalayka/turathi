@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   EventList? eventsList;
   UserService userService = UserService();
   String _greeting = '';
+  
 
   @override
   void initState() {

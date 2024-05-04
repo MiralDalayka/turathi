@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:geocode/geocode.dart';
+import 'package:turathi/core/functions/get_user_city.dart';
 import 'package:turathi/core/services/google_map_api.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
+
+
+
+
 
 class HeaderPart extends StatefulWidget {
   const HeaderPart({super.key});
@@ -12,8 +17,27 @@ class HeaderPart extends StatefulWidget {
 }
 
 class _HeaderPartState extends State<HeaderPart> {
+   Address? _currentAddress;
+   @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
+
+ Future<void> _getCurrentLocation() async {
+    try {
+      Address address = await UserCity();
+      setState(() {
+        _currentAddress = address;
+      });
+    } catch (e) {
+      print('Error getting location: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16),
@@ -47,7 +71,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                 ),
                 Text(
-                  'Jordan Amman , Khalda ',
+                 _currentAddress != null ? "${_currentAddress!.countryName} ${_currentAddress!.city} "  ?? 'Unknown' : 'Unknown',
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,

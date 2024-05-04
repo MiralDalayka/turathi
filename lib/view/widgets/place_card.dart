@@ -43,7 +43,8 @@ class _PlaceCardState extends State<PlaceCard> {
             child: Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  
+                  borderRadius: BorderRadius.circular(300),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
