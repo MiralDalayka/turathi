@@ -1,99 +1,122 @@
-
+import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/models/request_model.dart';
+import 'package:turathi/core/providers/request_provider.dart';
 import 'package:turathi/core/services/request_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../../utils/theme_manager.dart';
-
 
 class RequestToBeExpert extends StatefulWidget {
   const RequestToBeExpert({super.key});
 
   @override
   State<RequestToBeExpert> createState() => _RequestToBeExpertState();
-
 }
 
 class _RequestToBeExpertState extends State<RequestToBeExpert> {
-File? file;
-RequestService _requestService = RequestService();
+  String? msg;
+  File? file;
+  // RequestProvider? _provider;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: ThemeManager.background,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: ThemeManager.background,
-        title: Text(
-          'Request To Be Expert',
-          style: ThemeManager.textStyle.copyWith(
-            fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
-            fontWeight: FontWeight.bold,
-            fontFamily: ThemeManager.fontFamily,
-            color: ThemeManager.primary,
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize:
-              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
-          child: Divider(
-            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
-            color: Colors.grey[300],
-          ),
-        ),
-      ),
+    RequestProvider  _provider = Provider.of<RequestProvider>(context);
 
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-       
-          children: [
-            ElevatedButton(
-            onPressed: () {
-              _pickFile();
-          },
-            style: ThemeManager.buttonStyle,
-            child: Text(
-              'Upload Certificate',
-              style: ThemeManager.textStyle
-                  .copyWith(color: ThemeManager.primary),
+      return Scaffold(
+        backgroundColor: ThemeManager.background,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: ThemeManager.background,
+          title: Text(
+            'Request To Be Expert',
+            style: ThemeManager.textStyle.copyWith(
+              fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+              fontWeight: FontWeight.bold,
+              fontFamily: ThemeManager.fontFamily,
+              color: ThemeManager.primary,
             ),
           ),
-            SizedBox(height:  LayoutManager.widthNHeight0(context, 1) * 0.08,),
-            ElevatedButton(
-              onPressed: () {
-                _requestService.addRequest(RequestModel(),file!);
-              },
-              style: ThemeManager.buttonStyle,
-              child: Text(
-                'Request',
-                style: ThemeManager.textStyle
-                    .copyWith(color: ThemeManager.primary),
-              ),
-            )
-          ],
+          bottom: PreferredSize(
+            preferredSize:
+                Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+            child: Divider(
+              height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+              color: Colors.grey[300],
+            ),
+          ),
         ),
-      ),
-    );
-  }
+        body: FutureBuilder(
+          future: _provider.getRequestByUserId(),
+          builder: (context,snapshot){
+            var data = snapshot.data;
+            if(data==null) return const Center(child: CircularProgressIndicator());
+            if(data=="Not Found") {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        _pickFile();
+                      },
+                      style: ThemeManager.buttonStyle,
+                      child: Text(
+                        'Upload Certificate',
+                        style: ThemeManager.textStyle
+                            .copyWith(color: ThemeManager.primary),
+                      ),
+                    ),
+                    SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.08,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _provider!.addRequest(RequestModel(), file!).whenComplete(() => Navigator.of(context).pop());
+                      },
+                      style: ThemeManager.buttonStyle,
+                      child: Text(
+                        'Request',
+                        style: ThemeManager.textStyle
+                            .copyWith(color: ThemeManager.primary),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            }
+            return     Scaffold(
+              body: Center(
+                child: Text(data),
+              ),
+            );
+          },
+        ),
+      );
+    }
 
-Future<void> _pickFile() async{
+
+  Future<void> _pickFile() async {
     FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'doc'],
     );
 
     if (pickedFile != null) {
-      
-        file = File(pickedFile.files.single.path!);
-
+      file = File(pickedFile.files.single.path!);
     }
-
   }
+
+//   Future<void> _requestToBeExpertStatus() async {
+//      msg=await  _provider!.getRequestByUserId();
+// log(msg.toString());
+//
+//   }
 }

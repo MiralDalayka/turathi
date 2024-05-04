@@ -6,11 +6,14 @@ class RequestModel {
   String? certificate;
   String? userId;
 
-  RequestModel()
-  {
+  RequestModel.empty() {
+    requestId = "-1";
+  }
+
+  RequestModel() {
     requestId = uuid.v4();
     userId = sharedUser.id;
-    status = 'unapproved';
+    status = 'Waiting For Admin Acceptance';
   }
 
   RequestModel.fromJson(Map<String, dynamic> json) {
