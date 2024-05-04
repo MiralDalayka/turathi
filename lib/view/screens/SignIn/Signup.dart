@@ -1,21 +1,14 @@
 // ignore_for_file: unused_local_variable, annotate_overrides
-import 'dart:collection';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
 import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/firebase_auth.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
-import 'package:turathi/view/widgets/deff_button%203.dart';
 
 class SingUp extends StatefulWidget {
   const SingUp({super.key});
@@ -196,6 +189,7 @@ class _SingUpState extends State<SingUp> {
                                 await currentLocation.getCurrentLocation();
 
                             final user = UserModel(
+                           
                                 name: signUpController.firstName.text,
                                 email: signUpController.email.text,
                                 pass: signUpController.password.text,
@@ -203,7 +197,7 @@ class _SingUpState extends State<SingUp> {
                                 longitude: p?.longitude,
                                 latitude: p?.latitude);
 
-                              //  print("object ${signUpController.firstName.text}");
+                            //  print("object ${signUpController.firstName.text}");
 
                             _signUp(context, user, p!);
                           }
@@ -261,40 +255,35 @@ class _SingUpState extends State<SingUp> {
   }
 
   void _signUp(BuildContext context, UserModel user, Position p) async {
+    String str = await _service.addUser(user);
 
-   
+    if (str == "Done") {
+      print("User is successfully created");
 
-String str=await _service.addUser(user);
-
-      if (str=="Done" ) {
-        print("User is successfully created");
-
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed(signIn);
-        }
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed(signIn);
       }
-       else {
-        print("Error occurred during sign up");
+    } else {
+      print("Error occurred during sign up");
 
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                str,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              backgroundColor: Colors.red,
-              duration: Duration(seconds: 3),
-              action: SnackBarAction(
-                label: '',
-                textColor: Colors.white,
-                onPressed: () {},
-              ),
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              str,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          );
-        }
+            backgroundColor: Colors.red,
+            duration: Duration(seconds: 3),
+            action: SnackBarAction(
+              label: '',
+              textColor: Colors.white,
+              onPressed: () {},
+            ),
+          ),
+        );
       }
-
+    }
   }
 }

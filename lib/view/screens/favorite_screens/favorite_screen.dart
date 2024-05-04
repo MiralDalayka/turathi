@@ -74,7 +74,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                         const SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 200,
                           childAspectRatio: 0.7,
-                          mainAxisSpacing: 0,
+                          mainAxisSpacing: 10,
                           crossAxisSpacing: 16,
                         ),
                         itemBuilder: (context, index) {

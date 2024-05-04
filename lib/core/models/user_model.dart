@@ -13,11 +13,13 @@ class UserModel {
   String? certificate;
   String? email;
   List<String>? favList;
+  // String? userid;
 
   String? phone;
   UserModel.empty();
   UserModel(
       {this.id,
+      // this.userid,
       required this.name,
       required pass,
       required this.email,
@@ -44,6 +46,7 @@ class UserModel {
     phone = json['phone'];
     email = json['email'];
     favList = json['favList'].cast<String>();
+    //  userid = json['userid'].cast<String>();
 
   }
 
@@ -59,6 +62,7 @@ class UserModel {
     data['phone'] = phone;
     data['email'] = email;
     data['favList'] = favList;
+    //  data['userid'] = userid;
 
     return data;
   }

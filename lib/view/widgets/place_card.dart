@@ -12,7 +12,6 @@ class PlaceCard extends StatefulWidget {
     this.aspectRatio = 0.7,
     required this.onPress,
     required this.placeModel,
-
   }) : super(key: key);
 
   final double width, aspectRatio;
@@ -49,7 +48,10 @@ class _PlaceCardState extends State<PlaceCard> {
                     width: double.infinity,
                     height: double.infinity,
                     child: Image.network(
-                      widget.placeModel.images![0],
+                      widget.placeModel.images != null &&
+                              widget.placeModel.images!.isNotEmpty
+                          ? widget.placeModel.images![0]
+                          : 'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png?hl=ar',
                       fit: BoxFit.cover,
                       color: Colors.black.withOpacity(0.15),
                       colorBlendMode: BlendMode.darken,
@@ -60,7 +62,9 @@ class _PlaceCardState extends State<PlaceCard> {
                   bottom: LayoutManager.widthNHeight0(context, 0) * 0.045,
                   left: LayoutManager.widthNHeight0(context, 0) * 0.04,
                   child: Text(
-                    widget.placeModel.title!.toUpperCase(),
+                    widget.placeModel.title != null
+                        ? widget.placeModel.title!.toUpperCase()
+                        : 'No Title',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       shadows: const [
@@ -78,11 +82,17 @@ class _PlaceCardState extends State<PlaceCard> {
                   ),
                 ),
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.001,
-                  right: LayoutManager.widthNHeight0(context, 1) * 0.0002,
-                  child: Icon( sharedUser.favList!.contains(widget.placeModel.id!)?Icons.favorite:Icons.favorite_outline, color:ThemeManager.primary,)
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.025,
+                  right: LayoutManager.widthNHeight0(context, 1) * 0.025,
+                  child: Icon(
+                    sharedUser.favList != null &&
+                            widget.placeModel.id != null &&
+                            sharedUser.favList!.contains(widget.placeModel.id!)
+                        ? Icons.favorite
+                        : Icons.favorite_outline,
+                    color: ThemeManager.primary,
                   ),
-
+                ),
               ],
             ),
           ),

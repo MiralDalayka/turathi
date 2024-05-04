@@ -37,30 +37,26 @@ class _BodyPlacesState extends State<BodyPlaces> {
   @override
   Widget build(BuildContext context) {
     
-    // print("&&&&&&&${widget.dis_num}");
-    // log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
+    print("&&&&&&&${widget.dis_num}");
+    log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
     double cardWidth = 150;
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;
-    var dataList = [];
+
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
 
-///////
+    var dataList = [];
     if (isMyLocationTab) {
-       dataList = [];
-      userNearestLat = sharedUser.latitude!;
-      userNearestLog = sharedUser.longitude!;
-      dataList.addAll([userNearestLat, userNearestLog]); //userNearestLat == 0.0 || userNearestLog == 0.0)
+      log("%%%%%%%%%%%%%");
+     
+      dataList.addAll([userNearestLat, userNearestLog]); 
+    } else {
+      log("**********");
 
-
-    }
-    if(isNearestPlaceTab)
-    {
-      log("Second tab");
-      dataList = [0.0,0.0];
-      dataList.addAll([selectedNearestLat, selectedNearestLog]); //((selectedNearestLat
+      dataList.addAll([selectedNearestLat, selectedNearestLog]);
+      log("$selectedNearestLat,$selectedNearestLog");
     }
 
     if (dataList.first == 0.0 || dataList.last == 0.0) {
