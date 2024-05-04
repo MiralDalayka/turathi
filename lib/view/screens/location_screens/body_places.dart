@@ -61,7 +61,6 @@ class _BodyPlacesState extends State<BodyPlaces> {
       log("Second tab");
       dataList = [0.0,0.0];
       dataList.addAll([selectedNearestLat, selectedNearestLog]); //((selectedNearestLat
-      // log("$selectedNearestLat,$selectedNearestLog");
     }
 
     if (dataList.first == 0.0 || dataList.last == 0.0) {
