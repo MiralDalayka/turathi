@@ -20,6 +20,7 @@ class NotificationService {
             lat2: user.latitude!,
             lon2: user.longitude!,
           );
+      log("Distance");
       log(distanceInKm.toString());
       if (distanceInKm <= 10){
         NotificationModel notificationModel =
