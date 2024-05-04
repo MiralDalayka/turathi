@@ -17,14 +17,14 @@ class DeleteUser extends StatefulWidget {
 }
 
 class _DeleteUser extends State<DeleteUser> {
-
-  UserProvider userProvider=UserProvider();
+  UserProvider userProvider = UserProvider();
 
   @override
   Widget build(BuildContext context) {
-      print("FirebaseAuth.instance.currentUser${FirebaseAuth.instance.currentUser?.email}");
-      print("object${FirebaseAuth.instance.currentUser?.uid}");
-    
+    print(
+        "FirebaseAuth.instance.currentUser${FirebaseAuth.instance.currentUser?.email}");
+    print("object${FirebaseAuth.instance.currentUser?.uid}");
+
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -64,12 +64,51 @@ class _DeleteUser extends State<DeleteUser> {
                       Divider(height: 1, color: Colors.grey[300]),
                       InkWell(
                         onTap: () async {
-               
+                          // showDialog(
+                          //   context: context,
+                          //   builder: (BuildContext context) {
+                          //     return AlertDialog(
+                          //       backgroundColor: ThemeManager.primary,
+                          //       title: Text(
+                          //         'Confirm Deletion',
+                          //         style: TextStyle(color: Colors.white),
+                          //       ),
+                          //       content: Text(
+                          //         'Are you sure you want to Your Account ?',
+                          //         style: TextStyle(color: Colors.white),
+                          //       ),
+                          //       actions: [
+                          //         TextButton(
+                          //           onPressed: () {
+                          //             Navigator.of(context).pop();
+                          //           },
+                          //           child: Text(
+                          //             'Cancel',
+                          //             style: TextStyle(
+                          //                 color:ThemeManager.second,
+                          //                 fontWeight: FontWeight.bold),
+                          //           ),
+                          //         ),
+                          //         TextButton(
+                          //           onPressed: () {
+                          //             userProvider.deleteUserprovider();
 
-                          userProvider.deleteUserprovider();
-
-                          //log out
-                          Navigator.of(context).pushReplacementNamed(signIn);
+                          //             //log out
+                          //             Navigator.of(context)
+                          //                 .pushReplacementNamed(signIn);
+                          //           },
+                          //           child: Text(
+                          //             'OK',
+                          //             style: TextStyle(
+                          //                 color:
+                          //                     Color.fromARGB(255, 255, 32, 16),
+                          //                 fontWeight: FontWeight.bold),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     );
+                          //   },
+                          // );
                         },
                         child: Center(
                           child: Container(

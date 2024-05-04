@@ -166,10 +166,7 @@ class UndefineRoute extends StatelessWidget {
       body: Center(
         child: Text(
           'This $routeName is Undefine Route',
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1!
-              .copyWith(color: Colors.grey.shade700),
+        
         ),
       ),
     );
