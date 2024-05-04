@@ -47,7 +47,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
 
-
+///////
     if (isMyLocationTab) {
        dataList = [];
       userNearestLat = sharedUser.latitude!;
