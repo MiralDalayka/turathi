@@ -6,12 +6,13 @@ class RequestModel {
   String? certificate;
   String? userId;
 
- RequestModel.empty() {
+
+
+  RequestModel.empty() {
     requestId = "-1";
   }
-  
-  RequestModel()
-  {
+
+  RequestModel() {
     requestId = uuid.v4();
     userId = sharedUser.id;
     status = 'Waiting For Admin Acceptance';

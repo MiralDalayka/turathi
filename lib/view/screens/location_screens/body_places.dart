@@ -60,7 +60,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
     } else {
       log("**********");
-
+///
       dataList.addAll([selectedNearestLat, selectedNearestLog]);
           log("selectttttttt --> $selectedNearestLat,$selectedNearestLog");
       print("dataList2 --->  ${dataList}");
