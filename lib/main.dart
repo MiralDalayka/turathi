@@ -1,6 +1,7 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:geocode/geocode.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/comment_provider.dart';
 import 'package:turathi/core/providers/event_provider.dart';
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     GetCurrentLocation().performNearbySearch(context);
+
+
 
     print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
