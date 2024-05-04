@@ -71,7 +71,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                 ),
                 Text(
-                 _currentAddress != null ? "${_currentAddress!.countryName} ${_currentAddress!.city} "  ?? 'Unknown' : 'Unknown',
+                 _currentAddress != null ? "${_currentAddress!.countryName} ${_currentAddress!.city} , ${_currentAddress!.streetAddress} "  ?? 'Unknown' : 'Unknown',
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,
