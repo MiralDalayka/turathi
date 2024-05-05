@@ -7,7 +7,7 @@ import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/comment_circle.dart';
 
 class CommentCard extends StatelessWidget {
-  final PlaceCommentModel commentModel;
+  final CommentModel commentModel;
 
   const CommentCard({
     Key? key,
@@ -22,7 +22,8 @@ class CommentCard extends StatelessWidget {
           CommentInfo(
               text: commentModel.commentTxt,
               writer: commentModel.writerName,
-              date: commentModel.date),
+              date: commentModel.date,
+              writtenByExpert: commentModel.writtenByExpert),
           SizedBox(
             height: LayoutManager.widthNHeight0(context, 0) * 0.02,
           ),
@@ -36,17 +37,18 @@ class CommentCard extends StatelessWidget {
   }
 }
 
-
 class CommentInfo extends StatelessWidget {
   final String? text;
   final String? writer;
   final DateTime? date;
+  final int? writtenByExpert;
 
   const CommentInfo({
     Key? key,
     required this.text,
     required this.writer,
     required this.date,
+    required this.writtenByExpert,
   }) : super(key: key);
 
   @override
@@ -59,22 +61,27 @@ class CommentInfo extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-            
-             CircleTextWidget(text: writer ?? ''),
-            SizedBox(width: LayoutManager.widthNHeight0(context, 1) * 0.015),
-            Text(
-              writer ?? '',
-              style: TextStyle(
-                fontFamily: ThemeManager.fontFamily,
-                color: ThemeManager.textColor,
-                fontSize: 15,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircleTextWidget(text: writer ?? ''),
+                SizedBox(
+                    width: LayoutManager.widthNHeight0(context, 1) * 0.015),
+                Text(
+                  writer ?? '',
+                  style: TextStyle(
+                    fontFamily: ThemeManager.fontFamily,
+                    color: ThemeManager.textColor,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
             ),
-           ],),
-          
+          if(  writtenByExpert==1)
+            Text(
+             "EXPERT",
+              style: ThemeManager.textStyle.copyWith(fontSize: 12,color: ThemeManager.primary),
+            ),
             Text(
               _getDisplayTime(date),
               style: TextStyle(
@@ -83,7 +90,7 @@ class CommentInfo extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            // Expanded(child: SizedBox()), 
+            // Expanded(child: SizedBox()),
           ],
         ),
         SizedBox(

@@ -26,7 +26,7 @@ class CommentService {
         .where('placeId', isEqualTo: placeId)
         .get()
         .whenComplete(() {
-
+log("Place comments done");
     }).catchError((error) {
       log(error.toString());
     });
@@ -52,6 +52,7 @@ class CommentService {
     Map<String, dynamic> data = {};
     CommentModel tempModel;
     CommentList commentList = CommentList(comments: []);
+
     for (var item in commentsData.docs) {
       data["id"] = item.get("id");
       data["date"] = item.get("date");
@@ -60,8 +61,8 @@ class CommentService {
       data["writtenByExpert"] = item.get("writtenByExpert");
       data["placeId"] = item.get("placeId");
       data["questionId"] = item.get("questionId");
-
       tempModel = CommentModel.fromJson(data);
+
       commentList.comments.add(tempModel);
     }
     return commentList;

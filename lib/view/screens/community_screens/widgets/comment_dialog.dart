@@ -1,17 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/models/comment_model.dart';
+import 'package:turathi/core/providers/comment_provider.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/community_screens/question_view.dart';
 
 class CommentDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();
+  final String questionId;
 
-  CommentDialog({super.key});
+  CommentDialog({super.key, required this.questionId});
 
   @override
   Widget build(BuildContext context) {
+    CommentProvider provider = Provider.of<CommentProvider>(context);
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -48,18 +52,20 @@ class CommentDialog extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child:  Text('Cancel',style: ThemeManager.textStyle,),
+                  child: Text(
+                    'Cancel',
+                    style: ThemeManager.textStyle,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {
                     log(commentController.text);
-                    //BACK
-                    //write this code in the cont
-                    //create a comment model
-                    //  CommentModel(commentTxt: commentController.text,writerName: userModel,date: DateTime.now(),writtenByExpert: userModelExpert)
-                    // state management
-                    Navigator.of(context).pop();
+                    provider
+                        .addComment(CommentModel(
+                            commentTxt: commentController.text,
+                            questionId: questionId))
+                        .whenComplete(() => Navigator.of(context).pop());
                   },
                   child: Text(
                     'Save',

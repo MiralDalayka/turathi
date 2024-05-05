@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/utils/shared.dart';
 
@@ -24,7 +25,7 @@ class CommentModel {
 
   CommentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    date = json['date'];
+    date =  (json["date"] as Timestamp).toDate();
     commentTxt = json['commentTxt'];
     writerName = json['writerName'];
     writtenByExpert = json['writtenByExpert'];

@@ -212,13 +212,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    // Navigator.of(context).pushNamed(
-                                    //   commentsPlaceRoute,
-                                    //   // arguments: widget.placeModel.id,
-                                    // );\
-
-                                    ////////////here we have to chnage to pushNamed
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => CommentsPlace(
