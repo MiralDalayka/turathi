@@ -72,7 +72,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           name = value;
                         });
                       },
-                      initialValue: sharedUser.name.toString().toUpperCase(),
+                      initialValue: sharedUser.name.toString(),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Name must not be empty';

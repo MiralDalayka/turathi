@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/question_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -10,7 +7,6 @@ import 'package:turathi/view/widgets/add_button.dart';
 
 import '../../../core/models/question_model.dart';
 import '../../../utils/layout_manager.dart';
-import '../../widgets/back_arrow_button.dart';
 import 'widgets/question_box.dart';
 import 'widgets/question_dialog.dart';
 
@@ -34,20 +30,20 @@ class _CommunityScreenState extends State<CommunityScreen> {
       floatingActionButton: AddButton(
         onPressed: () {
           final currentUser = UserService().auth.currentUser;
-          if (currentUser != null && currentUser.isAnonymous) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => showCustomAlertDialog(context,
-                  "You Have To SignIn First \nTo Ask Question!"),
-            );
-          } else {
+          // if (currentUser != null && currentUser.isAnonymous) {
+          //   showDialog(
+          //     context: context,
+          //     builder: (BuildContext context) => showCustomAlertDialog(context,
+          //         "You Have To SignIn First \nTo Ask Question!"),
+          //   );
+          // } else {
             showDialog(
               context: context,
               builder: (BuildContext context) {
                 return QuestionDialog();
               },
             );
-          }
+          // }
         },
       ),
       backgroundColor: ThemeManager.background,

@@ -59,7 +59,7 @@ class NavigationBar extends StatelessWidget {
       items: destinations.map((destination) {
         return BottomNavigationBarItem(
           icon: Container(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
                 color: selectedIndex == destination.index
                     ? Color(0xff6E232F)

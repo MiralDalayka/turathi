@@ -15,18 +15,24 @@ class CircleTextWidget extends StatelessWidget {
 String initial = getInitials(text); 
 
     return Container(
-      width: LayoutManager.widthNHeight0(context, 1) * 0.1,
+      width: LayoutManager.widthNHeight0(context, 1) * 0.11,
       height: 40,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: ThemeManager.primary,
       ),
       child: Center(
-        child: Text(
-          initial,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        child: DefaultTextStyle(
+          style: TextStyle(),
+          child: Text(
+            initial,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            fontSize:  LayoutManager.widthNHeight0(context, 1) * 0.06,
+                 
+            ),
+            
           ),
         ),
       ),

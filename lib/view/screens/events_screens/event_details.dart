@@ -42,7 +42,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           ),
         ),
         Positioned(
-          top: height - 95,
+          top: height - 100,
           left: left,
           child: SizedBox(
             width: LayoutManager.widthNHeight0(context, 1) - 20,
@@ -50,6 +50,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 maxLines: 3,
                 widget.eventModel.name!,
                 style: ThemeManager.textStyle.copyWith(
+                  fontSize: 29,
                     color: ThemeManager.second,
                     decoration: TextDecoration.none)),
           ),
@@ -200,20 +201,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           maxLines: 3,
                         ),
 
-                        // AutoSizeText(
-
-                        //   widget.eventModel.address!,
-                        //   overflow: TextOverflow.ellipsis,
-                        //   style: ThemeManager.textStyle.copyWith(
-
-                        //     decoration: TextDecoration.none,
-                        //     color: ThemeManager.primary
-                        //   ),
-                        //   maxLines: 3,
-                        // ),
                         defaultButton3(
                           text: 'Show Map',
-                          // width: LayoutManager.widthNHeight0(context, 1) * 0.36,
                           borderRadius: 18,
                           background: ThemeManager.primary,
                           textColor: ThemeManager.second,
@@ -248,7 +237,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   size: 25,
                 ))),
         Positioned(
-            top: LayoutManager.widthNHeight0(context, 1) * 0.25, //45,
+            top: LayoutManager.widthNHeight0(context, 1) * 0.75, //45,
             right: LayoutManager.widthNHeight0(context, 1) * 0.03, //10
             child: Column(
               mainAxisSize: MainAxisSize.min,
