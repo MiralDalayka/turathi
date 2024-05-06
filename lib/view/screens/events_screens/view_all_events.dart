@@ -24,15 +24,15 @@ class _EventsScreenState extends State<EventsScreen> {
       floatingActionButton: AddButton(
         onPressed: () {
           final currentUser = UserService().auth.currentUser;
-          if (currentUser != null && currentUser.isAnonymous) {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => showCustomAlertDialog(
-                  context, "You Have To SignIn First \nTo Add Event!"),
-            );
-          } else {
+          // if (currentUser != null && currentUser.isAnonymous) {
+          //   showDialog(
+          //     context: context,
+          //     builder: (BuildContext context) => showCustomAlertDialog(
+          //         context, "You Have To SignIn First \nTo Add Event!"),
+          //   );
+          // } else {
             Navigator.of(context).pushNamed(addNewEventRoute);
-          }
+          // }
         },
       ),
       backgroundColor: ThemeManager.background,

@@ -265,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   0.04,
                             ),
                             ViewEvent(
-                              eventModel: eventsList!.events[1],
+                              eventModel: eventsList!.events[1],//change 1 to 0
                               flag: false,
                             ),
                           ],

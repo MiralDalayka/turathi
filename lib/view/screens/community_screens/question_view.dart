@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/view/widgets/small_Image.dart';
 import '../../../core/models/comment_model.dart';
 import '../../../core/models/question_model.dart';
 import '../../../core/providers/comment_provider.dart';
@@ -8,7 +9,6 @@ import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
 import '../../widgets/back_arrow_button.dart';
 import '../../widgets/comment_place_card.dart';
-import 'widgets/comment_box.dart';
 import 'widgets/comment_dialog.dart';
 
 class QuestionView extends StatefulWidget {
@@ -16,17 +16,17 @@ class QuestionView extends StatefulWidget {
 
   final QuestionModel question;
 
-
   @override
   State<QuestionView> createState() => _QuestionViewState();
 }
 
 class _QuestionViewState extends State<QuestionView> {
   CommentList? commentList;
+  int selectedImage = 0;
 
   @override
   Widget build(BuildContext context) {
-    var height = LayoutManager.widthNHeight0(context, 0) * 0.35;
+    var height = LayoutManager.widthNHeight0(context, 0) * 0.4;
     CommentProvider provider = Provider.of<CommentProvider>(context);
 
     double left = 15;
@@ -34,41 +34,76 @@ class _QuestionViewState extends State<QuestionView> {
     return Stack(
       children: <Widget>[
         SizedBox(
-          height: height,
+          height: height + 40,
           width: double.infinity,
           child: Image.network(
             color: Colors.black.withOpacity(0.2),
             colorBlendMode: BlendMode.darken,
-            widget.question.images![0],
+            widget.question.images![selectedImage],
             fit: BoxFit.cover,
           ),
         ),
         Positioned(
-          top: height - 120,
-          left: left,
-          child: Text(
-            widget.question.title!,
-            style: TextStyle(
-                fontFamily: ThemeManager.fontFamily,
-                color: ThemeManager.second,
-                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.04,
-                decoration: TextDecoration.none),
+          top: LayoutManager.widthNHeight0(context, 1) * 0.18, //45,
+          right: 10,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              for (int index = 0;
+                  index < widget.question.images!.length;
+                  index++)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: SmallImage(
+                    isSelected: index == selectedImage,
+                    press: () {
+                      setState(() {
+                        selectedImage = index;
+                      });
+                    },
+                    image: widget.question.images![index],
+                  ),
+                ),
+            ],
           ),
         ),
         Positioned(
-          top: height - 70,
+          top: height - LayoutManager.widthNHeight0(context, 0) * 0.1,
+          left: left,
+          child: Text(
+            widget.question.title!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontFamily: ThemeManager.fontFamily,
+              fontSize: LayoutManager.widthNHeight0(context, 0) * 0.035,
+              fontWeight: FontWeight.w600,
+              color: ThemeManager.second,
+              decoration: TextDecoration.none,
+              shadows: [
+                Shadow(
+                  color: Colors.black.withOpacity(0.6),
+                  blurRadius: 2,
+                  offset: Offset(-1, 1),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: height - 35,
           left: left,
           child: Text(
             widget.question.writerName!,
             style: TextStyle(
-                // fontFamily: ThemeManager.fontFamily,
+                fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.second,
                 fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
                 decoration: TextDecoration.none),
           ),
         ),
         Positioned(
-            top: height - 20,
+            top: height - 1,
             bottom: 0,
             child: Container(
               height: LayoutManager.widthNHeight0(context, 0),
@@ -93,8 +128,26 @@ class _QuestionViewState extends State<QuestionView> {
                     const SizedBox(
                       height: 10,
                     ),
+                    // DefaultTextStyle(
+                    //   style: TextStyle(),
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(right: 230, top: 20),
+                    //     child: Text(
+                    //       "Comments ",
+                    //       textAlign: TextAlign.start,
+                    //       style: TextStyle(
+                    //         color: ThemeManager.textColor,
+                    //         fontFamily: ThemeManager.fontFamily,
+                    //         fontWeight: FontWeight.bold,
+                    //         fontSize:
+                    //             LayoutManager.widthNHeight0(context, 0) * 0.021,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     FutureBuilder(
-                        future: provider.getQuestionComments(widget.question.id!),
+                        future:
+                            provider.getQuestionComments(widget.question.id!),
                         builder: (context, snapshot) {
                           var data = snapshot.data;
                           if (data == null) {
@@ -105,47 +158,57 @@ class _QuestionViewState extends State<QuestionView> {
                           commentList = data;
                           if (commentList!.comments.isNotEmpty) {
                             return Expanded(
-                              child: Padding(
-                                  padding: EdgeInsets.all(
-                                      LayoutManager.widthNHeight0(context, 1) * 0.05),
-                                  child: ListView.separated(
-                                      itemBuilder: (context, index) {
-                                        return CommentCard(
-                                          commentModel: commentList!.comments[index],
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) =>
-                                          Divider(height: 1, color: Colors.grey[300]),
-                                      itemCount: commentList!.comments.length)),
-                            );
+                                child: ListView.separated(
+                                    itemBuilder: (context, index) {
+                                      return CommentCard(
+                                        commentModel:
+                                            commentList!.comments[index],
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        Divider(
+                                            height: 1, color: Colors.grey[300]),
+                                    itemCount: commentList!.comments.length));
                           }
                           return Padding(
                             padding: EdgeInsets.only(
-                                top: LayoutManager.widthNHeight0(context, 1) * 0.35),
+                                top: LayoutManager.widthNHeight0(context, 1) *
+                                    0.35),
                             child: Center(
                               child: Column(
                                 children: [
-                                  Text(
-                                    "No Comments On This Place Yet",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: ThemeManager.primary,
-                                      fontFamily: ThemeManager.fontFamily,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize:
-                                      LayoutManager.widthNHeight0(context, 0) * 0.021,
+                                  DefaultTextStyle(
+                                    style: TextStyle(),
+                                    child: Text(
+                                      "No Comments On This Place Yet",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ThemeManager.primary,
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: LayoutManager.widthNHeight0(
+                                                context, 0) *
+                                            0.021,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
-                                      height:
-                                      LayoutManager.widthNHeight0(context, 0) * 0.01),
-                                  Text(
-                                    "You're welcome to share your\n thoughts and comments!",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: ThemeManager.fontFamily,
-                                      fontSize:
-                                      LayoutManager.widthNHeight0(context, 0) * 0.02,
+                                      height: LayoutManager.widthNHeight0(
+                                              context, 0) *
+                                          0.01),
+                                  DefaultTextStyle(
+                                    style: TextStyle(),
+                                    child: Text(
+                                      "You're welcome to share your\n thoughts and comments!",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: ThemeManager.fontFamily,
+                                        color: ThemeManager.primary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: LayoutManager.widthNHeight0(
+                                                context, 0) *
+                                            0.02,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -165,19 +228,29 @@ class _QuestionViewState extends State<QuestionView> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return CommentDialog(questionId: widget.question.id!,);
+                return CommentDialog(
+                  questionId: widget.question.id!,
+                );
               },
             );
           }),
         ),
+      
         Positioned(
-            top: 25,
+          top: 30,
             left: iconLeft,
-            child: const BackArrowButton(
-              color: Colors.white,
-            )),
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white, // Changed color to white
+              size: 30, // Changed size to 30
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
       ],
     );
   }
 }
-

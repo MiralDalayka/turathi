@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/question_model.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 
 import '../../../../utils/Router/const_router_names.dart';
 import '../../../../utils/layout_manager.dart';
@@ -15,7 +16,6 @@ class QuestionBox extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
-
           questionRoute,
           arguments: question,
         );
@@ -29,17 +29,20 @@ class QuestionBox extends StatelessWidget {
               Expanded(
                   flex: 1,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
-                    child:
-                   question.images!=null&& question.images!.isNotEmpty?
-                    Image.network(
-                      question.images![0],
-                      fit: BoxFit.cover,
-                      height: 150,
-                    ):Image.asset("assets/images/img_png/imageProfile.png"),
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: question.images != null &&
+                            question.images!.isNotEmpty
+                        ? Image.network(
+                            question.images![0],
+                            fit: BoxFit.cover,
+                            height:
+                                LayoutManager.widthNHeight0(context, 0) * 0.17,
+                           
+                          )
+                        : Image.asset("assets/images/img_png/imageProfile.png"),
                   )),
-              const SizedBox(
-                width: 10,
+              SizedBox(
+                width: LayoutManager.widthNHeight0(context, 0) * 0.015,
               ),
               Expanded(
                 flex: 2,
@@ -48,13 +51,13 @@ class QuestionBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      question.title!,
+                      question.title.toString().toUpperCase(),
                       style: TextStyle(
-                        fontFamily: 'KohSantepheap',
+                        fontFamily: ThemeManager.fontFamily,
                         color: ThemeManager.primary,
                         fontWeight: FontWeight.bold,
                         fontSize:
-                            LayoutManager.widthNHeight0(context, 0) * 0.03,
+                            LayoutManager.widthNHeight0(context, 0) * 0.027,
                       ),
                     ),
                     Text(
@@ -62,12 +65,14 @@ class QuestionBox extends StatelessWidget {
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontFamily: 'KohSantepheap',
+                        fontSize:
+                            LayoutManager.widthNHeight0(context, 1) * 0.05,
+                        fontFamily: ThemeManager.fontFamily,
                         color: ThemeManager.textColor,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.07,
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
@@ -85,7 +90,7 @@ class QuestionBox extends StatelessWidget {
                           Text(
                             question.writerName!,
                             style: TextStyle(
-                              fontFamily: 'KohSantepheap',
+                              fontFamily: ThemeManager.fontFamily,
                               color: ThemeManager.primary,
                             ),
                           )

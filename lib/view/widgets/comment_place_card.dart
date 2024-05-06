@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:intl/intl.dart';
 import 'package:turathi/core/models/comment_model.dart';
 import 'package:turathi/core/models/comment_place_model.dart';
@@ -19,6 +20,9 @@ class CommentCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: LayoutManager.widthNHeight0(context, 0) * 0.01,
+          ),
           CommentInfo(
               text: commentModel.commentTxt,
               writer: commentModel.writerName,
@@ -27,10 +31,7 @@ class CommentCard extends StatelessWidget {
           SizedBox(
             height: LayoutManager.widthNHeight0(context, 0) * 0.02,
           ),
-          Divider(
-            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
-            color: Colors.grey[300],
-          ),
+         
         ],
       ),
     );
@@ -55,39 +56,42 @@ class CommentInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: LayoutManager.widthNHeight0(context, 0) * 0.03,
-        ),
+      
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
                 CircleTextWidget(text: writer ?? ''),
+
                 SizedBox(
                     width: LayoutManager.widthNHeight0(context, 1) * 0.015),
-                Text(
-                  writer ?? '',
-                  style: TextStyle(
-                    fontFamily: ThemeManager.fontFamily,
-                    color: ThemeManager.textColor,
-                    fontSize: 15,
+               DefaultTextStyle(
+              style: TextStyle(),
+                  child: Text(
+                    writer ?? '',
+                    style: TextStyle(
+                      fontFamily: ThemeManager.fontFamily,
+                      color: ThemeManager.textColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ],
             ),
-          if(  writtenByExpert==1)
-            Text(
-             "EXPERT",
-              style: ThemeManager.textStyle.copyWith(fontSize: 12,color: ThemeManager.primary),
-            ),
-            Text(
-              _getDisplayTime(date),
-              style: TextStyle(
-                fontFamily: ThemeManager.fontFamily,
-                color: ThemeManager.textColor,
-                fontSize: 12,
+
+              DefaultTextStyle(
+              style: TextStyle(),
+              child: Text(
+                _getDisplayTime(date),
+                style: TextStyle(
+                  fontFamily: ThemeManager.fontFamily,
+                  color: ThemeManager.textColor,
+                  fontSize: 12,
+                ),
               ),
             ),
             // Expanded(child: SizedBox()),
@@ -96,14 +100,38 @@ class CommentInfo extends StatelessWidget {
         SizedBox(
           height: LayoutManager.widthNHeight0(context, 0) * 0.02,
         ),
-        Text(
-          text ?? '',
-          style: TextStyle(
-            fontFamily: ThemeManager.fontFamily,
-            color: ThemeManager.textColor,
-            fontSize: 10,
-          ),
-        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            DefaultTextStyle(
+              style: TextStyle(),
+              child: Text(
+                text ?? '',
+                style: TextStyle(
+                  fontFamily: ThemeManager.fontFamily,
+                  color: ThemeManager.textColor,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            if (writtenByExpert == 1)
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: ThemeManager.primary,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  "EXPERT",
+                  style: TextStyle(
+                    fontFamily: ThemeManager.fontFamily,
+                    color: ThemeManager.second,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        )
       ],
     );
   }
