@@ -51,8 +51,6 @@ class UserService {
   }
 
   Future<UserModel> updateUser(UserModel model) async {
-
-
     String? newEmail = model.email;
 
     if (newEmail != null) {
@@ -64,9 +62,7 @@ class UserService {
       }
     } else {
       print("New email address is null. Cannot update.");
-
     }
-
 
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
@@ -97,23 +93,28 @@ class UserService {
   Future<bool> signIn(String email, String password) async {
     UserModel? userModel = await getUserByEmail(email);
 
-    String? str = userModel!.password;
+    if (userModel != null && userModel.password != null) {
+      String? str = userModel!.password;
 
-    if (str != null) if (Crypt(str).match(password)) {
-      print("User is successfully in match");
+      if (str != null) if (Crypt(str).match(password)) {
+        print("User is successfully in match");
 
-      return true;
-    } 
+        return true;
+      }
 
-    User? user = await _auth.signinwithemailandpassword(email, password);
+      User? user = await _auth.signinwithemailandpassword(email, password);
 
-    if (user != null) {
-      print("User is successfully Signin");
+      if (user != null) {
+        print("User is successfully Signin");
 
-      return true;
+        return true;
+      } else {
+        print("error is happend 3");
+        checkUser = false;
+        return false;
+      }
     } else {
-      print("error is happend 3");
-      checkUser = false;
+      print("This email is not exciting. ");
       return false;
     }
   }
@@ -143,8 +144,7 @@ class UserService {
       return null;
     }
 
-    Map<String, dynamic> data =
-        {}; // Retrieve data from the first document 
+    Map<String, dynamic> data = {}; // Retrieve data from the first document
 
     data["id"] = userData.docs[0].get("id");
     data["name"] = userData.docs[0].get("name");

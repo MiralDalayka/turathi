@@ -17,15 +17,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreen extends State<ProfileScreen> {
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: ThemeManager.background,
       body: SingleChildScrollView(
@@ -55,24 +48,38 @@ class _ProfileScreen extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hi ${sharedUser.name??"Guest"}".toUpperCase(),
+                        "Hi ${sharedUser.name ?? "Guest"}".toUpperCase(),
                         style: TextStyle(
                           fontSize:
                               LayoutManager.widthNHeight0(context, 1) * 0.06,
                           color: ThemeManager.second,
                           fontWeight: FontWeight.bold,
                           fontFamily: ThemeManager.fontFamily,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 3,
+                              color: Colors.black.withOpacity(0.5),
+                            ),
+                          ],
                         ),
                       ),
                       Text(
                         "Welcome Again",
                         style: TextStyle(
-                            fontSize:
-                                LayoutManager.widthNHeight0(context, 1) * 0.06,
-                            color: ThemeManager.second,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: ThemeManager.fontFamily,
+                          fontSize:
+                              LayoutManager.widthNHeight0(context, 1) * 0.06,
+                          color: ThemeManager.second,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: ThemeManager.fontFamily,
+                          shadows: [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 3,
+                              color: Colors.black.withOpacity(0.5),
                             ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

@@ -37,9 +37,7 @@ class _thirdBox extends State<thirdBox> {
             children: [
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushNamed("About us");
-                  // commentService.addComment(CommentModel(commentTxt: 'ttttttttteeeeeeeeeeeesssssttt',placeId: 'f8be9249-9912-49dd-a10a-50579ce2eb10'));
-
+                  Navigator.of(context).pushNamed(aboutUsScreen);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
@@ -85,8 +83,6 @@ class _thirdBox extends State<thirdBox> {
                   padding: EdgeInsets.only(right: 17),
                   child: GestureDetector(
                     onTap: () async {
-
-
                       userService.signOut();
 
                       print("sign out");
@@ -117,8 +113,6 @@ class _thirdBox extends State<thirdBox> {
                       ],
                     ),
                   ),
-
-               
                 ),
               ),
             ],

@@ -27,6 +27,7 @@ String initial = getInitials(text);
           child: Text(
             initial,
             style: TextStyle(
+              fontFamily: ThemeManager.fontFamily,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             fontSize:  LayoutManager.widthNHeight0(context, 1) * 0.06,

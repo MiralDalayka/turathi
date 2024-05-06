@@ -4,8 +4,9 @@ import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
-import 'package:turathi/view/screens/notification/notification_page.dart';
+import 'package:turathi/view/screens/profile_screens/screens/notification/notification_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
+import 'package:turathi/view/screens/profile_screens/screens/aboutus_page.dart';
 import 'package:turathi/view/screens/profile_screens/screens/change_info.dart';
 import 'package:turathi/view/screens/profile_screens/screens/delete_user.dart';
 import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
@@ -33,12 +34,18 @@ class MyRouter {
           return _route(SplashScreen());
         }
 
+//AboutUsScreen
+      case aboutUsScreen:
+        {
+          return _route(AboutUsScreen());
+        }
+
       case signIn:
         {
           return _route(LogIn());
         }
 
-         case deleteuserpage:
+      case deleteuserpage:
         {
           return _route(DeleteUser());
         }
@@ -166,7 +173,6 @@ class UndefineRoute extends StatelessWidget {
       body: Center(
         child: Text(
           'This $routeName is Undefine Route',
-        
         ),
       ),
     );

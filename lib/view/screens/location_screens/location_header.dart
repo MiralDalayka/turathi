@@ -28,9 +28,11 @@ class _HeaderPartState extends State<HeaderPart> {
  Future<void> _getCurrentLocation() async {
     try {
       Address address = await UserCity();
+      if (mounted) {
       setState(() {
         _currentAddress = address;
       });
+      }
     } catch (e) {
       print('Error getting location: $e');
     }

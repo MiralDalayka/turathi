@@ -20,6 +20,9 @@ class CommentCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
+          SizedBox(
+            height: LayoutManager.widthNHeight0(context, 0) * 0.01,
+          ),
           CommentInfo(
               text: commentModel.commentTxt,
               writer: commentModel.writerName,
@@ -28,10 +31,7 @@ class CommentCard extends StatelessWidget {
           SizedBox(
             height: LayoutManager.widthNHeight0(context, 0) * 0.02,
           ),
-          Divider(
-            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
-            color: Colors.grey[300],
-          ),
+         
         ],
       ),
     );
@@ -56,17 +56,20 @@ class CommentInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+      
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+
                 CircleTextWidget(text: writer ?? ''),
+
                 SizedBox(
                     width: LayoutManager.widthNHeight0(context, 1) * 0.015),
-                DefaultTextStyle(
-                  style: TextStyle(),
+               DefaultTextStyle(
+              style: TextStyle(),
                   child: Text(
                     writer ?? '',
                     style: TextStyle(
@@ -80,7 +83,7 @@ class CommentInfo extends StatelessWidget {
               ],
             ),
 
-            DefaultTextStyle(
+              DefaultTextStyle(
               style: TextStyle(),
               child: Text(
                 _getDisplayTime(date),

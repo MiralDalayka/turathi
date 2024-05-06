@@ -235,12 +235,21 @@ class _QuestionViewState extends State<QuestionView> {
             );
           }),
         ),
+      
         Positioned(
-            top: 25,
+          top: 30,
             left: iconLeft,
-            child: const BackArrowButton(
-              color: Colors.white,
-            )),
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white, // Changed color to white
+              size: 30, // Changed size to 30
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
       ],
     );
   }

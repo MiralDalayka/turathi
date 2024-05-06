@@ -30,6 +30,8 @@ class EventProvider extends ChangeNotifier {
 
   Future<void> _getEvents() async {
     _eventList= await _eventService.getEvents();
-      print("something here 2");
+      // print("something here 2");
   }
+
+
 }
