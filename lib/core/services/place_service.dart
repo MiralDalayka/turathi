@@ -205,25 +205,25 @@ class PlaceService {
 //   return tempModel;
 // }
 
-  // Future<PlaceModel> updatePlaceFiled(
-  //     {required String id ,
-  //       required String placeFieldName ,
-  //       required Object placeFieldValue}) async {
-  //   QuerySnapshot placesData = await _fireStore
-  //       .collection(_collectionName)
-  //       .where('id', isEqualTo: id)
-  //       .get();
-  //   String placeId = placesData.docs[0].id; //id for the ref
-  //
-  //   _fireStore
-  //       .collection(_collectionName)
-  //       .doc(placeId)
-  //       .update({placeFieldName: placeFieldValue})
-  //       .whenComplete(() {
-  //     log("UPDATE done");
-  //   }).catchError((error) {
-  //     log(error.toString());
-  //   });
-  //   return placeModel;
-  // }
+  Future<PlaceModel> updatePlaceFiled(
+      {required String id ,
+        required String placeFieldName ,
+        required Object placeFieldValue}) async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: id)
+        .get();
+    String placeId = placesData.docs[0].id; //id for the ref
+
+    _fireStore
+        .collection(_collectionName)
+        .doc(placeId)
+        .update({placeFieldName: placeFieldValue})
+        .whenComplete(() {
+      log("UPDATE done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    return await getPlaceById(id);
+  }
 }

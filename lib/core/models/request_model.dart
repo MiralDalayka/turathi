@@ -1,5 +1,5 @@
 import '../../utils/shared.dart';
-
+enum RequestStatus { accepted, rejected,waiting,dataWarning }
 class RequestModel {
   String? requestId;
   String? status;
@@ -15,7 +15,7 @@ class RequestModel {
   RequestModel() {
     requestId = uuid.v4();
     userId = sharedUser.id;
-    status = 'Waiting For Admin Acceptance';
+    status = RequestStatus.waiting.name;
   }
 
   RequestModel.fromJson(Map<String, dynamic> json) {

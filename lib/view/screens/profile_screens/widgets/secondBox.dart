@@ -34,7 +34,7 @@ class _secondBox extends State<SecondBox> {
               InkWell(
                  onTap: () {
                   final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
+                  if (currentUser == null) {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To Sign In First \nTo View Your Added Places!"),
