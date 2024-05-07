@@ -61,7 +61,6 @@ class _DeleteUser extends State<DeleteUser> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Divider(height: 1, color: Colors.grey[300]),
                       InkWell(
                         onTap: () async {
                           showDialog(

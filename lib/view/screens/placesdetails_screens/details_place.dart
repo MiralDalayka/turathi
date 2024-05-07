@@ -167,16 +167,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 height: 3,
                               ),
                               Text(
-                                "${( getDistanceInKm(
-                                        lat1: widget.placeModel.latitude!,
-                                        lon1: widget.placeModel.longitude!,
-                                        lat2: userNearestLat,
-                                        lon2: userNearestLog).toInt())} km",
+                                "${(getDistanceInKm(lat1: widget.placeModel.latitude!, lon1: widget.placeModel.longitude!, lat2: userNearestLat, lon2: userNearestLog).toInt())} km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,
                                   fontFamily: ThemeManager.fontFamily,
-                                  fontSize: 10,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.none,
                                 ),
@@ -234,17 +230,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 LayoutManager.widthNHeight0(context, 1) * 0.1,
                           ),
                           Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                           
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              /*
-                                  height: LayoutManager.widthNHeight0(
-                                              context, 1) *
-                                          0.05, //30.0,
-                                      width: LayoutManager.widthNHeight0(
-                                              context, 0) *
-                                          0.035, //18.0,
-                                 */
                               Expanded(
                                 child: IconButton(
                                   onPressed: () async {
@@ -258,8 +245,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     }
                                   },
                                   icon: SizedBox(
-                                    width: LayoutManager.widthNHeight0(context, 1)*0.055,
-                                    height:LayoutManager.widthNHeight0(context, 1)*0.055,
+                                    width: LayoutManager.widthNHeight0(
+                                            context, 1) *
+                                        0.055,
+                                    height: LayoutManager.widthNHeight0(
+                                            context, 1) *
+                                        0.055,
                                     child: Image.asset(
                                       widget.placeModel.likesList!
                                               .contains(sharedUser.id)
@@ -297,14 +288,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               //       },
                               //     )),
 
-                              Text(
-                                "${widget.placeModel.like}",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: ThemeManager.fontFamily,
-                                  color:
-                                      ThemeManager.textColor.withOpacity(0.7),
-                                  decoration: TextDecoration.none,
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                  "${widget.placeModel.like}",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: ThemeManager.fontFamily,
+                                    color:
+                                        ThemeManager.textColor.withOpacity(0.7),
+                                    decoration: TextDecoration.none,
+                                  ),
                                 ),
                               )
                             ],
@@ -312,9 +306,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ],
                       ),
                     ),
-                    ////////////////////////////
                     SizedBox(
-                      height: 12,
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.05,
                     ),
                     Text(
                       "${widget.placeModel.description} ",
@@ -328,7 +321,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         decoration: TextDecoration.none,
                       ),
                     ),
-
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                     ),
@@ -415,9 +407,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   color: Colors.white,
                   size: 25,
                 ))),
-
-
-
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
             right: 10,
@@ -535,8 +524,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ],
                 )
               ],
-            )
-            ),
+            )),
       ],
     );
   }
