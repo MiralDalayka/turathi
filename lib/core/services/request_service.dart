@@ -16,10 +16,8 @@ class RequestService {
     _fireStore.collection(_collectionName).add(model.toJson())
         .whenComplete(() async {
           log("***************REQUEST***************");
-     //model.certificate = await _filesStorageService.addFile(file);
-     updateRequestFiled(requestId:  model.requestId!,
-         placeFieldName: "certificate",
-         placeFieldValue:  await _filesStorageService.addFile(file));
+     model.certificate = await _filesStorageService.addFile(file);
+     updateRequestFiled(model);
     }).catchError((error) {
       return "Failed";
     });
@@ -85,26 +83,23 @@ class RequestService {
   }
 
   Future<RequestModel> updateRequestFiled(
-      {required String requestId ,
-        required String placeFieldName ,
-        required Object placeFieldValue}) async {
-    QuerySnapshot placesData = await _fireStore
-        .collection(_collectionName)
-        .where('requestId', isEqualTo: requestId)
-        .get();
-    String placeId = placesData.docs[0].id; //id for the ref
+      RequestModel requestModel) async {
 
+    QuerySnapshot requestData = await _fireStore
+        .collection(_collectionName)
+        .where('requestId', isEqualTo: requestModel.requestId)
+        .get();
+    String requestId = requestData.docs[0].id;
     _fireStore
         .collection(_collectionName)
-        .doc(placeId)
-        .update({placeFieldName: placeFieldValue})
+        .doc(requestId)
+        .update({"certificate": requestModel.certificate})
         .whenComplete(() {
-      log("update ${placeFieldName} request done");
-      log("${placeFieldValue}");
-
+      log("update request done");
     }).catchError((error) {
       log(error.toString());
     });
+
     return await getRequestById(requestId);
   }
 }
