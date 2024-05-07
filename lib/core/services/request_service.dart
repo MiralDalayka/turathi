@@ -100,6 +100,8 @@ class RequestService {
         .update({placeFieldName: placeFieldValue})
         .whenComplete(() {
       log("update ${placeFieldName} request done");
+      log("${placeFieldValue}");
+
     }).catchError((error) {
       log(error.toString());
     });
