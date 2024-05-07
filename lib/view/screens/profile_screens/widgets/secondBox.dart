@@ -33,15 +33,15 @@ class _secondBox extends State<SecondBox> {
             children: [
               InkWell(
                  onTap: () {
-                  final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To Sign In First \nTo View Your Added Places!"),
-                    );
-                  } else {
+                  // final currentUser = UserService().auth.currentUser;
+                  // if (currentUser != null && currentUser.isAnonymous) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To Sign In First \nTo View Your Added Places!"),
+                  //   );
+                  // } else {
                      Navigator.of(context).pushNamed(addedPlacesRoute);
-                  }
+                  // }
                 },
 
                 
@@ -83,15 +83,15 @@ class _secondBox extends State<SecondBox> {
               ),
               InkWell(
                  onTap: () {
-                  final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To SignIn First \nTo Rquest To Be An Expert!"),
-                    );
-                  } else {
+                  // final currentUser = UserService().auth.currentUser;
+                  // if (currentUser != null && currentUser.isAnonymous) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To SignIn First \nTo Rquest To Be An Expert!"),
+                  //   );
+                  // } else {
                     Navigator.of(context).pushNamed(requestToBeExpertRoute);
-                  }
+                  // }
                 },
 
                
