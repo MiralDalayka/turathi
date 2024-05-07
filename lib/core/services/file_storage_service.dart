@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:turathi/utils/shared.dart';
 
 
 class FilesStorageService {
@@ -11,10 +12,8 @@ class FilesStorageService {
         FirebaseStorage.instanceFor(bucket: 'turathi-96897.appspot.com');
 
   Future<String> addFile(File file) async {
-    // File file = File(xFile.path);
-    var fileName = basename(file.path);
-    Reference reference = _storageInstance.ref().child("certificateFiles/$fileName");
-/////
+    // var fileName = basename(file.path);
+    Reference reference = _storageInstance.ref().child("certificateFiles/${sharedUser.id}");
     UploadTask uploadTask = reference.putFile(file);
 
     String url = await uploadTask.then((res) {
