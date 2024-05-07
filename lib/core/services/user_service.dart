@@ -38,7 +38,6 @@ class UserService {
         }
       }
     }
-
     _fireStore
         .collection(_collectionName)
         .add(model.toJson())
@@ -50,44 +49,89 @@ class UserService {
     return "Done";
   }
 
-  Future<UserModel> updateUser(UserModel model) async {
-    String? newEmail = model.email;
+  // Future<UserModel> updateUser2(UserModel model) async {
+  //   String? newEmail = model.email;
+
+  //   if (newEmail != null) {
+  //     try {
+  //       await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
+  //       print("Email updated successfully");
+  //     } catch (error) {
+  //       print("Error updating email: $error");
+  //     }
+  //   } else {
+  //     print("New email address is null. Cannot update.");
+  //   }
+
+  //   QuerySnapshot userData = await _fireStore
+  //       .collection(_collectionName)
+  //       .where('id', isEqualTo: sharedUser.id)
+  //       .get();
+
+  //   if (userData.docs.isNotEmpty) {
+  //     String userId = userData.docs[0].id;
+  //     print("Hhhhhhhh ${userId}");
+
+  //     _fireStore
+  //         .collection(_collectionName)
+  //         .doc(userId)
+  //         .update(model.toJson())
+  //         .whenComplete(() {
+  //       log("user data updated successfully");
+  //     }).catchError((error) {
+  //       log(error.toString());
+  //       print("object12");
+  //     });
+  //   } else {
+  //     log("No user data found for the provided ID");
+  //   }
+
+  //   return model;
+  // }
+
+  Future<UserModel> updateUser(String id) async {
+    UserModel userModel=await getUserById(id);
+
+    String? newEmail = sharedUser.email;
+
+    print(FirebaseAuth.instance.currentUser);
 
     if (newEmail != null) {
-      try {
-        await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
-        print("Email updated successfully");
-      } catch (error) {
-        print("Error updating email: $error");
-      }
+  try {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser?.email != newEmail) {
+      await currentUser?.updateEmail(newEmail);
+      print("Email updated successfully");
     } else {
-      print("New email address is null. Cannot update.");
+      print("Email is already up-to-date");
     }
-
+  } catch (error) {
+    print("Error updating email: $error");
+  }
+} else {
+  print("New email address is null. Cannot update.");
+}
+///////here update the user info in the firestore 
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: sharedUser.id)
+        .where('id', isEqualTo: id)
         .get();
+    String userId = userData.docs[0].id;
 
-    if (userData.docs.isNotEmpty) {
-      String userId = userData.docs[0].id;
-      print("Hhhhhhhh ${userId}");
-
-      _fireStore
-          .collection(_collectionName)
-          .doc(userId)
-          .update(model.toJson())
-          .whenComplete(() {
-        log("user data updated successfully");
-      }).catchError((error) {
-        log(error.toString());
-        print("object12");
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).update(
+        {
+          'name': sharedUser.name,
+          'email': sharedUser.email,
+          'phone': sharedUser.phone,
+        },
+      ).whenComplete(() {
+        log("user update : ${userId}");
       });
-    } else {
-      log("No user data found for the provided ID");
+    } on FirebaseException catch (e) {
+      log(e.toString());
     }
-
-    return model;
+    return await getUserById(id);
   }
 
   Future<bool> signIn(String email, String password) async {
@@ -261,5 +305,29 @@ class UserService {
     }).catchError((error) {
       print("Error getting documents: $error");
     });
+  }
+
+  Future<UserModel> getUserById(String ID) async {
+    QuerySnapshot userData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: ID)
+        .get();
+    Map<String, dynamic> data = {};
+
+    UserModel tempModel;
+    data["id"] = userData.docs[0].get("id");
+    data["name"] = userData.docs[0].get("name");
+    data["password"] = userData.docs[0].get("password");
+    data["role"] = userData.docs[0].get("role");
+    data["longitude"] = userData.docs[0].get("longitude");
+    data["latitude"] = userData.docs[0].get("latitude");
+    data["certificate"] = userData.docs[0].get("certificate");
+    data["phone"] = userData.docs[0].get("phone");
+    data["email"] = userData.docs[0].get("email");
+    data["favList"] = userData.docs[0].get("favList");
+
+    tempModel = UserModel.fromJson(data);
+
+    return tempModel;
   }
 }
