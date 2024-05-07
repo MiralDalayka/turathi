@@ -406,14 +406,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
             left: 10,
             child: IconButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .popAndPushNamed(bottomNavRoute); //change it
+                  // Navigator.of(context)
+                  //     .popAndPushNamed(bottomNavRoute); //change it
+                  Navigator.pop(context);
                 },
                 icon: const Icon(
                   Icons.arrow_back_sharp,
                   color: Colors.white,
                   size: 25,
                 ))),
+
+
+
         Positioned(
             top: LayoutManager.widthNHeight0(context, 1) * 0.135, //45,
             right: 10,

@@ -29,18 +29,18 @@ class FirstBox extends State<firstBox> {
             children: [
               InkWell(
                 onTap: () {
-                  final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => showCustomAlertDialog(
-                          context,
-                          "You Have To SignIn First \nTo See Your Personal Details!"),
-                    );
+                  // final currentUser = UserService().auth.currentUser;
+                  // if (currentUser != null && currentUser.isAnonymous) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => showCustomAlertDialog(
+                  //         context,
+                  //         "You Have To SignIn First \nTo See Your Personal Details!"),
+                  //   );
                     
-                  } else {
+                  // } else {
                     Navigator.of(context).pushNamed(personalDetilsScreen);
-                  }
+                  // }
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
@@ -82,18 +82,18 @@ class FirstBox extends State<firstBox> {
 
               InkWell(
                onTap: () {
-                  final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => showCustomAlertDialog(
-                          context,
-                          "You Have To SignIn First \nTo See Your Personal Details!"),
-                    );
+                  // final currentUser = UserService().auth.currentUser;
+                  // if (currentUser != null && currentUser.isAnonymous) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => showCustomAlertDialog(
+                  //         context,
+                  //         "You Have To SignIn First \nTo See Your Personal Details!"),
+                  //   );
                     
-                  } else {
+                  // } else {
                     Navigator.of(context).pushNamed(changeInfo);
-                  }
+                  // }
                 },
 
                 child: Padding(
@@ -177,18 +177,18 @@ class FirstBox extends State<firstBox> {
               InkWell(
                 onTap: () {
        
-                  final currentUser = UserService().auth.currentUser;
-                  if (currentUser != null && currentUser.isAnonymous) {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => showCustomAlertDialog(
-                          context,
-                          "You Have To SignIn First \nTo Delete Your Account!"),
-                    );
+                  // final currentUser = UserService().auth.currentUser;
+                  // if (currentUser != null && currentUser.isAnonymous) {
+                  //   showDialog(
+                  //     context: context,
+                  //     builder: (BuildContext context) => showCustomAlertDialog(
+                  //         context,
+                  //         "You Have To SignIn First \nTo Delete Your Account!"),
+                  //   );
                     
-                  } else {
+                  // } else {
                     Navigator.of(context).pushNamed(deleteuserpage);
-                  }
+                  // }
 
                 },
                 child: Padding(
