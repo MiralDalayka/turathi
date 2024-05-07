@@ -273,8 +273,8 @@ class UserService {
     //delete from Auth
     try {
       print("object${FirebaseAuth.instance.currentUser?.uid}");
-
-      await FirebaseAuth.instance.currentUser?.delete();
+print("qqqqqq->${FirebaseAuth.instance.currentUser!}");
+      await FirebaseAuth.instance.currentUser!.delete();
 
       //  print("FirebaseAuth.instance.currentUser${FirebaseAuth.instance.currentUser?.email}");
 
