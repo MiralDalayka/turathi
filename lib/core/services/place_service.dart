@@ -205,10 +205,31 @@ class PlaceService {
 //   return tempModel;
 // }
 
-  Future<PlaceModel> updatePlaceFiled(
+  // Future<PlaceModel> updatePlaceFiled(
+  //     {required String id ,
+  //       required String placeFieldName ,
+  //       required String placeFieldValue}) async {
+  //   QuerySnapshot placesData = await _fireStore
+  //       .collection(_collectionName)
+  //       .where('id', isEqualTo: id)
+  //       .get();
+  //   String placeId = placesData.docs[0].id; //id for the ref
+  //
+  //   _fireStore
+  //       .collection(_collectionName)
+  //       .doc(placeId)
+  //       .update({placeFieldName: placeFieldValue})
+  //       .whenComplete(() {
+  //     log("update ${placeFieldName} to ${placeFieldValue} done");
+  //   }).catchError((error) {
+  //     log(error.toString());
+  //   });
+  //   return await getPlaceById(id);
+  // }
+
+  Future<PlaceModel> updatePlaceVisibility(
       {required String id ,
-        required String placeFieldName ,
-        required Object placeFieldValue}) async {
+        required bool isVisible}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: id)
@@ -218,9 +239,9 @@ class PlaceService {
     _fireStore
         .collection(_collectionName)
         .doc(placeId)
-        .update({placeFieldName: placeFieldValue})
+        .update({"isVisible":isVisible })
         .whenComplete(() {
-      log("UPDATE done");
+      log("update isVisible to ${isVisible.toString()} done");
     }).catchError((error) {
       log(error.toString());
     });
