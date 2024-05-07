@@ -31,6 +31,7 @@ const String changeInfo= '/bottomScreen/profileScreen/ChangeInfo';
 const String signIn = '/LogIn';
 const String signUp= '/SingUp';
 const String deleteuserpage= '/bottomScreen/profileScreen/DeleteUser';
+const String changePass= '/bottomScreen/profileScreen/ChangePass';
 
 
 

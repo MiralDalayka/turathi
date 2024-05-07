@@ -1,22 +1,37 @@
+import 'package:crypt/crypt.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/core/models/user_model.dart';
+import 'package:turathi/core/functions/modify_data.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
-class ChangeInfo extends StatefulWidget {
-  const ChangeInfo({Key? key});
+class ChangePass extends StatefulWidget {
+  const ChangePass({Key? key});
 
   @override
-  State<ChangeInfo> createState() => _ChangeInfoState();
+  State<ChangePass> createState() => _ChangePassState();
 }
 
-class _ChangeInfoState extends State<ChangeInfo> {
-  String name = "", emailAddress = "", phoneNu = "";
+class _ChangePassState extends State<ChangePass> {
+  TextEditingController oldPassController = TextEditingController();
+  TextEditingController newPassController = TextEditingController();
+  bool obscureText = true; 
   SignUpController signUpController = SignUpController();
   UserService userService = UserService();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    oldPassController.dispose();
+    newPassController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +41,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
-          'Change Info',
+          'Change Password',
           style: ThemeManager.textStyle.copyWith(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
             fontWeight: FontWeight.bold,
@@ -35,8 +50,8 @@ class _ChangeInfoState extends State<ChangeInfo> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize:
-              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          preferredSize: Size.fromHeight(
+              LayoutManager.widthNHeight0(context, 1) * 0.01),
           child: Divider(
             height: LayoutManager.widthNHeight0(context, 1) * 0.01,
             color: Colors.grey[300],
@@ -58,7 +73,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15.0),
                       child: Text(
-                        'Name',
+                        'Old Password',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -67,15 +82,14 @@ class _ChangeInfoState extends State<ChangeInfo> {
                       ),
                     ),
                     TextFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          name = value;
-                        });
-                      },
-                      initialValue: sharedUser.name.toString(),
+                      controller: oldPassController,
+                      obscureText: obscureText,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Name must not be empty';
+                          return 'Pass must not be empty';
+                        }
+                        if (value.length < 7) {
+                          return "Password length should be more than 7 characters";
                         }
                         return null;
                       },
@@ -96,36 +110,45 @@ class _ChangeInfoState extends State<ChangeInfo> {
                               const BorderRadius.all(Radius.circular(5)),
                         ),
                         isDense: true,
-                        hintText: 'Enter your name',
+                        hintText: 'Enter your current pass',
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          child: Icon(
+                         
+                            obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.05,
                     ),
-                    Text(
-                      'Email Address',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: ThemeManager.fontFamily,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        'New Password',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: ThemeManager.fontFamily,
+                        ),
                       ),
                     ),
                     TextFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          emailAddress = value;
-                        });
-                      },
-                      initialValue: sharedUser.email.toString(),
+                      controller: newPassController,
+                      obscureText: true,
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Email must not be empty';
+                          return 'New Pass must not be empty';
                         }
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.1#$&'*+-/=?^_ {|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value);
-                        if (!emailValid) {
-                          return "Enter valid Email";
+                        if (value.length < 7) {
+                          return "New Password length should be more than 7 characters";
                         }
                         return null;
                       },
@@ -146,56 +169,11 @@ class _ChangeInfoState extends State<ChangeInfo> {
                               const BorderRadius.all(Radius.circular(5)),
                         ),
                         isDense: true,
-                        hintText: 'Enter your email',
+                        hintText: 'Enter your new pass',
                       ),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.05,
-                    ),
-                    Text(
-                      'Phone',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: ThemeManager.fontFamily,
-                      ),
-                    ),
-                    TextFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          phoneNu = value;
-                        });
-                      },
-                      initialValue: sharedUser.phone.toString(),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Phone must not be empty';
-                        }
-                        bool phoneExp = RegExp(r'^\d{10}$').hasMatch(value);
-                        if (!phoneExp) {
-                          return 'Phone number is not valid';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        counterText: "",
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ThemeManager.primary,
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: ThemeManager.primary,
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(5)),
-                        ),
-                        isDense: true,
-                        hintText: 'Enter your phone number',
-                      ),
                     ),
                     SizedBox(
                       height: LayoutManager.widthNHeight0(context, 1) * 0.085,
@@ -203,27 +181,27 @@ class _ChangeInfoState extends State<ChangeInfo> {
                     InkWell(
                       onTap: () async {
                         if (signUpController.formKey.currentState!.validate()) {
-                          oldemail = sharedUser.email.toString();
-                          if (name == "") {
-                            name = sharedUser.name.toString();
+                          if ((Crypt(sharedUser.password.toString())
+                              .match(oldPassController.text))) {
+                            sharedUser.password =
+                                hashPassword(newPassController.text);
+
+                            userService.updateUserPass(
+                                sharedUser.id.toString());
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    "User Password Updated Successfully"),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Old Password doesn't match"),
+                              ),
+                            );
                           }
-                          if (emailAddress == "") {
-                            emailAddress = sharedUser.email.toString();
-                          }
-                          if (phoneNu == "") {
-                            phoneNu = sharedUser.phone.toString();
-                          }
-                          
-                          userService.updateUser(sharedUser.id.toString());
-                          sharedUser.name = name;
-                          sharedUser.email = emailAddress;
-                          sharedUser.phone = phoneNu;
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content:
-                                    Text("User Info Updated Successfully")),
-                          );
-                          Navigator.pop(context);
                         }
                       },
                       child: Center(
@@ -236,7 +214,7 @@ class _ChangeInfoState extends State<ChangeInfo> {
                           ),
                           child: Center(
                             child: Text(
-                              "Edit Info",
+                              "Change Password",
                               style: TextStyle(
                                 color: ThemeManager.second,
                                 fontSize: 20,
