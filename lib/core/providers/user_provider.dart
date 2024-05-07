@@ -25,7 +25,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<UserModel> updateUser(UserModel model) async {
-    return await _userService.updateUser(model).whenComplete(() {
+    return await _userService.updateUser(model.id.toString()).whenComplete(() {
       notifyListeners();
     });
   }

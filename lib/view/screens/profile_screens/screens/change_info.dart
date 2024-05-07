@@ -198,14 +198,8 @@ class _ChangeInfoState extends State<ChangeInfo> {
                       onTap: () async {
                         if (signUpController.formKey.currentState!.validate()) {
                           // All fields are valid, proceed with updating user info
-                          userService.updateUser(UserModel(
-                            name: name,
-                            pass: sharedUser.password,
-                            email: emailAddress,
-                            phone: phoneNu,
-                            longitude: sharedUser.longitude,
-                            latitude: sharedUser.latitude,
-                          ));
+                      oldemail=sharedUser.email.toString();
+                          userService.updateUser(sharedUser.id.toString());
                           sharedUser.name = name;
                           sharedUser.email = emailAddress;
                           sharedUser.phone = phoneNu;
