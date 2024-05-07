@@ -7,31 +7,32 @@ import 'package:turathi/core/services/file_storage_service.dart';
 import '../../utils/shared.dart';
 
 class RequestService {
-
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "requests";
   final FilesStorageService _filesStorageService = FilesStorageService();
 
-  Future<String> addRequest(RequestModel model,File file) async {
-    _fireStore.collection(_collectionName).add(model.toJson())
+  Future<String> addRequest(RequestModel model, File file) async {
+    _fireStore
+        .collection(_collectionName)
+        .add(model.toJson())
         .whenComplete(() async {
-          log("***************REQUEST***************");
-     model.certificate = await _filesStorageService.addFile(file);
-     updateRequestFiled(model);
+      log("***************REQUEST***************");
+      model.certificate = await _filesStorageService.addFile(file);
+      updateRequestFiled(id: model.requestId!,filedName: "certificate",value: model.certificate!);
     }).catchError((error) {
       return "Failed";
     });
     return "Done";
   }
 
-  Future<RequestModel> getRequestByUserId() async{
+  Future<RequestModel> getRequestByUserId() async {
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)
         .where('userId', isEqualTo: sharedUser.id)
         .get();
-    RequestModel tempModel=RequestModel.empty();
+    RequestModel tempModel = RequestModel.empty();
 
-    if(requestData.docs.isNotEmpty) {
+    if (requestData.docs.isNotEmpty) {
       Map<String, dynamic> data = {};
 
       data["requestId"] = requestData.docs[0].get("requestId");
@@ -44,14 +45,14 @@ class RequestService {
     return tempModel;
   }
 
-  Future<RequestModel> getRequestById(String requestId) async{
+  Future<RequestModel> getRequestById(String requestId) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)
         .where('requestId', isEqualTo: requestId)
         .get();
-    RequestModel tempModel=RequestModel.empty();
+    RequestModel tempModel = RequestModel.empty();
 
-    if(requestData.docs.isNotEmpty) {
+    if (requestData.docs.isNotEmpty) {
       Map<String, dynamic> data = {};
 
       data["requestId"] = requestData.docs[0].get("requestId");
@@ -82,24 +83,20 @@ class RequestService {
     return requestModel;
   }
 
-  Future<RequestModel> updateRequestFiled(
-      RequestModel requestModel) async {
-
+  Future<void> updateRequestFiled(
+      {required String filedName, required String value,required String id}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)
-        .where('requestId', isEqualTo: requestModel.requestId)
+        .where('requestId', isEqualTo: id)
         .get();
     String requestId = requestData.docs[0].id;
     _fireStore
         .collection(_collectionName)
         .doc(requestId)
-        .update({"certificate": requestModel.certificate})
-        .whenComplete(() {
+        .update({filedName: value}).whenComplete(() {
       log("update request done");
     }).catchError((error) {
       log(error.toString());
     });
-
-    return await getRequestById(requestId);
   }
 }

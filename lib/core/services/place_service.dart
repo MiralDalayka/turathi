@@ -143,6 +143,7 @@ class PlaceService {
           'like': FieldValue.increment(1),
           if (placesData.docs[0].get("like") >= 5)
             'state': PlaceState.TrustWorthy.name
+
         },
       ).whenComplete(() {
         log("LIKE POST : ${placeId}");
