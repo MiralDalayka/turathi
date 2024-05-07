@@ -90,28 +90,28 @@ class UserService {
   // }
 
   Future<UserModel> updateUser(String id) async {
-    UserModel userModel=await getUserById(id);
+    UserModel userModel = await getUserById(id);
 
     String? newEmail = sharedUser.email;
 
     print(FirebaseAuth.instance.currentUser);
 
     if (newEmail != null) {
-  try {
-    var currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser?.email != newEmail) {
-      await currentUser?.updateEmail(newEmail);
-      print("Email updated successfully");
+      try {
+        var currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser?.email != newEmail) {
+          await currentUser?.updateEmail(newEmail);
+          print("Email updated successfully");
+        } else {
+          print("Email is already up-to-date");
+        }
+      } catch (error) {
+        print("Error updating email: $error");
+      }
     } else {
-      print("Email is already up-to-date");
+      print("New email address is null. Cannot update.");
     }
-  } catch (error) {
-    print("Error updating email: $error");
-  }
-} else {
-  print("New email address is null. Cannot update.");
-}
-///////here update the user info in the firestore 
+///////here update the user info in the firestore
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: id)
@@ -127,6 +127,49 @@ class UserService {
         },
       ).whenComplete(() {
         log("user update : ${userId}");
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
+    return await getUserById(id);
+  }
+
+  Future<UserModel> updateUserPass(String id) async {
+    UserModel userModel = await getUserById(id);
+
+    String? newPass = sharedUser.password;
+
+    print(FirebaseAuth.instance.currentUser);
+
+    if (newPass != null) {
+      try {
+        var currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser?.email != newPass) {
+          await currentUser?.updatePassword(newPass);
+          print("Pass updated successfully");
+        } else {
+          print("Pass is already up-to-date");
+        }
+      } catch (error) {
+        print("Error updating Pass: $error");
+      }
+    } else {
+      print("New Pass is null. Cannot update.");
+    }
+///////here update the user Pass in the firestore
+    QuerySnapshot userData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: id)
+        .get();
+    String userId = userData.docs[0].id;
+
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).update(
+        {
+          'password': sharedUser.password,
+        },
+      ).whenComplete(() {
+        log("user pass update : ${userId}");
       });
     } on FirebaseException catch (e) {
       log(e.toString());
@@ -273,8 +316,8 @@ class UserService {
     //delete from Auth
     try {
       print("object${FirebaseAuth.instance.currentUser?.uid}");
-
-      await FirebaseAuth.instance.currentUser?.delete();
+      print("qqqqqq->${FirebaseAuth.instance.currentUser!}");
+      await FirebaseAuth.instance.currentUser!.delete();
 
       //  print("FirebaseAuth.instance.currentUser${FirebaseAuth.instance.currentUser?.email}");
 

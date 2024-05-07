@@ -135,7 +135,7 @@ class FirstBox extends State<firstBox> {
 
               InkWell(
                 onTap: () {
-                  // Navigator.of(context).pushNamed("Change Password");
+                    Navigator.of(context).pushNamed(changePass);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
