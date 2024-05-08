@@ -139,7 +139,7 @@ class MyRouter {
         {
           final arg = settings.arguments as String;
           return _route(ReportPlace(
-            placeID: arg,
+            placeId: arg,
           ));
         }
       // case commentsPlaceRoute:

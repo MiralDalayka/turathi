@@ -9,8 +9,8 @@ import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
 
 class ReportPlace extends StatefulWidget {
-  const ReportPlace({super.key, required this.placeID});
-final String placeID;
+  const ReportPlace({super.key, required this.placeId});
+final String placeId;
   @override
   State<ReportPlace> createState() => _ReportPlaceState();
 
@@ -50,7 +50,7 @@ class _ReportPlaceState extends State<ReportPlace> {
                     setState(() {
                       if (formKey.currentState!.validate()) {
                         //call controller
-                        reportProvider.addReport(ReportModel(reasons: reasons.text));
+                        reportProvider.addReport(ReportModel(reasons: reasons.text,placeId: widget.placeId));
                         reasons.clear();
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
