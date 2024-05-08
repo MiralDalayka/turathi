@@ -59,7 +59,7 @@ class AddedPlaces extends StatelessWidget {
                 print("!!!!!!!!!!!!!!!!!!$currentUserID");
 
                 final userPlaces = snapshot.data!.places
-                    .where((place) => place.userID == currentUserID)
+                    .where((place) => place.userId == currentUserID)
                     .toList();
 
                 if (userPlaces.isEmpty) {

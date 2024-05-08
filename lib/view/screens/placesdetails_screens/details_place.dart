@@ -251,10 +251,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     if (widget.placeModel.likesList!
                                         .contains(sharedUser.id)) {
                                       widget.placeModel = await placeProvider
-                                          .dislikePlace(widget.placeModel.id!);
+                                          .dislikePlace(widget.placeModel.placeId!);
                                     } else {
                                       widget.placeModel = await placeProvider
-                                          .likePlace(widget.placeModel.id!);
+                                          .likePlace(widget.placeModel.placeId!);
                                     }
                                   },
                                   icon: SizedBox(
@@ -427,7 +427,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed(addReportRoute,
-                        arguments: widget.placeModel.id);
+                        arguments: widget.placeModel.placeId);
                   },
                   child: Container(
                     width: LayoutManager.widthNHeight0(context, 0) * 0.082,
@@ -492,15 +492,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     child: IconButton(
                       onPressed: () async {
                         if (sharedUser.favList!
-                            .contains(widget.placeModel.id!)) {
+                            .contains(widget.placeModel.placeId!)) {
                           await userProvider
-                              .removeFavPlace(widget.placeModel.id!);
+                              .removeFavPlace(widget.placeModel.placeId!);
                         } else {
-                          await userProvider.favPlace(widget.placeModel.id!);
+                          await userProvider.favPlace(widget.placeModel.placeId!);
                         }
                       },
                       icon: Icon(
-                        sharedUser.favList!.contains(widget.placeModel.id!)
+                        sharedUser.favList!.contains(widget.placeModel.placeId!)
                             ? Icons.favorite
                             : Icons.favorite_border_outlined,
                         color: ThemeManager.primary,

@@ -18,7 +18,7 @@ class PlaceService {
     model.images = await _filesStorageService
         .uploadImages(
             imageType: ImageType.placesImages.name,
-            folderName: model.id!,
+            folderName: model.placeId!,
             pickedImages: images!)
         .whenComplete(() {
       _fireStore
@@ -53,8 +53,8 @@ class PlaceService {
     //temp list
     PlaceList placeList = PlaceList(places: []);
     for (var item in placesData.docs) {
-      data["id"] = item.get("id");
-      data["userID"] = item.get("userID");
+      data["placeId"] = item.get("placeId");
+      data["userId"] = item.get("userId");
       data["state"] = item.get("state");
       data["address"] = item.get("address");
       data["status"] = item.get("status");
@@ -68,7 +68,7 @@ class PlaceService {
       data["likesList"] =  item.get("likesList");
       tempModel = PlaceModel.fromJson(data);
       tempModel.images = await _filesStorageService.getImages(
-          imageType: ImageType.placesImages.name, folderName: tempModel.id!);
+          imageType: ImageType.placesImages.name, folderName: tempModel.placeId!);
 
       placeList.places.add(tempModel);
     }
@@ -79,14 +79,14 @@ class PlaceService {
       {required PlaceModel placeModel, List<XFile>? images}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: placeModel.id)
+        .where('placeId', isEqualTo: placeModel.placeId)
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
     log(images.toString());
     if (images != null) {
       placeModel.images!.addAll(await _filesStorageService.uploadImages(
           imageType: ImageType.placesImages.name,
-          folderName: placeModel.id!,
+          folderName: placeModel.placeId!,
           pickedImages: images!));
     }
     _fireStore
@@ -101,16 +101,16 @@ class PlaceService {
     return placeModel;
   }
 
-  Future<PlaceModel> getPlaceById(String ID) async {
+  Future<PlaceModel> getPlaceById(String id) async {
     QuerySnapshot placeData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: ID)
+        .where('placeId', isEqualTo: id)
         .get();
     Map<String, dynamic> data = {};
 
     PlaceModel tempModel;
-    data["id"] = placeData.docs[0].get("id");
-    data["userID"] = placeData.docs[0].get("userID");
+    data["placeId"] = placeData.docs[0].get("placeId");
+    data["userId"] = placeData.docs[0].get("userId");
     data["state"] = placeData.docs[0].get("state");
     data["address"] = placeData.docs[0].get("address");
     data["status"] = placeData.docs[0].get("status");
@@ -125,14 +125,14 @@ class PlaceService {
 
     tempModel = PlaceModel.fromJson(data);
     tempModel.images = tempModel.images = await _filesStorageService.getImages(
-        imageType: ImageType.placesImages.name, folderName: tempModel.id!);
+        imageType: ImageType.placesImages.name, folderName: tempModel.placeId!);
 
     return tempModel;
   }
   Future<PlaceModel> likePlace(String id) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: id)
+        .where('placeId', isEqualTo: id)
         .get();
     String placeId = placesData.docs[0].id;
 
@@ -158,7 +158,7 @@ class PlaceService {
   Future<PlaceModel> dislikePlace(String id) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: id)
+        .where('placeId', isEqualTo: id)
         .get();
     String placeId = placesData.docs[0].id;
     try {
@@ -177,75 +177,4 @@ class PlaceService {
 
   }
 
-
-// Future<PlaceModel> getPlaceByUserId(String userID) async {
-//   QuerySnapshot placeData = await _fireStore
-//       .collection(_collectionName)
-//       .where('userID', isEqualTo: userID)
-//       .get();
-//   Map<String, dynamic> data = {};
-//
-//   PlaceModel tempModel;
-//   data["id"] = placeData.docs[0].get("id");
-//   data["userID"] = placeData.docs[0].get("userID");
-//   data["state"] = placeData.docs[0].get("state");
-//   data["address"] = placeData.docs[0].get("address");
-//   data["status"] = placeData.docs[0].get("status");
-//   data["description"] = placeData.docs[0].get("description");
-//   data["title"] = placeData.docs[0].get("title");
-//   data["latitude"] = placeData.docs[0].get("latitude");
-//   data["longitude"] = placeData.docs[0].get("longitude");
-//   data["isVisible"] = placeData.docs[0].get("isVisible");
-//   data["disLike"] = placeData.docs[0].get("disLike");
-//   data["like"] = placeData.docs[0].get("like");
-//
-//   tempModel = PlaceModel.fromJson(data);
-//   tempModel.images = tempModel.images = await _filesStorageService.getImages(
-//       imageType: ImageType.placesImages.name, folderName: tempModel.id!);
-//
-//   return tempModel;
-// }
-
-  // Future<PlaceModel> updatePlaceFiled(
-  //     {required String id ,
-  //       required String placeFieldName ,
-  //       required String placeFieldValue}) async {
-  //   QuerySnapshot placesData = await _fireStore
-  //       .collection(_collectionName)
-  //       .where('id', isEqualTo: id)
-  //       .get();
-  //   String placeId = placesData.docs[0].id; //id for the ref
-  //
-  //   _fireStore
-  //       .collection(_collectionName)
-  //       .doc(placeId)
-  //       .update({placeFieldName: placeFieldValue})
-  //       .whenComplete(() {
-  //     log("update ${placeFieldName} to ${placeFieldValue} done");
-  //   }).catchError((error) {
-  //     log(error.toString());
-  //   });
-  //   return await getPlaceById(id);
-  // }
-
-  Future<PlaceModel> updatePlaceVisibility(
-      {required String id ,
-        required bool isVisible}) async {
-    QuerySnapshot placesData = await _fireStore
-        .collection(_collectionName)
-        .where('id', isEqualTo: id)
-        .get();
-    String placeId = placesData.docs[0].id; //id for the ref
-
-    _fireStore
-        .collection(_collectionName)
-        .doc(placeId)
-        .update({"isVisible":isVisible })
-        .whenComplete(() {
-      log("update isVisible to ${isVisible.toString()} done");
-    }).catchError((error) {
-      log(error.toString());
-    });
-    return await getPlaceById(id);
-  }
 }

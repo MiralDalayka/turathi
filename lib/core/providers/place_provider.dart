@@ -57,7 +57,7 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<PlaceModel> likePlace(String id) async {
     // int index = _placeList.places.indexOf(placeModel);
-    var index = _placeList.places.indexWhere((element) => element.id == id);
+    var index = _placeList.places.indexWhere((element) => element.placeId == id);
     log("INDEX $index");
 
     PlaceModel temp = await _placeService.likePlace(id!).whenComplete(() async {
@@ -70,7 +70,7 @@ class PlaceProvider extends ChangeNotifier {
   }
 
   Future<PlaceModel> dislikePlace(String id) async {
-    var index = _placeList.places.indexWhere((element) => element.id == id);
+    var index = _placeList.places.indexWhere((element) => element.placeId == id);
 
     PlaceModel temp =
         await _placeService.dislikePlace(id!).whenComplete(() async {

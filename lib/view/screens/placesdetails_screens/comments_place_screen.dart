@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/core/models/comment_place_model.dart';
 import 'package:turathi/core/providers/comment_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/widgets/comment_place_card.dart';
+import 'package:turathi/view/widgets/comment_card.dart';
 
 import '../../../core/services/comment_service.dart';
 
@@ -95,7 +94,7 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                                 provider
                                     .addComment(CommentModel(
                                         commentTxt: _commentController.text,
-                                        placeId: widget.place.id))
+                                        placeId: widget.place.placeId))
                                     .whenComplete(() =>
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
@@ -115,7 +114,7 @@ class _CommentsPlaceState extends State<CommentsPlace> {
             ),
           ),
           FutureBuilder(
-              future: provider.getPlaceComments(widget.place.id!),
+              future: provider.getPlaceComments(widget.place.placeId!),
               builder: (context, snapshot) {
                 var data = snapshot.data;
                 if (data == null) {

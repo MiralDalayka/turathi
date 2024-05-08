@@ -45,26 +45,6 @@ class RequestService {
     return tempModel;
   }
 
-  Future<RequestModel> getRequestById(String requestId) async {
-    QuerySnapshot requestData = await _fireStore
-        .collection(_collectionName)
-        .where('requestId', isEqualTo: requestId)
-        .get();
-    RequestModel tempModel = RequestModel.empty();
-
-    if (requestData.docs.isNotEmpty) {
-      Map<String, dynamic> data = {};
-
-      data["requestId"] = requestData.docs[0].get("requestId");
-      data["userId"] = requestData.docs[0].get("userId");
-      data["certificate"] = requestData.docs[0].get("certificate");
-      data["status"] = requestData.docs[0].get("status");
-
-      tempModel = RequestModel.fromJson(data);
-    }
-    return tempModel;
-  }
-
   Future<RequestModel> updateRequest(RequestModel requestModel) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_collectionName)

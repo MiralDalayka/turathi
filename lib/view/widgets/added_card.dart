@@ -48,7 +48,7 @@ class _ProductCardState extends State<AddedCard> {
       for (QueryDocumentSnapshot<Map<String, dynamic>> doc in snapshot.docs) {
         List<dynamic>? dataList = doc['dataList'];
         counter++;
-        String homeId = widget.placeModel.id!;
+        String homeId = widget.placeModel.placeId!;
         if (dataList != null) {
           String str = dataList[7].toString();
           int openingBraceIndex = str.indexOf("{");

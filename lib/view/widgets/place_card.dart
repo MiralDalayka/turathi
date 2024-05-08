@@ -87,8 +87,8 @@ class _PlaceCardState extends State<PlaceCard> {
                   right: LayoutManager.widthNHeight0(context, 1) * 0.025,
                   child: Icon(
                     sharedUser.favList != null &&
-                            widget.placeModel.id != null &&
-                            sharedUser.favList!.contains(widget.placeModel.id!)
+                            widget.placeModel.placeId != null &&
+                            sharedUser.favList!.contains(widget.placeModel.placeId!)
                         ? Icons.favorite
                         : Icons.favorite_outline,
                     color: ThemeManager.primary,
