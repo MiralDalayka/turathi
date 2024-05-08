@@ -1,6 +1,9 @@
 
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:turathi/core/services/admin_service.dart';
 
 import 'package:turathi/utils/lib_organizer.dart';
 
@@ -24,6 +27,7 @@ class _AdminSignInState extends State<AdminSignIn> {
 
   @override
   Widget build(BuildContext context) {
+    AdminService _service = AdminService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -132,7 +136,11 @@ class _AdminSignInState extends State<AdminSignIn> {
                     child: InkWell(
                       onTap: () async {
                         if (key.currentState!.validate()) {
-
+                          // _service.signIn(_idController.text, _passController.text).whenComplete(() {
+                          //   log("DOOOOOOOOOONE");
+                          // });
+                          bool t =await _service.signIn(_idController.text, _passController.text);
+                          log(    t.toString());
 
                         }else{
                           showDialog(

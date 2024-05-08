@@ -128,7 +128,7 @@ class PlaceProvider extends ChangeNotifier {
     for (String id in sharedUser.favList!) {
       PlaceModel tempModel = places.firstWhere((element) => element.id == id,
           orElse: () => PlaceModel.empty());
-      if (tempModel.id != "-1"||tempModel.isVisible==false) {
+      if (tempModel.placeId != "-1"||tempModel.isVisible==false) {
         tempList.add(tempModel);
       }
     }

@@ -34,7 +34,7 @@ class PlaceModel {
   PlaceModel.empty(
 
       ){
-    id = '-1';
+    placeId = '-1';
   }
   
 
