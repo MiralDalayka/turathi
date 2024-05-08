@@ -31,7 +31,11 @@ class PlaceModel {
   double? longitude;
   double? latitude;
 
-  PlaceModel.empty();
+  PlaceModel.empty(
+
+      ){
+    id = '-1';
+  }
   
 
   PlaceModel(

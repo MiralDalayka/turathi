@@ -16,6 +16,7 @@ import '../../core/models/event_model.dart';
 import '../../core/models/question_model.dart';
 import '../../view/screens/add_data_screens/add_event_page.dart';
 import '../../view/screens/add_data_screens/add_place_page.dart';
+import '../../view/screens/admin_screens/admin_signin_screen.dart';
 import '../../view/screens/community_screens/question_view.dart';
 import '../../view/screens/events_screens/event_details.dart';
 import '../../view/screens/events_screens/view_all_events.dart';
@@ -142,18 +143,12 @@ class MyRouter {
             placeId: arg,
           ));
         }
-      // case commentsPlaceRoute:
-      // {
-      //   return _route(const CommentsPlace());
-      // }
-      // case ex:
-      //   {
-      //     final arg = settings.arguments as modelName;
-      //     return _route(PageClass(
-      //       model: arg,
-      //     ));
-      //   }
+    //////////////////////////////////admin
+      case signInAdminRoute:{
+        return _route(const AdminSignIn(
 
+        ));
+    }
       default:
         {
           final arg = settings.name as String;

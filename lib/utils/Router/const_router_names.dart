@@ -46,3 +46,6 @@ const String editPlaceRoute = '/bottomScreen/profileScreen/AddedPlaces/EditPlace
 
 
 
+/////////////////////
+//admin
+const String signInAdminRoute = '/signInAdmin';
