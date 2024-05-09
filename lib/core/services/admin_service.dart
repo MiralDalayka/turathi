@@ -90,26 +90,42 @@ class AdminService {
       data["status"] = item.get("status");
       data["certificate"] = item.get("certificate");
       data["userId"] = item.get("userId");
-
       tempModel = RequestModel.fromJson(data);
-
       requestList.requests.add(tempModel);
     }
     return requestList;
   }
 
   Future<void> updateRequestStatus(
-      {required String requestId, required RequestStatus requestStatus}) async {
+      {required RequestModel requestModel, required RequestStatus requestStatus}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_requestCollectionName)
-        .where('requestId', isEqualTo: requestId)
+        .where('requestId', isEqualTo: requestModel.requestId)
         .get();
     String id = requestData.docs[0].id;
     _fireStore
         .collection(_requestCollectionName)
         .doc(id)
         .update({'status': requestStatus.name}).whenComplete(() {
+      notifyUser(requestModel.userId!, "your request status is ${requestStatus.name}");
       log("update request status done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+  }
+  Future<void> deleteRequest(
+      {required RequestModel requestModel}) async {
+    QuerySnapshot requestData = await _fireStore
+        .collection(_requestCollectionName)
+        .where('requestId', isEqualTo: requestModel.requestId)
+        .get();
+    String id = requestData.docs[0].id;
+    _fireStore
+        .collection(_requestCollectionName)
+        .doc(id)
+        .delete().whenComplete(() {
+      notifyUser(requestModel.userId!, "your request to be expert is rejected");
+      log("delete request done");
     }).catchError((error) {
       log(error.toString());
     });
@@ -132,7 +148,7 @@ class AdminService {
     });
   }
 
-  Future<bool> updatePlaceVisibility(
+  Future<void> updatePlaceVisibility(
       {required String id, required bool isVisible}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_placeCollectionName)
@@ -147,9 +163,7 @@ class AdminService {
       log("update isVisible to ${isVisible.toString()} done");
     }).catchError((error) {
       log(error.toString());
-      return false;
     });
-    return true;
   }
 
   Future<void> notifyUser(String userId, String text) async {
