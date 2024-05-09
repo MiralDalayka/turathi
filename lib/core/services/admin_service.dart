@@ -109,7 +109,16 @@ class AdminService {
         .collection(_requestCollectionName)
         .doc(id)
         .update({'status': requestStatus.name}).whenComplete(() {
-      notifyUser(requestModel.userId!, "your request status is ${requestStatus.name}");
+          if(requestStatus.name == RequestStatus.accepted.name){
+            updateUserRoleToExpert(id: requestModel.userId!);
+          }
+          else  if(requestStatus.name == RequestStatus.rejected.name){
+            deleteRequest(requestModel: requestModel);
+          }
+          else {
+            notifyUser(requestModel.userId!, "your request status is ${requestStatus.name}");
+
+          }
       log("update request status done");
     }).catchError((error) {
       log(error.toString());
