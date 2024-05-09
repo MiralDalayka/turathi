@@ -203,4 +203,9 @@ class AdminService {
     data["password"] = adminData.docs[0].get("password");
     return AdminModel.fromJson(data);
   }
+
+  Map<String, dynamic> dataList = {};
+  ReportList reportList = ReportList(reports: []);
+
+
 }
