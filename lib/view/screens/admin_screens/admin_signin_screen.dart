@@ -141,14 +141,17 @@ class _AdminSignInState extends State<AdminSignIn> {
                           // });
                           bool t =await _service.signIn(_idController.text, _passController.text);
                           log(    t.toString());
+                          //nav to home
+                          if(t)
+                            Navigator.of(context).pushReplacementNamed(homeAdminRoute);
 
                         }else{
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text("Error"),
-                                content: Text(
+                                title: const Text("Error"),
+                                content: const Text(
                                     "An error has occurred"),
                                 actions: [
                                   TextButton(

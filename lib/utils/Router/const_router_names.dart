@@ -49,3 +49,13 @@ const String editPlaceRoute = '/bottomScreen/profileScreen/AddedPlaces/EditPlace
 /////////////////////
 //admin
 const String signInAdminRoute = '/signInAdmin';
+const String homeAdminRoute = '/signInAdmin/home';
+//add to routers
+const String allReportsAdminRoute = '/signInAdmin/home/allReportsAdminRoute';
+const String reportAdminRoute = '/signInAdmin/home/reportAdminRoute';
+const String requestsAdminRoute = '/signInAdmin/home/requestsAdminRoute';
+
+const String placesAdminRoute = '/signInAdmin/home/placesAdminRoute';
+const String eventsAdminRoute = '/signInAdmin/home/eventsAdminRoute';
+
+
