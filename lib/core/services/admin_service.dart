@@ -6,6 +6,7 @@ import 'package:turathi/core/models/notification_model.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/models/request_model.dart';
 import 'package:turathi/core/models/user_model.dart';
+import 'package:turathi/core/services/file_storage_service.dart';
 
 class AdminService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -14,6 +15,7 @@ class AdminService {
   final String _requestCollectionName = "requests";
   final String _placeCollectionName = "places";
   final String _userCollectionName = "users";
+  final FilesStorageService _filesStorageService = FilesStorageService();
 
   Future<bool> signIn(String adminId, String password) async {
     AdminModel? adminModel = await _getAdmin(adminId);
@@ -124,6 +126,7 @@ class AdminService {
         .collection(_requestCollectionName)
         .doc(id)
         .delete().whenComplete(() {
+          _filesStorageService.deleteFile(userId: requestModel.userId!);
       notifyUser(requestModel.userId!, "your request to be expert is rejected");
       log("delete request done");
     }).catchError((error) {

@@ -12,7 +12,6 @@ class FilesStorageService {
         FirebaseStorage.instanceFor(bucket: 'turathi-96897.appspot.com');
 
   Future<String> addFile(File file) async {
-    // var fileName = basename(file.path);
     Reference reference = _storageInstance.ref().child("certificateFiles/${sharedUser.id}");
     UploadTask uploadTask = reference.putFile(file);
 
@@ -67,4 +66,11 @@ List<String> urlList =[];
 
     return fileUrls;
   }
+   Future<void> deleteFile({required String userId}) async {
+       Reference reference = _storageInstance.ref().child("certificateFiles/${userId}");
+       reference.delete().whenComplete(() {
+         log("certificate deleted successfully");
+       }
+       );
+   }
 }
