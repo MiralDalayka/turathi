@@ -99,7 +99,8 @@ class AdminService {
   }
 
   Future<void> updateRequestStatus(
-      {required RequestModel requestModel, required RequestStatus requestStatus}) async {
+      {required RequestModel requestModel,
+      required RequestStatus requestStatus}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_requestCollectionName)
         .where('requestId', isEqualTo: requestModel.requestId)
@@ -109,23 +110,21 @@ class AdminService {
         .collection(_requestCollectionName)
         .doc(id)
         .update({'status': requestStatus.name}).whenComplete(() {
-          if(requestStatus.name == RequestStatus.accepted.name){
-            updateUserRoleToExpert(id: requestModel.userId!);
-          }
-          else  if(requestStatus.name == RequestStatus.rejected.name){
-            deleteRequest(requestModel: requestModel);
-          }
-          else {
-            notifyUser(requestModel.userId!, "your request status is ${requestStatus.name}");
-
-          }
+      if (requestStatus.name == RequestStatus.accepted.name) {
+        updateUserRoleToExpert(id: requestModel.userId!);
+      } else if (requestStatus.name == RequestStatus.rejected.name) {
+        deleteRequest(requestModel: requestModel);
+      } else {
+        notifyUser(requestModel.userId!,
+            "your request status is ${requestStatus.name}");
+      }
       log("update request status done");
     }).catchError((error) {
       log(error.toString());
     });
   }
-  Future<void> deleteRequest(
-      {required RequestModel requestModel}) async {
+
+  Future<void> deleteRequest({required RequestModel requestModel}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_requestCollectionName)
         .where('requestId', isEqualTo: requestModel.requestId)
@@ -134,8 +133,9 @@ class AdminService {
     _fireStore
         .collection(_requestCollectionName)
         .doc(id)
-        .delete().whenComplete(() {
-          _filesStorageService.deleteFile(userId: requestModel.userId!);
+        .delete()
+        .whenComplete(() {
+      _filesStorageService.deleteFile(userId: requestModel.userId!);
       notifyUser(requestModel.userId!, "your request to be expert is rejected");
       log("delete request done");
     }).catchError((error) {
@@ -153,7 +153,7 @@ class AdminService {
         .collection(_userCollectionName)
         .doc(userId)
         .update({'role': UsersRole.expert.name}).whenComplete(() {
-      notifyUser(userId, "your role is expert");
+      notifyUser(id, "your role is expert");
       log("update user role done");
     }).catchError((error) {
       log(error.toString());
@@ -161,16 +161,16 @@ class AdminService {
   }
 
   Future<void> updatePlaceVisibility(
-      {required String id, required bool isVisible}) async {
+      {required String placeId, required bool isVisible}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_placeCollectionName)
-        .where('placeId', isEqualTo: id)
+        .where('placeId', isEqualTo: placeId)
         .get();
-    String placeId = placesData.docs[0].id; //id for the ref
+    String id = placesData.docs[0].id; //id for the ref
 
     _fireStore
         .collection(_placeCollectionName)
-        .doc(placeId)
+        .doc(id)
         .update({"isVisible": isVisible}).whenComplete(() {
       log("update isVisible to ${isVisible.toString()} done");
     }).catchError((error) {
