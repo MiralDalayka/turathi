@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/services/admin_service.dart';
+import 'package:turathi/utils/layout_manager.dart';
 import '../../../core/services/admin_service.dart';
 import '../../../core/services/admin_service.dart';
 import '../../../utils/Router/const_router_names.dart';
@@ -24,9 +25,28 @@ class _ReportsScreenState extends State<ReportsScreen> {
     AdminService adminService = AdminService();
 
     return Scaffold(
+      backgroundColor: ThemeManager.background,
       appBar: AppBar(
-        title: Text("Reports"),
         centerTitle: true,
+        backgroundColor: ThemeManager.background,
+        title: Text(
+          'Admin Reports',
+          style: ThemeManager.textStyle.copyWith(
+            fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+            fontWeight: FontWeight.bold,
+            fontFamily: ThemeManager.fontFamily,
+            color: ThemeManager.primary,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
+        ),
+      
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -36,7 +56,15 @@ class _ReportsScreenState extends State<ReportsScreen> {
             if (snapshot.hasData) {
               reportsList = snapshot.data;
               if (reportsList!.reports.isEmpty)
-                return const Center(child: Text("NO REPORTS YET"));
+                return  Padding(
+                 padding:  EdgeInsets.only(bottom:LayoutManager.widthNHeight0(context, 1) * 0.4 ),
+                  child: Center(child: Text("NO Reports YET", 
+                    style: TextStyle(
+                      color: ThemeManager.primary,
+                      fontFamily: "KohSantepheap",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,))),
+                );
               List<String> ids = adminService.placesIds.toList();
 
               return ListView.builder(

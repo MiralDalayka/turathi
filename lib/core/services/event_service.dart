@@ -7,9 +7,7 @@ import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
 
-
 class EventService {
-
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "events";
   final FilesStorageService _filesStorageService = FilesStorageService();
@@ -20,10 +18,11 @@ class EventService {
         .add(model.toJson())
         .whenComplete(() async {
       _filesStorageService.uploadImages(
-          imageType: ImageType.eventImages.name,folderName: model.id!, pickedImages: images!);
+          imageType: ImageType.eventImages.name,
+          folderName: model.id!,
+          pickedImages: images!);
       log("Event Done -------------------------");
-    })
-        .catchError((error) {
+    }).catchError((error) {
       log(error.toString());
       return "Failed";
     });
@@ -32,8 +31,8 @@ class EventService {
 
   Future<EventList> getEvents() async {
     QuerySnapshot eventsData =
-    await _fireStore.collection(_collectionName).get().whenComplete(() {
-log("get events done");
+        await _fireStore.collection(_collectionName).get().whenComplete(() {
+      log("get events done");
     }).catchError((error) {
       log(error.toString());
     });
@@ -52,14 +51,38 @@ log("get events done");
       data["creatorName"] = item.get("creatorName");
       tempModel = EventModel.fromJson(data);
 
-      tempModel.images =
-      await _filesStorageService.getImages(imageType:ImageType.eventImages.name,
-          folderName: tempModel.id!);
+      tempModel.images = await _filesStorageService.getImages(
+          imageType: ImageType.eventImages.name, folderName: tempModel.id!);
 
       eventList.events.add(tempModel);
     }
 
     return eventList;
   }
-}
 
+  Future<EventModel> updateEvent(
+      {required EventModel eventModel, List<XFile>? images}) async {
+    QuerySnapshot eventsData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: eventModel.id)
+        .get();
+    String eventId = eventsData.docs[0].id;
+    log(images.toString());
+    if (images != null) {
+      eventModel.images!.addAll(await _filesStorageService.uploadImages(
+          imageType: ImageType.eventImages.name,
+          folderName: eventModel.id!,
+          pickedImages: images!));
+    }
+    _fireStore
+        .collection(_collectionName)
+        .doc(eventId)
+        .update(eventModel.toJson())
+        .whenComplete(() {
+      log("UPDATE done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+    return eventModel;
+  }
+}

@@ -5,6 +5,8 @@ import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
+import 'package:turathi/view/screens/admin_screens/events_admin.dart';
+import 'package:turathi/view/screens/admin_screens/places_admin.dart';
 import 'package:turathi/view/screens/profile_screens/screens/change_pass.dart';
 import 'package:turathi/view/screens/profile_screens/screens/notification/notification_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
@@ -41,7 +43,16 @@ class MyRouter {
           return _route(SplashScreen());
         }
 
-//AboutUsScreen
+      case eventsAdminRoute:
+        {
+          return _route(eventsAdmin());
+        }
+
+      case placesAdminRoute:
+        {
+          return _route(placesAdmin());
+        }
+
       case aboutUsScreen:
         {
           return _route(AboutUsScreen());
