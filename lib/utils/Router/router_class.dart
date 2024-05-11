@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/place_model.dart';
+import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
 import 'package:turathi/view/screens/SignIn/signin.dart';
@@ -18,6 +19,7 @@ import '../../view/screens/add_data_screens/add_event_page.dart';
 import '../../view/screens/add_data_screens/add_place_page.dart';
 import '../../view/screens/admin_screens/admin_home_page.dart';
 import '../../view/screens/admin_screens/admin_signin_screen.dart';
+import '../../view/screens/admin_screens/place_reports.dart';
 import '../../view/screens/admin_screens/reports_screen.dart';
 import '../../view/screens/admin_screens/requests_screen.dart';
 import '../../view/screens/community_screens/question_view.dart';
@@ -162,6 +164,14 @@ class MyRouter {
       case allReportsAdminRoute:
         {
           return _route(const ReportsScreen());
+        }
+      case placeReportsAdminRoute:
+        {
+          final arg = settings.arguments as List<ReportModel>;
+
+          return _route(PlaceReportsScreen(
+            reportList: arg,
+          ));
         }
       default:
         {

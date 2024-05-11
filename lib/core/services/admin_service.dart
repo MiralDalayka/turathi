@@ -3,10 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import 'package:turathi/core/models/admin_model.dart';
 import 'package:turathi/core/models/notification_model.dart';
+import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/models/request_model.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
+import 'package:turathi/core/services/place_service.dart';
 
 class AdminService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -16,6 +18,11 @@ class AdminService {
   final String _placeCollectionName = "places";
   final String _userCollectionName = "users";
   final FilesStorageService _filesStorageService = FilesStorageService();
+  final Set<String> _placesIds = <String>{};
+
+  Set<String> get placesIds => _placesIds;
+
+
 
   Future<bool> signIn(String adminId, String password) async {
     AdminModel? adminModel = await _getAdmin(adminId);
@@ -67,7 +74,7 @@ class AdminService {
       data["reasons"] = item.get("reasons");
       data["userId"] = item.get("userId");
       data["placeId"] = item.get("placeId");
-
+      _placesIds.add(data["placeId"]);
       tempModel = ReportModel.fromJson(data);
 
       reportList.reports.add(tempModel);
@@ -176,6 +183,22 @@ class AdminService {
     }).catchError((error) {
       log(error.toString());
     });
+
+
+  }
+
+  Future<void> deleteReports(List<ReportModel> reports) async {
+    for(ReportModel mode in reports){
+      QuerySnapshot requestData = await _fireStore
+          .collection(_reportCollectionName)
+          .where('reportId', isEqualTo: mode.reportId)
+          .get();
+      String id = requestData.docs[0].id;
+      _fireStore
+          .collection(_reportCollectionName)
+          .doc(id)
+          .delete();
+    }
   }
 
   Future<void> notifyUser(String userId, String text) async {
