@@ -40,7 +40,6 @@ log("Place comments done");
         .where('questionId', isEqualTo: questionId)
         .get()
         .whenComplete(() {
-
     }).catchError((error) {
       log(error.toString());
     });

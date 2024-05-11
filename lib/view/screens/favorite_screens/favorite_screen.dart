@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
@@ -58,44 +60,43 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             }
             favoritePlaces = provider.getFavPlaces(data.places);
             if (favoritePlaces!.places.isNotEmpty) {
-              return Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: GridView.builder(
-                          itemCount: favoritePlaces!.places.length,
-                          shrinkWrap: true,
-                          gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 0.7,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 16,
-                          ),
-                          itemBuilder: (context, index) {
-                            final placeModel = favoritePlaces!.places[index];
-                            return PlaceCard(
-                              placeModel: placeModel,
-                              onPress: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsScreen(
-                                      placeModel: placeModel,
-                                    ),
-                                  ),
-                                );
-                              },
-        
-                            );
-                          },
+              log("${data.places.toList()}");
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: GridView.builder(
+                        itemCount: favoritePlaces!.places.length,
+                        shrinkWrap: true,
+                        gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200,
+                          childAspectRatio: 0.7,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 16,
                         ),
+                        itemBuilder: (context, index) {
+                          final placeModel = favoritePlaces!.places[index];
+                          return PlaceCard(
+                            placeModel: placeModel,
+                            onPress: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsScreen(
+                                    placeModel: placeModel,
+                                  ),
+                                ),
+                              );
+                            },
+
+                          );
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               );
         

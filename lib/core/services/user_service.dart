@@ -49,46 +49,6 @@ class UserService {
     return "Done";
   }
 
-  // Future<UserModel> updateUser2(UserModel model) async {
-  //   String? newEmail = model.email;
-
-  //   if (newEmail != null) {
-  //     try {
-  //       await FirebaseAuth.instance.currentUser?.updateEmail(newEmail);
-  //       print("Email updated successfully");
-  //     } catch (error) {
-  //       print("Error updating email: $error");
-  //     }
-  //   } else {
-  //     print("New email address is null. Cannot update.");
-  //   }
-
-  //   QuerySnapshot userData = await _fireStore
-  //       .collection(_collectionName)
-  //       .where('id', isEqualTo: sharedUser.id)
-  //       .get();
-
-  //   if (userData.docs.isNotEmpty) {
-  //     String userId = userData.docs[0].id;
-  //     print("Hhhhhhhh ${userId}");
-
-  //     _fireStore
-  //         .collection(_collectionName)
-  //         .doc(userId)
-  //         .update(model.toJson())
-  //         .whenComplete(() {
-  //       log("user data updated successfully");
-  //     }).catchError((error) {
-  //       log(error.toString());
-  //       print("object12");
-  //     });
-  //   } else {
-  //     log("No user data found for the provided ID");
-  //   }
-
-  //   return model;
-  // }
-
   Future<UserModel> updateUser(String id) async {
     UserModel userModel = await getUserById(id);
 
@@ -185,7 +145,6 @@ class UserService {
 
       if (str != null) if (Crypt(str).match(password)) {
         print("User is successfully in match");
-
         return true;
       }
 

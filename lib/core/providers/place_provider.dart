@@ -57,32 +57,32 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<PlaceModel> likePlace(String id) async {
     // int index = _placeList.places.indexOf(placeModel);
-    var index = _placeList.places.indexWhere((element) => element.id == id);
+    var index = _placeList.places.indexWhere((element) => element.placeId == id);
     log("INDEX $index");
 
-    PlaceModel temp=   await _placeService.likePlace(id!).whenComplete(() async {
+    PlaceModel temp = await _placeService.likePlace(id!).whenComplete(() async {
       await getMostPopularPlaces();
     });
-    _placeList.places[index] =temp;
+    _placeList.places[index] = temp;
 
     notifyListeners();
     return temp;
   }
 
   Future<PlaceModel> dislikePlace(String id) async {
-    var index = _placeList.places.indexWhere((element) => element.id == id);
+    var index = _placeList.places.indexWhere((element) => element.placeId == id);
 
-
-    PlaceModel temp=   await _placeService.dislikePlace(id!).whenComplete(() async {
+    PlaceModel temp =
+        await _placeService.dislikePlace(id!).whenComplete(() async {
       await getMostPopularPlaces();
     });
-    _placeList.places[index] =temp;
-///
+    _placeList.places[index] = temp;
+
+    ///
 
     notifyListeners();
     return temp;
   }
-
 
   Future<PlaceList> getNearestPlaceList(
       selectedNearestLat, selectedNearestLog, distanceValue) async {
@@ -90,20 +90,18 @@ class PlaceProvider extends ChangeNotifier {
     PlaceList places = _placeList;
 
     nearestPlaces = places.places.where((place) {
-      double distanceInKm =
-          getDistanceInKm(
-            lat1: place.latitude!,
-            lon1: place.longitude!,
-            lat2: selectedNearestLat,
-            lon2: selectedNearestLog,
-          );
+      double distanceInKm = getDistanceInKm(
+        lat1: place.latitude!,
+        lon1: place.longitude!,
+        lat2: selectedNearestLat,
+        lon2: selectedNearestLog,
+      );
       log(distanceInKm.toString());
       return distanceInKm <= distanceValue;
     }).toList();
 
     return PlaceList(places: nearestPlaces);
   }
-
 
   Future<PlaceList> getMostPopularPlaces() async {
     PlaceList places = _placeList;
@@ -122,15 +120,17 @@ class PlaceProvider extends ChangeNotifier {
     selectedNearestLog = long;
     notifyListeners();
   }
+
   //test this function
-  PlaceList getFavPlaces(places){
-    List<PlaceModel> tempList=[];
+  PlaceList getFavPlaces(places) {
+    List<PlaceModel> tempList = [];
 
-    for(String id in sharedUser.favList!){
-      var tempModel =places.firstWhere((element) => element.id==id,orElse:()=>PlaceModel.empty());
-
-   tempList.add(tempModel);
-
+    for (String id in sharedUser.favList!) {
+      PlaceModel tempModel = places.firstWhere((element) => element.id == id,
+          orElse: () => PlaceModel.empty());
+      if (tempModel.placeId != "-1"||tempModel.isVisible==false) {
+        tempList.add(tempModel);
+      }
     }
     return PlaceList(places: tempList);
   }

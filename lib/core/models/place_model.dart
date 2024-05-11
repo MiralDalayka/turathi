@@ -15,8 +15,8 @@ import '../functions/calculate_distanceInKm.dart';
 enum PlaceState { NewPlace, TrustWorthy } //
 
 class PlaceModel {
-  String? userID;
-  String? id;
+  String? userId;
+  String? placeId;
   String? title;
   String? description;
   String? status;
@@ -31,7 +31,11 @@ class PlaceModel {
   double? longitude;
   double? latitude;
 
-  PlaceModel.empty();
+  PlaceModel.empty(
+
+      ){
+    placeId = '-1';
+  }
   
 
   PlaceModel(
@@ -42,8 +46,8 @@ class PlaceModel {
       required this.latitude,
       this.status,
       }) {
-    id = uuid.v4();
-    userID = sharedUser.id;
+    placeId = uuid.v4();
+    userId = sharedUser.id;
     status = "Open";
     state = PlaceState.NewPlace.name;
     commentsPlace = [];
@@ -54,8 +58,8 @@ class PlaceModel {
   }
 
   PlaceModel.fromJson(Map<String, dynamic> json) {
-    userID = json['userID'];
-    id = json['id'];
+    userId = json['userId'];
+    placeId = json['placeId'];
     title = json['title'];
     description = json['description'];
     status = json['status'];
@@ -71,8 +75,8 @@ class PlaceModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['userID'] = this.userID;
-    data['id'] = this.id;
+    data['userId'] = this.userId;
+    data['placeId'] = this.placeId;
     data['title'] = this.title;
     data['description'] = this.description;
     data['status'] = this.status;

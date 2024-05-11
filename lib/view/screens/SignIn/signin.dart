@@ -250,9 +250,7 @@ class _LogInState extends State<LogIn> {
                         // ),
                       ],
                     ),
-                    SizedBox(
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.4,
-                    ),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -280,6 +278,37 @@ class _LogInState extends State<LogIn> {
                             ))
                       ],
                     ),
+                    SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.3,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Are you admin?",
+                          style: TextStyle(
+                              fontSize:
+                              MediaQuery.of(context).size.width * .033,
+                              fontFamily: ThemeManager.fontFamily,
+                              color: Colors.grey[600]),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(signInAdminRoute);
+                            },
+                            child: Text(
+                              "Start",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13,
+                                  fontFamily: ThemeManager.fontFamily,
+                                  color: Colors.grey[700]),
+                            ))
+                      ],
+                    ),
+
                   ])),
         ),
       ),
