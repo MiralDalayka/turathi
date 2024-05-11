@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/admin_screens/widgets/buttons.dart';
 
 class AdminHomePage extends StatefulWidget {
@@ -12,17 +14,39 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       backgroundColor: ThemeManager.background,
       appBar: AppBar(
-        title: const Text("Home Page"),
         centerTitle: true,
+        backgroundColor: ThemeManager.background,
+        title: Text(
+          'Admin Home',
+          style: ThemeManager.textStyle.copyWith(
+            fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+            fontWeight: FontWeight.bold,
+            fontFamily: ThemeManager.fontFamily,
+            color: ThemeManager.primary,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
+        ),
+      
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount:buttonsList.length ,
-          itemBuilder: (context, index) {
-          return buttonsList[index];
-
-        }),
+      body: Padding(
+        padding:  EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.04,),
+        child: Center(
+          child: ListView.builder(
+            itemCount:buttonsList.length ,
+            itemBuilder: (context, index) {
+            return buttonsList[index];
+        
+          }),
+        ),
       ),
     );
   }
