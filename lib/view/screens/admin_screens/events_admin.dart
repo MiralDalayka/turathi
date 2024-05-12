@@ -89,55 +89,57 @@ class eventsAdmin extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Column(
-                    children: [
-                        SizedBox(height: LayoutManager.widthNHeight0(context, 1)*0.05,),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          
-                          horizontal:
-                              LayoutManager.widthNHeight0(context, 1) * 0.05,
-                        ),
-                        child: GridView.builder(
-                          itemCount: userEvents.length,
-                          shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount,
-                            childAspectRatio: cardWidth / (cardWidth + 65),
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 16,
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                          SizedBox(height: LayoutManager.widthNHeight0(context, 1)*0.05,),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            
+                            horizontal:
+                                LayoutManager.widthNHeight0(context, 1) * 0.05,
                           ),
-                          itemBuilder: (context, index) {
-                            final EventModel = userEvents[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                  eventDetailsRoute,
-                                  arguments: EventModel,
-                                );
-                              },
-                              child: SizedBox(
-                                width: cardWidth,
-                                child: EventCard(
-                                  eventModel: EventModel,
-
-                                  onPress: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => EditEvent(
-                                          eventModel: EventModel,
+                          child: GridView.builder(
+                            itemCount: userEvents.length,
+                            shrinkWrap: true,
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: crossAxisCount,
+                              childAspectRatio: cardWidth / (cardWidth + 65),
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 16,
+                            ),
+                            itemBuilder: (context, index) {
+                              final EventModel = userEvents[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                    eventDetailsRoute,
+                                    arguments: EventModel,
+                                  );
+                                },
+                                child: SizedBox(
+                                  width: cardWidth,
+                                  child: EventCard(
+                                    eventModel: EventModel,
+                    
+                                    onPress: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditEvent(
+                                            eventModel: EventModel,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 }
               }

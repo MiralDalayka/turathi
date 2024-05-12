@@ -17,12 +17,15 @@ class EventProvider extends ChangeNotifier {
     return _eventList;
   }
 
-  Future<String> addEvent(EventModel model, List<XFile> images) async {
-    String msg = (await _eventService.addEvent(model, images).whenComplete(() {
-      _getEvents();
+  Future<EventList> get twoEventsList async {
+    return await _eventService.twoEventsList;
+  }
+
+  Future<void> addEvent(EventModel model, List<XFile> images) async {
+    _eventList.events
+        .add(await _eventService.addEvent(model, images).whenComplete(() {
       notifyListeners();
     }));
-    return msg;
   }
 
   Future<void> _getEvents() async {

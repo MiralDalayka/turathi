@@ -6,27 +6,46 @@ import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
+import 'dart:convert';
 
 class EventService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "events";
   final FilesStorageService _filesStorageService = FilesStorageService();
 
-  Future<String> addEvent(EventModel model, List<XFile> images) async {
-    _fireStore
-        .collection(_collectionName)
-        .add(model.toJson())
-        .whenComplete(() async {
-      _filesStorageService.uploadImages(
-          imageType: ImageType.eventImages.name,
-          folderName: model.id!,
-          pickedImages: images!);
-      log("Event Done -------------------------");
+  Future<EventModel> addEvent(EventModel model, List<XFile> images) async {
+    model.images = await _filesStorageService
+        .uploadImages(
+            imageType: ImageType.eventImages.name,
+            folderName: model.id!,
+            pickedImages: images!)
+        .whenComplete(() {
+      _fireStore
+          .collection(_collectionName)
+          .add(model.toJson())
+          .whenComplete(() => log("Event Done -------------------------"));
     }).catchError((error) {
       log(error.toString());
-      return "Failed";
+
     });
-    return "Done";
+return model;
+  }
+
+  Future<EventList> get twoEventsList async {
+    QuerySnapshot eventsData =
+        await _fireStore.collection(_collectionName).limit(2).get();
+    EventModel tempModel;
+    EventList eventList = EventList(events: []);
+    for (var item in eventsData.docs) {
+      tempModel = EventModel.fromJson(item.data() as Map<String, dynamic>);
+
+      tempModel.images = await _filesStorageService.getImages(
+          imageType: ImageType.eventImages.name, folderName: tempModel.id!);
+
+      eventList.events.add(tempModel);
+    }
+
+    return eventList;
   }
 
   Future<EventList> getEvents() async {
@@ -36,20 +55,10 @@ class EventService {
     }).catchError((error) {
       log(error.toString());
     });
-    Map<String, dynamic> data = {};
     EventModel tempModel;
     EventList eventList = EventList(events: []);
     for (var item in eventsData.docs) {
-      data["id"] = item.get("id");
-      data["name"] = item.get("name");
-      data["date"] = item.get("date");
-      data["description"] = item.get("description");
-      data["address"] = item.get("address");
-      data["longitude"] = item.get("longitude");
-      data["latitude"] = item.get("latitude");
-      data["ticketPrice"] = item.get("ticketPrice");
-      data["creatorName"] = item.get("creatorName");
-      tempModel = EventModel.fromJson(data);
+      tempModel = EventModel.fromJson(item.data() as Map<String, dynamic>);
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);

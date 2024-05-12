@@ -11,7 +11,6 @@
 
 
 
-
  
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -19,6 +18,7 @@
         <uses-permission android:name="android.permission."/>
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:label="turathi"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

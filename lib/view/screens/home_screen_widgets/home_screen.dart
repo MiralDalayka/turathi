@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/event_provider.dart';
@@ -9,10 +7,6 @@ import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
 import '../../../core/models/event_model.dart';
-import '../../../utils/Router/const_router_names.dart';
-import '../../../utils/layout_manager.dart';
-import '../../../utils/shared.dart';
-import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -234,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: LayoutManager.widthNHeight0(context, 1) * 0.03,
               ),
               FutureBuilder(
-                future: eventProvider.eventList,
+                future: eventProvider.twoEventsList,
                 builder: (context, snapshot) {
                   var data = snapshot.data;
                   if (data == null) {

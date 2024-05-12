@@ -27,7 +27,6 @@ class _EditPlaceState extends State<EditPlace> {
   final formKey = GlobalKey<FormState>();
   XFile? image;
   bool mapScreenOpened = false;
-  DateTime selectedDate = DateTime.now();
   List<double>? data;
   List<XFile>? images;
   TextEditingController? title;

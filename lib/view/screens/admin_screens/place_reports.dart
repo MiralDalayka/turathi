@@ -42,9 +42,13 @@ class _PlaceReportsScreenState extends State<PlaceReportsScreen> {
                         adminService.updatePlaceVisibility(
                             placeId: widget.reportList[0].placeId!,
                             isVisible: false);
-                        adminService.deleteReports(widget.reportList).whenComplete(() {
-ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("The place is hidden")));
-Navigator.of(context).pop();
+                        adminService
+                            .deleteReports(widget.reportList)
+                            .whenComplete(() {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("The place is hidden")));
+                          Navigator.of(context).pop();
                         });
                       },
                       child: Text(
