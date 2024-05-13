@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/SignIn/Signup.dart';
@@ -8,7 +7,6 @@ import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 import 'package:turathi/view/screens/admin_screens/events_admin.dart';
 import 'package:turathi/view/screens/admin_screens/places_admin.dart';
 import 'package:turathi/view/screens/profile_screens/screens/notification/notification_page.dart';
-import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/screens/profile_screens/screens/aboutus_page.dart';
 import 'package:turathi/view/screens/profile_screens/screens/change_info.dart';
 import 'package:turathi/view/screens/profile_screens/screens/delete_user.dart';
@@ -34,7 +32,6 @@ import '../../view/screens/profile_screens/screens/added_places.dart';
 import '../../view/screens/profile_screens/screens/request_to_be_expert.dart';
 import '../../view/screens/splach_screen/splach_screen.dart';
 import '../../view/widgets/custom_bottom_nav_bar.dart';
-import 'const_router_names.dart';
 
 class MyRouter {
   static Route generateRoute(RouteSettings settings) {

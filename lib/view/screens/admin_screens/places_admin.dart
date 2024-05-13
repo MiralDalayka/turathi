@@ -1,10 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/services/admin_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 import 'package:turathi/view/widgets/place_card.dart';
 
 class placesAdmin extends StatelessWidget {

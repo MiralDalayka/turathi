@@ -6,7 +6,6 @@ import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
-import 'dart:convert';
 
 class EventService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

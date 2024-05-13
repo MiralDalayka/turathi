@@ -1,16 +1,10 @@
 import 'dart:developer';
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:turathi/core/models/comment_model.dart';
 
 import '../../utils/shared.dart';
-import '../functions/calculate_distanceInKm.dart';
 
-// enum PlaceStatus {
-//   Closed_For_Maintenance,
-//   Open,
-// } //
+
 
 enum PlaceState { NewPlace, TrustWorthy } //
 

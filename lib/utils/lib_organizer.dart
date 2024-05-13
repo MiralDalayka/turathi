@@ -8,6 +8,5 @@ export 'package:turathi/core/services/google_map.dart';
 export 'package:turathi/utils/Router/const_router_names.dart';
 export 'package:turathi/utils/layout_manager.dart';
 export 'package:turathi/utils/shared.dart';
-export 'package:turathi/utils/theme_manager.dart';
 export 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 export 'package:auto_size_text/auto_size_text.dart';

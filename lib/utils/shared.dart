@@ -1,7 +1,6 @@
 import 'package:turathi/core/models/user_model.dart';
 import 'package:uuid/uuid.dart';
 
-import '../core/functions/get_current_location.dart';
 
 bool checkUser=false;//this is to check the user if is null or not when he sign in
 double selectedNearestLat = 0;

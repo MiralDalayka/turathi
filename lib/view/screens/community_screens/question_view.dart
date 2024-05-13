@@ -7,7 +7,6 @@ import '../../../core/providers/comment_provider.dart';
 import '../../../utils/layout_manager.dart';
 import '../../../utils/theme_manager.dart';
 import '../../widgets/add_button.dart';
-import '../../widgets/back_arrow_button.dart';
 import '../../widgets/comment_card.dart';
 import 'widgets/comment_dialog.dart';
 

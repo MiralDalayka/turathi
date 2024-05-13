@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/theme_manager.dart';
 
 class BackArrowButton extends StatelessWidget {
   const BackArrowButton({super.key, required this.color});

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/core/services/place_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider_widget.dart';
-
-import '../../../../utils/theme_manager.dart';
 
 class ImageSliderWidget extends StatefulWidget {
   ImageSliderWidget({super.key});

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/models/comment_model.dart';
 import 'package:turathi/core/providers/comment_provider.dart';
-import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/widgets/comment_card.dart';
-
-import '../../../core/services/comment_service.dart';
 
 class CommentsPlace extends StatefulWidget {
   final PlaceModel place;

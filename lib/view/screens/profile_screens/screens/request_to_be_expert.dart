@@ -1,15 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/models/request_model.dart';
 import 'package:turathi/core/providers/request_provider.dart';
-import 'package:turathi/core/services/request_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../../utils/theme_manager.dart';

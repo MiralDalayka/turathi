@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';

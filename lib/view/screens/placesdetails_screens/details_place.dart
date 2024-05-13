@@ -1,14 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/place_likes_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/core/services/place_service.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/location_screens/body_places.dart';
 import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {

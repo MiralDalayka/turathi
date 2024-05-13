@@ -1,7 +1,5 @@
 import 'package:geocode/geocode.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:geocode/geocode.dart';
-import 'package:geolocator/geolocator.dart';
 
 Future<Address> UserCity() async {
     bool serviceEnabled;
