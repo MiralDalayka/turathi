@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/user_service.dart';
+
 import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
+
 import 'package:turathi/utils/theme_manager.dart';
 
 import '../../../../utils/Router/const_router_names.dart';
@@ -33,15 +31,9 @@ class _secondBox extends State<SecondBox> {
             children: [
               InkWell(
                  onTap: () {
-                  // final currentUser = UserService().auth.currentUser;
-                  // if (currentUser != null && currentUser.isAnonymous) {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To Sign In First \nTo View Your Added Places!"),
-                  //   );
-                  // } else {
+                
                      Navigator.of(context).pushNamed(addedPlacesRoute);
-                  // }
+               
                 },
 
                 
@@ -83,15 +75,8 @@ class _secondBox extends State<SecondBox> {
               ),
               InkWell(
                  onTap: () {
-                  // final currentUser = UserService().auth.currentUser;
-                  // if (currentUser != null && currentUser.isAnonymous) {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => showCustomAlertDialog(context, "You Have To SignIn First \nTo Rquest To Be An Expert!"),
-                  //   );
-                  // } else {
+                
                     Navigator.of(context).pushNamed(requestToBeExpertRoute);
-                  // }
                 },
 
                
