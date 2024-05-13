@@ -136,12 +136,10 @@ class _AdminSignInState extends State<AdminSignIn> {
                     child: InkWell(
                       onTap: () async {
                         if (key.currentState!.validate()) {
-                          // _service.signIn(_idController.text, _passController.text).whenComplete(() {
-                          //   log("DOOOOOOOOOONE");
-                          // });
+                       
                           bool t =await _service.signIn(_idController.text, _passController.text);
                           log(    t.toString());
-                          //nav to home
+                       
                           if(t)
                             Navigator.of(context).pushReplacementNamed(homeAdminRoute);
 

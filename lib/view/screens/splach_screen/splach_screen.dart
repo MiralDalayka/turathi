@@ -27,8 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
           log("&&&");
           Navigator.of(context).pushReplacementNamed(signIn);
         } else {
+        
           sharedUser =  (await userService.getUserByEmail(FirebaseAuth.instance.currentUser!.email!))!;
+             print(FirebaseAuth.instance.currentUser);
           Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+          
         }
       },
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/shared.dart';

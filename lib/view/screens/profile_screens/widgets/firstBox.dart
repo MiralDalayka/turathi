@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
-import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -22,25 +20,15 @@ class FirstBox extends State<firstBox> {
         color: ThemeManager.second,
       ),
       child: Container(
-          height: LayoutManager.widthNHeight0(context, 1) * 0.5,
+          height: LayoutManager.widthNHeight0(context, 1) * 0.4,
           padding:
               EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
           child: Column(
             children: [
               InkWell(
                 onTap: () {
-                  // final currentUser = UserService().auth.currentUser;
-                  // if (currentUser != null && currentUser.isAnonymous) {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => showCustomAlertDialog(
-                  //         context,
-                  //         "You Have To SignIn First \nTo See Your Personal Details!"),
-                  //   );
-                    
-                  // } else {
-                    Navigator.of(context).pushNamed(personalDetilsScreen);
-                  // }
+    
+                    Navigator.of(context).pushNamed(personalDetilsScreen);  
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
@@ -82,18 +70,9 @@ class FirstBox extends State<firstBox> {
 
               InkWell(
                onTap: () {
-                  // final currentUser = UserService().auth.currentUser;
-                  // if (currentUser != null && currentUser.isAnonymous) {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => showCustomAlertDialog(
-                  //         context,
-                  //         "You Have To SignIn First \nTo See Your Personal Details!"),
-                  //   );
-                    
-                  // } else {
+              
                     Navigator.of(context).pushNamed(changeInfo);
-                  // }
+         
                 },
 
                 child: Padding(
@@ -136,18 +115,9 @@ class FirstBox extends State<firstBox> {
               InkWell(
                 onTap: () {
        
-                  // final currentUser = UserService().auth.currentUser;
-                  // if (currentUser != null && currentUser.isAnonymous) {
-                  //   showDialog(
-                  //     context: context,
-                  //     builder: (BuildContext context) => showCustomAlertDialog(
-                  //         context,
-                  //         "You Have To SignIn First \nTo Delete Your Account!"),
-                  //   );
-                    
-                  // } else {
+                 
                     Navigator.of(context).pushNamed(deleteuserpage);
-                  // }
+              
 
                 },
                 child: Padding(

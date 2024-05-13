@@ -170,7 +170,7 @@ String _formatAddress(Address address) {
   if (fullAddress.length > 30) {
    if(halfAddress.length>30)
    {
-    return "Jordan";
+    return address.countryName.toString();
    }
    else return halfAddress;
   } 
