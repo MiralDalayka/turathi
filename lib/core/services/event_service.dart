@@ -41,8 +41,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-
-      eventList.events.add(tempModel);
+      int dif = tempModel.date!.difference(DateTime.now()).inDays;
+      if(dif>0) {
+        eventList.events.add(tempModel);
+      }
     }
 
     return eventList;
@@ -62,8 +64,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-
-      eventList.events.add(tempModel);
+      int dif = tempModel.date!.difference(DateTime.now()).inDays;
+if(dif>0) {
+  eventList.events.add(tempModel);
+}
     }
 
     return eventList;

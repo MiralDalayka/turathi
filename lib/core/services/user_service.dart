@@ -8,8 +8,7 @@ import 'firebase_auth.dart';
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  final FirebaseAuthService _auth = FirebaseAuthService();
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuthService auth = FirebaseAuthService();
 
   final String _collectionName = "users";
 
@@ -19,7 +18,7 @@ class UserService {
       print(
           "email in adduser${model.email.toString()} pass in adduser ${model.password.toString()}");
 
-      if (await _auth.signupwithemailandpassword(
+      if (await auth.signupwithemailandpassword(
               model.email.toString(), model.password.toString()) ==
           null) {
         return "The email address is already in use by another account.";
@@ -148,7 +147,7 @@ class UserService {
         return true;
       }
 
-      User? user = await _auth.signinwithemailandpassword(email, password);
+      User? user = await auth.signinwithemailandpassword(email, password);
 
       if (user != null) {
         print("User is successfully Signin");
@@ -166,16 +165,10 @@ class UserService {
   }
 
   signOut() async {
-    sharedUser = UserModel(
-        name: null,
-        pass: null,
-        email: null,
-        phone: null,
-        longitude: null,
-        latitude: null);
 
-    await auth.signOut();
-    // log("testttttt ${usershared.name}");
+
+    await auth.logOut();
+    log("&&&&&&&");
   }
 
   Future<UserModel?> getUserByEmail(String email) async {

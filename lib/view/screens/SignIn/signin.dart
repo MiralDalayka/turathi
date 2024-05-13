@@ -168,14 +168,15 @@ class _LogInState extends State<LogIn> {
 
                                 //   print("wowowowowowow ${hashPassword(textController.controllerPass.text)}");
                                 if (signInSuccess) {
+                                  sharedUser = (await userService
+                                      .getUserByEmail(textController
+                                      .controllerEmail.text))!;
                                   Navigator.of(context)
                                       .pushReplacementNamed(bottomNavRoute);
 
                                   ////here to get the userInfo
 
-                                  sharedUser = (await userService
-                                      .getUserByEmail(textController
-                                          .controllerEmail.text))!;
+
                                 } else {
                                   print("error is happened");
                                   showDialog(

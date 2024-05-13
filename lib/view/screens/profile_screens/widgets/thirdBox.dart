@@ -83,7 +83,7 @@ class _thirdBox extends State<thirdBox> {
                   padding: EdgeInsets.only(right: 17),
                   child: GestureDetector(
                     onTap: () async {
-                      userService.signOut();
+                     await userService.signOut();
 
                       print("sign out");
 
