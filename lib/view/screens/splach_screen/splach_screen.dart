@@ -25,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
       () async {
         if (FirebaseAuth.instance.currentUser == null) {
           log("&&&");
-       
           Navigator.of(context).pushReplacementNamed(signIn);
         } else {
         
