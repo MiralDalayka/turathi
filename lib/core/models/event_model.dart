@@ -26,12 +26,14 @@ class EventModel {
     id= uuid.v4();
     creatorName = sharedUser.name;
 
+
   }
 
   EventModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     date = (json["date"] as Timestamp).toDate();
+
     description = json['description'];
     address = json['address'];
     longitude = json['longitude'];

@@ -7,7 +7,6 @@ import 'package:turathi/view/screens/SignIn/signin.dart';
 import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
 import 'package:turathi/view/screens/admin_screens/events_admin.dart';
 import 'package:turathi/view/screens/admin_screens/places_admin.dart';
-import 'package:turathi/view/screens/profile_screens/screens/change_pass.dart';
 import 'package:turathi/view/screens/profile_screens/screens/notification/notification_page.dart';
 import 'package:turathi/view/screens/placesdetails_screens/comments_place_screen.dart';
 import 'package:turathi/view/screens/profile_screens/screens/aboutus_page.dart';
@@ -59,10 +58,7 @@ class MyRouter {
         {
           return _route(AboutUsScreen());
         }
-      case changePass:
-        {
-          return _route(ChangePass());
-        }
+
       case signIn:
         {
           return _route(LogIn());

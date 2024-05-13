@@ -29,14 +29,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
     return Scaffold(
       floatingActionButton: AddButton(
         onPressed: () {
-          final currentUser = UserService().auth.currentUser;
-          // if (currentUser != null && currentUser.isAnonymous) {
-          //   showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) => showCustomAlertDialog(context,
-          //         "You Have To SignIn First \nTo Ask Question!"),
-          //   );
-          // } else {
+
             showDialog(
               context: context,
               builder: (BuildContext context) {

@@ -26,7 +26,6 @@ Widget showCustomAlertDialog(BuildContext context, String message) {
             onPressed: () {
               sharedUser = UserModel(
                 name: null,
-                pass: null,
                 email: null,
                 phone: null,
                 longitude: null,

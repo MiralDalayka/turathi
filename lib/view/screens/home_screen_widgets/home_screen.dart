@@ -131,17 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     AddButton(
                       onPressed: () {
-                        final currentUser = UserService().auth.currentUser;
-                        if (currentUser != null && currentUser.isAnonymous) {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) =>
-                                showCustomAlertDialog(context,
-                                    "You Have To SignIn First \nTo Add Place!"),
-                          );
-                        } else {
+
                           Navigator.of(context).pushNamed(addNewPlaceRoute);
-                        }
+
                       },
                     )
                   ],
