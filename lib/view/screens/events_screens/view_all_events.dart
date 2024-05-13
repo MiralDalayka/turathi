@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/dialog_signin.dart';
+import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
@@ -10,29 +12,21 @@ import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/layout_manager.dart';
 
 class EventsScreen extends StatefulWidget {
-  const EventsScreen({super.key, required this.eventsList});
-  final List<EventModel> eventsList;
+  const EventsScreen({super.key});
   @override
   State<EventsScreen> createState() => _EventsScreenState();
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  UserService userService = UserService();
+  EventList? eventList;
   @override
   Widget build(BuildContext context) {
+    EventProvider provider = Provider.of<EventProvider>(context);
     return Scaffold(
       floatingActionButton: AddButton(
         onPressed: () {
-          final currentUser = UserService().auth.currentUser;
-          // if (currentUser != null && currentUser.isAnonymous) {
-          //   showDialog(
-          //     context: context,
-          //     builder: (BuildContext context) => showCustomAlertDialog(
-          //         context, "You Have To SignIn First \nTo Add Event!"),
-          //   );
-          // } else {
             Navigator.of(context).pushNamed(addNewEventRoute);
-          // }
+
         },
       ),
       backgroundColor: ThemeManager.background,
@@ -53,23 +47,35 @@ class _EventsScreenState extends State<EventsScreen> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: LayoutManager.widthNHeight0(context, 0),
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return ViewEvent(
-                  eventModel: widget.eventsList[index],
-                  height: LayoutManager.widthNHeight0(context, 0) * 0.13,
-                  flag: true,
-                );
-              },
-              separatorBuilder: (context, index) => SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 0) * 0.015,
-                  ),
-              itemCount: widget.eventsList.length),
-        ),
+      body: FutureBuilder(
+        future: provider.eventList,
+        builder: (context,snapshot){
+          if(snapshot.hasData){
+            eventList = snapshot.data;
+            if(eventList!.events.isNotEmpty){
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: LayoutManager.widthNHeight0(context, 0),
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return ViewEvent(
+                          eventModel: eventList!.events[index],
+                          height: LayoutManager.widthNHeight0(context, 0) * 0.13,
+                          flag: true,
+                        );
+                      },
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: LayoutManager.widthNHeight0(context, 0) * 0.015,
+                      ),
+                      itemCount: eventList!.events.length),
+                ),
+              );
+            }
+            return const Center(child: Text("NO EVENTS YET"),);
+          }
+          return const Center(child: CircularProgressIndicator(),);
+        },
       ),
     );
   }

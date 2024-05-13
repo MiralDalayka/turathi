@@ -10,6 +10,8 @@ import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 import 'package:turathi/core/services/place_service.dart';
 
+import '../../utils/shared.dart';
+
 class AdminService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "admins";
@@ -22,8 +24,6 @@ class AdminService {
 
   Set<String> get placesIds => _placesIds;
 
-
-
   Future<bool> signIn(String adminId, String password) async {
     AdminModel? adminModel = await _getAdmin(adminId);
 
@@ -35,6 +35,29 @@ class AdminService {
       }
     }
     return false;
+  }
+
+  Future<PlaceList> getPlaces() async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_placeCollectionName)
+        .get()
+        .whenComplete(() {
+      log("getPlaces done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+
+    PlaceModel tempModel;
+    PlaceList placeList = PlaceList(places: []);
+    for (var item in placesData.docs) {
+      tempModel = PlaceModel.fromJson(item.data() as Map<String, dynamic>);
+      tempModel.images = await _filesStorageService.getImages(
+          imageType: ImageType.placesImages.name,
+          folderName: tempModel.placeId!);
+
+      placeList.places.add(tempModel);
+    }
+    return placeList;
   }
 
   Future<ReportModel> getReportByPlaceId(String placeId) async {
@@ -183,21 +206,16 @@ class AdminService {
     }).catchError((error) {
       log(error.toString());
     });
-
-
   }
 
   Future<void> deleteReports(List<ReportModel> reports) async {
-    for(ReportModel mode in reports){
+    for (ReportModel mode in reports) {
       QuerySnapshot requestData = await _fireStore
           .collection(_reportCollectionName)
           .where('reportId', isEqualTo: mode.reportId)
           .get();
       String id = requestData.docs[0].id;
-      _fireStore
-          .collection(_reportCollectionName)
-          .doc(id)
-          .delete();
+      _fireStore.collection(_reportCollectionName).doc(id).delete();
     }
   }
 
@@ -229,6 +247,4 @@ class AdminService {
 
   Map<String, dynamic> dataList = {};
   ReportList reportList = ReportList(reports: []);
-
-
 }

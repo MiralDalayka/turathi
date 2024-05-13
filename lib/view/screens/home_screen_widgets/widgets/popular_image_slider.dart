@@ -54,31 +54,8 @@ class _ImageSliderWidgetState extends State<ImageSliderWidget> {
               ),
             );
           }
-          return Text("data is empty");
+          return Center(child: Text("No Places Yet"));
         });
   }
-// @override
-// Widget build(BuildContext context) {
-//   PlaceProvider placesProvider =Provider.of<PlaceProvider>(context);
-//   //future widget
-//   //
-//   return ClipRRect(
-//     borderRadius: BorderRadius.circular(30),
-//     child: ImageSlideshow(
-//       width: double.infinity,
-//       height: 210,
-//       initialPage: 0,
-//       indicatorRadius: 6,
-//       indicatorColor: ThemeManager.second,
-//       indicatorBackgroundColor:
-//       Color.fromRGBO(172, 166, 157, 1),
-//       autoPlayInterval: 3000,
-//       isLoop: true,
-//       children: popularPlaces!.places!.map((place) {
-//         return PopularPlaceWidget(placeModel: place);
-//
-//       }).toList(),
-//     ),
-//   );
-// }
+
 }

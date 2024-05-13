@@ -21,9 +21,11 @@ import '../../view/screens/add_data_screens/add_event_page.dart';
 import '../../view/screens/add_data_screens/add_place_page.dart';
 import '../../view/screens/admin_screens/admin_home_page.dart';
 import '../../view/screens/admin_screens/admin_signin_screen.dart';
+import '../../view/screens/admin_screens/edit_place_admin.dart';
 import '../../view/screens/admin_screens/place_reports.dart';
 import '../../view/screens/admin_screens/reports_screen.dart';
 import '../../view/screens/admin_screens/requests_screen.dart';
+import '../../view/screens/admin_screens/widgets/view_pdf.dart';
 import '../../view/screens/community_screens/question_view.dart';
 import '../../view/screens/events_screens/event_details.dart';
 import '../../view/screens/events_screens/view_all_events.dart';
@@ -122,9 +124,8 @@ class MyRouter {
 
       case eventsRoute:
         {
-          final arg = settings.arguments as List<EventModel>;
 
-          return _route(EventsScreen(eventsList: arg));
+          return _route(const EventsScreen());
         }
       case eventDetailsRoute:
         {
@@ -182,6 +183,22 @@ class MyRouter {
 
           return _route(PlaceReportsScreen(
             reportList: arg,
+          ));
+        }
+      case requestPDFViewAdminRoute:
+        {
+          final arg = settings.arguments as String;
+
+          return _route(PdfViewPage(
+            path: arg,
+          ));
+        }
+      case editPlacesAdminRoute:
+        {
+          final arg = settings.arguments as PlaceModel;
+
+          return _route(EditPlaceAdmin(
+          placeModel: arg,
           ));
         }
       default:

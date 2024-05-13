@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/services/admin_service.dart';
 
 import '../../../../core/models/request_model.dart';
+import '../../../../utils/Router/const_router_names.dart';
 import '../../../../utils/theme_manager.dart';
 
 class RequestWidget extends StatefulWidget {
@@ -17,9 +21,40 @@ class RequestWidget extends StatefulWidget {
 }
 
 class _RequestWidgetState extends State<RequestWidget> {
+  String remotePDFpath="";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    createFileOfPdfUrl().then((f) {
+      setState(() {
+        remotePDFpath = f.path;
+      });
+    });
+  }
   TextStyle style = ThemeManager.textStyle
       .copyWith(fontSize: 16, color: ThemeManager.primary);
+  Future<File> createFileOfPdfUrl() async {
+    Completer<File> completer = Completer();
+    try {
+      final url = widget.model.certificate;
+      final filename = url!.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir =  Directory.systemTemp;
+      log("Download files");
+      log("${dir.path}/$filename");
+      File file = File("${dir.path}/$filename");
 
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
+  }
   @override
   Widget build(BuildContext context) {
     AdminService service = AdminService();
@@ -43,7 +78,7 @@ class _RequestWidgetState extends State<RequestWidget> {
                         color: ThemeManager.primary,
                       ),
                       onPressed: () {
-                        log("pdf");
+                     Navigator.of(context).pushNamed(requestPDFViewAdminRoute,arguments:remotePDFpath );
                       },
                       label: Text(
                         "Download",
