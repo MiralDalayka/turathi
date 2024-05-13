@@ -22,7 +22,7 @@ class FirstBox extends State<firstBox> {
         color: ThemeManager.second,
       ),
       child: Container(
-          height: LayoutManager.widthNHeight0(context, 1) * 0.5,
+          height: LayoutManager.widthNHeight0(context, 1) * 0.4,
           padding:
               EdgeInsets.all(LayoutManager.widthNHeight0(context, 1) * 0.05),
           child: Column(
