@@ -7,9 +7,7 @@ import 'package:turathi/core/functions/picking_files.dart';
 import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/core/services/google_map_addplace.dart';
-import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
 
 class AddNewEvent extends StatefulWidget {
