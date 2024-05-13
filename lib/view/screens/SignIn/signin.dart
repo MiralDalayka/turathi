@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
 import 'package:turathi/core/functions/modify_data.dart';
 import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/firebase_auth.dart';
+
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -22,7 +22,7 @@ class LogIn extends StatefulWidget {
 class _LogInState extends State<LogIn> {
   TextController textController = TextController();
   UserService userService = UserService();
-  final FirebaseAuthService _auth = FirebaseAuthService();
+
   bool flag = false;
 
   @override
@@ -163,10 +163,7 @@ class _LogInState extends State<LogIn> {
                                   textController.controllerPass.text,
                                 );
 
-                                print(
-                                    "------>${sharedUser.password.toString()}");
 
-                                //   print("wowowowowowow ${hashPassword(textController.controllerPass.text)}");
                                 if (signInSuccess) {
                                   sharedUser = (await userService
                                       .getUserByEmail(textController

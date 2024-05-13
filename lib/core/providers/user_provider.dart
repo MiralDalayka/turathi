@@ -17,8 +17,8 @@ class UserProvider extends ChangeNotifier {
     }
     return _userList;
   }
-  Future<String> addUser(UserModel model) async {
-    String msg = (await _userService.addUser(model).whenComplete(() {
+  Future<String> addUser(UserModel model,String password) async {
+    String msg = (await _userService.addUser(model,password).whenComplete(() {
       notifyListeners();
     }));
     return msg;

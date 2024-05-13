@@ -192,14 +192,14 @@ class _SingUpState extends State<SingUp> {
                            
                                 name: signUpController.firstName.text,
                                 email: signUpController.email.text,
-                                pass: signUpController.password.text,
+
                                 phone: signUpController.phone.text,
                                 longitude: p?.longitude,
                                 latitude: p?.latitude);
 
                             //  print("object ${signUpController.firstName.text}");
 
-                            _signUp(context, user, p!);
+                            _signUp(context, user,signUpController.password.text);
                           }
                         },
                         child: Container(
@@ -254,8 +254,8 @@ class _SingUpState extends State<SingUp> {
     );
   }
 
-  void _signUp(BuildContext context, UserModel user, Position p) async {
-    String str = await _service.addUser(user);
+  void _signUp(BuildContext context, UserModel user, String password) async {
+    String str = await _service.addUser(user,password);
 
     if (str == "Done") {
       print("User is successfully created");

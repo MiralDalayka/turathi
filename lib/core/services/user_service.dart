@@ -1,28 +1,18 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:crypt/crypt.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:turathi/core/models/user_model.dart';
 import '../../utils/shared.dart';
-import 'firebase_auth.dart';
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  final FirebaseAuthService auth = FirebaseAuthService();
-
   final String _collectionName = "users";
 
-  Future<String> addUser(UserModel model) async {
+  Future<String> addUser(UserModel model,String password) async {
     bool mounted = false;
     try {
-      print(
-          "email in adduser${model.email.toString()} pass in adduser ${model.password.toString()}");
-
-      if (await auth.signupwithemailandpassword(
-              model.email.toString(), model.password.toString()) ==
-          null) {
-        return "The email address is already in use by another account.";
-      }
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: model.email!, password: password);
     } catch (e) {
       if (e is FirebaseAuthException) {
         log("Error occurred: $e");
@@ -49,11 +39,7 @@ class UserService {
   }
 
   Future<UserModel> updateUser(String id) async {
-    UserModel userModel = await getUserById(id);
-
     String? newEmail = sharedUser.email;
-
-    print(FirebaseAuth.instance.currentUser);
 
     if (newEmail != null) {
       try {
@@ -93,82 +79,24 @@ class UserService {
     return await getUserById(id);
   }
 
-  Future<UserModel> updateUserPass(String id) async {
-    UserModel userModel = await getUserById(id);
-
-    String? newPass = sharedUser.password;
-
-    print(FirebaseAuth.instance.currentUser);
-
-    if (newPass != null) {
-      try {
-        var currentUser = FirebaseAuth.instance.currentUser;
-        if (currentUser?.email != newPass) {
-          await currentUser?.updatePassword(newPass);
-          print("Pass updated successfully");
-        } else {
-          print("Pass is already up-to-date");
-        }
-      } catch (error) {
-        print("Error updating Pass: $error");
-      }
-    } else {
-      print("New Pass is null. Cannot update.");
-    }
-///////here update the user Pass in the firestore
-    QuerySnapshot userData = await _fireStore
-        .collection(_collectionName)
-        .where('id', isEqualTo: id)
-        .get();
-    String userId = userData.docs[0].id;
-
-    try {
-      await FirebaseFirestore.instance.collection('users').doc(userId).update(
-        {
-          'password': sharedUser.password,
-        },
-      ).whenComplete(() {
-        log("user pass update : ${userId}");
-      });
-    } on FirebaseException catch (e) {
-      log(e.toString());
-    }
-    return await getUserById(id);
-  }
 
   Future<bool> signIn(String email, String password) async {
-    UserModel? userModel = await getUserByEmail(email);
-
-    if (userModel != null && userModel.password != null) {
-      String? str = userModel!.password;
-
-      if (str != null) if (Crypt(str).match(password)) {
-        print("User is successfully in match");
-        return true;
-      }
-
-      User? user = await auth.signinwithemailandpassword(email, password);
-
-      if (user != null) {
-        print("User is successfully Signin");
-
-        return true;
-      } else {
-        print("error is happend 3");
-        checkUser = false;
-        return false;
-      }
-    } else {
-      print("This email is not exciting. ");
+    try {
+      UserCredential credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      sharedUser = (await getUserByEmail(email))!;
+      log(credential.user.toString());
+      return true;
+    } on FirebaseAuthException catch (e) {
+      log(e.message.toString());
       return false;
+    } catch (e) {
+      rethrow;
     }
   }
 
   signOut() async {
-
-
-    await auth.logOut();
-    log("&&&&&&&");
+    await FirebaseAuth.instance.signOut();
   }
 
   Future<UserModel?> getUserByEmail(String email) async {
@@ -302,10 +230,10 @@ class UserService {
     });
   }
 
-  Future<UserModel> getUserById(String ID) async {
+  Future<UserModel> getUserById(String Id) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
-        .where('id', isEqualTo: ID)
+        .where('id', isEqualTo: Id)
         .get();
     Map<String, dynamic> data = {};
 

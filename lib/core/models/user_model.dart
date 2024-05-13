@@ -6,7 +6,6 @@ enum UsersRole { user, expert }
 class UserModel {
   String? id;
   String? name;
-  String? password;
   String? role;
   double? longitude;
   double? latitude;
@@ -20,7 +19,6 @@ class UserModel {
   UserModel(
       {this.id,
       required this.name,
-      required pass,
       required this.email,
       required this.phone,
       required this.longitude,
@@ -28,16 +26,12 @@ class UserModel {
       this.certificate}) {
     role = UsersRole.user.name;
     id = uuid.v4();
-    if (pass != null) {
-      password = hashPassword(pass);
-    }
     favList=[];
   }
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    password = json['password'];
     role = json['role'];
     longitude = json['longitude'];
     latitude = json['latitude'];
@@ -53,7 +47,6 @@ class UserModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['password'] = password;
     data['role'] = role;
     data['longitude'] = longitude;
     data['latitude'] = latitude;
