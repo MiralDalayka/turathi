@@ -120,7 +120,6 @@ class UserService {
     data["latitude"] = userData.docs[0].get("latitude");
     data["email"] = userData.docs[0].get("email");
     data["phone"] = userData.docs[0].get("phone");
-    data["password"] = userData.docs[0].get("password");
     data["favList"] = userData.docs[0].get("favList");
 
     return UserModel.fromJson(data);
@@ -144,7 +143,6 @@ class UserService {
       data["latitude"] = item.get("latitude");
       data["email"] = item.get("email");
       data["phone"] = item.get("phone");
-      data["password"] = item.get("password");
       data["favList"] = item.get("favList");
 
       tempModel = UserModel.fromJson(data);
@@ -240,7 +238,6 @@ class UserService {
     UserModel tempModel;
     data["id"] = userData.docs[0].get("id");
     data["name"] = userData.docs[0].get("name");
-    data["password"] = userData.docs[0].get("password");
     data["role"] = userData.docs[0].get("role");
     data["longitude"] = userData.docs[0].get("longitude");
     data["latitude"] = userData.docs[0].get("latitude");
