@@ -241,7 +241,6 @@ class UserService {
     data["role"] = userData.docs[0].get("role");
     data["longitude"] = userData.docs[0].get("longitude");
     data["latitude"] = userData.docs[0].get("latitude");
-    data["certificate"] = userData.docs[0].get("certificate");
     data["phone"] = userData.docs[0].get("phone");
     data["email"] = userData.docs[0].get("email");
     data["favList"] = userData.docs[0].get("favList");

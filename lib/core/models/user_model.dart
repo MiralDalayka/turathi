@@ -9,7 +9,6 @@ class UserModel {
   String? role;
   double? longitude;
   double? latitude;
-  String? certificate;
   String? email;
   List<String>? favList;
 
@@ -22,8 +21,7 @@ class UserModel {
       required this.email,
       required this.phone,
       required this.longitude,
-      required this.latitude,
-      this.certificate}) {
+      required this.latitude}) {
     role = UsersRole.user.name;
     id = uuid.v4();
     favList=[];
@@ -35,7 +33,7 @@ class UserModel {
     role = json['role'];
     longitude = json['longitude'];
     latitude = json['latitude'];
-    certificate = json['certificate'];
+
     phone = json['phone'];
     email = json['email'];
     favList = json['favList'].cast<String>();
@@ -50,7 +48,7 @@ class UserModel {
     data['role'] = role;
     data['longitude'] = longitude;
     data['latitude'] = latitude;
-    data['certificate'] = certificate;
+
     data['phone'] = phone;
     data['email'] = email;
     data['favList'] = favList;
