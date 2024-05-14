@@ -32,7 +32,7 @@ return model;
 
   Future<EventList> get twoEventsList async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).limit(2).get();
+        await _fireStore.collection(_collectionName).get();//.limit(2)
     EventModel tempModel;
     EventList eventList = EventList(events: []);
     for (var item in eventsData.docs) {

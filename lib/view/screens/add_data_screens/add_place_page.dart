@@ -31,7 +31,6 @@ class _AddNewPlaceState extends State<AddNewPlace> {
 
   @override
   Widget build(BuildContext context) {
-
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -96,18 +95,16 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final temp =   await   Navigator.push(
-                             context,
-                             MaterialPageRoute(
-                               builder: (context) => AddPlaceMap(),
-                             ),
-                           );
+                        final temp = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddPlaceMap(),
+                          ),
+                        );
                         setState(() {
                           mapScreenOpened = true;
-                     data = temp;
+                          data = temp;
                         });
-
-
                       },
                       style: ThemeManager.buttonStyle,
                       child: Text(
@@ -132,19 +129,30 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                 ),
                 ElevatedButton(
                   onPressed: () async {
-
-                    if (formKey.currentState!.validate() && images != null &&data!.isNotEmpty) {
-                      placesProvider.addPlace(
-                         model:  PlaceModel(
+                    if (formKey.currentState!.validate() &&
+                        images != null &&
+                        data!.isNotEmpty) {
+                      String msg = await placesProvider.addPlace(
+                          model: PlaceModel(
                             title: name.text,
                             description: disc.text,
                             address: address.text,
                             latitude: data![0],
                             longitude: data![1],
                           ),
-                        images:   images!);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Place Added Successfully")));
+                          images: images!);
+                      if (msg == "Done") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Place Added Successfully")));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Place Name Already Exists"),
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+
                       Navigator.pop(context); //BACK
                     } else {
                       log('add place failed');

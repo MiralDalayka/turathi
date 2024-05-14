@@ -252,29 +252,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 ),
                               ),
 
-                              // Container(
-                              //     height: LayoutManager.widthNHeight0(
-                              //             context, 1) *
-                              //         0.05, //30.0,
-                              //     width: LayoutManager.widthNHeight0(
-                              //             context, 0) *
-                              //         0.035, //18.0,
-                              //     child: IconButton(
-                              //       padding: EdgeInsets.all(0.0),
-                              //       icon: Image.asset(
-                              //           "assets/images/img_png/like.png"),
-                              //       onPressed: () {
-                              //               placesProvider.addLike(widget.placeModel);
-                              //         setState(() {
-                              //           //
-                              //           // widget.placeModel.like =
-                              //           //     widget.placeModel.like! + 1;
-                              //
-                              //
-                              //         });
-                              //         print("Thumbs-up clicked ");
-                              //       },
-                              //     )),
+                           
 
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
@@ -338,25 +316,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ),
 
-                          // AutoSizeText(
-                          //     maxLines: 3,
-                          //     widget.placeModel.status,
-                          //     textAlign: TextAlign.start,
-                          //     style: ThemeManager.textStyle.copyWith(
-                          //       color: ThemeManager.primary,
-                          //       decoration: TextDecoration.none,
-                          //       shadows: <Shadow>[
-                          //         Shadow(
-                          //           offset: Offset(5.0, 5.0),
-                          //           blurRadius: 2.0,
-                          //           color: Colors.black.withOpacity(0.25),
-                          //         ),
-                          //       ],
-                          //     )
-                          //     )
+                      
                         ),
                         defaultButton3(
-                          text: 'Show Map',
+                          text: 'Visit Place',
                           width: LayoutManager.widthNHeight0(context, 1) * 0.36,
                           borderRadius: 18,
                           background: ThemeManager.primary,
@@ -386,8 +349,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             left: 10,
             child: IconButton(
                 onPressed: () {
-                  // Navigator.of(context)
-                  //     .popAndPushNamed(bottomNavRoute); //change it
+                
                   Navigator.pop(context);
                 },
                 icon: const Icon(
@@ -460,12 +422,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       borderRadius: BorderRadius.circular(20),
                       color: ThemeManager.second.withOpacity(0.25),
                     ),
-                    // child: Icon(
-                    //   Icons.favorite,
-                    //   size: 25,
-                    //
-                    //   color: ThemeManager.second,
-                    // ),
+                  
                     child: IconButton(
                       onPressed: () async {
                         if (sharedUser.favList!

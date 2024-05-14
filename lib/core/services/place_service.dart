@@ -35,6 +35,15 @@ class PlaceService {
     return model;
   }
 
+Future<bool> placeExists(String title) async {
+    final querySnapshot = await _fireStore
+        .collection(_collectionName)
+        .where('title', isEqualTo: title)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
+
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)

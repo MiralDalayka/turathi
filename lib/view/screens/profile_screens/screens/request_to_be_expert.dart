@@ -101,7 +101,7 @@ class _RequestToBeExpertState extends State<RequestToBeExpert> {
   Future<void> _pickFile() async {
     FilePickerResult? pickedFile = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'doc'],
+      allowedExtensions: ['pdf'],//remove doc
     );
 
     if (pickedFile != null) {

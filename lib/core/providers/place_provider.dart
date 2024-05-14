@@ -25,6 +25,13 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<String> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
+          bool exists = await _placeService.placeExists(model.title.toString());
+
+    if (exists) {
+      log("Place with title ${model.title} already exists");
+      return "Place already exists";
+    }
+    
     _placeList.places.add(await _placeService
         .addPlace(model: model, images: images)
         .whenComplete(() async {
@@ -36,6 +43,7 @@ class PlaceProvider extends ChangeNotifier {
 
     return "Done";
   }
+
 
   Future<void> _getPlaces() async {
     _placeList = await _placeService

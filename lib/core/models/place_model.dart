@@ -42,7 +42,7 @@ class PlaceModel {
       }) {
     placeId = uuid.v4();
     userId = sharedUser.id;
-    status = "Open";
+    status = "Open To Visit";
     state = PlaceState.NewPlace.name;
     commentsPlace = [];
     likesList=[];
