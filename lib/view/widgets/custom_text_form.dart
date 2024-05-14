@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
@@ -39,6 +40,63 @@ final String labelText;
     );
   }
 }
+
+
+
+
+
+
+class NumberFormFieldWidget extends StatelessWidget {
+  const NumberFormFieldWidget({
+    Key? key,
+    required this.labelText,
+    required this.hintText,
+    this.maxLine = 1,
+    required this.controller,
+  }) : super(key: key);
+
+  final String labelText;
+  final String hintText;
+  final int maxLine;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: TextFormField(
+        controller: controller,
+        maxLines: maxLine,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return '* Required';
+          }
+          return null;
+        },
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Allow only numbers
+        keyboardType: TextInputType.number, // Show numerical keyboard
+        decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: TextStyle(
+            color: ThemeManager.primary,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          hintText: hintText,
+          filled: true,
+          fillColor: ThemeManager.second,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
 
 class TextFormWidgetRead extends StatelessWidget {
   final bool passToggle;

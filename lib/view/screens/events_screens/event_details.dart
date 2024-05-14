@@ -237,7 +237,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   size: 25,
                 ))),
         Positioned(
-            top: LayoutManager.widthNHeight0(context, 1) * 0.75, //45,
+            top: LayoutManager.widthNHeight0(context, 1) * 0.3, //45,
             right: LayoutManager.widthNHeight0(context, 1) * 0.03, //10
             child: Column(
               mainAxisSize: MainAxisSize.min,
