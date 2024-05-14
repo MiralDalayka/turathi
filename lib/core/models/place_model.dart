@@ -20,7 +20,7 @@ class PlaceModel {
   List<String>? images;
   List<String>? likesList;
   int? like;
-  int? disLike;
+
   bool? isVisible;
   double? longitude;
   double? latitude;
@@ -47,7 +47,6 @@ class PlaceModel {
     commentsPlace = [];
     likesList=[];
     like = 0;
-    disLike = 0;
     isVisible = true;
   }
 
@@ -61,7 +60,6 @@ class PlaceModel {
     state = json['state'];
     like = json['like'];
     likesList = json['likesList'].cast<String>();
-    disLike = json['disLike'];
     isVisible = json['isVisible'];
     longitude = json['longitude'];
     latitude = json['latitude'];
@@ -78,7 +76,6 @@ class PlaceModel {
     data['state'] = this.state;
     data['like'] = this.like;
     data['likesList'] = this.likesList;
-    data['disLike'] = this.disLike;
     data['isVisible'] = this.isVisible;
     data['longitude'] = this.longitude;
     data['latitude'] = this.latitude;
