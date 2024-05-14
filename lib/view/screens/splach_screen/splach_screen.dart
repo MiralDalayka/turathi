@@ -23,7 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(seconds: 3),
       () async {
-        if (FirebaseAuth.instance.currentUser == null) {
+        try{
+ if (FirebaseAuth.instance.currentUser == null) {
           log("&&&");
           Navigator.of(context).pushReplacementNamed(signIn);
         } else {
@@ -33,6 +34,11 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.of(context).pushReplacementNamed(bottomNavRoute);
           
         }
+        }
+        catch(e){
+          print("Error $e");
+        }
+       
       },
     );
   }
