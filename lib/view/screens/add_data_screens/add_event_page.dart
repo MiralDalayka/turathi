@@ -84,7 +84,7 @@ class _AddNewEventState extends State<AddNewEvent> {
                   hintText: 'Enter event address in your words',
                   labelText: 'Address',
                 ),
-                TextFormFieldWidget(
+                NumberFormFieldWidget(
                   controller: ticketPrice,
                   hintText: 'Enter event ticket price, 0 for free events',
                   labelText: 'Ticket Price',
