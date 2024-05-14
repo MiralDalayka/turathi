@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/body_places.dart';
 import 'package:turathi/view/screens/location_screens/location_header.dart';

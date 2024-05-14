@@ -197,3 +197,21 @@
 //     );
 //   }
 // }
+
+
+
+// import 'package:test/test.dart';
+// import 'package:turathi/view/screens/location_screens/body_places.dart';
+
+// void main() {
+//   test('the place nearest to the users location should be appear based on the number that the user choose', () {
+// //32.556546, 35.846852
+//     int selectedDistance=10;//in km  dataList.addAll([userNearestLat, userNearestLog]); 
+//     final body =   BodyPlaces(tab: 'My Location', dis_num: selectedDistance);
+
+//     body;
+
+   
+//   });
+// }import 'package:firebase_app_check/firebase_app_check.dart';
+

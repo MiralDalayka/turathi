@@ -1,18 +1,13 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/services/google_map_addplace.dart';
-import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 
 import '../../../core/functions/picking_files.dart';
-import '../../../core/services/file_storage_service.dart';
-import '../../../core/services/place_service.dart';
-import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
 
 class EditPlace extends StatefulWidget {

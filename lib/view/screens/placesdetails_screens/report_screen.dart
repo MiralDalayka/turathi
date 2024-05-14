@@ -1,7 +1,5 @@
 import 'dart:developer';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/providers/report_provider.dart';
 

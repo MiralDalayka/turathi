@@ -8,7 +8,6 @@ import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/models/request_model.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/core/services/place_service.dart';
 
 import '../../utils/shared.dart';
 

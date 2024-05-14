@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/calculate_distanceInKm.dart';
 import 'package:turathi/core/models/place_model.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/utils/layout_manager.dart';

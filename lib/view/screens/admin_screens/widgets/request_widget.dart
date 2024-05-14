@@ -21,7 +21,7 @@ class RequestWidget extends StatefulWidget {
 }
 
 class _RequestWidgetState extends State<RequestWidget> {
-  String remotePDFpath="";
+  String remotePDFpath = "";
   @override
   void initState() {
     // TODO: implement initState
@@ -32,6 +32,7 @@ class _RequestWidgetState extends State<RequestWidget> {
       });
     });
   }
+
   TextStyle style = ThemeManager.textStyle
       .copyWith(fontSize: 16, color: ThemeManager.primary);
   Future<File> createFileOfPdfUrl() async {
@@ -42,7 +43,7 @@ class _RequestWidgetState extends State<RequestWidget> {
       var request = await HttpClient().getUrl(Uri.parse(url));
       var response = await request.close();
       var bytes = await consolidateHttpClientResponseBytes(response);
-      var dir =  Directory.systemTemp;
+      var dir = Directory.systemTemp;
       log("Download files");
       log("${dir.path}/$filename");
       File file = File("${dir.path}/$filename");
@@ -55,6 +56,7 @@ class _RequestWidgetState extends State<RequestWidget> {
 
     return completer.future;
   }
+
   @override
   Widget build(BuildContext context) {
     AdminService service = AdminService();
@@ -78,7 +80,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                         color: ThemeManager.primary,
                       ),
                       onPressed: () {
-                     Navigator.of(context).pushNamed(requestPDFViewAdminRoute,arguments:remotePDFpath );
+                        Navigator.of(context).pushNamed(
+                            requestPDFViewAdminRoute,
+                            arguments: remotePDFpath);
                       },
                       label: Text(
                         "Download",
@@ -90,15 +94,22 @@ class _RequestWidgetState extends State<RequestWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          widget.model.status = RequestStatus.accepted.name;
-                          service.updateRequestStatus(
-                              requestStatus: RequestStatus.accepted,
-                              requestModel: widget.model);
-                        });
-                      },
-                      child: const Text("Accept")),
+                    onPressed: () {
+                      setState(() {
+                        widget.model.status = RequestStatus.accepted.name;
+                        service.updateRequestStatus(
+                          requestStatus: RequestStatus.accepted,
+                          requestModel: widget.model,
+                        );
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ThemeManager.primary),
+                    child: Text(
+                      "Accept",
+                      style: TextStyle(color: ThemeManager.second),
+                    ),
+                  ),
                   ElevatedButton(
                       onPressed: () {
                         setState(() {
@@ -108,7 +119,11 @@ class _RequestWidgetState extends State<RequestWidget> {
                               requestModel: widget.model);
                         });
                       },
-                      child: const Text("Reject"))
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ThemeManager.primary,
+                      ),
+                      child: Text("Reject",
+                          style: TextStyle(color: ThemeManager.second)))
                 ],
               )
             ],

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:turathi/core/models/place_model.dart';
 
 import '../../../../utils/Router/const_router_names.dart';
-import '../../../../utils/theme_manager.dart';
 
 class PopularPlaceWidget extends StatelessWidget {
   const PopularPlaceWidget({super.key, required this.placeModel});

@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/models/comment_model.dart';
 import 'package:turathi/core/providers/comment_provider.dart';
 import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/community_screens/question_view.dart';
 
 class CommentDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();

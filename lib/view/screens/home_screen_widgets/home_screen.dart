@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/providers/event_provider.dart';
 import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
@@ -236,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   //   return Center(child: Text('Error: ${snapshot.error}'));
                   // } else
                   eventsList = data;
+                  print(">>..................${data.events}");
 
                   if (data.events.isNotEmpty) {
                     return Expanded(
@@ -259,8 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }
-
-                  return Padding(
+                  else {  return Padding(
                     padding: EdgeInsets.only(
                         top: LayoutManager.widthNHeight0(context, 1) * 0.2),
                     child: Center(
@@ -281,6 +280,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   );
+
+
+                }
                 },
               ),
             ],
