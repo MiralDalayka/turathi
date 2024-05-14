@@ -142,8 +142,29 @@ class _AdminSignInState extends State<AdminSignIn> {
                        
                           if(t)
                             Navigator.of(context).pushReplacementNamed(homeAdminRoute);
+                            else {
+                                showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("Error"),
+                                content: const Text(
+                                    "The ID or Password is Wrong !"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text("OK"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                            }
 
-                        }else{
+                        }
+                        else {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {

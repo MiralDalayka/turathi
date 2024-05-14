@@ -109,10 +109,6 @@ class _RequestToBeExpertState extends State<RequestToBeExpert> {
     }
   }
 
-//   Future<void> _requestToBeExpertStatus() async {
-//      msg=await  _provider!.getRequestByUserId();
-// log(msg.toString());
-//
-//   }
+
 
 }
