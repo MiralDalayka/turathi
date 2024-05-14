@@ -31,7 +31,7 @@ class PlaceProvider extends ChangeNotifier {
       log("Place with title ${model.title} already exists");
       return "Place already exists";
     }
-    
+
     _placeList.places.add(await _placeService
         .addPlace(model: model, images: images)
         .whenComplete(() async {
@@ -51,17 +51,38 @@ class PlaceProvider extends ChangeNotifier {
         .whenComplete(() => {log("Provider get places")});
   }
 
-  Future<PlaceModel> updatePlace(
-      {required PlaceModel placeModel, required List<XFile> images}) async {
-    log(placeModel.toJson().toString());
-    int index = _placeList.places.indexOf(placeModel);
+  // Future<PlaceModel> updatePlace(
+  //     {required PlaceModel placeModel, required List<XFile> images}) async {
+   
+  //   log(placeModel.toJson().toString());
+  //   int index = _placeList.places.indexOf(placeModel);
+  //   log("INDEX $index");
+  //   _placeList.places[index] = await _placeService
+  //       .updatePlace(placeModel: placeModel, images: images)
+  //       .whenComplete(() {
+  //     notifyListeners();
+  //   });
+  //   return placeModel;
+  // }
+Future<PlaceModel> updatePlace({
+  required PlaceModel placeModel,
+  required List<XFile> images,
+}) async {
+  log(placeModel.toJson().toString());
+  int index = _placeList.places.indexOf(placeModel);
+  log("INDEX $index");
+  if (index != -1) {
     _placeList.places[index] = await _placeService
         .updatePlace(placeModel: placeModel, images: images)
         .whenComplete(() {
       notifyListeners();
     });
-    return placeModel;
+  } else {
+    log('PlaceModel not found in the list');
   }
+  return placeModel;
+}
+
 
   Future<PlaceModel> likePlace(String id) async {
     // int index = _placeList.places.indexOf(placeModel);
