@@ -69,21 +69,6 @@ class PlaceProvider extends ChangeNotifier {
     return temp;
   }
 
-  Future<PlaceModel> dislikePlace(String id) async {
-    var index = _placeList.places.indexWhere((element) => element.placeId == id);
-
-    PlaceModel temp =
-        await _placeService.dislikePlace(id!).whenComplete(() async {
-      await getMostPopularPlaces();
-    });
-    _placeList.places[index] = temp;
-
-    ///
-
-    notifyListeners();
-    return temp;
-  }
-
   Future<PlaceList> getNearestPlaceList(
       selectedNearestLat, selectedNearestLog, distanceValue) async {
     List<PlaceModel> nearestPlaces = [];

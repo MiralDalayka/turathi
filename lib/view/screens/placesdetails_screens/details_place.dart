@@ -235,14 +235,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Expanded(
                                 child: IconButton(
                                   onPressed: () async {
-                                    if (widget.placeModel.likesList!
-                                        .contains(sharedUser.id)) {
-                                      widget.placeModel = await placeProvider
-                                          .dislikePlace(widget.placeModel.placeId!);
-                                    } else {
                                       widget.placeModel = await placeProvider
                                           .likePlace(widget.placeModel.placeId!);
-                                    }
+
                                   },
                                   icon: SizedBox(
                                     width: LayoutManager.widthNHeight0(
