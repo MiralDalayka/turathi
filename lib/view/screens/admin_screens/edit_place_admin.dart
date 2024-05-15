@@ -136,10 +136,10 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                         },
                         icon: Icon(widget.placeModel.isVisible!
                             ? Icons.visibility_off
-                            : Icons.visibility),
+                            : Icons.visibility,color: ThemeManager.primary,),
                         label: widget.placeModel.isVisible!
-                            ? Text("Hide Place")
-                            : Text("View Place")),
+                            ? Text("Hide Place",style: TextStyle(color: ThemeManager.primary))
+                            : Text("Show Place",style: TextStyle(color: ThemeManager.primary),)),
 
                             
                     ElevatedButton(

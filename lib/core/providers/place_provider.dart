@@ -52,7 +52,6 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<PlaceModel> updatePlace(
       {required PlaceModel placeModel, required List<XFile> images}) async {
-
     log(placeModel.toJson().toString());
     int index = _placeList.places.indexOf(placeModel);
     log("INDEX $index");
@@ -134,7 +133,7 @@ class PlaceProvider extends ChangeNotifier {
     if (places.places.length >= 10) {
       return PlaceList(places: places.places.getRange(0, 9).toList());
     }
-    log(places.places.getRange(0, places.places.length).first.title!+"{{{{");
+    log(places.places.getRange(0, places.places.length).first.title! + "{{{{");
 
     return PlaceList(
         places: places.places.getRange(0, places.places.length).toList());
@@ -143,6 +142,13 @@ class PlaceProvider extends ChangeNotifier {
   updatePosition(lat, long) {
     selectedNearestLat = lat;
     selectedNearestLog = long;
+    notifyListeners();
+  }
+
+  deleteplaceprovider(PlaceModel place_model) {
+    _placeList.places
+        .removeWhere((place) => place.placeId == place_model.placeId);
+    _placeService.deletePlace(placeModel: place_model);
     notifyListeners();
   }
 

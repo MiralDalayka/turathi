@@ -41,7 +41,6 @@ class _ReportsScreenState extends State<ReportsScreen> {
             color: Colors.grey[300],
           ),
         ),
-      
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -51,14 +50,17 @@ class _ReportsScreenState extends State<ReportsScreen> {
             if (snapshot.hasData) {
               reportsList = snapshot.data;
               if (reportsList!.reports.isEmpty)
-                return  Padding(
-                 padding:  EdgeInsets.only(bottom:LayoutManager.widthNHeight0(context, 1) * 0.4 ),
-                  child: Center(child: Text("NO Reports YET", 
-                    style: TextStyle(
-                      color: ThemeManager.primary,
-                      fontFamily: "KohSantepheap",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,))),
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: LayoutManager.widthNHeight0(context, 1) * 0.4),
+                  child: Center(
+                      child: Text("NO Reports Yet",
+                          style: TextStyle(
+                            color: ThemeManager.primary,
+                            fontFamily: "KohSantepheap",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ))),
                 );
               List<String> ids = adminService.placesIds.toList();
 
@@ -72,22 +74,41 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           List<ReportModel> temp = reportsList!.reports
                               .where((element) => element.placeId == ids[index])
                               .toList();
-                          Navigator.of(context).pushNamed(
-                              placeReportsAdminRoute,
-                              arguments: temp).then((value) {
-                                setState(() {
-
-                                });
+                          Navigator.of(context)
+                              .pushNamed(placeReportsAdminRoute,
+                                  arguments: temp)
+                              .then((value) {
+                            setState(() {});
                           });
                         },
-                        child: Container(
-                            height: 100,
-                            color: ThemeManager.second,
-                            child: Center(
-                                child: Text(
-                              "Place Id: ${ids[index]}",
-                              style: ThemeManager.textStyle,
-                            ))),
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              LayoutManager.widthNHeight0(context, 1) * 0.02),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              height: 100,
+                              color: ThemeManager.primary,
+                              child: Center(
+                                child: Padding(
+                                  padding: EdgeInsets.all(
+                                    LayoutManager.widthNHeight0(context, 1) *
+                                        0.02,
+                                  ),
+                                  child: Text(
+                                    textAlign: TextAlign.center,
+                                    "Place Id\n${ids[index]}",
+                                    style: TextStyle(
+                                        color: ThemeManager.second,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: ThemeManager.fontFamily,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     );
                   });

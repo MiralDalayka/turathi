@@ -44,7 +44,7 @@ class _PlaceCardState extends State<PlaceCard> {
               children: [
                 ClipRRect(
                   
-                  borderRadius: BorderRadius.circular(300),
+                  borderRadius: BorderRadius.circular(15),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
@@ -60,8 +60,8 @@ class _PlaceCardState extends State<PlaceCard> {
                   ),
                 ),
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.045,
-                  left: LayoutManager.widthNHeight0(context, 0) * 0.04,
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.055,
+                  left: LayoutManager.widthNHeight0(context, 0) * 0.02,
                   child: Text(
                     widget.placeModel.title != null
                         ? widget.placeModel.title!.toUpperCase()
@@ -82,8 +82,9 @@ class _PlaceCardState extends State<PlaceCard> {
                     ),
                   ),
                 ),
+
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.025,
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.02,
                   right: LayoutManager.widthNHeight0(context, 1) * 0.025,
                   child: Icon(
                     sharedUser.favList != null &&
@@ -94,6 +95,8 @@ class _PlaceCardState extends State<PlaceCard> {
                     color: ThemeManager.primary,
                   ),
                 ),
+
+                
               ],
             ),
           ),

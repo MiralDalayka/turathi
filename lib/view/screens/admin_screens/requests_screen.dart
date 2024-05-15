@@ -21,7 +21,7 @@ class _RequestScreenState extends State<RequestScreen> {
     AdminService adminService = AdminService();
 
     return Scaffold(
-     backgroundColor: ThemeManager.background,
+      backgroundColor: ThemeManager.background,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: ThemeManager.background,
@@ -42,7 +42,6 @@ class _RequestScreenState extends State<RequestScreen> {
             color: Colors.grey[300],
           ),
         ),
-      
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -51,29 +50,35 @@ class _RequestScreenState extends State<RequestScreen> {
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (data == null) {
-              return const Center(child: CircularProgressIndicator(),);
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
             requestList = data;
             if (requestList!.requests.isNotEmpty) {
               return ListView.builder(
-                  itemCount:requestList!.requests.length ,
+                  itemCount: requestList!.requests.length,
                   itemBuilder: (context, index) {
-
-                return RequestWidget(
-                  count: (index+1).toString(),
-                model: requestList!.requests[index]!,
-                );
-              });
+                    return RequestWidget(
+                      count: (index + 1).toString(),
+                      model: requestList!.requests[index]!,
+                    );
+                  });
             }
-            return  Padding(
-              padding:  EdgeInsets.only(bottom:LayoutManager.widthNHeight0(context, 1) * 0.4 ),
-              child: Center(child: Text("No requests yet", textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),)),
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: LayoutManager.widthNHeight0(context, 1) * 0.4),
+              child: Center(
+                  child: Text(
+                "No requests yet",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeManager.primary,
+                  fontFamily: ThemeManager.fontFamily,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              )),
             );
           },
         ),
