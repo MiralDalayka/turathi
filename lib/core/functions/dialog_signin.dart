@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
 import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 Widget showCustomAlertDialog(BuildContext context, String message) {
@@ -24,21 +20,11 @@ Widget showCustomAlertDialog(BuildContext context, String message) {
         children: [
           TextButton(
             onPressed: () {
-              sharedUser = UserModel(
-                name: null,
-                email: null,
-                phone: null,
-                longitude: null,
-                latitude: null,
-              );
-
               Navigator.of(context).pop();
-              UserService().signOut();
-
-              Navigator.of(context).pushNamed(signIn);
+            
             },
             child: Text(
-              'SignIn',
+              'OK',
               style: TextStyle(
                 fontFamily: ThemeManager.fontFamily,
                 color: Colors.white,
