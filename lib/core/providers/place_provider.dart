@@ -25,7 +25,7 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<String> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
-          bool exists = await _placeService.placeExists(model.title.toString());
+    bool exists = await _placeService.placeExists(model.title.toString());
 
     if (exists) {
       log("Place with title ${model.title} already exists");
@@ -44,7 +44,6 @@ class PlaceProvider extends ChangeNotifier {
     return "Done";
   }
 
-
   Future<void> _getPlaces() async {
     _placeList = await _placeService
         .getPlaces()
@@ -53,7 +52,7 @@ class PlaceProvider extends ChangeNotifier {
 
   // Future<PlaceModel> updatePlace(
   //     {required PlaceModel placeModel, required List<XFile> images}) async {
-   
+
   //   log(placeModel.toJson().toString());
   //   int index = _placeList.places.indexOf(placeModel);
   //   log("INDEX $index");
@@ -64,36 +63,48 @@ class PlaceProvider extends ChangeNotifier {
   //   });
   //   return placeModel;
   // }
-Future<PlaceModel> updatePlace({
-  required PlaceModel placeModel,
-  required List<XFile> images,
-}) async {
-  log(placeModel.toJson().toString());
-  int index = _placeList.places.indexOf(placeModel);
-  log("INDEX $index");
-  if (index != -1) {
-    _placeList.places[index] = await _placeService
-        .updatePlace(placeModel: placeModel, images: images)
-        .whenComplete(() {
-      notifyListeners();
-    });
-  } else {
-    log('PlaceModel not found in the list');
+  Future<PlaceModel> updatePlace({
+    required PlaceModel placeModel,
+    required List<XFile> images,
+  }) async {
+    log(placeModel.toJson().toString());
+    int index = _placeList.places.indexOf(placeModel);
+    log("INDEX $index");
+    if (index != -1) {
+      _placeList.places[index] = await _placeService
+          .updatePlace(placeModel: placeModel, images: images)
+          .whenComplete(() {
+        notifyListeners();
+      });
+    } else {
+      log('PlaceModel not found in the list');
+    }
+    return placeModel;
   }
-  return placeModel;
-}
-
 
   Future<PlaceModel> likePlace(String id) async {
     // int index = _placeList.places.indexOf(placeModel);
-    var index = _placeList.places.indexWhere((element) => element.placeId == id);
+    var index =
+        _placeList.places.indexWhere((element) => element.placeId == id);
     log("INDEX $index");
 
-    PlaceModel temp = await _placeService.likePlace(id!).whenComplete(() async {
-      await getMostPopularPlaces();
-    });
+    PlaceModel temp = await _placeService.likePlace(
+        id!, _placeList.places[index].likesList!.length);
+    _placeList.places[index] = temp;
+    await getMostPopularPlaces();
+    notifyListeners();
+    return temp;
+  }
+
+  Future<PlaceModel> dislikePost(String id) async {
+    var index =
+        _placeList.places.indexWhere((element) => element.placeId == id);
+
+    PlaceModel temp = await _placeService.disLikePlace(
+        id!, _placeList.places[index].likesList!.length);
     _placeList.places[index] = temp;
 
+    await getMostPopularPlaces();
     notifyListeners();
     return temp;
   }
@@ -118,15 +129,14 @@ Future<PlaceModel> updatePlace({
   }
 
   Future<PlaceList> getMostPopularPlaces() async {
-    PlaceList places = _placeList;
-    final temp;
+    PlaceList places = await placeList;
     if (places.places.length >= 10) {
-      temp = places.places.getRange(0, 9);
-    } else {
-      temp = places.places.getRange(0, places.places.length - 1);
+      return PlaceList(places: places.places.getRange(0, 9).toList());
     }
+    log(places.places.getRange(0, places.places.length).first.title!+"{{{{");
 
-    return PlaceList(places: temp.toList());
+    return PlaceList(
+        places: places.places.getRange(0, places.places.length).toList());
   }
 
   updatePosition(lat, long) {
@@ -140,9 +150,10 @@ Future<PlaceModel> updatePlace({
     List<PlaceModel> tempList = [];
 
     for (String id in sharedUser.favList!) {
-      PlaceModel tempModel = places.firstWhere((element) => element.placeId == id,
+      PlaceModel tempModel = places.firstWhere(
+          (element) => element.placeId == id,
           orElse: () => PlaceModel.empty());
-      if (tempModel.placeId != "-1"||tempModel.isVisible==false) {
+      if (tempModel.placeId != "-1" || tempModel.isVisible == false) {
         tempList.add(tempModel);
       }
     }

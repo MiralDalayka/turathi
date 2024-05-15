@@ -136,7 +136,7 @@ Future<bool> placeExists(String title) async {
 
     return tempModel;
   }
-  Future<PlaceModel> likePlace(String id) async {
+  Future<PlaceModel> likePlace(String id,int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('placeId', isEqualTo: id)
@@ -147,7 +147,7 @@ Future<bool> placeExists(String title) async {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
           'likesList': FieldValue.arrayUnion([sharedUser.id]),
-          'like': FieldValue.increment(1),
+          'like': likes+1,
           if (placesData.docs[0].get("like") >= 5)
             'state': PlaceState.TrustWorthy.name
 
@@ -162,18 +162,17 @@ Future<bool> placeExists(String title) async {
     return await getPlaceById( id);
   }
 
-  Future<PlaceModel> disLikePlace(String id) async {
+  Future<PlaceModel> disLikePlace(String id,int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('placeId', isEqualTo: id)
         .get();
     String placeId = placesData.docs[0].id;
-
     try {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
           'likesList': FieldValue.arrayRemove([sharedUser.id]),
-          'like': FieldValue.increment(-1),
+          'like': likes-1,
           if (placesData.docs[0].get("like") < 5)
             'state': PlaceState.NewPlace.name
 

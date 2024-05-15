@@ -17,7 +17,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
   int selectedImage = 0;
 
   Key? get key => null;
-
   @override
   Widget build(BuildContext context) {
     final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
@@ -228,9 +227,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Expanded(
                                 child: IconButton(
                                   onPressed: () async {
-                                      widget.placeModel = await placeProvider
-                                          .likePlace(widget.placeModel.placeId!);
 
+
+                                    if (widget.placeModel.likesList!.contains(sharedUser.id)) {
+                                      widget.placeModel= await placeProvider.dislikePost(widget.placeModel.placeId!);
+                                    } else {
+                                      widget.placeModel  =await   placeProvider.likePlace(widget.placeModel.placeId!);
+                                    }
                                   },
                                   icon: SizedBox(
                                     width: LayoutManager.widthNHeight0(
@@ -257,7 +260,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: Text(
-                                  "${widget.placeModel.like}",
+                                  "${widget.placeModel.likesList?.length}",
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontFamily: ThemeManager.fontFamily,
