@@ -153,7 +153,7 @@ Future<bool> placeExists(String title) async {
 
         },
       ).whenComplete(() {
-        log("LIKE POST : ${placeId}");
+        log("LIKE PLACE : ${placeId}");
 
       });
     } on FirebaseException catch (e) {
@@ -162,6 +162,30 @@ Future<bool> placeExists(String title) async {
     return await getPlaceById( id);
   }
 
+  Future<PlaceModel> disLikePlace(String id) async {
+    QuerySnapshot placesData = await _fireStore
+        .collection(_collectionName)
+        .where('placeId', isEqualTo: id)
+        .get();
+    String placeId = placesData.docs[0].id;
 
+    try {
+      await FirebaseFirestore.instance.collection('places').doc(placeId).update(
+        {
+          'likesList': FieldValue.arrayRemove([sharedUser.id]),
+          'like': FieldValue.increment(-1),
+          if (placesData.docs[0].get("like") < 5)
+            'state': PlaceState.NewPlace.name
+
+        },
+      ).whenComplete(() {
+        log("disLikePlace : ${placeId}");
+
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
+    return await getPlaceById( id);
+  }
 
 }
