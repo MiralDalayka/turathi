@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
 
 
 
-    print('cureent long: ${userNearestLog},cureent lat: ${userNearestLat} ');
 
     return MultiProvider(
       providers: [

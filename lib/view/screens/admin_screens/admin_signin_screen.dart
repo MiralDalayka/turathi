@@ -17,17 +17,15 @@ class AdminSignIn extends StatefulWidget {
 }
 
 class _AdminSignInState extends State<AdminSignIn> {
-  TextEditingController _idController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
   bool flag = false;
   GlobalKey<FormState> key = GlobalKey<FormState>();
 
-  bool? isChecked = false;
-  bool passToggle = true;
 
   @override
   Widget build(BuildContext context) {
-    AdminService _service = AdminService();
+    AdminService service = AdminService();
     return Scaffold(
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
@@ -136,34 +134,33 @@ class _AdminSignInState extends State<AdminSignIn> {
                     child: InkWell(
                       onTap: () async {
                         if (key.currentState!.validate()) {
-                          // _service.signIn(_idController.text, _passController.text).whenComplete(() {
-                          //   log("DOOOOOOOOOONE");
-                          // });
-                          bool t =await _service.signIn(_idController.text, _passController.text);
+
+                          bool t =await service.signIn(_idController.text, _passController.text);
                           log(    t.toString());
                           //nav to home
                           if(t)
                             Navigator.of(context).pushReplacementNamed(homeAdminRoute);
+                          else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text("Error"),
+                                  content: const Text(
+                                      "An error happened"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text("OK"),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
 
-                        }else{
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text("Error"),
-                                content: const Text(
-                                    "An error has occurred"),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text("OK"),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
                         }
                       },
                       child: Container(

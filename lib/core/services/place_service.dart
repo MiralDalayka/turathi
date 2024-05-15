@@ -63,7 +63,6 @@ class PlaceService {
       data["latitude"] = item.get("latitude");
       data["longitude"] = item.get("longitude");
       data["isVisible"] = item.get("isVisible");
-      data["disLike"] = item.get("disLike");
       data["like"] = item.get("like");
       data["likesList"] =  item.get("likesList");
       tempModel = PlaceModel.fromJson(data);
@@ -119,7 +118,6 @@ class PlaceService {
     data["latitude"] = placeData.docs[0].get("latitude");
     data["longitude"] = placeData.docs[0].get("longitude");
     data["isVisible"] = placeData.docs[0].get("isVisible");
-    data["disLike"] = placeData.docs[0].get("disLike");
     data["like"] = placeData.docs[0].get("like");
     data["likesList"] = placeData.docs[0].get("likesList");
 

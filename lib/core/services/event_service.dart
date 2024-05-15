@@ -33,7 +33,7 @@ return model;
 
   Future<EventList> get twoEventsList async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).limit(2).get();
+        await _fireStore.collection(_collectionName).limit(2).where("date",isGreaterThan: DateTime.now()).get();
     EventModel tempModel;
     EventList eventList = EventList(events: []);
     for (var item in eventsData.docs) {
@@ -41,10 +41,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-      int dif = tempModel.date!.difference(DateTime.now()).inDays;
-      if(dif>0) {
+      // int dif = tempModel.date!.difference(DateTime.now()).inDays;
+      // if(dif>0) {
         eventList.events.add(tempModel);
-      }
+      // }
     }
 
     return eventList;
@@ -52,7 +52,7 @@ return model;
 
   Future<EventList> getEvents() async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).get().whenComplete(() {
+        await _fireStore.collection(_collectionName).where("date",isGreaterThan: DateTime.now()).get().whenComplete(() {
       log("get events done");
     }).catchError((error) {
       log(error.toString());
@@ -64,10 +64,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-      int dif = tempModel.date!.difference(DateTime.now()).inDays;
-if(dif>0) {
+      // int dif = tempModel.date!.difference(DateTime.now()).inDays;
+// if(dif>0) {
   eventList.events.add(tempModel);
-}
+// }
     }
 
     return eventList;
