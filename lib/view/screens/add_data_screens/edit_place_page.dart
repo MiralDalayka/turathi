@@ -20,7 +20,6 @@ class EditPlace extends StatefulWidget {
 
 class _EditPlaceState extends State<EditPlace> {
   final formKey = GlobalKey<FormState>();
-  XFile? image;
   bool mapScreenOpened = false;
   List<double>? data;
   List<XFile>? images;
@@ -148,15 +147,8 @@ log(widget.placeModel.title!);
                 ),
                 ElevatedButton(
                   onPressed: () async {
-                    if(data ==null){
-                      data = [widget.placeModel.latitude!,widget.placeModel.longitude!];
-                    }
-                    log("images.toString()");
-
-
-                    if(images ==null){
-                      images = [];
-                    }
+                    data ??= [widget.placeModel.latitude!,widget.placeModel.longitude!];
+                    images ??= [];
                     if (formKey.currentState!.validate() && images != null &&data!.isNotEmpty) {
                       log(title!.text);
                       widget.placeModel.title = title!.text;

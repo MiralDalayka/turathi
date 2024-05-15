@@ -84,18 +84,18 @@ Future<bool> placeExists(String title) async {
   }
 
   Future<PlaceModel> updatePlace(
-      {required PlaceModel placeModel, List<XFile>? images}) async {
+      {required PlaceModel placeModel, required List<XFile> images}) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('placeId', isEqualTo: placeModel.placeId)
         .get();
     String placeId = placesData.docs[0].id; //id for the ref
     log(images.toString());
-    if (images != null) {
+    if (images.isNotEmpty) {
       placeModel.images!.addAll(await _filesStorageService.uploadImages(
           imageType: ImageType.placesImages.name,
           folderName: placeModel.placeId!,
-          pickedImages: images!));
+          pickedImages: images));
     }
     _fireStore
         .collection(_collectionName)
