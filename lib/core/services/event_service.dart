@@ -6,7 +6,6 @@ import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/services/file_storage_service.dart';
 
 import '../../utils/shared.dart';
-import 'dart:convert';
 
 class EventService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -33,7 +32,7 @@ return model;
 
   Future<EventList> get twoEventsList async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).limit(2).where("date",isGreaterThan: DateTime.now()).get();
+        await _fireStore.collection(_collectionName).get();//.limit(2)
     EventModel tempModel;
     EventList eventList = EventList(events: []);
     for (var item in eventsData.docs) {
@@ -41,10 +40,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-      // int dif = tempModel.date!.difference(DateTime.now()).inDays;
-      // if(dif>0) {
+      int dif = tempModel.date!.difference(DateTime.now()).inDays;
+      if(dif>0) {
         eventList.events.add(tempModel);
-      // }
+      }
     }
 
     return eventList;
@@ -52,7 +51,7 @@ return model;
 
   Future<EventList> getEvents() async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).where("date",isGreaterThan: DateTime.now()).get().whenComplete(() {
+        await _fireStore.collection(_collectionName).get().whenComplete(() {
       log("get events done");
     }).catchError((error) {
       log(error.toString());
@@ -64,10 +63,10 @@ return model;
 
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.eventImages.name, folderName: tempModel.id!);
-      // int dif = tempModel.date!.difference(DateTime.now()).inDays;
-// if(dif>0) {
+      int dif = tempModel.date!.difference(DateTime.now()).inDays;
+if(dif>0) {
   eventList.events.add(tempModel);
-// }
+}
     }
 
     return eventList;

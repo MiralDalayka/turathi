@@ -1,12 +1,7 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/services/admin_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
-import '../../../core/services/admin_service.dart';
-import '../../../core/services/admin_service.dart';
 import '../../../utils/Router/const_router_names.dart';
 import '../../../utils/theme_manager.dart';
 

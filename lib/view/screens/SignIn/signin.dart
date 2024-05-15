@@ -1,15 +1,8 @@
-import 'package:crypt/crypt.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/functions/modify_data.dart';
-import 'package:turathi/core/models/user_model.dart';
-
 import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
-import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/SignFormField.dart';
 
 class LogIn extends StatefulWidget {
@@ -171,7 +164,7 @@ class _LogInState extends State<LogIn> {
                                   Navigator.of(context)
                                       .pushReplacementNamed(bottomNavRoute);
 
-                                  ////here to get the userInfo
+                        
 
 
                                 } else {

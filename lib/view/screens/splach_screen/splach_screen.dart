@@ -19,16 +19,26 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // userService.signOut();
+
     Timer(
       const Duration(seconds: 3),
       () async {
-        if (FirebaseAuth.instance.currentUser == null) {
+        try{
+ if (FirebaseAuth.instance.currentUser == null) {
+          log("&&&");
           Navigator.of(context).pushReplacementNamed(signIn);
         } else {
+        
           sharedUser =  (await userService.getUserByEmail(FirebaseAuth.instance.currentUser!.email!))!;
+             print(FirebaseAuth.instance.currentUser);
           Navigator.of(context).pushReplacementNamed(bottomNavRoute);
+          
         }
+        }
+        catch(e){
+          print("Error $e");
+        }
+       
       },
     );
   }

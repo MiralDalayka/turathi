@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/core/services/user_service.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
 class DeleteUser extends StatefulWidget {
@@ -93,7 +89,7 @@ class _DeleteUser extends State<DeleteUser> {
                                     onPressed: () {
                                       userProvider.deleteUserprovider();
 
-                                      //log out
+                                     
                                       Navigator.of(context)
                                           .pushReplacementNamed(signIn);
                                     },

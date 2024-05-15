@@ -1,4 +1,3 @@
-import 'package:geocode/geocode.dart';
 
 String addNewLineAfterChars(String text, int charCount) {
   List<String> words = text.split('_');

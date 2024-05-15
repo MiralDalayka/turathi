@@ -1,16 +1,10 @@
 import 'dart:developer';
-import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:turathi/core/models/comment_model.dart';
 
 import '../../utils/shared.dart';
-import '../functions/calculate_distanceInKm.dart';
 
-// enum PlaceStatus {
-//   Closed_For_Maintenance,
-//   Open,
-// } //
+
 
 enum PlaceState { NewPlace, TrustWorthy } //
 
@@ -26,6 +20,7 @@ class PlaceModel {
   List<String>? images;
   List<String>? likesList;
   int? like;
+
   bool? isVisible;
   double? longitude;
   double? latitude;
@@ -47,7 +42,7 @@ class PlaceModel {
       }) {
     placeId = uuid.v4();
     userId = sharedUser.id;
-    status = "Open";
+    status = "Open To Visit";
     state = PlaceState.NewPlace.name;
     commentsPlace = [];
     likesList=[];

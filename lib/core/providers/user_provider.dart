@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+
 import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/providers/place_provider.dart';
+
 import 'package:turathi/core/services/user_service.dart';
 import 'dart:developer';
 

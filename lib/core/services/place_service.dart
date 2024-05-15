@@ -35,6 +35,15 @@ class PlaceService {
     return model;
   }
 
+Future<bool> placeExists(String title) async {
+    final querySnapshot = await _fireStore
+        .collection(_collectionName)
+        .where('title', isEqualTo: title)
+        .get();
+
+    return querySnapshot.docs.isNotEmpty;
+  }
+
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
@@ -153,26 +162,6 @@ class PlaceService {
     return await getPlaceById( id);
   }
 
-  Future<PlaceModel> dislikePlace(String id) async {
-    QuerySnapshot placesData = await _fireStore
-        .collection(_collectionName)
-        .where('placeId', isEqualTo: id)
-        .get();
-    String placeId = placesData.docs[0].id;
-    try {
-      await FirebaseFirestore.instance.collection('places').doc(placeId).update(
-        {
-          'likesList': FieldValue.arrayRemove([sharedUser.id]),
-          'like': FieldValue.increment(-1), //back
-          if (placesData.docs[0].get("like") < 5)
-            'state': PlaceState.NewPlace.name
-        },
-      );
-    } on FirebaseException {
-      log('Error dislikePost');
-    }
-    return await getPlaceById( id);
 
-  }
 
 }

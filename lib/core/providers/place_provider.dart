@@ -25,6 +25,13 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<String> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
+          bool exists = await _placeService.placeExists(model.title.toString());
+
+    if (exists) {
+      log("Place with title ${model.title} already exists");
+      return "Place already exists";
+    }
+
     _placeList.places.add(await _placeService
         .addPlace(model: model, images: images)
         .whenComplete(() async {
@@ -37,23 +44,45 @@ class PlaceProvider extends ChangeNotifier {
     return "Done";
   }
 
+
   Future<void> _getPlaces() async {
     _placeList = await _placeService
         .getPlaces()
         .whenComplete(() => {log("Provider get places")});
   }
 
-  Future<PlaceModel> updatePlace(
-      {required PlaceModel placeModel, required List<XFile> images}) async {
-    log(placeModel.toJson().toString());
-    int index = _placeList.places.indexOf(placeModel);
+  // Future<PlaceModel> updatePlace(
+  //     {required PlaceModel placeModel, required List<XFile> images}) async {
+   
+  //   log(placeModel.toJson().toString());
+  //   int index = _placeList.places.indexOf(placeModel);
+  //   log("INDEX $index");
+  //   _placeList.places[index] = await _placeService
+  //       .updatePlace(placeModel: placeModel, images: images)
+  //       .whenComplete(() {
+  //     notifyListeners();
+  //   });
+  //   return placeModel;
+  // }
+Future<PlaceModel> updatePlace({
+  required PlaceModel placeModel,
+  required List<XFile> images,
+}) async {
+  log(placeModel.toJson().toString());
+  int index = _placeList.places.indexOf(placeModel);
+  log("INDEX $index");
+  if (index != -1) {
     _placeList.places[index] = await _placeService
         .updatePlace(placeModel: placeModel, images: images)
         .whenComplete(() {
       notifyListeners();
     });
-    return placeModel;
+  } else {
+    log('PlaceModel not found in the list');
   }
+  return placeModel;
+}
+
 
   Future<PlaceModel> likePlace(String id) async {
     // int index = _placeList.places.indexOf(placeModel);
@@ -64,21 +93,6 @@ class PlaceProvider extends ChangeNotifier {
       await getMostPopularPlaces();
     });
     _placeList.places[index] = temp;
-
-    notifyListeners();
-    return temp;
-  }
-
-  Future<PlaceModel> dislikePlace(String id) async {
-    var index = _placeList.places.indexWhere((element) => element.placeId == id);
-
-    PlaceModel temp =
-        await _placeService.dislikePlace(id!).whenComplete(() async {
-      await getMostPopularPlaces();
-    });
-    _placeList.places[index] = temp;
-
-    ///
 
     notifyListeners();
     return temp;
