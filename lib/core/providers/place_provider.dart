@@ -145,9 +145,8 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteplaceprovider(PlaceModel place_model) {
-    _placeList.places
-        .removeWhere((place) => place.placeId == place_model.placeId);
+  deletePlace(PlaceModel place_model) {
+    _placeList.places.remove(place_model);
     _placeService.deletePlace(placeModel: place_model);
     notifyListeners();
   }

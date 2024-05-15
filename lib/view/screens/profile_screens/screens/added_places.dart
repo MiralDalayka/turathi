@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
@@ -181,11 +183,7 @@ class AddedPlaces extends StatelessWidget {
                                               TextButton(
                                                 onPressed: () async {
                                                   await placeProvider
-                                                      .deleteplaceprovider(
-                                                          placeModel);
-                                                  //  setState(() {});
-
-                                                  ///the problem hre
+                                                      .deletePlace(placeModel);
 
                                                   Navigator.pop(context);
                                                 },

@@ -110,7 +110,7 @@ class PlaceService {
     return placeModel;
   }
 
-  Future<void> deletePlace( {required PlaceModel placeModel}) async {
+  Future<void> deletePlace({required PlaceModel placeModel}) async {
     try {
       QuerySnapshot placesData = await FirebaseFirestore.instance
           .collection(_collectionName)
