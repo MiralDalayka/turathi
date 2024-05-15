@@ -35,7 +35,7 @@ class PlaceService {
     return model;
   }
 
-Future<bool> placeExists(String title) async {
+  Future<bool> placeExists(String title) async {
     final querySnapshot = await _fireStore
         .collection(_collectionName)
         .where('title', isEqualTo: title)
@@ -73,10 +73,11 @@ Future<bool> placeExists(String title) async {
       data["longitude"] = item.get("longitude");
       data["isVisible"] = item.get("isVisible");
       data["like"] = item.get("like");
-      data["likesList"] =  item.get("likesList");
+      data["likesList"] = item.get("likesList");
       tempModel = PlaceModel.fromJson(data);
       tempModel.images = await _filesStorageService.getImages(
-          imageType: ImageType.placesImages.name, folderName: tempModel.placeId!);
+          imageType: ImageType.placesImages.name,
+          folderName: tempModel.placeId!);
 
       placeList.places.add(tempModel);
     }
@@ -109,6 +110,26 @@ Future<bool> placeExists(String title) async {
     return placeModel;
   }
 
+  Future<void> deletePlace( {required PlaceModel placeModel}) async {
+    try {
+      QuerySnapshot placesData = await FirebaseFirestore.instance
+          .collection(_collectionName)
+          .where('placeId', isEqualTo: placeModel.placeId)
+          .get();
+      String placeId = placesData.docs[0].id;
+
+      await FirebaseFirestore.instance
+          .collection(_collectionName)
+          .doc(placeId)
+          .delete();
+
+      log("Place deleted successfully");
+    } catch (error) {
+      log("Error deleting place: $error");
+      throw error;
+    }
+  }
+
   Future<PlaceModel> getPlaceById(String id) async {
     QuerySnapshot placeData = await _fireStore
         .collection(_collectionName)
@@ -136,7 +157,8 @@ Future<bool> placeExists(String title) async {
 
     return tempModel;
   }
-  Future<PlaceModel> likePlace(String id,int likes) async {
+
+  Future<PlaceModel> likePlace(String id, int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('placeId', isEqualTo: id)
@@ -147,22 +169,20 @@ Future<bool> placeExists(String title) async {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
           'likesList': FieldValue.arrayUnion([sharedUser.id]),
-          'like': likes+1,
+          'like': likes + 1,
           if (placesData.docs[0].get("like") >= 5)
             'state': PlaceState.TrustWorthy.name
-
         },
       ).whenComplete(() {
         log("LIKE PLACE : ${placeId}");
-
       });
     } on FirebaseException catch (e) {
       log(e.toString());
     }
-    return await getPlaceById( id);
+    return await getPlaceById(id);
   }
 
-  Future<PlaceModel> disLikePlace(String id,int likes) async {
+  Future<PlaceModel> disLikePlace(String id, int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
         .where('placeId', isEqualTo: id)
@@ -172,19 +192,16 @@ Future<bool> placeExists(String title) async {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
           'likesList': FieldValue.arrayRemove([sharedUser.id]),
-          'like': likes-1,
+          'like': likes - 1,
           if (placesData.docs[0].get("like") < 5)
             'state': PlaceState.NewPlace.name
-
         },
       ).whenComplete(() {
         log("disLikePlace : ${placeId}");
-
       });
     } on FirebaseException catch (e) {
       log(e.toString());
     }
-    return await getPlaceById( id);
+    return await getPlaceById(id);
   }
-
 }

@@ -454,9 +454,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    for (int index = 0;
-                        index < widget.placeModel.images!.length;
-                        index++)
+                    for (int index = 0;index < widget.placeModel.images!.length &&  index < 4;index++)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SmallImage(

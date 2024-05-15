@@ -3,17 +3,22 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
+import 'package:turathi/view/widgets/added_card.dart';
 import 'package:turathi/view/widgets/place_card.dart';
 
 class AddedPlaces extends StatelessWidget {
   const AddedPlaces({super.key});
+
+  //  @override
+  // void initState() {
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     double cardWidth = 150;
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;
-
     int crossAxisCount =
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
 
@@ -39,7 +44,6 @@ class AddedPlaces extends StatelessWidget {
             color: Colors.grey[300],
           ),
         ),
-      
       ),
       body: Consumer<PlaceProvider>(
         builder: (context, placeProvider, child) {
@@ -66,7 +70,6 @@ class AddedPlaces extends StatelessWidget {
                   return Center(
                     child: Column(
                       children: [
-                        
                         Padding(
                           padding: EdgeInsets.only(
                               top: LayoutManager.widthNHeight0(context, 1) *
@@ -103,17 +106,19 @@ class AddedPlaces extends StatelessWidget {
                 } else {
                   return Column(
                     children: [
-                        SizedBox(height: LayoutManager.widthNHeight0(context, 1)*0.05,),
+                      SizedBox(
+                        height: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                          
                           horizontal:
                               LayoutManager.widthNHeight0(context, 1) * 0.05,
                         ),
                         child: GridView.builder(
                           itemCount: userPlaces.length,
                           shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: crossAxisCount,
                             childAspectRatio: cardWidth / (cardWidth + 65),
                             mainAxisSpacing: 10,
@@ -130,20 +135,74 @@ class AddedPlaces extends StatelessWidget {
                               },
                               child: SizedBox(
                                 width: cardWidth,
-                                child: PlaceCard(
-                                  placeModel: placeModel,
-
-                                  onPress: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => EditPlace(
-                                          placeModel: placeModel,
+                                child: AddedCard(
+                                    placeModel: placeModel,
+                                    onPress: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditPlace(
+                                            placeModel: placeModel,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                ),
+                                      );
+                                    },
+                                    onDelete: () {
+                                      print("delete");
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            backgroundColor:
+                                                ThemeManager.primary,
+                                            title: Text(
+                                              'Confirm Deletion',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            content: Text(
+                                              'Are you sure you want to delete this Place?',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () async {
+                                                  await placeProvider
+                                                      .deleteplaceprovider(
+                                                          placeModel);
+                                                  //  setState(() {});
+
+                                                  ///the problem hre
+
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'OK',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 255, 32, 16),
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }),
                               ),
                             );
                           },
