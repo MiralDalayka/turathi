@@ -189,6 +189,27 @@ class AdminService {
     });
   }
 
+  Future<void> updatePlace(
+      {required PlaceModel placeModel}) async {
+    log(placeModel.toJson().toString());
+    QuerySnapshot placesData = await _fireStore
+        .collection(_placeCollectionName)
+        .where('placeId', isEqualTo: placeModel.placeId)
+        .get();
+    String placeId = placesData.docs[0].id; //id for the ref
+
+    _fireStore
+        .collection(_placeCollectionName)
+        .doc(placeId)
+        .update(placeModel.toJson())
+        .whenComplete(() {
+      log("UPDATE done");
+    }).catchError((error) {
+      log(error.toString());
+    });
+
+  }
+
   Future<void> updatePlaceVisibility(
       {required String placeId, required bool isVisible}) async {
     QuerySnapshot placesData = await _fireStore

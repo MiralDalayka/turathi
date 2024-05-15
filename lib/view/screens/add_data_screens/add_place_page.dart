@@ -140,7 +140,9 @@ class _AddNewPlaceState extends State<AddNewPlace> {
                             latitude: data![0],
                             longitude: data![1],
                           ),
-                          images: images!);
+                          images: images!.length > 4
+                              ? images!.take(4).toList()
+                              : images!);
                       if (msg == "Done") {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

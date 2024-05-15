@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/picking_files.dart';
-import 'package:turathi/core/providers/place_provider.dart';
+import 'package:turathi/core/services/admin_service.dart';
 import 'package:turathi/core/services/google_map_addplace.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 
@@ -23,7 +21,6 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
   XFile? image;
   bool mapScreenOpened = false;
   List<double>? data;
-  List<XFile>? images;
   TextEditingController? title;
   TextEditingController? description;
   TextEditingController? address;
@@ -41,7 +38,7 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
   @override
   Widget build(BuildContext context) {
     log(widget.placeModel.title!);
-    final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
+    AdminService adminService = AdminService();
     var style = ThemeManager.textStyle.copyWith(fontSize: 15);
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -102,17 +99,7 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
-                      onPressed: () async {
-                        images = await pickImages();
-                      },
-                      style: ThemeManager.buttonStyle,
-                      child: Text(
-                        'Pick Image',
-                        style: ThemeManager.textStyle
-                            .copyWith(color: ThemeManager.primary),
-                      ),
-                    ),
+
                     ElevatedButton(
                       onPressed: () async {
                         final temp = await Navigator.push(
@@ -157,19 +144,13 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                             
                     ElevatedButton(
                       onPressed: () async {
-                        if (data == null) {
-                          data = [
+                        data ??= [
                             widget.placeModel.latitude!,
                             widget.placeModel.longitude!
                           ];
-                        }
-                        log("images.toString()${images}");
 
-                        if (images == null) {
-                          images = [];
-                        }
                         if (formKey.currentState!.validate() &&
-                            images != null &&
+
                             data!.isNotEmpty) {
                           log(title!.text);
                           widget.placeModel.title = title!.text;
@@ -179,8 +160,8 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                           widget.placeModel.latitude = data![0];
                           widget.placeModel.longitude = data![1];
 
-                          placesProvider.updatePlace(
-                              placeModel: widget.placeModel, images: images!);
+                          adminService.updatePlace(
+                              placeModel: widget.placeModel);
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text("Place Updated Successfully")));
