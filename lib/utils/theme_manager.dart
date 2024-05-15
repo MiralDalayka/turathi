@@ -15,7 +15,7 @@ class ThemeManager {
       fontFamily: 'KohSantepheap',
       color: textColor,
       fontWeight: FontWeight.bold,
-      fontSize: 18);
+      fontSize: 16);
  static ButtonStyle buttonStyle= ButtonStyle(
   shape: MaterialStateProperty.all(const StadiumBorder()),
   backgroundColor:

@@ -3,10 +3,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/theme_manager.dart';
+// import 'package:share_plus/share_plus.dart';
+
 
 class PdfViewPage extends StatefulWidget {
   const PdfViewPage({super.key, required this.path});
-final String path;
+  final String path;
 
   @override
   State<PdfViewPage> createState() => _PdfViewPageState();
@@ -14,7 +18,7 @@ final String path;
 
 class _PdfViewPageState extends State<PdfViewPage> {
   final Completer<PDFViewController> _controller =
-  Completer<PDFViewController>();
+      Completer<PDFViewController>();
   int? pages = 0;
   int? currentPage = 0;
   bool isReady = false;
@@ -23,14 +27,37 @@ class _PdfViewPageState extends State<PdfViewPage> {
   Widget build(BuildContext context) {
     log(widget.path);
     return Scaffold(
+      backgroundColor: ThemeManager.background,
       appBar: AppBar(
-        title: Text("Document"),
+        centerTitle: true,
+        backgroundColor: ThemeManager.background,
+        title: Text(
+          'Document',
+          style: ThemeManager.textStyle.copyWith(
+            fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+            fontWeight: FontWeight.bold,
+            fontFamily: ThemeManager.fontFamily,
+            color: ThemeManager.primary,
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.share),
-            onPressed: () {},
+            onPressed: () {
+              // if (widget.path.isNotEmpty) {
+              //   Share.shareFiles([widget.path], text: 'Sharing PDF Document');
+              // }
+            },
           ),
         ],
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
+        ),
       ),
       body: Stack(
         children: <Widget>[
@@ -44,7 +71,7 @@ class _PdfViewPageState extends State<PdfViewPage> {
             defaultPage: currentPage!,
             fitPolicy: FitPolicy.BOTH,
             preventLinkNavigation:
-            false, // if set to true the link is handled in flutter
+                false, 
             onRender: (_pages) {
               setState(() {
                 pages = _pages;
@@ -78,13 +105,13 @@ class _PdfViewPageState extends State<PdfViewPage> {
           ),
           errorMessage.isEmpty
               ? !isReady
-              ? Center(
-            child: CircularProgressIndicator(),
-          )
-              : Container()
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Container()
               : Center(
-            child: Text(errorMessage),
-          )
+                  child: Text(errorMessage),
+                )
         ],
       ),
       floatingActionButton: FutureBuilder<PDFViewController>(
@@ -92,7 +119,11 @@ class _PdfViewPageState extends State<PdfViewPage> {
         builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
           if (snapshot.hasData) {
             return FloatingActionButton.extended(
-              label: Text("Go to ${pages! ~/ 2}"),
+              label: Text(
+                "Go to ${pages! ~/ 2}",
+                style: TextStyle(color: ThemeManager.second),
+              ),
+              backgroundColor: ThemeManager.primary,
               onPressed: () async {
                 await snapshot.data!.setPage(pages! ~/ 2);
               },

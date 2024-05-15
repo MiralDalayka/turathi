@@ -1,11 +1,29 @@
-
 import 'package:flutter/material.dart';
 import 'package:turathi/core/services/admin_service.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/view/widgets/place_card.dart';
 
-class placesAdmin extends StatelessWidget {
-  const placesAdmin({super.key});
+class placesAdmin extends StatefulWidget {
+  const placesAdmin({Key? key}) : super(key: key);
+
+  @override
+  _placesAdminState createState() => _placesAdminState();
+}
+
+class _placesAdminState extends State<placesAdmin> {
+  late Future<PlaceList> _placesFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshPlaces();
+  }
+
+  Future<void> _refreshPlaces() async {
+    setState(() {
+      _placesFuture = AdminService().getPlaces();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +32,8 @@ class placesAdmin extends StatelessWidget {
     double totalWidth = cardWidth + spacingWidth;
 
     int crossAxisCount =
-        MediaQuery.of(context).size.width ~/ totalWidth; 
-AdminService service = AdminService();
+        MediaQuery.of(context).size.width ~/ totalWidth;
+    
     return Scaffold(
       backgroundColor: ThemeManager.background,
       appBar: AppBar(
@@ -31,17 +49,22 @@ AdminService service = AdminService();
           ),
         ),
         bottom: PreferredSize(
-          preferredSize:
-              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          preferredSize: Size.fromHeight(
+              LayoutManager.widthNHeight0(context, 1) * 0.01),
           child: Divider(
             height: LayoutManager.widthNHeight0(context, 1) * 0.01,
             color: Colors.grey[300],
           ),
         ),
-      
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: _refreshPlaces,
+          ),
+        ],
       ),
       body: FutureBuilder<PlaceList>(
-        future: service.getPlaces(),
+        future: _placesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -52,20 +75,16 @@ AdminService service = AdminService();
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-
-
-
             final userPlaces = snapshot.data!.places.toList();
 
             if (userPlaces.isEmpty) {
               return Center(
                 child: Column(
                   children: [
-
                     Padding(
                       padding: EdgeInsets.only(
-                          top: LayoutManager.widthNHeight0(context, 1) *
-                              0.5),
+                        top: LayoutManager.widthNHeight0(context, 1) * 0.5,
+                      ),
                       child: Center(
                         child: Column(
                           children: [
@@ -88,17 +107,19 @@ AdminService service = AdminService();
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                      SizedBox(height: LayoutManager.widthNHeight0(context, 1)*0.05,),
+                    SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(
-
                         horizontal:
                             LayoutManager.widthNHeight0(context, 1) * 0.05,
                       ),
                       child: GridView.builder(
                         itemCount: userPlaces.length,
                         shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: crossAxisCount,
                           childAspectRatio: cardWidth / (cardWidth + 65),
                           mainAxisSpacing: 10,
@@ -110,9 +131,10 @@ AdminService service = AdminService();
                             width: cardWidth,
                             child: PlaceCard(
                               placeModel: placeModel,
-
                               onPress: () {
-                                Navigator.pushNamed(context, editPlacesAdminRoute,arguments: placeModel);
+                                Navigator.pushNamed(
+                                    context, editPlacesAdminRoute,
+                                    arguments: placeModel);
                               },
                             ),
                           );
