@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:turathi/core/models/report_model.dart';
 import 'package:turathi/core/providers/report_provider.dart';
+import 'package:turathi/utils/layout_manager.dart';
 
 import '../../../utils/theme_manager.dart';
 import '../../widgets/custom_text_form.dart';
@@ -23,12 +24,28 @@ class _ReportPlaceState extends State<ReportPlace> {
   Widget build(BuildContext context) {
     ReportProvider reportProvider = ReportProvider();
     return Scaffold(
+       backgroundColor: ThemeManager.background,
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: ThemeManager.background,
         title: Text(
           'Write a Report',
-          style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
+          style: ThemeManager.textStyle.copyWith(
+            fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
+            fontWeight: FontWeight.bold,
+            fontFamily: ThemeManager.fontFamily,
+            color: ThemeManager.primary,
+          ),
         ),
+        bottom: PreferredSize(
+          preferredSize:
+              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          child: Divider(
+            height: LayoutManager.widthNHeight0(context, 1) * 0.01,
+            color: Colors.grey[300],
+          ),
+        ),
+      
       ),
       body: Form(
         key: formKey,

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/functions/dialog_signin.dart';
 import 'package:turathi/core/models/comment_model.dart';
 import 'package:turathi/core/providers/comment_provider.dart';
 import 'package:turathi/utils/theme_manager.dart';
@@ -17,7 +18,7 @@ class CommentDialog extends StatelessWidget {
     CommentProvider provider = Provider.of<CommentProvider>(context);
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(40.0),
       ),
       child: Container(
         color: ThemeManager.second,
@@ -59,12 +60,22 @@ class CommentDialog extends StatelessWidget {
                 const SizedBox(width: 10),
                 TextButton(
                   onPressed: () {
-                    log(commentController.text);
-                    provider
-                        .addComment(CommentModel(
-                            commentTxt: commentController.text,
-                            questionId: questionId))
-                        .whenComplete(() => Navigator.of(context).pop());
+                    if (commentController.text.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return showCustomAlertDialog(
+                              context, "Please write a comment before saving");
+                        },
+                      );
+                    } else {
+                      log(commentController.text);
+                      provider
+                          .addComment(CommentModel(
+                              commentTxt: commentController.text,
+                              questionId: questionId))
+                          .whenComplete(() => Navigator.of(context).pop());
+                    }
                   },
                   child: Text(
                     'Save',
