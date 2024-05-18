@@ -36,7 +36,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
         Positioned(
-          top: height - 110,
+          top: height - 108,
           left: left,
           child: Text(
             widget.placeModel.title!,
@@ -62,10 +62,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     decoration: TextDecoration.none,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 8),
                 Container(
-                  width: 85,
-                  height: 25,
+                  width: 95,
+                  height: 30,
                   decoration: BoxDecoration(
                     color: Color(0xFFE2D1B9).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(33),
@@ -86,7 +86,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
-                          fontSize: 15,
+                          fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: ThemeManager.primary,
                           decoration: TextDecoration.none,
