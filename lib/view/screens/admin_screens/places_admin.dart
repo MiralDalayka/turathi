@@ -64,6 +64,7 @@ class _placesAdminState extends State<placesAdmin> {
         ],
       ),
       body:   SingleChildScrollView(
+         physics: AlwaysScrollableScrollPhysics(),
         child: FutureBuilder<PlaceList>(
           future: _placesFuture,
           builder: (context, snapshot) {
@@ -76,6 +77,7 @@ class _placesAdminState extends State<placesAdmin> {
                 child: Text('Error: ${snapshot.error}'),
               );
             } else {
+              
               final userPlaces = snapshot.data!.places.toList();
         
               if (userPlaces.isEmpty) {
@@ -117,30 +119,32 @@ class _placesAdminState extends State<placesAdmin> {
                               LayoutManager.widthNHeight0(context, 1) * 0.05,
                         ),
                       
-                          child: GridView.builder(
-                            itemCount: userPlaces.length,
-                            shrinkWrap: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              childAspectRatio: cardWidth / (cardWidth + 65),
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 16,
+                          child: SingleChildScrollView(
+                            child: GridView.builder(
+                              itemCount: userPlaces.length,
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                childAspectRatio: cardWidth / (cardWidth + 65),
+                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 16,
+                              ),
+                              itemBuilder: (context, index) {
+                                final placeModel = userPlaces[index];
+                                return SizedBox(
+                                  width: cardWidth,
+                                  child: PlaceCard(
+                                    placeModel: placeModel,
+                                    onPress: () {
+                                      Navigator.pushNamed(
+                                          context, editPlacesAdminRoute,
+                                          arguments: placeModel);
+                                    },
+                                  ),
+                                );
+                              },
                             ),
-                            itemBuilder: (context, index) {
-                              final placeModel = userPlaces[index];
-                              return SizedBox(
-                                width: cardWidth,
-                                child: PlaceCard(
-                                  placeModel: placeModel,
-                                  onPress: () {
-                                    Navigator.pushNamed(
-                                        context, editPlacesAdminRoute,
-                                        arguments: placeModel);
-                                  },
-                                ),
-                              );
-                            },
                           ),
                      
                       ),
