@@ -19,9 +19,7 @@ import 'core/functions/get_current_location.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform
-
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate();
 
   runApp(const MyApp());
@@ -32,11 +30,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     GetCurrentLocation().performNearbySearch(context);
-
-
-
 
     return MultiProvider(
       providers: [
@@ -44,12 +38,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: EventProvider()),
         ChangeNotifierProvider.value(value: QuestionProvider()),
         ChangeNotifierProvider.value(value: NotificationProvider()),
-         ChangeNotifierProvider.value(value: UserProvider()),
-         ChangeNotifierProvider.value(value: ReportProvider()),
-           ChangeNotifierProvider.value(value: RequestProvider()),
-           ChangeNotifierProvider.value(value: CommentProvider()),
-
-
+        ChangeNotifierProvider.value(value: UserProvider()),
+        ChangeNotifierProvider.value(value: ReportProvider()),
+        ChangeNotifierProvider.value(value: RequestProvider()),
+        ChangeNotifierProvider.value(value: CommentProvider()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -59,4 +51,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
