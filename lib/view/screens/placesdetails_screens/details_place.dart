@@ -86,7 +86,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
-                          fontSize: 13,
+                          fontSize: 15,
                           fontWeight: FontWeight.w600,
                           color: ThemeManager.primary,
                           decoration: TextDecoration.none,

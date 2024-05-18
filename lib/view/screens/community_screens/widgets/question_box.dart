@@ -57,8 +57,11 @@ class QuestionBox extends StatelessWidget {
                         color: ThemeManager.primary,
                         fontWeight: FontWeight.bold,
                         fontSize:
-                            LayoutManager.widthNHeight0(context, 0) * 0.027,
+                            LayoutManager.widthNHeight0(context, 0) * 0.02,
                       ),
+                    ),
+                     SizedBox(
+                      height: LayoutManager.widthNHeight0(context, 1) * 0.01,
                     ),
                     Text(
                       question.questionTxt!,
@@ -66,7 +69,7 @@ class QuestionBox extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize:
-                            LayoutManager.widthNHeight0(context, 1) * 0.05,
+                            LayoutManager.widthNHeight0(context, 1) * 0.04,
                         fontFamily: ThemeManager.fontFamily,
                         color: ThemeManager.textColor,
                       ),
