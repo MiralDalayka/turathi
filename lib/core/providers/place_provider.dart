@@ -130,13 +130,15 @@ class PlaceProvider extends ChangeNotifier {
 
   Future<PlaceList> getMostPopularPlaces() async {
     PlaceList places = await placeList;
-    if (places.places.length >= 10) {
-      return PlaceList(places: places.places.getRange(0, 9).toList());
-    }
-    log(places.places.getRange(0, places.places.length).first.title! + "{{{{");
+    if(places.places.isNotEmpty){
+      if (places.places.length >= 10) {
+        return PlaceList(places: places.places.getRange(0, 9).toList());
+      }
+      log(places.places.getRange(0, places.places.length).first.title! + "{{{{");
 
-    return PlaceList(
-        places: places.places.getRange(0, places.places.length).toList());
+      return places;
+    }
+    return PlaceList(places: []);
   }
 
   updatePosition(lat, long) {
@@ -147,8 +149,10 @@ class PlaceProvider extends ChangeNotifier {
 
   deletePlace(PlaceModel place_model) {
     _placeList.places.remove(place_model);
-    _placeService.deletePlace(placeModel: place_model);
-    notifyListeners();
+    _placeService.deletePlace(placeModel: place_model).whenComplete(() {
+      notifyListeners();
+
+    });
   }
 
   //test this function
