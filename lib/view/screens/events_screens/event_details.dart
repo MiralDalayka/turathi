@@ -50,13 +50,20 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                 maxLines: 3,
                 widget.eventModel.name!,
                 style: ThemeManager.textStyle.copyWith(
-                  fontSize: 29,
+                   shadows: const [
+                          Shadow(
+                            color: Colors.black,
+                            blurRadius: 2,
+                            offset: Offset(6, 6),
+                          ),
+                        ],
+                  fontSize: 26,
                     color: ThemeManager.second,
                     decoration: TextDecoration.none)),
           ),
         ),
         Positioned(
-            top: height - 35,
+            top: height - 36,
             bottom: 0,
             child: Container(
               width: LayoutManager.widthNHeight0(context, 1),
@@ -97,7 +104,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "Date & Time",
+                                      "Date",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: ThemeManager.textColor
@@ -112,7 +119,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                       height: LayoutManager.widthNHeight0(context, 0)*0.008,
                                     ),
                                     Text(
-                                      DateFormat('yyyy-MM-dd || kk:mm')
+                                      DateFormat('yyyy-MM-dd')
                                           .format(widget.eventModel.date!),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -164,13 +171,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         ],
                       ),
                     ),
-                    ////////////////////////////
+                   
                     SizedBox(
                       height: 12,
                     ),
                     Text(
                       "${widget.eventModel.description!} ",
-                      textAlign: TextAlign.start,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: ThemeManager.textColor.withOpacity(0.7),
                         fontFamily: ThemeManager.fontFamily,
@@ -186,7 +193,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         AutoSizeText(
                           addNewLineAfterChars(
@@ -196,6 +203,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           overflow: TextOverflow.ellipsis,
                           style: ThemeManager.textStyle.copyWith(
                             decoration: TextDecoration.none,
+                            fontSize: 19,
                             color: ThemeManager.primary,
                           ),
                           maxLines: 3,

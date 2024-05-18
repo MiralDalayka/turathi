@@ -31,12 +31,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: Image.network(
             widget.placeModel.images![selectedImage],
             fit: BoxFit.cover,
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.17),
             colorBlendMode: BlendMode.darken,
           ),
         ),
         Positioned(
-          top: height - 110,
+          top: height - 108,
           left: left,
           child: Text(
             widget.placeModel.title!,
@@ -62,10 +62,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     decoration: TextDecoration.none,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 8),
                 Container(
-                  width: 85,
-                  height: 25,
+                  width: 95,
+                  height: 30,
                   decoration: BoxDecoration(
                     color: Color(0xFFE2D1B9).withOpacity(0.8),
                     borderRadius: BorderRadius.circular(33),
@@ -155,7 +155,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
-                              SizedBox(
+                              SizedBox(//32.550294, 35.851794
                                 height: 3,
                               ),
                               Text(
@@ -238,10 +238,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   icon: SizedBox(
                                     width: LayoutManager.widthNHeight0(
                                             context, 1) *
-                                        0.055,
+                                        0.045,
                                     height: LayoutManager.widthNHeight0(
                                             context, 1) *
-                                        0.055,
+                                        0.045,
                                     child: Image.asset(
                                       widget.placeModel.likesList!
                                               .contains(sharedUser.id)
@@ -306,6 +306,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             maxLines: 3,
                             textAlign: TextAlign.start,
+                            
                             style: ThemeManager.textStyle.copyWith(
                               color: ThemeManager.primary,
                               decoration: TextDecoration.none,
