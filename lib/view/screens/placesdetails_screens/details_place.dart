@@ -155,7 +155,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
-                              SizedBox(
+                              SizedBox(//32.550294, 35.851794
                                 height: 3,
                               ),
                               Text(
@@ -306,6 +306,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             maxLines: 3,
                             textAlign: TextAlign.start,
+                            
                             style: ThemeManager.textStyle.copyWith(
                               color: ThemeManager.primary,
                               decoration: TextDecoration.none,
