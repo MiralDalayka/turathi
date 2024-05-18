@@ -41,81 +41,89 @@ class _PlaceReportsScreenState extends State<PlaceReportsScreen> {
         ),
       ),
       body: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "Number of reports: ${widget.reportList.length}",
-                    style: ThemeManager.textStyle.copyWith(fontSize: 14),
+        padding: const EdgeInsets.only(top: 10),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Number of reports: ${widget.reportList.length}",
+                  style: ThemeManager.textStyle.copyWith(fontSize: 14),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    adminService.updatePlaceVisibility(
+                        placeId: widget.reportList[0].placeId!,
+                        isVisible: false);
+                    adminService
+                        .deleteReports(widget.reportList)
+                        .whenComplete(() {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text("The place has been hidden")));
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        ThemeManager.primary), 
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        adminService.updatePlaceVisibility(
-                            placeId: widget.reportList[0].placeId!,
-                            isVisible: false);
-                        adminService
-                            .deleteReports(widget.reportList)
-                            .whenComplete(() {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text("The place has been hidden")));
-                          Navigator.of(context).pop();
-                        });
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                           ThemeManager.primary), // Change the color to red
-                      ),
-                      child: Text(
-                        "Hide Place",
-                        style: TextStyle(color: ThemeManager.second),
-                      ))
-                ],
-              ),
-              SizedBox(
-                  height: LayoutManager.widthNHeight0(context, 1) * 1.7,
-                  child: ListView.builder(
-                      itemCount: widget.reportList.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
+                  child: Text(
+                    "Hide Place",
+                    style: TextStyle(color: ThemeManager.second),
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: widget.reportList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.all(
+                        LayoutManager.widthNHeight0(context, 1) * 0.03),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        color: ThemeManager.primary,
+                        child: Padding(
                           padding: EdgeInsets.all(
-                              LayoutManager.widthNHeight0(context, 1) * 0.03),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                                height:
-                                    LayoutManager.widthNHeight0(context, 1) * 0.4,
-                                color: ThemeManager.primary,
-                                child: Padding(
-                                  padding: EdgeInsets.all(
-                                      LayoutManager.widthNHeight0(context, 1) *
-                                          0.02),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        "Reported By : ${widget.reportList[index].userId}",
-                                        style:  TextStyle(color: ThemeManager.second,fontFamily: ThemeManager.fontFamily,fontSize: 15),
-                                      ),
-                                     
-                                      Text(
-                                        textAlign: TextAlign.center,
-                                        " Reasons : ${widget.reportList[index].reasons}",
-                                        style:   TextStyle(color: ThemeManager.second,fontFamily: ThemeManager.fontFamily,fontSize: 15),
-                                      ),
-                                    ],
-                                  ),
-                                )),
+                              LayoutManager.widthNHeight0(context, 1) * 0.02),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Reported By : ${widget.reportList[index].userId}",
+                                style: TextStyle(
+                                  color: ThemeManager.second,
+                                  fontFamily: ThemeManager.fontFamily,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              Text(
+                                "Reasons : ${widget.reportList[index].reasons}",
+                                style: TextStyle(
+                                  color: ThemeManager.second,
+                                  fontFamily: ThemeManager.fontFamily,
+                                  fontSize: 15,
+                                ),
+                                maxLines: 12, 
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                           ),
-                        );
-                      }))
-            ],
-          )),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

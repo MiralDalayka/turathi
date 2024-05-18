@@ -68,8 +68,8 @@ class _QuestionViewState extends State<QuestionView> {
           ),
         ),
         Positioned(
-          top: height-25,
-           left: left,
+          top: height - 25,
+          left: left,
           child: Text(
             widget.question.writerName!,
             style: TextStyle(
@@ -77,7 +77,7 @@ class _QuestionViewState extends State<QuestionView> {
                   Shadow(
                     color: Colors.black.withOpacity(0.6),
                     blurRadius: 1,
-                    offset: Offset(3,2),
+                    offset: Offset(3, 2),
                   ),
                 ],
                 fontFamily: ThemeManager.fontFamily,
@@ -88,7 +88,7 @@ class _QuestionViewState extends State<QuestionView> {
         ),
         Positioned(
           top: height - LayoutManager.widthNHeight0(context, 0) * 0.0001,
-          left: left-5,
+          left: left - 5,
           child: Text(
             widget.question.title!,
             textAlign: TextAlign.center,
@@ -119,15 +119,15 @@ class _QuestionViewState extends State<QuestionView> {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(20))),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
                     Text(
                       widget.question.questionTxt!,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        height: 1.4,
-                        wordSpacing:1,
+                          height: 1.4,
+                          wordSpacing: 1,
                           fontFamily: ThemeManager.fontFamily,
                           fontSize: 16,
                           fontWeight: FontWeight.w100,
@@ -135,7 +135,7 @@ class _QuestionViewState extends State<QuestionView> {
                           decoration: TextDecoration.none),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 5),
+                      padding: const EdgeInsets.only(top: 2),
                       child: Divider(color: Colors.grey[300]),
                     ),
                     FutureBuilder(
@@ -216,7 +216,7 @@ class _QuestionViewState extends State<QuestionView> {
               ),
             )),
         Positioned(
-          bottom: 20,
+          bottom: 40,
           right: 20,
           child: AddButton(onPressed: () {
             //controller //BACK
@@ -231,13 +231,13 @@ class _QuestionViewState extends State<QuestionView> {
           }),
         ),
         Positioned(
-          top: 30,
+          top: 40,
           left: iconLeft,
           child: IconButton(
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.white, // Changed color to white
-              size: 30, // Changed size to 30
+              color: Colors.white,
+              size: 30,
             ),
             onPressed: () {
               Navigator.of(context).pop();
