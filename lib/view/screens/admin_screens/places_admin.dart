@@ -63,90 +63,94 @@ class _placesAdminState extends State<placesAdmin> {
           ),
         ],
       ),
-      body: FutureBuilder<PlaceList>(
-        future: _placesFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error: ${snapshot.error}'),
-            );
-          } else {
-            final userPlaces = snapshot.data!.places.toList();
-
-            if (userPlaces.isEmpty) {
+      body:   SingleChildScrollView(
+        child: FutureBuilder<PlaceList>(
+          future: _placesFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: LayoutManager.widthNHeight0(context, 1) * 0.5,
-                      ),
-                      child: Center(
-                        child: Column(
-                          children: [
-                            Text(
-                              "There Is No Places Yet.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: ThemeManager.fontFamily,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
               );
             } else {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: LayoutManager.widthNHeight0(context, 1) * 0.05,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal:
-                            LayoutManager.widthNHeight0(context, 1) * 0.05,
-                      ),
-                      child: GridView.builder(
-                        itemCount: userPlaces.length,
-                        shrinkWrap: true,
-                        gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          childAspectRatio: cardWidth / (cardWidth + 65),
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 16,
+              final userPlaces = snapshot.data!.places.toList();
+        
+              if (userPlaces.isEmpty) {
+                return Center(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: LayoutManager.widthNHeight0(context, 1) * 0.5,
                         ),
-                        itemBuilder: (context, index) {
-                          final placeModel = userPlaces[index];
-                          return SizedBox(
-                            width: cardWidth,
-                            child: PlaceCard(
-                              placeModel: placeModel,
-                              onPress: () {
-                                Navigator.pushNamed(
-                                    context, editPlacesAdminRoute,
-                                    arguments: placeModel);
-                              },
-                            ),
-                          );
-                        },
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                "There Is No Places Yet.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: ThemeManager.fontFamily,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else {
+                return 
+               Column(
+                    children: [
+                      SizedBox(
+                        height: LayoutManager.widthNHeight0(context, 1) * 0.05,
                       ),
-                    ),
-                  ],
-                ),
-              );
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal:
+                              LayoutManager.widthNHeight0(context, 1) * 0.05,
+                        ),
+                      
+                          child: GridView.builder(
+                            itemCount: userPlaces.length,
+                            shrinkWrap: true,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: crossAxisCount,
+                              childAspectRatio: cardWidth / (cardWidth + 65),
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 16,
+                            ),
+                            itemBuilder: (context, index) {
+                              final placeModel = userPlaces[index];
+                              return SizedBox(
+                                width: cardWidth,
+                                child: PlaceCard(
+                                  placeModel: placeModel,
+                                  onPress: () {
+                                    Navigator.pushNamed(
+                                        context, editPlacesAdminRoute,
+                                        arguments: placeModel);
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                     
+                      ),
+                    ],
+            
+                );
+              }
             }
-          }
-        },
+          },
+        ),
       ),
     );
   }

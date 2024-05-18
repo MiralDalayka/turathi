@@ -57,7 +57,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             offset: Offset(6, 6),
                           ),
                         ],
-                  fontSize: 29,
+                  fontSize: 26,
                     color: ThemeManager.second,
                     decoration: TextDecoration.none)),
           ),
