@@ -63,7 +63,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           ),
         ),
         Positioned(
-            top: height - 35,
+            top: height - 36,
             bottom: 0,
             child: Container(
               width: LayoutManager.widthNHeight0(context, 1),
@@ -171,7 +171,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         ],
                       ),
                     ),
-                    ////////////////////////////
+                   
                     SizedBox(
                       height: 12,
                     ),
