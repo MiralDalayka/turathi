@@ -59,9 +59,7 @@ class ViewEvent extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   autoTextFunction(txt: eventModel.name!, maxLine: 3),
-                  autoTextFunction(
-                    txt: 'Open ⋅ Closes ${eventModel.date!.hour}',
-                  ),
+                  
                   autoTextFunction(
                     txt: 'Address: ${eventModel.address!}',
                     maxLine: 3,
@@ -70,10 +68,17 @@ class ViewEvent extends StatelessWidget {
                     autoTextFunction(
                       txt: 'Creator Name: ${eventModel.creatorName!}',
                     ),
-                  if (flag && eventModel.ticketPrice != 0)
+                  if ( eventModel.ticketPrice != 0)
                     autoTextFunction(
                       txt: 'Ticket Price: ${eventModel.ticketPrice!}',
                     )
+                    else if ( eventModel.ticketPrice == 0)
+                    autoTextFunction(
+                      txt: 'Ticket Price: Free',
+                    )
+
+                    
+                   
                 ],
               ),
             )

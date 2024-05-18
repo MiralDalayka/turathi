@@ -59,31 +59,33 @@ class _AddedCardState extends State<AddedCard> {
                           ? widget.placeModel.images![0]
                           : 'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png?hl=ar',
                       fit: BoxFit.cover,
-                      color: Colors.black.withOpacity(0.15),
+                      color: Colors.black.withOpacity(0.18),
                       colorBlendMode: BlendMode.darken,
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.23,
-                  left: LayoutManager.widthNHeight0(context, 0) * 0.04,
-                  child: Text(
-                    widget.placeModel.title != null
-                        ? widget.placeModel.title!.toUpperCase()
-                        : 'No Title',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      shadows: const [
-                        Shadow(
-                          color: Colors.black,
-                          blurRadius: 2,
-                          offset: Offset(3, 3),
-                        ),
-                      ],
-                      color: ThemeManager.second,
-                      fontFamily: ThemeManager.fontFamily,
-                      fontWeight: FontWeight.w900,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.017,
+                  bottom: LayoutManager.widthNHeight0(context, 0) * 0.22,
+                  left: LayoutManager.widthNHeight0(context, 0) * 0.008,
+                  child: Center(
+                    child: Text(
+                      widget.placeModel.title != null
+                          ? widget.placeModel.title!.toUpperCase()
+                          : 'No Title',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        shadows: const [
+                          Shadow(
+                            color: Colors.black,
+                            blurRadius: 2,
+                            offset: Offset(2, 2),
+                          ),
+                        ],
+                        color: ThemeManager.second,
+                        fontFamily: ThemeManager.fontFamily,
+                        fontWeight: FontWeight.w900,
+                        fontSize: LayoutManager.widthNHeight0(context, 0) * 0.017,
+                      ),
                     ),
                   ),
                 ),

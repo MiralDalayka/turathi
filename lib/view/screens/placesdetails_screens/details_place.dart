@@ -31,7 +31,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: Image.network(
             widget.placeModel.images![selectedImage],
             fit: BoxFit.cover,
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.17),
             colorBlendMode: BlendMode.darken,
           ),
         ),
@@ -238,10 +238,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   icon: SizedBox(
                                     width: LayoutManager.widthNHeight0(
                                             context, 1) *
-                                        0.055,
+                                        0.045,
                                     height: LayoutManager.widthNHeight0(
                                             context, 1) *
-                                        0.055,
+                                        0.045,
                                     child: Image.asset(
                                       widget.placeModel.likesList!
                                               .contains(sharedUser.id)

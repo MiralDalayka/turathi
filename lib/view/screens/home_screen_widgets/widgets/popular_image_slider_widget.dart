@@ -15,8 +15,14 @@ class PopularPlaceWidget extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(placeDetailsRoute, arguments: placeModel);
       },
-      child: Image.network(
-        placeModel.images![0],
+      child: Image.network(  placeModel.images![0] != null &&
+                              placeModel.images![0].isNotEmpty
+                          ? placeModel.images![0]
+                          : 'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png?hl=ar',
+                    
+      
+      // Image.network(
+        // placeModel.images![0],
         fit: BoxFit.cover,
       ),
     );

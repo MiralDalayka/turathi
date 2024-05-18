@@ -37,6 +37,7 @@ class SmallImage extends StatelessWidget {
         child: Image.network(
           image,
           fit: BoxFit.fill, 
+          
         ),
       )
     );
