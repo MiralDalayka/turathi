@@ -5,6 +5,8 @@ import 'package:turathi/core/services/google_map_api.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+import '../../../utils/shared.dart';
+
 
 
 
@@ -17,7 +19,7 @@ class HeaderPart extends StatefulWidget {
 }
 
 class _HeaderPartState extends State<HeaderPart> {
-   Address? _currentAddress;
+   String? _currentAddress;
 
    @override
   void initState() {
@@ -27,7 +29,7 @@ class _HeaderPartState extends State<HeaderPart> {
 
  Future<void> _getCurrentLocation() async {
     try {
-      Address address = await UserCity();
+      String address = await UserCity(longitude: sharedUser.longitude!,latitude: sharedUser.latitude!);
       if (mounted) {
       setState(() {
         _currentAddress = address;
@@ -74,7 +76,7 @@ class _HeaderPartState extends State<HeaderPart> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                 ),
                 Text(
-              _currentAddress != null ? _formatAddress(_currentAddress!) : 'Waiting',
+              _currentAddress != null ? _currentAddress! : 'Waiting',
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,
@@ -164,18 +166,3 @@ class _HeaderPartState extends State<HeaderPart> {
 
 
 
-String _formatAddress(Address address) {
-  String fullAddress = '${address.countryName} ${address.city}, ${address.streetAddress}';
-  String halfAddress= '${address.countryName} ${address.city}';
-  if (fullAddress.length > 30) {
-   if(halfAddress.length>30)
-   {
-    return address.countryName.toString();
-   }
-   else return halfAddress;
-  } 
-  
-  else {
-    return fullAddress;
-  }
-}
