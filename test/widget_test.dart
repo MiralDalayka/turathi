@@ -1,30 +1,56 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:turathi/core/models/user_model.dart';
 
-import 'package:turathi/main.dart';
+import 'package:turathi/utils/lib_organizer.dart';
+import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    PlaceModel placeModel = PlaceModel(
+        latitude: 0,
+        longitude: 0,
+        address: "address",
+        description: "description",
+        title: 'title');
+    placeModel.like = 4;
+    placeModel.likesList = ['1', '2', '3', '4'];
+    sharedUser = UserModel(
+        name: 'name',
+        email: 'email',
+        phone: 'phone',
+        longitude: 1,
+        latitude: 1);
+    sharedUser.id = '5';
+    await tester.pumpWidget(MaterialApp(
+      home: LikeButton(
+        onLike: () {
+          if(placeModel.likesList!.contains(sharedUser.id!))
+          placeModel.likesList!.remove(sharedUser.id!);
+          else
+            placeModel.likesList!.add(sharedUser.id!);
 
-    // Verify that our counter starts at 0. //state at likes<5
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+          placeModel.like = placeModel.likesList!.length;
+        },
+        placeModel: placeModel,
+      ),
+    ));
 
-    // Tap the '+' icon and trigger a frame. //like button
-    await tester.tap(find.byIcon(Icons.add));
+    final image = tester.firstWidget<Image>(find.byType(Image));
+    expect(image.image,
+        equals(const AssetImage('assets/images/img_png/like.png')));
+
+    await tester.tap(find.byType(IconButton));
     await tester.pump();
+    final likedImage = tester.firstWidget<Image>(find.byType(Image));
+    expect(likedImage.image,
+        equals(const AssetImage('assets/images/img_png/like_filled.png')));
+    await tester.tap(find.byType(IconButton));
 
-    // Verify that our counter has incremented.//state at likes>5
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.pump();
+    final disLikedImage = tester.firstWidget<Image>(find.byType(Image));
+    expect(disLikedImage.image,
+        equals(const AssetImage('assets/images/img_png/like.png')));
   });
 }

@@ -39,6 +39,7 @@ class PlaceModel {
       required this.longitude,
       required this.latitude,
       this.status,
+        this.likesList
       }) {
     placeId = uuid.v4();
     userId = sharedUser.id;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/providers/user_provider.dart';
+import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
 import '../../../utils/lib_organizer.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   int selectedImage = 0;
 
   Key? get key => null;
+
   @override
   Widget build(BuildContext context) {
     final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
@@ -155,7 +157,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
-                              SizedBox(//32.550294, 35.851794
+                              SizedBox(
+                                //32.550294, 35.851794
                                 height: 3,
                               ),
                               Text(
@@ -225,38 +228,53 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Expanded(
-                                child: IconButton(
-                                  onPressed: () async {
-
-
-                                    if (widget.placeModel.likesList!.contains(sharedUser.id)) {
-                                      widget.placeModel= await placeProvider.dislikePost(widget.placeModel.placeId!);
+                                child: LikeButton(
+                                  onLike: () async {
+                                    if (widget.placeModel.likesList!
+                                        .contains(sharedUser.id)) {
+                                      widget.placeModel =
+                                          await placeProvider.dislikePost(
+                                              widget.placeModel.placeId!);
                                     } else {
-                                      widget.placeModel  =await   placeProvider.likePlace(widget.placeModel.placeId!);
+                                      widget.placeModel =
+                                          await placeProvider.likePlace(
+                                              widget.placeModel.placeId!);
                                     }
                                   },
-                                  icon: SizedBox(
-                                    width: LayoutManager.widthNHeight0(
-                                            context, 1) *
-                                        0.045,
-                                    height: LayoutManager.widthNHeight0(
-                                            context, 1) *
-                                        0.045,
-                                    child: Image.asset(
-                                      widget.placeModel.likesList!
-                                              .contains(sharedUser.id)
-                                          ? "assets/images/img_png/like_filled.png"
-                                          : "assets/images/img_png/like.png",
-                                      color: ThemeManager.primary,
-                                    ),
-                                  ),
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
+                                  placeModel: widget.placeModel,
                                 ),
+                                // child: IconButton(
+                                //   onPressed: () async {
+                                //     if (widget.placeModel.likesList!
+                                //         .contains(sharedUser.id)) {
+                                //       widget.placeModel =
+                                //           await placeProvider.dislikePost(
+                                //               widget.placeModel.placeId!);
+                                //     } else {
+                                //       widget.placeModel =
+                                //           await placeProvider.likePlace(
+                                //               widget.placeModel.placeId!);
+                                //     }
+                                //   },
+                                //   icon: SizedBox(
+                                //     width: LayoutManager.widthNHeight0(
+                                //             context, 1) *
+                                //         0.045,
+                                //     height: LayoutManager.widthNHeight0(
+                                //             context, 1) *
+                                //         0.045,
+                                //     child: Image.asset(
+                                //       widget.placeModel.likesList!
+                                //               .contains(sharedUser.id)
+                                //           ? "assets/images/img_png/like_filled.png"
+                                //           : "assets/images/img_png/like.png",
+                                //       color: ThemeManager.primary,
+                                //     ),
+                                //   ),
+                                //   splashColor: Colors.transparent,
+                                //   highlightColor: Colors.transparent,
+                                // ),
                               ),
-
-                           
-
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
                                 child: Text(
@@ -306,7 +324,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                             maxLines: 3,
                             textAlign: TextAlign.start,
-                            
                             style: ThemeManager.textStyle.copyWith(
                               color: ThemeManager.primary,
                               decoration: TextDecoration.none,
@@ -319,8 +336,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ],
                             ),
                           ),
-
-                      
                         ),
                         defaultButton3(
                           text: 'Visit Place',
@@ -353,7 +368,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
             left: 10,
             child: IconButton(
                 onPressed: () {
-                
                   Navigator.pop(context);
                 },
                 icon: const Icon(
@@ -426,7 +440,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       borderRadius: BorderRadius.circular(20),
                       color: ThemeManager.second.withOpacity(0.25),
                     ),
-                  
                     child: IconButton(
                       onPressed: () async {
                         if (sharedUser.favList!
@@ -434,7 +447,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           await userProvider
                               .removeFavPlace(widget.placeModel.placeId!);
                         } else {
-                          await userProvider.favPlace(widget.placeModel.placeId!);
+                          await userProvider
+                              .favPlace(widget.placeModel.placeId!);
                         }
                       },
                       icon: Icon(
@@ -455,7 +469,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    for (int index = 0;index < widget.placeModel.images!.length &&  index < 4;index++)
+                    for (int index = 0;
+                        index < widget.placeModel.images!.length && index < 4;
+                        index++)
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SmallImage(
@@ -476,3 +492,5 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 }
+
+
