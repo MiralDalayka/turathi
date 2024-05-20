@@ -57,7 +57,7 @@ class _EventCardState extends State<EventCard> {
                 ),
                 Positioned(
                   bottom: LayoutManager.widthNHeight0(context, 0) * 0.045,
-                  left: LayoutManager.widthNHeight0(context, 0) * 0.04,
+                  left: LayoutManager.widthNHeight0(context, 0) * 0.003,
                   child: Text(
                     widget.eventModel.name != null
                         ? widget.eventModel.name!.toUpperCase()
@@ -74,7 +74,7 @@ class _EventCardState extends State<EventCard> {
                       color: ThemeManager.second,
                       fontFamily: ThemeManager.fontFamily,
                       fontWeight: FontWeight.w900,
-                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.017,
+                      fontSize: LayoutManager.widthNHeight0(context, 0) * 0.0155,
                     ),
                   ),
                 ),

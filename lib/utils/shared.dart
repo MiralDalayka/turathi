@@ -30,6 +30,8 @@ UserModel sharedUser = UserModel.empty() ;
 
 String oldemail="";
 
+bool AdminCheck=false;
+
 
 
 

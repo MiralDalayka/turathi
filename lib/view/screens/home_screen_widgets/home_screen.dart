@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    AdminCheck=false;
     super.initState();
     _setGreeting();
   }

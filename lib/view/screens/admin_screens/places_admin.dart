@@ -94,7 +94,7 @@ class _placesAdminState extends State<placesAdmin> {
             } else {
               return Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                  horizontal: LayoutManager.widthNHeight0(context, 1) * 0.03,
                 ),
                 child: GridView.builder(
                   itemCount: userPlaces.length,
