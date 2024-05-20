@@ -20,10 +20,6 @@ class MapScreenLocation extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreenLocation> {
-  Position? currentLocation;
-  double? distance;
-  double? bearing;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,95 +50,74 @@ class _MapScreenState extends State<MapScreenLocation> {
   }
 
   Future<void> performNearbySearch() async {
-    await _getCurrentLocation().then((currentPos) {
-      setState(() {
-        currentLocation = currentPos;
-
-        userNearestLat = currentPos.latitude;
-        userNearestLog= currentPos.longitude;
-        
-         distance = Geolocator.distanceBetween(
-          currentPos.latitude,
-          currentPos.longitude,
-          widget.lat,
-          widget.lon,
-        );
-        bearing = Geolocator.bearingBetween(
-          currentPos.latitude,
-          currentPos.longitude,
-          widget.lat,
-          widget.lon,
-        );
-        print('Current: ${currentPos.latitude} meters');
-        print('Distance: $distance meters');
-        print('Bearing: $bearing degrees');
-
+    // await _getCurrentLocation().then((currentPos) {
+    //   setState(() {
         _launchMaps(
-            widget.lat, widget.lon, 32.49517491030077, 35.991236423865466);
-      }); //,
-    }).catchError((error) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('Failed to get current location: $error'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
-    });
+            widget.lat, widget.lon, sharedUser.latitude!, sharedUser.longitude!);
+    //   }); //,
+    // }).catchError((error) {
+    //   showDialog(
+    //     context: context,
+    //     builder: (context) => AlertDialog(
+    //       title: Text('Error'),
+    //       content: Text('Failed to get current location: $error'),
+    //       actions: [
+    //         TextButton(
+    //           onPressed: () {
+    //             Navigator.of(context).pop();
+    //           },
+    //           child: Text('OK'),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // });
   }
 
   @override
   void initState() {
-    _initMap();
+    // _initMap();
     super.initState();
   }
 
-  Future<void> _initMap() async {
-    await _getCurrentLocation().then((value) {}).catchError((error) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('Failed to get current location: $error'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
-    });
-  }
+  // Future<void> _initMap() async {
+  //   await _getCurrentLocation().then((value) {}).catchError((error) {
+  //     showDialog(
+  //       context: context,
+  //       builder: (context) => AlertDialog(
+  //         title: Text('Error'),
+  //         content: Text('Failed to get current location: $error'),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //             child: Text('OK'),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   });
+  // }
 
-  Future<Position> _getCurrentLocation() async {
-    await Permission.locationWhenInUse.request();
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      throw 'Location services are disabled.';
-    }
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        throw 'Location permission denied.';
-      }
-    }
-    if (permission == LocationPermission.deniedForever) {
-      throw 'Location permission permanently denied.';
-    }
-    return await Geolocator.getCurrentPosition();
-  }
+  // Future<Position> _getCurrentLocation() async {
+  //   await Permission.locationWhenInUse.request();
+  //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     throw 'Location services are disabled.';
+  //   }
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       throw 'Location permission denied.';
+  //     }
+  //   }
+  //   if (permission == LocationPermission.deniedForever) {
+  //     throw 'Location permission permanently denied.';
+  //   }
+  //   return await Geolocator.getCurrentPosition();
+  // }
 
   void _launchMaps(double lat, double lon, double d, double a) async {
     final double myLatitude = lat; // 32.494564056396484;

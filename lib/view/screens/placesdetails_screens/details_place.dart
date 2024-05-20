@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
 import 'package:turathi/core/providers/user_provider.dart';
+import 'package:turathi/utils/shared.dart';
 import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
 import '../../../utils/lib_organizer.dart';
 
@@ -21,6 +25,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     final PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
     final userProvider = Provider.of<UserProvider>(context);
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
@@ -162,7 +167,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 height: 3,
                               ),
                               Text(
-                                "${(getDistanceInKm(lat1: widget.placeModel.latitude!, lon1: widget.placeModel.longitude!, lat2: userNearestLat, lon2: userNearestLog).toInt())} km",
+                                "${(getDistanceInKm(lat1: widget.placeModel.latitude!, lon1: widget.placeModel.longitude!, lat2: sharedUser.latitude!, lon2: sharedUser.longitude!).toPrecision(2))} km",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: ThemeManager.primary,

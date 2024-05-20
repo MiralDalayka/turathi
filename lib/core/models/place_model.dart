@@ -16,7 +16,6 @@ class PlaceModel {
   String? status;
   String? address;
   String? state;
-  List<CommentModel>? commentsPlace;
   List<String>? images;
   List<String>? likesList;
   int? like;
@@ -45,7 +44,6 @@ class PlaceModel {
     userId = sharedUser.id;
     status = "Open To Visit";
     state = PlaceState.NewPlace.name;
-    commentsPlace = [];
     likesList=[];
     like = 0;
     isVisible = true;

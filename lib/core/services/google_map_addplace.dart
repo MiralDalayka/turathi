@@ -21,7 +21,7 @@ class AddPlaceMap extends StatefulWidget {
 class _AddPlaceMapState extends State<AddPlaceMap> {
   late GoogleMapController mapController;
   late CameraPosition cam_pos =
-      CameraPosition(target: LatLng(32.558435, 35.850203), zoom: 13);
+  CameraPosition(target: LatLng(sharedUser.latitude!,sharedUser.longitude!), zoom: 13);
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -30,10 +30,6 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
 
   MapType currentMapType = MapType.hybrid;
 
-  Position? currentLocation;
-
-  double? distance;
-  double? bearing;
 
   bool markerAdded = false;
 
@@ -166,38 +162,38 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
 
   @override
   void initState() {
-    _initMap();
+    // _initMap();
     super.initState();
   }
 
-  Future<void> _initMap() async {
-    await _getCurrentLocation().then((value) {});
-  }
-
-  Future<Position> _getCurrentLocation() async {
-    try {
-      await Permission.locationWhenInUse.request();
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-      if (!serviceEnabled) {
-        throw 'Location services are disabled.';
-      }
-
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          throw 'Location permission denied.';
-        }
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        throw 'Location permission permanently denied.';
-      }
-
-      return await Geolocator.getCurrentPosition();
-    } catch (e) {
-      throw e.toString();
-    }
-  }
+  // Future<void> _initMap() async {
+  //   await _getCurrentLocation().then((value) {});
+  // }
+  //
+  // Future<Position> _getCurrentLocation() async {
+  //   try {
+  //     await Permission.locationWhenInUse.request();
+  //     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //
+  //     if (!serviceEnabled) {
+  //       throw 'Location services are disabled.';
+  //     }
+  //
+  //     LocationPermission permission = await Geolocator.checkPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       permission = await Geolocator.requestPermission();
+  //       if (permission == LocationPermission.denied) {
+  //         throw 'Location permission denied.';
+  //       }
+  //     }
+  //
+  //     if (permission == LocationPermission.deniedForever) {
+  //       throw 'Location permission permanently denied.';
+  //     }
+  //
+  //     return await Geolocator.getCurrentPosition();
+  //   } catch (e) {
+  //     throw e.toString();
+  //   }
+  // }
 }

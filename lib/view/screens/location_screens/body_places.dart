@@ -50,11 +50,11 @@ class _BodyPlacesState extends State<BodyPlaces> {
     if (isMyLocationTab) {
       log("%%%%%%%%%%%%%");
      
-      dataList.addAll([userNearestLat, userNearestLog]); 
+      dataList.addAll([sharedUser.latitude, sharedUser.longitude]);
 
       print("dataList1 --->  ${dataList}");
 
-      log("userrrrr --> $userNearestLat,$userNearestLog");
+      log("userrrrr --> ${sharedUser.latitude}, ${sharedUser.longitude}");
 
 
     } else {

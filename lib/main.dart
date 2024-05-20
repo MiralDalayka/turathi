@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetCurrentLocation().performNearbySearch(context);
+    // GetCurrentLocation().performNearbySearch(context);
 
     return MultiProvider(
       providers: [
