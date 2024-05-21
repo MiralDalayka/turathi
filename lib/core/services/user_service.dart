@@ -1,6 +1,9 @@
 import 'dart:developer';
+import 'dart:html';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:turathi/core/functions/get_current_location.dart';
 import 'package:turathi/core/models/user_model.dart';
 import '../../utils/shared.dart';
 
@@ -8,7 +11,7 @@ class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "users";
 
-  Future<String> addUser(UserModel model,String password) async {
+  Future<String> addUser(UserModel model, String password) async {
     bool mounted = false;
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -79,6 +82,28 @@ class UserService {
     return await getUserById(id);
   }
 
+  Future<UserModel> updateUserLocation() async {
+    QuerySnapshot userData = await _fireStore
+        .collection(_collectionName)
+        .where('id', isEqualTo: sharedUser.id)
+        .get();
+    String userId = userData.docs[0].id;
+    GetCurrentLocation getCurrentLocation = GetCurrentLocation();
+    Position? currentLocation = await getCurrentLocation.getCurrentLocation();
+    try {
+      await FirebaseFirestore.instance.collection('users').doc(userId).update(
+        {
+          'latitude': currentLocation!.latitude,
+          'longitude': currentLocation.longitude,
+        },
+      ).whenComplete(() {
+        log("user current location : ${userId}");
+      });
+    } on FirebaseException catch (e) {
+      log(e.toString());
+    }
+    return await getUserById(sharedUser.id!);
+  }
 
   Future<bool> signIn(String email, String password) async {
     try {

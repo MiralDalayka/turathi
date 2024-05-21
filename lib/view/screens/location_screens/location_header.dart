@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
+import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/get_user_city.dart';
 import 'package:turathi/core/services/google_map_api.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+import '../../../core/providers/user_provider.dart';
 import '../../../utils/shared.dart';
 
 class HeaderPart extends StatefulWidget {
@@ -41,6 +43,7 @@ class _HeaderPartState extends State<HeaderPart> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16),
@@ -98,9 +101,10 @@ class _HeaderPartState extends State<HeaderPart> {
                 );
               }, txt: "Choose The Nearest Point")
 
-            else //update user loc
-
-              _locationButton(onTab: () {}, txt: "Update My Location"),
+            else
+              _locationButton(onTab: () {
+                userProvider.updateUserLocation();
+              }, txt: "Update My Location"),
             SizedBox(
               height: LayoutManager.widthNHeight0(context, 0) * 0.005,
             ),
