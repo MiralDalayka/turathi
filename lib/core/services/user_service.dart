@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
@@ -82,7 +82,7 @@ class UserService {
     return await getUserById(id);
   }
 
-  Future<UserModel> updateUserLocation() async {
+  Future<void> updateUserLocation() async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: sharedUser.id)
@@ -97,12 +97,13 @@ class UserService {
           'longitude': currentLocation.longitude,
         },
       ).whenComplete(() {
-        log("user current location : ${userId}");
+        log("user current location updated successfully");
+        sharedUser.latitude = currentLocation.latitude;
+        sharedUser.longitude= currentLocation.longitude;
       });
     } on FirebaseException catch (e) {
       log(e.toString());
     }
-    return await getUserById(sharedUser.id!);
   }
 
   Future<bool> signIn(String email, String password) async {

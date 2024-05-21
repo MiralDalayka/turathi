@@ -32,7 +32,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> updateUserLocation() async {
-    sharedUser = await _userService.updateUserLocation().whenComplete(() {
+   await _userService.updateUserLocation().whenComplete(() {
       notifyListeners();
     });
   }

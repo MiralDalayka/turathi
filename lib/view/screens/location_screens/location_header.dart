@@ -90,21 +90,23 @@ class _HeaderPartState extends State<HeaderPart> {
             SizedBox(
               height: LayoutManager.widthNHeight0(context, 1) * 0.028,
             ),
-            ////////////////////
             if (widget.tab == "Nearest Place")
-              _locationButton(onTab: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NearestMap(),
-                  ),
-                );
-              }, txt: "Choose The Nearest Point")
-
+              _locationButton(
+                  onTab: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NearestMap(),
+                      ),
+                    );
+                  },
+                  txt: "Choose The Nearest Point")
             else
-              _locationButton(onTab: () {
-                userProvider.updateUserLocation();
-              }, txt: "Update My Location"),
+              _locationButton(
+                  onTab: () {
+                    userProvider.updateUserLocation();
+                  },
+                  txt: "Update My Location"),
             SizedBox(
               height: LayoutManager.widthNHeight0(context, 0) * 0.005,
             ),
@@ -147,8 +149,7 @@ class _HeaderPartState extends State<HeaderPart> {
                 fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.primary,
                 fontWeight: FontWeight.bold,
-                fontSize:
-                LayoutManager.widthNHeight0(context, 0) * 0.0175,
+                fontSize: LayoutManager.widthNHeight0(context, 0) * 0.0175,
                 shadows: const [
                   Shadow(
                     color: Colors.grey,
@@ -172,4 +173,3 @@ class _HeaderPartState extends State<HeaderPart> {
     );
   }
 }
-
