@@ -23,25 +23,13 @@ class _AddEventMapState extends State<AddEventMap> {
   late GoogleMapController mapController;
   late CameraPosition cam_pos =
   CameraPosition(target: LatLng(sharedUser.latitude!,sharedUser.longitude!), zoom: 13);
-
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
-
   Set<Marker> markers = {};
-
   MapType currentMapType = MapType.hybrid;
-
-  Position? currentLocation;
-
-  double? distance;
-  double? bearing;
-
   bool markerAdded = false;
-
-
   @override
   Widget build(BuildContext context) {
-    var placesProvider = Provider.of<PlaceProvider>(context);
 
     return Scaffold(
       appBar: AppBar(

@@ -16,28 +16,20 @@ class BodyPlaces extends StatefulWidget {
   final String tab;
   final int dis_num;
 
-  BodyPlaces({Key? key, required this.tab, required this.dis_num}) : super(key: key);
+  BodyPlaces({Key? key, required this.tab, required this.dis_num})
+      : super(key: key);
 
   @override
   State<BodyPlaces> createState() => _BodyPlacesState();
-  
 }
 
 class _BodyPlacesState extends State<BodyPlaces> {
-
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
-
   bool get isMyLocationTab => widget.tab == "My Location";
-
-  List<PlaceModel>? nearestPlacesList;
-
   PlaceList? placesList;
 
   @override
   Widget build(BuildContext context) {
-    
-    print("&&&&&&&${widget.dis_num}");
-    log("Build the tabs $isMyLocationTab and $isNearestPlaceTab");
     double cardWidth = 150;
     double spacingWidth = 10;
     double totalWidth = cardWidth + spacingWidth;
@@ -48,28 +40,16 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
     var dataList = [];
     if (isMyLocationTab) {
-      log("%%%%%%%%%%%%%");
-     
       dataList.addAll([sharedUser.latitude, sharedUser.longitude]);
-
-      print("dataList1 --->  ${dataList}");
-
-      log("userrrrr --> ${sharedUser.latitude}, ${sharedUser.longitude}");
-
-
     } else {
-      log("**********");
-///
       dataList.addAll([selectedNearestLat, selectedNearestLog]);
-          log("selectttttttt --> $selectedNearestLat,$selectedNearestLog");
-      print("dataList2 --->  ${dataList}");
-
     }
 
     if (dataList.first == 0.0 || dataList.last == 0.0) {
       return Center(
         child: Padding(
-          padding: EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+          padding: EdgeInsets.only(
+              top: LayoutManager.widthNHeight0(context, 1) * 0.45),
           child: Column(
             children: [
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
@@ -99,7 +79,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
     }
 
     return FutureBuilder(
-      future: placesProvider.getNearestPlaceList(dataList.first, dataList.last, widget.dis_num),
+      future: placesProvider.getNearestPlaceList(
+          dataList.first, dataList.last, widget.dis_num),
       builder: (context, snapshot) {
         var data = snapshot.data;
         if (data == null) {
@@ -108,7 +89,10 @@ class _BodyPlacesState extends State<BodyPlaces> {
         placesList = data;
         if (placesList!.places.isNotEmpty) {
           return Padding(
-            padding: EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1) * 0.04, left: LayoutManager.widthNHeight0(context, 1) * 0.035, right: LayoutManager.widthNHeight0(context, 1) * 0.035),
+            padding: EdgeInsets.only(
+                top: LayoutManager.widthNHeight0(context, 1) * 0.04,
+                left: LayoutManager.widthNHeight0(context, 1) * 0.035,
+                right: LayoutManager.widthNHeight0(context, 1) * 0.035),
             child: GridView.builder(
               itemCount: placesList!.places.length,
               shrinkWrap: true,
@@ -131,7 +115,6 @@ class _BodyPlacesState extends State<BodyPlaces> {
                     width: cardWidth,
                     child: PlaceCard(
                       placeModel: placeModel,
-
                       onPress: () {
                         Navigator.push(
                           context,
@@ -153,10 +136,12 @@ class _BodyPlacesState extends State<BodyPlaces> {
         }
         return Center(
           child: Padding(
-            padding: EdgeInsets.only(top: LayoutManager.widthNHeight0(context, 1) * 0.45),
+            padding: EdgeInsets.only(
+                top: LayoutManager.widthNHeight0(context, 1) * 0.45),
             child: Column(
               children: [
-                SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
+                SizedBox(
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.02),
                 Text(
                   "There IS No Places",
                   textAlign: TextAlign.center,
@@ -167,7 +152,8 @@ class _BodyPlacesState extends State<BodyPlaces> {
                     fontSize: 17,
                   ),
                 ),
-                SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
+                SizedBox(
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.025),
                 const Text(
                   "Nearest Your Location",
                   textAlign: TextAlign.center,

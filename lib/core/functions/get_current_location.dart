@@ -25,41 +25,41 @@ class GetCurrentLocation {
     }
   }
 
-  Future<void> performNearbySearch(BuildContext context) async {
-    try {
-
-      Position? currentPos = await getCurrentLocation();
-      if (currentPos != null) {  // If the current position is null then show me error message
-        _currentLocation = currentPos;
-        // userNearestLat = currentPos.latitude;
-        // userNearestLog = currentPos.longitude;
-      } else {
-
-        throw ('Failed to get current location');
-      }
-    } catch (error) {
-      print("Failed to get current location: $error");
-
-      _showErrorDialog(context, error.toString()); //error
-    }
-  }
+  // Future<void> performNearbySearch(BuildContext context) async {
+  //   try {
+  //
+  //     Position? currentPos = await getCurrentLocation();
+  //     if (currentPos != null) {  // If the current position is null then show me error message
+  //       _currentLocation = currentPos;
+  //       // userNearestLat = currentPos.latitude;
+  //       // userNearestLog = currentPos.longitude;
+  //     } else {
+  //
+  //       throw ('Failed to get current location');
+  //     }
+  //   } catch (error) {
+  //     print("Failed to get current location: $error");
+  //
+  //     _showErrorDialog(context, error.toString()); //error
+  //   }
+  // }
 
   //  this is to show error
-  void _showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text('Failed to get current location: $errorMessage'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showErrorDialog(BuildContext context, String errorMessage) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) => AlertDialog(
+  //       title: Text('Error'),
+  //       content: Text('Failed to get current location: $errorMessage'),
+  //       actions: [
+  //         TextButton(
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           child: Text('OK'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

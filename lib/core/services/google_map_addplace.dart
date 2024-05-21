@@ -27,16 +27,11 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
       Completer<GoogleMapController>();
 
   Set<Marker> markers = {};
-
   MapType currentMapType = MapType.hybrid;
-
-
   bool markerAdded = false;
 
   @override
   Widget build(BuildContext context) {
-    // var placesProvider = Provider.of<AddPlacesProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
