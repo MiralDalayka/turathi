@@ -32,7 +32,7 @@ return model;
 
   Future<EventList> get twoEventsList async {
     QuerySnapshot eventsData =
-        await _fireStore.collection(_collectionName).where("date",isGreaterThan: DateTime.now()).get();//.limit(2)
+        await _fireStore.collection(_collectionName).where("date",isGreaterThan: DateTime.now()).limit(2).get();
     EventModel tempModel;
     EventList eventList = EventList(events: []);
     for (var item in eventsData.docs) {
@@ -44,6 +44,7 @@ return model;
         eventList.events.add(tempModel);
 
     }
+    log(eventList.events.length.toString());
 
     return eventList;
   }
