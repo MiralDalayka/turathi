@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/providers/place_provider.dart';
@@ -100,7 +101,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           shadows: [
                             Shadow(
                               color: Colors.black.withOpacity(0.3),
-                              blurRadius: 2,
+                              blurRadius: 1,
                               offset: Offset(-1, 1),
                             ),
                           ],
@@ -324,21 +325,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           width: LayoutManager.widthNHeight0(context, 0) * 0.2,
                           child: AutoSizeText(
                             addNewLineAfterChars(
-                              widget.placeModel.status!,
+                              widget.placeModel.status!.toUpperCase(),
                               20,
                             ),
                             maxLines: 3,
+                          
                             textAlign: TextAlign.start,
                             style: ThemeManager.textStyle.copyWith(
                               color: ThemeManager.primary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                               decoration: TextDecoration.none,
-                              shadows: <Shadow>[
-                                Shadow(
-                                  offset: Offset(5.0, 5.0),
-                                  blurRadius: 2.0,
-                                  color: Colors.black.withOpacity(0.25),
-                                ),
-                              ],
+                             
                             ),
                           ),
                         ),
