@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:turathi/core/providers/user_provider.dart';
 import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/utils/lib_organizer.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/screens/location_screens/body_places.dart';
 import 'package:turathi/view/screens/location_screens/location_header.dart';
@@ -46,6 +49,7 @@ int currentTab = 0;
 
   @override
   Widget build(BuildContext context) {
+     var provider  = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -125,7 +129,8 @@ int currentTab = 0;
                 onTap: (selected){
                   setState(() {
                     currentTab = selected;
-                    log(currentTab.toString()+"____");
+
+                    log(currentTab.toString()+"____"+sharedUser.latitude.toString());
 
                   });
                 },
@@ -148,11 +153,13 @@ int currentTab = 0;
             ),
             Expanded(
               child: TabBarView(
+
                 controller: tabController,
                 children: [
-                  BodyPlaces(tab: 'My Location', dis_num: selectedDistance),
+                  BodyPlaces(tab: 'My Location', dis_num: selectedDistance,dataList: [sharedUser.latitude,sharedUser.longitude],),
                   isTabControllerInitialized
                       ? BodyPlaces(
+                    dataList: [selectedNearestLat, selectedNearestLog],
                           tab: 'Nearest Place', dis_num: selectedDistance)
                       : const Center(child: CircularProgressIndicator()),
                 ],

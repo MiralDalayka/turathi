@@ -20,22 +20,26 @@ class HeaderPart extends StatefulWidget {
 }
 
 class _HeaderPartState extends State<HeaderPart> {
-  String? _currentAddress;
+  String _currentAddress = 'Waiting';
+
   @override
   void initState() {
     super.initState();
     _getCurrentLocation();
+
   }
 
   Future<void> _getCurrentLocation() async {
     try {
-      String address = await UserCity(
-          longitude: sharedUser.longitude!, latitude: sharedUser.latitude!);
-      if (mounted) {
-        setState(() {
-          _currentAddress = address;
-        });
-      }
+       await UserCity(
+          longitude: sharedUser.longitude!, latitude: sharedUser.latitude!).then((value) {
+        if (mounted) {
+          setState(() {
+            _currentAddress = value;
+          });
+        }
+      });
+
     } catch (e) {
       print('Error getting location: $e');
     }
@@ -43,7 +47,7 @@ class _HeaderPartState extends State<HeaderPart> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     return Container(
       child: Padding(
         padding: const EdgeInsets.only(right: 16, left: 16),
@@ -77,7 +81,8 @@ class _HeaderPartState extends State<HeaderPart> {
                   height: LayoutManager.widthNHeight0(context, 1) * 0.06,
                 ),
                 Text(
-                  _currentAddress != null ? _currentAddress! : 'Waiting',
+                  // _currentAddress != null ? _currentAddress! : 'Waiting',
+                  _currentAddress,
                   style: TextStyle(
                     fontFamily: ThemeManager.fontFamily,
                     color: Colors.grey,
@@ -104,15 +109,9 @@ class _HeaderPartState extends State<HeaderPart> {
             else
               _locationButton(
                   onTab: () {
-                    userProvider.updateUserLocation();
-
-                      showDialog(
-                      context: context,
-                      builder: (context) {
-                        return showCustomAlertDialog(
-                            context, "Your location updated successfully.");
-                      },
-                    );
+                    userProvider.updateUserLocation().whenComplete(() async {
+                      await _getCurrentLocation();
+                    });
                   },
                   txt: "Update My Location"),
             SizedBox(

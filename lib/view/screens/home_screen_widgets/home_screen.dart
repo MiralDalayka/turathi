@@ -56,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
         actions: <Widget>[
           IconButton(
+            key: Key("Notification"),
             icon: Icon(
               Icons.notifications_none_outlined,
               color: ThemeManager.primary,

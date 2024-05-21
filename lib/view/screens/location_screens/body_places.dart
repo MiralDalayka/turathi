@@ -15,8 +15,9 @@ import '../../../utils/Router/const_router_names.dart';
 class BodyPlaces extends StatefulWidget {
   final String tab;
   final int dis_num;
+  var dataList;
 
-  BodyPlaces({Key? key, required this.tab, required this.dis_num})
+  BodyPlaces({Key? key, required this.tab, required this.dis_num,required this.dataList})
       : super(key: key);
 
   @override
@@ -38,14 +39,15 @@ class _BodyPlacesState extends State<BodyPlaces> {
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
 
-    var dataList = [];
+
     if (isMyLocationTab) {
-      dataList.addAll([sharedUser.latitude, sharedUser.longitude]);
+
+      widget.dataList.addAll([sharedUser.latitude, sharedUser.longitude]);
     } else {
-      dataList.addAll([selectedNearestLat, selectedNearestLog]);
+      widget.dataList.addAll([selectedNearestLat, selectedNearestLog]);
     }
 
-    if (dataList.first == 0.0 || dataList.last == 0.0) {
+    if (widget.dataList.first == 0.0 || widget.dataList.last == 0.0) {
       return Center(
         child: Padding(
           padding: EdgeInsets.only(
@@ -80,7 +82,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
 
     return FutureBuilder(
       future: placesProvider.getNearestPlaceList(
-          dataList.first, dataList.last, widget.dis_num),
+          widget.dataList.first, widget.dataList.last, widget.dis_num),
       builder: (context, snapshot) {
         var data = snapshot.data;
         if (data == null) {

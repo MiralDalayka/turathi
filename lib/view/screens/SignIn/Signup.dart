@@ -42,6 +42,7 @@ class _SingUpState extends State<SingUp> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Key("Turathi title"),
       backgroundColor: const Color(0xffEAEBEF),
       body: SingleChildScrollView(
         child: Form(
@@ -78,6 +79,7 @@ class _SingUpState extends State<SingUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
+
                               "Turathi",
                               style: TextStyle(
                                   fontSize:
