@@ -7,7 +7,6 @@ import 'package:turathi/utils/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
-
 import '../functions/get_current_location.dart';
 
 class MapScreenLocation extends StatefulWidget {
@@ -28,7 +27,7 @@ class _MapScreenState extends State<MapScreenLocation> {
           SizedBox(
             height: _getHeight(context),
             child: FutureBuilder(
-              future: performNearbySearch(),
+              future: performNearbySearch().whenComplete(() => Navigator.of(context).pop()),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
@@ -52,8 +51,11 @@ class _MapScreenState extends State<MapScreenLocation> {
   Future<void> performNearbySearch() async {
     // await _getCurrentLocation().then((currentPos) {
     //   setState(() {
-        _launchMaps(
-            widget.lat, widget.lon, sharedUser.latitude!, sharedUser.longitude!);
+    _launchMaps(
+        userLatitude: sharedUser.latitude!,
+        userLongitude: sharedUser.longitude!,
+        placeLatitude:  widget.lat,
+      placeLongitude:   widget.lon);
     //   }); //,
     // }).catchError((error) {
     //   showDialog(
@@ -119,15 +121,13 @@ class _MapScreenState extends State<MapScreenLocation> {
   //   return await Geolocator.getCurrentPosition();
   // }
 
-  void _launchMaps(double lat, double lon, double d, double a) async {
-    final double myLatitude = lat; // 32.494564056396484;
-    final double myLongitude = lon; //35.99126052856445  ;
-    final double destinationLatitude = d; //34.0522;
-    final double destinationLongitude = a; //-118.2437;
-    var url =
-    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
+  void _launchMaps(
+      {required double userLatitude,
+      required double userLongitude,
+      required double placeLatitude,
+      required double placeLongitude}) async {
+    var url = Uri.parse(
+        "https://www.google.com/maps/dir/?api=1&origin=$userLatitude,$userLongitude&destination=$placeLatitude,$placeLongitude");
     await launchUrl(url);
-
   }
-
 }

@@ -50,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
         height: LayoutManager.widthNHeight0(context, 0),
         width: LayoutManager.widthNHeight0(context, 1),
         child: Image.asset(
+          key: Key("SplashImage"),
           'assets/images/img_png/splach.png',
           fit: BoxFit.fill,
         ),

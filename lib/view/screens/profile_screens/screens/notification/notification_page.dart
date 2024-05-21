@@ -18,6 +18,7 @@ class NotificationPage extends StatelessWidget {
 
      backgroundColor: ThemeManager.background,
       appBar: AppBar(
+        key: Key("Notifications page"),
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
