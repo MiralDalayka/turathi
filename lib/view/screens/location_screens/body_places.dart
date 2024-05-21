@@ -56,7 +56,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
             children: [
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
               Text(
-                "You Should Allow Access To",
+                "You Have To Choose",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeManager.primary,
@@ -67,7 +67,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
               ),
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
               const Text(
-                "Your Location",
+                "The Location You Want",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: "KohSantepheap",
