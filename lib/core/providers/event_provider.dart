@@ -9,6 +9,7 @@ class EventProvider extends ChangeNotifier {
   final EventService _eventService = EventService();
 
   EventList _eventList = EventList(events: []);
+  EventList _twoEventsList = EventList(events: []);
 
   Future<EventList> get eventList async {
     if (_eventList.events.isEmpty) {
@@ -18,7 +19,10 @@ class EventProvider extends ChangeNotifier {
   }
 
   Future<EventList> get twoEventsList async {
-    return await _eventService.twoEventsList;
+    if (_twoEventsList.events.isEmpty) {
+      await _getTwoEvents();
+    }
+    return _twoEventsList;
   }
 
   Future<void> addEvent(EventModel model, List<XFile> images) async {
@@ -30,7 +34,11 @@ class EventProvider extends ChangeNotifier {
 
   Future<void> _getEvents() async {
     _eventList = await _eventService.getEvents();
-    // print("something here 2");
+
+  }
+  Future<void> _getTwoEvents() async {
+    _twoEventsList = await _eventService.twoEventsList;
+
   }
 
   Future<EventModel> updateEvent(
