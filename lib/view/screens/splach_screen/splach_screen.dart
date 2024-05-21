@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
+// userService.signOut();
     Timer(
       const Duration(seconds: 3),
       () async {

@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -17,7 +18,7 @@ class _Location_PageState extends State<LocationPage>
   late TabController tabController;
   bool isTabControllerInitialized = false;
   int selectedDistance = 10;
-
+int currentTab = 0;
   @override
   void initState() {
     super.initState();
@@ -34,11 +35,11 @@ class _Location_PageState extends State<LocationPage>
   void _tabControllerListener() {
     if (!isTabControllerInitialized) {
       if (mounted) {
-      setState(() {
-        isTabControllerInitialized = true;
+        setState(() {
+          isTabControllerInitialized = true;
 
-        // log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
-      });
+          // log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
+        });
       }
     }
   }
@@ -56,7 +57,15 @@ class _Location_PageState extends State<LocationPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const HeaderPart(),
+            Builder(
+
+
+                builder: (context) {
+              if (currentTab == 0)
+                return HeaderPart(tab: "Update user location");
+              else //if (tabController.index == 1)
+                return HeaderPart(tab: "Nearest Place");
+            }),
             Container(
               height: LayoutManager.widthNHeight0(context, 1) * 0.1,
               width: LayoutManager.widthNHeight0(context, 1) * 0.2,
@@ -93,11 +102,15 @@ class _Location_PageState extends State<LocationPage>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(value.toString(),style: TextStyle(color: ThemeManager.primary),),
+                            Text(
+                              value.toString(),
+                              style: TextStyle(color: ThemeManager.primary),
+                            ),
                             const SizedBox(
                                 width:
                                     4), // Add spacing between number and "Km"
-                            Text("Km",style: TextStyle(color: ThemeManager.primary)),
+                            Text("Km",
+                                style: TextStyle(color: ThemeManager.primary)),
                           ],
                         ),
                       );
@@ -106,12 +119,16 @@ class _Location_PageState extends State<LocationPage>
                 ),
               ),
             ),
-
-      
-
             Padding(
               padding: const EdgeInsets.only(right: 0), //50//
               child: TabBar(
+                onTap: (selected){
+                  setState(() {
+                    currentTab = selected;
+                    log(currentTab.toString()+"____");
+
+                  });
+                },
                 controller: tabController,
                 labelStyle: TextStyle(
                   fontSize: LayoutManager.widthNHeight0(context, 1) * 0.035,

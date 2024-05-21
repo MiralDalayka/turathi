@@ -20,7 +20,8 @@ import 'core/functions/get_current_location.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAppCheck.instance.activate();
+
+
   runApp(const MyApp());
 }
 
@@ -32,15 +33,26 @@ class MyApp extends StatelessWidget {
     // GetCurrentLocation().performNearbySearch(context);
 
     return MultiProvider(
+      // providers: [
+      //   ChangeNotifierProvider.value(value: PlaceProvider()),
+      //   ChangeNotifierProvider.value(value: EventProvider()),
+      //   ChangeNotifierProvider.value(value: QuestionProvider()),
+      //   ChangeNotifierProvider.value(value: NotificationProvider()),
+      //   ChangeNotifierProvider.value(value: UserProvider()),
+      //   ChangeNotifierProvider.value(value: ReportProvider()),
+      //   ChangeNotifierProvider.value(value: RequestProvider()),
+      //   ChangeNotifierProvider.value(value: CommentProvider()),
+      // ],
       providers: [
-        ChangeNotifierProvider.value(value: PlaceProvider()),
-        ChangeNotifierProvider.value(value: EventProvider()),
-        ChangeNotifierProvider.value(value: QuestionProvider()),
-        ChangeNotifierProvider.value(value: NotificationProvider()),
-        ChangeNotifierProvider.value(value: UserProvider()),
-        ChangeNotifierProvider.value(value: ReportProvider()),
-        ChangeNotifierProvider.value(value: RequestProvider()),
-        ChangeNotifierProvider.value(value: CommentProvider()),
+        ChangeNotifierProvider<PlaceProvider>(create: (_) => PlaceProvider()),
+        ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),
+        ChangeNotifierProvider<QuestionProvider>(create: (_) => QuestionProvider()),
+        ChangeNotifierProvider<NotificationProvider>(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider<UserProvider>(create: (_) => UserProvider()),
+        ChangeNotifierProvider<ReportProvider>(create: (_) => ReportProvider()),
+        ChangeNotifierProvider<RequestProvider>(create: (_) => RequestProvider()),
+        ChangeNotifierProvider<CommentProvider>(create: (_) => CommentProvider()),
+
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

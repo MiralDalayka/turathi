@@ -52,7 +52,7 @@ dependencies:
   flutter_local_notifications: ^16.1.0
   cloud_firestore: ^4.14.0
   firebase_storage: ^11.5.6
-  firebase_app_check: any
+  firebase_app_check: ^0.2.2+5
   crypt: ^4.3.1
   uuid: ^4.4.0
   http: ^1.2.1
