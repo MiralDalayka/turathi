@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi ${sharedUser.name ?? "Guest"} !".toUpperCase(),
+                "Hi ${sharedUser.name} !".toUpperCase(),
                 style: TextStyle(
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Shadow(
                       color: Colors.grey,
                       blurRadius: 1,
-                      offset: Offset(0, 3),
+                      offset: Offset(0, 1),
                     ),
                   ],
                 ),
@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Shadow(
                       color: Colors.grey,
                       blurRadius: 1,
-                      offset: Offset(0, 3),
+                      offset: Offset(0, 1),
                     ),
                   ],
                 ),
@@ -124,13 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Be Part Of Collect Data With Us",
+                      "Share Your Favourite Place With Us",
                       style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontWeight: FontWeight.bold,
                           fontSize:
-                              LayoutManager.widthNHeight0(context, 0) * 0.0175),
+                              LayoutManager.widthNHeight0(context, 0) * 0.017),
                     ),
                     AddButton(
                       onPressed: () {
@@ -152,13 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
-                  shadows: const [
-                    Shadow(
-                      color: Colors.grey,
-                      blurRadius: 0.01,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
+                
                 ),
               ),
               SizedBox(
@@ -180,11 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize:
                           LayoutManager.widthNHeight0(context, 0) * 0.0165,
                       shadows: const [
-                        Shadow(
-                          color: Colors.grey,
-                          blurRadius: 0.01,
-                          offset: Offset(0, 2),
-                        ),
+                      
                       ],
                     ),
                   ),
@@ -201,18 +191,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(
                         'See All',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w800,
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontSize:
                               LayoutManager.widthNHeight0(context, 0) * 0.0165,
-                          shadows: const [
-                            Shadow(
-                              color: Colors.grey,
-                              blurRadius: 0.01,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
+                        
                         ),
                       ),
                     ),

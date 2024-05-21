@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
 import 'package:provider/provider.dart';
+import 'package:turathi/core/functions/dialogAlert.dart';
 import 'package:turathi/core/functions/get_user_city.dart';
 import 'package:turathi/core/services/google_map_api.dart';
 import 'package:turathi/utils/layout_manager.dart';
@@ -133,14 +134,7 @@ class _HeaderPartState extends State<HeaderPart> {
         decoration: BoxDecoration(
           color: ThemeManager.second,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.4),
-              blurRadius: 2,
-              offset: const Offset(-1, -1),
-              spreadRadius: 0,
-            ),
-          ],
+        
           border: Border.all(
             color: ThemeManager.primary,
             width: 1,
