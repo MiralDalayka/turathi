@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: ThemeManager.primary,
                           fontWeight: FontWeight.bold,
                           fontSize:
-                              LayoutManager.widthNHeight0(context, 0) * 0.0175),
+                              LayoutManager.widthNHeight0(context, 0) * 0.017),
                     ),
                     AddButton(
                       onPressed: () {

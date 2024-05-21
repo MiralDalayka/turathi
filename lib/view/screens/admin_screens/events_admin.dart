@@ -7,7 +7,7 @@ import 'package:turathi/view/screens/admin_screens/edit_event.dart';
 import 'package:turathi/view/widgets/event_card.dart';
 
 class eventsAdmin extends StatelessWidget {
-  const eventsAdmin({super.key});
+  const eventsAdmin({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class eventsAdmin extends StatelessWidget {
     double totalWidth = cardWidth + spacingWidth;
 
     int crossAxisCount =
-        MediaQuery.of(context).size.width ~/ totalWidth; 
+        MediaQuery.of(context).size.width ~/ totalWidth;
 
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -34,13 +34,12 @@ class eventsAdmin extends StatelessWidget {
         ),
         bottom: PreferredSize(
           preferredSize:
-              Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
+          Size.fromHeight(LayoutManager.widthNHeight0(context, 1) * 0.01),
           child: Divider(
             height: LayoutManager.widthNHeight0(context, 1) * 0.01,
             color: Colors.grey[300],
           ),
         ),
-      
       ),
       body: Consumer<EventProvider>(
         builder: (context, eventProvider, child) {
@@ -56,16 +55,12 @@ class eventsAdmin extends StatelessWidget {
                   child: Text('Error: ${snapshot.error}'),
                 );
               } else {
-            
-            
-
                 final userEvents = snapshot.data!.events.toList();
 
                 if (userEvents.isEmpty) {
                   return Center(
                     child: Column(
                       children: [
-                        
                         Padding(
                           padding: EdgeInsets.only(
                               top: LayoutManager.widthNHeight0(context, 1) *
@@ -89,56 +84,47 @@ class eventsAdmin extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                          SizedBox(height: LayoutManager.widthNHeight0(context, 1)*0.05,),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            
-                            horizontal:
-                                LayoutManager.widthNHeight0(context, 1) * 0.05,
-                          ),
-                          child: GridView.builder(
-                            itemCount: userEvents.length,
-                            shrinkWrap: true,
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              childAspectRatio: cardWidth / (cardWidth + 65),
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 16,
-                            ),
-                            itemBuilder: (context, index) {
-                              final EventModel = userEvents[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushNamed(
-                                    eventDetailsRoute,
-                                    arguments: EventModel,
-                                  );
-                                },
-                                child: SizedBox(
-                                  width: cardWidth,
-                                  child: EventCard(
-                                    eventModel: EventModel,
-                    
-                                    onPress: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => EditEvent(
-                                            eventModel: EventModel,
-                                          ),
-                                        ),
-                                      );
-                                    },
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                      horizontal: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                    ),
+                    child: GridView.builder(
+                      itemCount: userEvents.length,
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        childAspectRatio: cardWidth / (cardWidth + 65),
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 16,
+                      ),
+                      itemBuilder: (context, index) {
+                        final EventModel = userEvents[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              eventDetailsRoute,
+                              arguments: EventModel,
+                            );
+                          },
+                          child: SizedBox(
+                            width: cardWidth,
+                            child: EventCard(
+                              eventModel: EventModel,
+                              onPress: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditEvent(
+                                      eventModel: EventModel,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   );
                 }

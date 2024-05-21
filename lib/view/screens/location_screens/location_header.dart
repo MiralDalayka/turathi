@@ -134,14 +134,7 @@ class _HeaderPartState extends State<HeaderPart> {
         decoration: BoxDecoration(
           color: ThemeManager.second,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.4),
-              blurRadius: 1,
-              offset: const Offset(-1, -1),
-              spreadRadius: 0,
-            ),
-          ],
+        
           border: Border.all(
             color: ThemeManager.primary,
             width: 1,
