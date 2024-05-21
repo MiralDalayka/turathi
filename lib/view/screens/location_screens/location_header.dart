@@ -21,7 +21,6 @@ class HeaderPart extends StatefulWidget {
 
 class _HeaderPartState extends State<HeaderPart> {
   String? _currentAddress;
-
   @override
   void initState() {
     super.initState();
