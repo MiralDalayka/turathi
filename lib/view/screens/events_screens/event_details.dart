@@ -24,6 +24,12 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String date= "Date";
+    String dateFormate='yyyy-MM-dd';
+    String ticketPrice=  "Ticket Price";
+    String free='Free';
+    String visitEvent= 'Visit Event';
+
     var height = LayoutManager.widthNHeight0(context, 0) * 0.55;
     double left = LayoutManager.widthNHeight0(context, 0) * 0.02;
     return Stack(
@@ -101,7 +107,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "Date",
+                                    date,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: ThemeManager.textColor
@@ -116,7 +122,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                       height: LayoutManager.widthNHeight0(context, 0)*0.008,
                                     ),
                                     Text(
-                                      DateFormat('yyyy-MM-dd')
+                                      DateFormat(dateFormate)
                                           .format(widget.eventModel.date!),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -132,7 +138,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      "Ticket Price",
+                                    ticketPrice,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: ThemeManager.textColor
@@ -148,8 +154,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                                     ),
                                     Text(
                                       widget.eventModel.ticketPrice == 0
-                                          ? 'Free'
-                                          : widget.eventModel.ticketPrice
+                                          ? 
+                                          free: widget.eventModel.ticketPrice
                                               .toString(),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -207,7 +213,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         ),
 
                         defaultButton(
-                          text: 'Show Map',
+                          text:visitEvent,
                           borderRadius: 18,
                           background: ThemeManager.primary,
                           textColor: ThemeManager.second,

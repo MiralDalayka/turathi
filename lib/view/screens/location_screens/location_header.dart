@@ -41,6 +41,9 @@ class _HeaderPartState extends State<HeaderPart> {
 
   @override
   Widget build(BuildContext context) {
+    String urLocation='Your Location';
+    String tab2Msg= "Choose The Nearest Point";
+    String tab1Msg="Update My Location";
     var userProvider = Provider.of<UserProvider>(context);
     return Container(
       child: Padding(
@@ -49,7 +52,7 @@ class _HeaderPartState extends State<HeaderPart> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Your Location',
+             urLocation ,
               style: TextStyle(
                 fontFamily: ThemeManager.fontFamily,
                 color: ThemeManager.primary,
@@ -99,7 +102,7 @@ class _HeaderPartState extends State<HeaderPart> {
                       ),
                     );
                   },
-                  txt: "Choose The Nearest Point")
+                  txt:tab2Msg)
             else
               _locationButton(
                   onTab: () {
@@ -107,7 +110,7 @@ class _HeaderPartState extends State<HeaderPart> {
                       await _getCurrentLocation();
                     });
                   },
-                  txt: "Update My Location"),
+                  txt:tab1Msg ),
             SizedBox(
               height: LayoutManager.widthNHeight0(context, 0) * 0.005,
             ),

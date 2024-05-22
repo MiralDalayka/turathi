@@ -41,6 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String containerHeader = "Share Your Favourite Place With Us";
+    String popularPlaces = 'Popular Places';
+    String event = 'Events';
+    String seeAll = 'See All';
+    String noEventsCase= 'No Events are available';
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               Icons.notifications_none_outlined,
               color: ThemeManager.primary,
-              // size:LayoutManager.widthNHeight0(context, 0) * 2,//here
             ),
             onPressed: () {
               Navigator.of(context).pushNamed(notificationPage);
@@ -102,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Share Your Favourite Place With Us",
+                      containerHeader,
                       style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
@@ -122,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: LayoutManager.widthNHeight0(context, 0) * 0.014,
               ),
               Text(
-                'Popular Places',
+                popularPlaces,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: ThemeManager.fontFamily,
@@ -141,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Events',
+                    event,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: ThemeManager.fontFamily,
@@ -162,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           right:
                               LayoutManager.widthNHeight0(context, 1) * 0.02),
                       child: Text(
-                        'See All',
+                        seeAll,
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           fontFamily: ThemeManager.fontFamily,
@@ -218,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: LayoutManager.widthNHeight0(context, 1) * 0.2),
                       child: Center(
                         child: Text(
-                          'No Events are available',
+                         noEventsCase,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: ThemeManager.fontFamily,

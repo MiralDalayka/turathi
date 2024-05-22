@@ -23,7 +23,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+String appBarText= "Community";
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Scaffold(
       floatingActionButton: AddButton(
@@ -43,7 +43,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.06,
         title: Text(
-          "Community",
+         appBarText,
           style: TextStyle(
               fontFamily: ThemeManager.fontFamily,
               color: ThemeManager.primary,

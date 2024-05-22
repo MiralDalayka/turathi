@@ -15,6 +15,7 @@ class _EventsScreenState extends State<EventsScreen> {
   EventList? eventList;
   @override
   Widget build(BuildContext context) {
+    String appBarText= "Events";
     EventProvider provider = Provider.of<EventProvider>(context);
     return Scaffold(
       floatingActionButton: AddButton(
@@ -28,7 +29,7 @@ class _EventsScreenState extends State<EventsScreen> {
         backgroundColor: ThemeManager.background,
         toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.06,
         title: Text(
-          "Events",
+         appBarText,
           style: ThemeManager.textStyle.copyWith(color: ThemeManager.primary),
         ),
         centerTitle: true,

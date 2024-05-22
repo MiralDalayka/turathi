@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/view/view_layer.dart';
 
-
+// Widget representing the event card
 class ViewEvent extends StatelessWidget {
   ViewEvent({
     super.key,
@@ -19,9 +19,13 @@ class ViewEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    height ??= LayoutManager.widthNHeight0(context, 0) * 0.145; //here the height
+    // Set default height if not provided
+    height ??= LayoutManager.widthNHeight0(context, 0) * 0.145;
+
     return InkWell(
       onTap: () {
+
+         // Navigate to event details page when tapped
         Navigator.of(context)
             .pushNamed(eventDetailsRoute, arguments: eventModel);
       },
@@ -36,7 +40,7 @@ class ViewEvent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              width:  LayoutManager.widthNHeight0(context, 1)*0.35, ///here the width
+              width:  LayoutManager.widthNHeight0(context, 1)*0.35,
               height: height,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
@@ -48,7 +52,7 @@ class ViewEvent extends StatelessWidget {
             ),
             SizedBox(
               width: LayoutManager.widthNHeight0(context, 1) * 0.02,
-            ), //2
+            ), 
             Padding(
               padding: EdgeInsets.all(
                   LayoutManager.widthNHeight0(context, 1) * 0.005),
@@ -66,6 +70,8 @@ class ViewEvent extends StatelessWidget {
                     autoTextFunction(
                       txt: 'Creator Name: ${eventModel.creatorName!}',
                     ),
+
+                     // Display ticket price show 'Free' if ticket price is 0
                   if ( eventModel.ticketPrice != 0)
                     autoTextFunction(
                       txt: 'Ticket Price: ${eventModel.ticketPrice!}',

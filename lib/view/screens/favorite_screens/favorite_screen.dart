@@ -18,6 +18,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String NoFavCase2= "SAVE YOUR FAVOURITE PLACE NOW!";
+    String NoFavCase22= "It looks like you haven’t added any favourite place just yet.";
     PlaceProvider provider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       backgroundColor: ThemeManager.background,
@@ -110,11 +112,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     SizedBox(
                         height: LayoutManager.widthNHeight0(context, 1) * 0.02),
                     Text(
-                      "SAVE YOUR FAVOURITE PLACE NOW!",
+                     NoFavCase2,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: ThemeManager.primary,
-                        fontFamily: "KohSantepheap",
+                        fontFamily: ThemeManager.fontFamily,
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
                       ),
@@ -122,10 +124,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     SizedBox(
                         height: LayoutManager.widthNHeight0(context, 1) * 0.025),
                     Text(
-                      "It looks like you haven’t added any favourite place just yet.",
+                    NoFavCase22 ,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: "KohSantepheap",
+                        fontFamily:  ThemeManager.fontFamily,
                         fontSize: 16,
                       ),
                     ),

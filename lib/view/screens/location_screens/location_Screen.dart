@@ -16,7 +16,7 @@ class _Location_PageState extends State<LocationPage>
   late TabController tabController;
   bool isTabControllerInitialized = false;
   int selectedDistance = 10;
-int currentTab = 0;
+  int currentTab = 0;
   @override
   void initState() {
     super.initState();
@@ -35,7 +35,6 @@ int currentTab = 0;
       if (mounted) {
         setState(() {
           isTabControllerInitialized = true;
-
         });
       }
     }
@@ -54,10 +53,7 @@ int currentTab = 0;
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Builder(
-
-
-                builder: (context) {
+            Builder(builder: (context) {
               if (currentTab == 0)
                 return HeaderPart(tab: "Update user location");
               else //if (tabController.index == 1)
@@ -103,9 +99,7 @@ int currentTab = 0;
                               value.toString(),
                               style: TextStyle(color: ThemeManager.primary),
                             ),
-                            const SizedBox(
-                                width:
-                                    4),
+                            const SizedBox(width: 4),
                             Text("Km",
                                 style: TextStyle(color: ThemeManager.primary)),
                           ],
@@ -119,12 +113,13 @@ int currentTab = 0;
             Padding(
               padding: const EdgeInsets.only(right: 0), //50//
               child: TabBar(
-                onTap: (selected){
+                onTap: (selected) {
                   setState(() {
                     currentTab = selected;
 
-                    log(currentTab.toString()+"____"+sharedUser.latitude.toString());
-
+                    log(currentTab.toString() +
+                        "____" +
+                        sharedUser.latitude.toString());
                   });
                 },
                 controller: tabController,
@@ -146,14 +141,18 @@ int currentTab = 0;
             ),
             Expanded(
               child: TabBarView(
-
                 controller: tabController,
                 children: [
-                  BodyPlaces(tab: 'My Location', dis_num: selectedDistance,dataList: [sharedUser.latitude,sharedUser.longitude],),
+                  BodyPlaces(
+                    tab: 'My Location',
+                    dis_num: selectedDistance,
+                    dataList: [sharedUser.latitude, sharedUser.longitude],
+                  ),
                   isTabControllerInitialized
                       ? BodyPlaces(
-                    dataList: [selectedNearestLat, selectedNearestLog],
-                          tab: 'Nearest Place', dis_num: selectedDistance)
+                          dataList: [selectedNearestLat, selectedNearestLog],
+                          tab: 'Nearest Place',
+                          dis_num: selectedDistance)
                       : const Center(child: CircularProgressIndicator()),
                 ],
               ),

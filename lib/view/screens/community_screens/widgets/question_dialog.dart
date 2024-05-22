@@ -27,6 +27,10 @@ class _QuestionDialogState extends State<QuestionDialog> {
     String writeQuestion='Write a question';
     String hintFiled1='Title';
     String hintField2='Ask your question here...';
+    String pickImage= 'Pick Image';
+    String cancel='Cancel';
+    String errorMsg="*All field are required";
+    String save='Save';
 
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Dialog(
@@ -80,7 +84,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 },
                 style: ThemeManager.buttonStyle,
                 child: Text(
-                  'Pick Image',
+                  pickImage,
                   style: ThemeManager.textStyle
                       .copyWith(fontWeight: FontWeight.w300),
                 ),
@@ -104,7 +108,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      'Cancel',
+                      cancel,
                       style: ThemeManager.textStyle,
                     ),
                   ),
@@ -125,13 +129,13 @@ class _QuestionDialogState extends State<QuestionDialog> {
                             .whenComplete(() => Navigator.of(context).pop());
                       } else {
                         setState(() {
-                          txt = "*All field are required";
+                          txt = errorMsg;
                         });
                         log('add Question failed');
                       }
                     },
                     child: Text(
-                      'Save',
+                      save,
                       style: ThemeManager.textStyle,
                     ),
                   ),
