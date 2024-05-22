@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turathi/core/models/comment_model.dart';
+import '../data_layer.dart';
 
 class CommentService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "comments";
 
+  // add comment to database
   Future<String> addComment(CommentModel model) async {
     _fireStore
         .collection(_collectionName)
@@ -20,6 +21,7 @@ class CommentService {
     return "Done";
   }
 
+  // get comments for specific place based on placeId
   Future<CommentList> getPlaceComments(String placeId) async {
     QuerySnapshot commentsData =
     await _fireStore.collection(_collectionName)
@@ -34,6 +36,7 @@ log("Place comments done");
 
   }
 
+  // get comments for specific question based on questionId
   Future<CommentList> getQuestionComments(String questionId) async {
     QuerySnapshot commentsData =
     await _fireStore.collection(_collectionName)

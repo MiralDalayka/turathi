@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/utils/lib_organizer.dart';
+import 'package:turathi/core/data_layer.dart';
 
-import '../../../../utils/Router/const_router_names.dart';
-import '../../../../utils/layout_manager.dart';
-import '../../../../utils/theme_manager.dart';
-
+import '../../../view_layer.dart';
 class QuestionBox extends StatelessWidget {
   const QuestionBox({super.key, required this.question});
 

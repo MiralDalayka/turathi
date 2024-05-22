@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/custom_text_form.dart';
 
-class PersdonalDetilsScreen extends StatefulWidget {
-  const PersdonalDetilsScreen({super.key});
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
+
+//page to view all user info
+class PersonalDetailsScreen extends StatefulWidget {
+  const PersonalDetailsScreen({super.key});
 
   @override
-  State<PersdonalDetilsScreen> createState() => _PersdonalDetilsScreenState();
+  State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
 }
 
-class _PersdonalDetilsScreenState extends State<PersdonalDetilsScreen> {
+class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   SignUpController signUpController = SignUpController();
   TextController textController = TextController();
   String name = "", role = "", emailAddress = "", phoneNu = "";

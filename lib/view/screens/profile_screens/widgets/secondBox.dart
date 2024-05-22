@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-
-import 'package:turathi/utils/layout_manager.dart';
-
-import 'package:turathi/utils/theme_manager.dart';
-
-import '../../../../utils/Router/const_router_names.dart';
+import 'package:turathi/view/view_layer.dart';
 
 
-class SecondBox extends StatefulWidget {
-  const SecondBox({super.key});
+class SecondBoxWidget extends StatefulWidget {
+  const SecondBoxWidget({super.key});
 
   @override
-  State<SecondBox> createState() => _secondBox();
+  State<SecondBoxWidget> createState() => _secondBox();
 }
 
-class _secondBox extends State<SecondBox> {
+class _secondBox extends State<SecondBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

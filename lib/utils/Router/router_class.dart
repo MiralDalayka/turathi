@@ -1,37 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/SignIn/Signup.dart';
-import 'package:turathi/view/screens/SignIn/signin.dart';
-import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
-import 'package:turathi/view/screens/admin_screens/events_admin.dart';
-import 'package:turathi/view/screens/admin_screens/places_admin.dart';
-import 'package:turathi/view/screens/profile_screens/screens/notification/notification_page.dart';
-import 'package:turathi/view/screens/profile_screens/screens/aboutus_page.dart';
-import 'package:turathi/view/screens/profile_screens/screens/change_info.dart';
-import 'package:turathi/view/screens/profile_screens/screens/delete_user.dart';
-import 'package:turathi/view/screens/profile_screens/screens/personalDetils_screen.dart';
+import '../../core/data_layer.dart';
+import '../../view/view_layer.dart';
 
-import '../../core/models/event_model.dart';
-import '../../core/models/question_model.dart';
-import '../../view/screens/add_data_screens/add_event_page.dart';
-import '../../view/screens/add_data_screens/add_place_page.dart';
-import '../../view/screens/admin_screens/admin_home_page.dart';
-import '../../view/screens/admin_screens/admin_signin_screen.dart';
-import '../../view/screens/admin_screens/edit_place_admin.dart';
-import '../../view/screens/admin_screens/place_reports.dart';
-import '../../view/screens/admin_screens/reports_screen.dart';
-import '../../view/screens/admin_screens/requests_screen.dart';
-import '../../view/screens/admin_screens/widgets/view_pdf.dart';
-import '../../view/screens/community_screens/question_view.dart';
-import '../../view/screens/events_screens/event_details.dart';
-import '../../view/screens/events_screens/view_all_events.dart';
-import '../../view/screens/placesdetails_screens/details_place.dart';
-import '../../view/screens/placesdetails_screens/report_screen.dart';
-import '../../view/screens/profile_screens/screens/added_places.dart';
-import '../../view/screens/profile_screens/screens/request_to_be_expert.dart';
-import '../../view/screens/splach_screen/splach_screen.dart';
-import '../../view/widgets/custom_bottom_nav_bar.dart';
 
 class MyRouter {
   static Route generateRoute(RouteSettings settings) {
@@ -43,12 +13,12 @@ class MyRouter {
 
       case eventsAdminRoute:
         {
-          return _route(eventsAdmin());
+          return _route(EventsAdmin());
         }
 
       case placesAdminRoute:
         {
-          return _route(placesAdmin());
+          return _route(PlacesAdmin());
         }
 
       case aboutUsScreen:
@@ -61,17 +31,16 @@ class MyRouter {
           return _route(LogIn());
         }
 
-      case deleteuserpage:
+      case deleteUserPage:
         {
           return _route(DeleteUser());
         }
 
       case personalDetilsScreen:
         {
-          return _route(PersdonalDetilsScreen());
+          return _route(PersonalDetailsScreen());
         }
 
-      // NotificationPage
 
       case notificationPage:
         {
@@ -153,7 +122,7 @@ class MyRouter {
             placeId: arg,
           ));
         }
-      //////////////////////////////////admin
+      //admin routes
       case signInAdminRoute:
         {
           return _route(const AdminSignIn());

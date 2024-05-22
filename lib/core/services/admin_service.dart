@@ -1,34 +1,33 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
-import 'package:turathi/core/models/admin_model.dart';
-import 'package:turathi/core/models/notification_model.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/core/models/request_model.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
+import '../data_layer.dart';
 
-import '../../utils/shared.dart';
 
 class AdminService {
-  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  // collection names
   final String _collectionName = "admins";
   final String _reportCollectionName = "reports";
   final String _requestCollectionName = "requests";
   final String _placeCollectionName = "places";
   final String _userCollectionName = "users";
-  final FilesStorageService _filesStorageService = FilesStorageService();
-  final Set<String> _placesIds = <String>{};
 
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  final FilesStorageService _filesStorageService = FilesStorageService();
+
+  // List of placeIds that have a report.
+  final Set<String> _placesIds = <String>{};
   Set<String> get placesIds => _placesIds;
 
+  //sign in for admin using adminId and password
   Future<bool> signIn(String adminId, String password) async {
+    // get admin model from firebase store
     AdminModel? adminModel = await _getAdmin(adminId);
 
     if (adminModel != null && adminModel.password != null) {
       String? passwordFromDb = adminModel.password;
-
+      //check if the password is correct
+      // by hashing it and compare with the store password
       if (Crypt(passwordFromDb!).match(password)) {
         return true;
       }
@@ -36,6 +35,7 @@ class AdminService {
     return false;
   }
 
+  // get all places
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData = await _fireStore
         .collection(_placeCollectionName)
@@ -59,26 +59,7 @@ class AdminService {
     return placeList;
   }
 
-  Future<ReportModel> getReportByPlaceId(String placeId) async {
-    QuerySnapshot reportData = await _fireStore
-        .collection(_reportCollectionName)
-        .where('placeId', isEqualTo: placeId)
-        .get();
-    ReportModel tempModel = ReportModel.empty();
-
-    if (reportData.docs.isNotEmpty) {
-      Map<String, dynamic> data = {};
-
-      data["reportId"] = reportData.docs[0].get("reportId");
-      data["reasons"] = reportData.docs[0].get("reasons");
-      data["userId"] = reportData.docs[0].get("userId");
-      data["placeId"] = reportData.docs[0].get("placeId");
-
-      tempModel = ReportModel.fromJson(data);
-    }
-    return tempModel;
-  }
-
+  //get all reports
   Future<ReportList> getReports() async {
     QuerySnapshot reportsData = await _fireStore
         .collection(_reportCollectionName)
@@ -96,6 +77,8 @@ class AdminService {
       data["reasons"] = item.get("reasons");
       data["userId"] = item.get("userId");
       data["placeId"] = item.get("placeId");
+
+      // add the place id of the report to _placesIds list
       _placesIds.add(data["placeId"]);
       tempModel = ReportModel.fromJson(data);
 
@@ -104,6 +87,7 @@ class AdminService {
     return reportList;
   }
 
+  // get all users requests to be an expert
   Future<RequestList> getRequests() async {
     QuerySnapshot requestsData = await _fireStore
         .collection(_requestCollectionName)
@@ -127,6 +111,7 @@ class AdminService {
     return requestList;
   }
 
+// accept or reject the user request to be an expert
   Future<void> updateRequestStatus(
       {required RequestModel requestModel,
       required RequestStatus requestStatus}) async {
@@ -138,12 +123,18 @@ class AdminService {
     _fireStore
         .collection(_requestCollectionName)
         .doc(id)
+        // update the request status
         .update({'status': requestStatus.name}).whenComplete(() {
+      // if admin accept the request , the user will be updated to expert
       if (requestStatus.name == RequestStatus.accepted.name) {
         updateUserRoleToExpert(id: requestModel.userId!);
-      } else if (requestStatus.name == RequestStatus.rejected.name) {
+      }
+      // if admin reject the request , the request will be deleted from database
+      else if (requestStatus.name == RequestStatus.rejected.name) {
         deleteRequest(requestModel: requestModel);
-      } else {
+      }
+      // else the user will be notified with his request status (data warning,,,,)
+      else {
         notifyUser(requestModel.userId!,
             "your request status is ${requestStatus.name}");
       }
@@ -153,6 +144,7 @@ class AdminService {
     });
   }
 
+  // delete the request from database
   Future<void> deleteRequest({required RequestModel requestModel}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_requestCollectionName)
@@ -164,14 +156,16 @@ class AdminService {
         .doc(id)
         .delete()
         .whenComplete(() {
+          // delete the pdf file for the deleted request
       _filesStorageService.deleteFile(userId: requestModel.userId!);
+      // notify user
       notifyUser(requestModel.userId!, "your request to be expert is rejected");
       log("delete request done");
     }).catchError((error) {
       log(error.toString());
     });
   }
-
+// update user role to expert in database
   Future<void> updateUserRoleToExpert({required String id}) async {
     QuerySnapshot requestData = await _fireStore
         .collection(_userCollectionName)
@@ -182,15 +176,15 @@ class AdminService {
         .collection(_userCollectionName)
         .doc(userId)
         .update({'role': UsersRole.expert.name}).whenComplete(() {
+          // notify user
       notifyUser(id, "your role is expert");
       log("update user role done");
     }).catchError((error) {
       log(error.toString());
     });
   }
-
-  Future<void> updatePlace(
-      {required PlaceModel placeModel}) async {
+// update place data in database
+  Future<void> updatePlace({required PlaceModel placeModel}) async {
     log(placeModel.toJson().toString());
     QuerySnapshot placesData = await _fireStore
         .collection(_placeCollectionName)
@@ -207,9 +201,9 @@ class AdminService {
     }).catchError((error) {
       log(error.toString());
     });
-
   }
 
+  // change the place visibility
   Future<void> updatePlaceVisibility(
       {required String placeId, required bool isVisible}) async {
     QuerySnapshot placesData = await _fireStore
@@ -228,6 +222,7 @@ class AdminService {
     });
   }
 
+  // when admin change the place visibility ,the related reports will be deleted
   Future<void> deleteReports(List<ReportModel> reports) async {
     for (ReportModel mode in reports) {
       QuerySnapshot requestData = await _fireStore
@@ -239,6 +234,7 @@ class AdminService {
     }
   }
 
+  // send notifications for user
   Future<void> notifyUser(String userId, String text) async {
     NotificationModel notificationModel =
         NotificationModel(userId: userId, text: text);

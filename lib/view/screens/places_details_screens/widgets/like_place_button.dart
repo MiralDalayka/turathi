@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/place_model.dart';
-import '../../../../utils/layout_manager.dart';
-import '../../../../utils/shared.dart';
-import '../../../../utils/theme_manager.dart';
-
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 class LikeButton extends StatefulWidget {
   final PlaceModel placeModel;
   final Function onLike;

@@ -1,14 +1,8 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/core/services/place_service.dart';
+import '../data_layer.dart';
 
-import '../../utils/shared.dart';
-import '../functions/calculate_distanceInKm.dart';
-import '../models/place_model.dart';
 
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
@@ -47,7 +41,7 @@ class PlaceProvider extends ChangeNotifier {
   Future<void> _getPlaces() async {
     _placeList = await _placeService
         .getPlaces()
-        .whenComplete(() => {log("Provider get places")});
+        .whenComplete(() {log("Provider get places");});
   }
 
   Future<PlaceModel> updatePlace(
@@ -89,7 +83,7 @@ class PlaceProvider extends ChangeNotifier {
     log("INDEX $index");
 
     PlaceModel temp = await _placeService.likePlace(
-        id!, _placeList.places[index].likesList!.length);
+        id, _placeList.places[index].likesList!.length);
     _placeList.places[index] = temp;
     await getMostPopularPlaces();
     notifyListeners();
@@ -101,7 +95,7 @@ class PlaceProvider extends ChangeNotifier {
         _placeList.places.indexWhere((element) => element.placeId == id);
 
     PlaceModel temp = await _placeService.disLikePlace(
-        id!, _placeList.places[index].likesList!.length);
+        id, _placeList.places[index].likesList!.length);
     _placeList.places[index] = temp;
 
     await getMostPopularPlaces();

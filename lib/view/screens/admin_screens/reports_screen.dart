@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import '../../../utils/Router/const_router_names.dart';
-import '../../../utils/theme_manager.dart';
 
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
+
+//page to  view all reports related to chosen place
+//with an action to hide the place visibility
 class ReportsScreen extends StatefulWidget {
   const ReportsScreen({super.key});
 

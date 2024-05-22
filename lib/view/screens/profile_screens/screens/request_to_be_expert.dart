@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/request_model.dart';
-import 'package:turathi/core/providers/request_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
-import '../../../../utils/theme_manager.dart';
-
+//page to upload a pdf file includes the required info to be an expert
 class RequestToBeExpert extends StatefulWidget {
   const RequestToBeExpert({super.key});
 
@@ -20,7 +17,6 @@ class RequestToBeExpert extends StatefulWidget {
 class _RequestToBeExpertState extends State<RequestToBeExpert> {
   String? msg;
   File? file;
-  // RequestProvider? _provider;
 
   @override
   Widget build(BuildContext context) {

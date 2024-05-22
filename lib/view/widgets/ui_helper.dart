@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
 
 snackBarFunction({required String msg, context}) {
   return ScaffoldMessenger.of(context)

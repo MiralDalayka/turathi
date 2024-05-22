@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider_widget.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//widget that shows the place images as slider
 class ImageSliderWidget extends StatefulWidget {
   ImageSliderWidget({super.key});
 
@@ -15,15 +15,9 @@ class ImageSliderWidget extends StatefulWidget {
 class _ImageSliderWidgetState extends State<ImageSliderWidget> {
   PlaceList? popularPlaces;
 
-  // getPopPlaces()async{
-  //   popularPlaces =await placesProvider.getMostPopularPlaces();
-  //
-  // }
   @override
   Widget build(BuildContext context) {
     PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
-    //future widget
-    //
     return FutureBuilder(
         future: placesProvider.getMostPopularPlaces(),
         builder: (context, snapshot) {

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turathi/core/models/report_model.dart';
+import '../data_layer.dart';
 
 class ReportService {
 
@@ -8,6 +8,7 @@ class ReportService {
   final String _collectionName = "reports";
 
 
+  // add report about place to database
   Future<String> addReport(ReportModel model) async {
     _fireStore
         .collection(_collectionName)

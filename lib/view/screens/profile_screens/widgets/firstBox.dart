@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
 
-class firstBox extends StatefulWidget {
-  const firstBox({super.key});
+class FirstBoxWidget extends StatefulWidget {
+  const FirstBoxWidget({super.key});
 
   @override
-  State<firstBox> createState() => FirstBox();
+  State<FirstBoxWidget> createState() => FirstBox();
 }
 
-class FirstBox extends State<firstBox> {
+class FirstBox extends State<FirstBoxWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,7 +114,7 @@ class FirstBox extends State<firstBox> {
                 onTap: () {
        
                  
-                    Navigator.of(context).pushNamed(deleteuserpage);
+                    Navigator.of(context).pushNamed(deleteUserPage);
               
 
                 },

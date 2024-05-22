@@ -1,15 +1,11 @@
-import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
-import '../../../utils/lib_organizer.dart';
-
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
+//page ti view the place info with actions
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
 
@@ -249,37 +245,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   },
                                   placeModel: widget.placeModel,
                                 ),
-                                // child: IconButton(
-                                //   onPressed: () async {
-                                //     if (widget.placeModel.likesList!
-                                //         .contains(sharedUser.id)) {
-                                //       widget.placeModel =
-                                //           await placeProvider.dislikePost(
-                                //               widget.placeModel.placeId!);
-                                //     } else {
-                                //       widget.placeModel =
-                                //           await placeProvider.likePlace(
-                                //               widget.placeModel.placeId!);
-                                //     }
-                                //   },
-                                //   icon: SizedBox(
-                                //     width: LayoutManager.widthNHeight0(
-                                //             context, 1) *
-                                //         0.045,
-                                //     height: LayoutManager.widthNHeight0(
-                                //             context, 1) *
-                                //         0.045,
-                                //     child: Image.asset(
-                                //       widget.placeModel.likesList!
-                                //               .contains(sharedUser.id)
-                                //           ? "assets/images/img_png/like_filled.png"
-                                //           : "assets/images/img_png/like.png",
-                                //       color: ThemeManager.primary,
-                                //     ),
-                                //   ),
-                                //   splashColor: Colors.transparent,
-                                //   highlightColor: Colors.transparent,
-                                // ),
+
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),
@@ -340,7 +306,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ),
                         ),
-                        defaultButton3(
+                        defaultButton(
                           text: 'Visit Place',
                           width: LayoutManager.widthNHeight0(context, 1) * 0.36,
                           borderRadius: 18,

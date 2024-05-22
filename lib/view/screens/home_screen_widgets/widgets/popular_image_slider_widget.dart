@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/place_model.dart';
-
-import '../../../../utils/Router/const_router_names.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
 class PopularPlaceWidget extends StatelessWidget {
   const PopularPlaceWidget({super.key, required this.placeModel});

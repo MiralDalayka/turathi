@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:provider/provider.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
 class AddedCard extends StatefulWidget {
   const AddedCard({
@@ -37,7 +34,7 @@ class _AddedCardState extends State<AddedCard> {
 
   @override
   Widget build(BuildContext context) {
-    PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
+
 
     return GestureDetector(
       onTap: widget.onPress,

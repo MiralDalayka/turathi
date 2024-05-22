@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
 
   @override
-  State<AboutUsScreen> createState() => _AboutusState();
+  State<AboutUsScreen> createState() => _AboutUsState();
 }
 
-class _AboutusState extends State<AboutUsScreen> {
+class _AboutUsState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

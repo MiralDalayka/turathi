@@ -1,9 +1,6 @@
 
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-
+import 'package:turathi/view/view_layer.dart';
 class SmallImage extends StatelessWidget {
   const SmallImage({
     super.key,

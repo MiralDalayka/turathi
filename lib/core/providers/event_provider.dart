@@ -1,9 +1,8 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/services/event_service.dart';
+import '../data_layer.dart';
+
 
 class EventProvider extends ChangeNotifier {
   final EventService _eventService = EventService();

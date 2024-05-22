@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/question_provider.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/add_button.dart';
 
-import '../../../core/models/question_model.dart';
-import '../../../utils/layout_manager.dart';
-import 'widgets/question_box.dart';
-import 'widgets/question_dialog.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+
+
+
+
+//page to view users questions
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
 

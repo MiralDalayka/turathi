@@ -1,13 +1,8 @@
-
-
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/admin_service.dart';
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
 
-import 'package:turathi/utils/lib_organizer.dart';
-
-import 'package:turathi/view/widgets/SignFormField.dart';
 
 class AdminSignIn extends StatefulWidget {
   const AdminSignIn({super.key});
@@ -138,7 +133,7 @@ class _AdminSignInState extends State<AdminSignIn> {
 
                           bool t =await service.signIn(_idController.text, _passController.text);
                           log(    t.toString());
-                          //nav to home
+
                           if(t) {
                             AdminCheck=true;
                             Navigator.of(context).pushReplacementNamed(homeAdminRoute);

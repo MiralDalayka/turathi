@@ -1,7 +1,4 @@
 const String initRoute = '/';
-// const String loginRoute = '/login';
-// const String forgetPasswordRoute = '/login/forgetPassword';
-// const String signUpRoute = '/signUp';
 const String bottomNavRoute = '/bottomScreen';
 const String homeRoute = '/bottomScreen/home';
 const String eventsRoute = '/bottomScreen/home/EventsScreen';
@@ -31,7 +28,7 @@ const String personalDetilsScreen =
 const String changeInfo = '/bottomScreen/profileScreen/ChangeInfo';
 const String signIn = '/LogIn';
 const String signUp = '/SingUp';
-const String deleteuserpage = '/bottomScreen/profileScreen/DeleteUser';
+const String deleteUserPage = '/bottomScreen/profileScreen/DeleteUser';
 
 
 const String commentsPlaceRoute = '/bottomScreen/-/DetailsScreen/CommentsPlace';
@@ -40,11 +37,10 @@ const String requestToBeExpertRoute = '/bottomScreen/Profile/RequestToBeExpert';
 const String editPlaceRoute =
     '/bottomScreen/profileScreen/AddedPlaces/EditPlace';
 
-/////////////////////
-//admin
+
+//admin screens
 const String signInAdminRoute = '/signInAdmin';
 const String homeAdminRoute = '/signInAdmin/home';
-//add to routers
 const String allReportsAdminRoute = '/signInAdmin/home/allReportsAdminRoute';
 const String placeReportsAdminRoute =
     '/signInAdmin/home/allReportsAdminRoute/PlaceReportsScreen';

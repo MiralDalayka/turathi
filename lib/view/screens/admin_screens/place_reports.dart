@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import '../../../utils/theme_manager.dart';
 
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
+
+//page to view reported places
+//view the place info and the number of reports
 class PlaceReportsScreen extends StatefulWidget {
   const PlaceReportsScreen({super.key, required this.reportList});
 

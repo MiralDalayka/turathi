@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/shared.dart';
-import '../../../utils/Router/const_router_names.dart';
-import '../../../utils/layout_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//welcome page ,first page in the app
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -19,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-// userService.signOut();
     Timer(
       const Duration(seconds: 3),
       () async {

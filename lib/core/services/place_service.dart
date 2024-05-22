@@ -1,20 +1,19 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/core/services/notification_service.dart';
+import '../data_layer.dart';
 
-import '../../utils/shared.dart';
 
 class PlaceService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "places";
   final FilesStorageService _filesStorageService = FilesStorageService();
   final NotificationService _notificationService = NotificationService();
+
+  // ad place to database
   Future<PlaceModel> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
+    // upload the images to FirebaseStorage
     model.images = await _filesStorageService
         .uploadImages(
             imageType: ImageType.placesImages.name,
@@ -26,8 +25,6 @@ class PlaceService {
           .add(model.toJson())
           .whenComplete(() {
         _notificationService.notifyUsers(model.latitude!, model.longitude!);
-
-        /////
         log("Add Place Done");
       });
     });
@@ -35,6 +32,7 @@ class PlaceService {
     return model;
   }
 
+  //check if the place is exist before adding new one
   Future<bool> placeExists(String title) async {
     final querySnapshot = await _fireStore
         .collection(_collectionName)
@@ -44,11 +42,12 @@ class PlaceService {
     return querySnapshot.docs.isNotEmpty;
   }
 
+  // get places from database
   Future<PlaceList> getPlaces() async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
-        .where('isVisible', isEqualTo: true)
-        .orderBy('like', descending: true)
+        .where('isVisible', isEqualTo: true) // return only the visible places
+        .orderBy('like', descending: true) // order the list by the number of likes
         .get()
         .whenComplete(() {
       log("getPlaces done");
@@ -75,6 +74,7 @@ class PlaceService {
       data["like"] = item.get("like");
       data["likesList"] = item.get("likesList");
       tempModel = PlaceModel.fromJson(data);
+      // get the images from FirebaseStorage and assign them to the images list
       tempModel.images = await _filesStorageService.getImages(
           imageType: ImageType.placesImages.name,
           folderName: tempModel.placeId!);
@@ -84,6 +84,7 @@ class PlaceService {
     return placeList;
   }
 
+  // update place data in database
   Future<PlaceModel> updatePlace(
       {required PlaceModel placeModel, required List<XFile> images}) async {
     QuerySnapshot placesData = await _fireStore
@@ -110,6 +111,7 @@ class PlaceService {
     return placeModel;
   }
 
+  // delete the place from database
   Future<void> deletePlace({required PlaceModel placeModel}) async {
     try {
       QuerySnapshot placesData = await FirebaseFirestore.instance
@@ -121,7 +123,13 @@ class PlaceService {
       await FirebaseFirestore.instance
           .collection(_collectionName)
           .doc(placeId)
-          .delete();
+          .delete()
+          .whenComplete(() async {
+            // delete the place images from FirebaseStorage
+        await _filesStorageService.deleteImages(
+            imageType: ImageType.placesImages.name,
+            folderName: placeModel.placeId!);
+      });
 
       log("Place deleted successfully");
     } catch (error) {
@@ -130,6 +138,7 @@ class PlaceService {
     }
   }
 
+  // get the place by its id
   Future<PlaceModel> getPlaceById(String id) async {
     QuerySnapshot placeData = await _fireStore
         .collection(_collectionName)
@@ -152,12 +161,15 @@ class PlaceService {
     data["likesList"] = placeData.docs[0].get("likesList");
 
     tempModel = PlaceModel.fromJson(data);
+    // get the images from FirebaseStorage and assign them to the images list
+
     tempModel.images = tempModel.images = await _filesStorageService.getImages(
         imageType: ImageType.placesImages.name, folderName: tempModel.placeId!);
 
     return tempModel;
   }
 
+  // add like to place
   Future<PlaceModel> likePlace(String id, int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
@@ -168,8 +180,9 @@ class PlaceService {
     try {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
-          'likesList': FieldValue.arrayUnion([sharedUser.id]),
-          'like': likes + 1,
+          'likesList': FieldValue.arrayUnion([sharedUser.id]), // add the user id to the likesList
+          'like': likes + 1, // increment the likes number by one
+          // change the place state to TrustWorthy if the number of likes greater than  or equal 5
           if (placesData.docs[0].get("like") >= 5)
             'state': PlaceState.TrustWorthy.name
         },
@@ -182,6 +195,7 @@ class PlaceService {
     return await getPlaceById(id);
   }
 
+  // remove like from place
   Future<PlaceModel> disLikePlace(String id, int likes) async {
     QuerySnapshot placesData = await _fireStore
         .collection(_collectionName)
@@ -191,10 +205,11 @@ class PlaceService {
     try {
       await FirebaseFirestore.instance.collection('places').doc(placeId).update(
         {
-          'likesList': FieldValue.arrayRemove([sharedUser.id]),
-          'like': likes - 1,
+          'likesList': FieldValue.arrayRemove([sharedUser.id]), // remove the user id from the likesList
+          'like': likes - 1, // decrement the likes number by one
+          // change the place state to RegularPlace if the number of likes greater than  or equal 5
           if (placesData.docs[0].get("like") < 5)
-            'state': PlaceState.NewPlace.name
+            'state': PlaceState.RegularPlace.name
         },
       ).whenComplete(() {
         log("disLikePlace : ${placeId}");

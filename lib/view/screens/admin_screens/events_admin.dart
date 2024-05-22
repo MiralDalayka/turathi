@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/admin_screens/edit_event.dart';
-import 'package:turathi/view/widgets/event_card.dart';
-
-class eventsAdmin extends StatelessWidget {
-  const eventsAdmin({Key? key});
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
+//page to view all events to the admin
+class EventsAdmin extends StatelessWidget {
+  const EventsAdmin({Key? key});
 
   @override
   Widget build(BuildContext context) {

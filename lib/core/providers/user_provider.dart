@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
-
-import 'package:turathi/core/models/user_model.dart';
-
-import 'package:turathi/core/services/user_service.dart';
 import 'dart:developer';
-
-import 'package:turathi/utils/lib_organizer.dart';
+import '../data_layer.dart';
 
 class UserProvider extends ChangeNotifier {
   final UserService _userService = UserService();
@@ -44,20 +39,20 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> favPlace(String id) async {
-    await _userService.favPlace(id).whenComplete(() {
+    await _userService.addFavoritePlace(id).whenComplete(() {
       sharedUser.favList?.add(id);
     });
     notifyListeners();
   }
 
   Future<void> removeFavPlace(String id) async {
-    await _userService.removeFavPlace(id).whenComplete(() {
+    await _userService.removeFavoritePlace(id).whenComplete(() {
       sharedUser.favList?.remove(id);
     });
     notifyListeners();
   }
 
-  Future<String> deleteUserprovider() async {
+  Future<String> deleteUserProvider() async {
     try {
       await _userService.deleteUser();
       notifyListeners();

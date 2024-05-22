@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+
+//page to remove user account
 class DeleteUser extends StatefulWidget {
   const DeleteUser({Key? key});
 
@@ -87,7 +87,7 @@ class _DeleteUser extends State<DeleteUser> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      userProvider.deleteUserprovider();
+                                      userProvider.deleteUserProvider();
 
                                      
                                       Navigator.of(context)

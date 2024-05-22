@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/notification_model.dart';
+import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/core/providers/notification_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//page to view user the notification such as new place added, admin response
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
