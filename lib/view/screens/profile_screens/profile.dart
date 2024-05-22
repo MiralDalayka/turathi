@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/profile_screens/widgets/firstBox.dart';
-import 'package:turathi/view/screens/profile_screens/widgets/secondBox.dart';
-import 'package:turathi/view/screens/profile_screens/widgets/thirdBox.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
-import '../../../utils/shared.dart';
 
+//page that provide actions on his profile and actions in the app
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key});
 
@@ -96,15 +93,15 @@ class _ProfileScreen extends State<ProfileScreen> {
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.08,
                   ),
-                  const firstBox(),
+                  const FirstBoxWidget(),
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.045,
                   ),
-                  const SecondBox(),
+                  const SecondBoxWidget(),
                   SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.045,
                   ),
-                  const thirdBox(),
+                  const ThirdBoxWidget(),
                 ],
               ),
             ),

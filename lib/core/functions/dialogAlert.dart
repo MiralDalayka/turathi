@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import '../../view/view_layer.dart';
 
 // show a custom dialog with specific message to the user
 Widget showCustomAlertDialog(BuildContext context, String message) {

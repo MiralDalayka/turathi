@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:turathi/utils/shared.dart';
+
 
 class GetCurrentLocation {
   // return user current location

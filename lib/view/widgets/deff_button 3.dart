@@ -1,9 +1,8 @@
-// ignore: duplicate_ignore
-// ignore: file_names
-// ignore_for_file: file_names
+
 
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
+
 
 Widget defaultButton3({
   double width = double.infinity,

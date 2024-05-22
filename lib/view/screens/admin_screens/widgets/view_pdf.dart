@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-// import 'package:share_plus/share_plus.dart';
+
+import '../../../view_layer.dart';
 
 
+//view the pdf certificate user provided to be an expert
 class PdfViewPage extends StatefulWidget {
   const PdfViewPage({super.key, required this.path});
   final String path;

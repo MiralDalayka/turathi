@@ -1,14 +1,8 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
-import 'package:turathi/core/models/admin_model.dart';
-import 'package:turathi/core/models/notification_model.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/core/models/request_model.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import '../../utils/shared.dart';
+import '../data_layer.dart';
+
 
 class AdminService {
   // collection names

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turathi/core/models/comment_model.dart';
+import '../data_layer.dart';
 
 class CommentService {
 

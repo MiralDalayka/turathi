@@ -1,15 +1,11 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/picking_files.dart';
-import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/core/services/google_map_add_place.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import '../../widgets/custom_text_form.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//form to fill the event data
 class AddNewEvent extends StatefulWidget {
   const AddNewEvent({super.key});
 
@@ -32,7 +28,7 @@ class _AddNewEventState extends State<AddNewEvent> {
   List<double>? data;
   List<XFile>? images;
 
-
+// pick the event date
   Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(
         context: context,

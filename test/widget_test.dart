@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:turathi/core/models/user_model.dart';
-
-import 'package:turathi/utils/lib_organizer.dart';
+import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
 
 void main() {

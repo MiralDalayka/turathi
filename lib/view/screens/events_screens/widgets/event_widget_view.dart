@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/models/event_model.dart';
-import '../../../../utils/Router/const_router_names.dart';
-import '../../../../utils/layout_manager.dart';
-import '../../../../utils/theme_manager.dart';
-import '../../../widgets/ui_helper.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
+
 
 class ViewEvent extends StatelessWidget {
   ViewEvent({

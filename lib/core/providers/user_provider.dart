@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
-
-import 'package:turathi/core/models/user_model.dart';
-
-import 'package:turathi/core/services/user_service.dart';
 import 'dart:developer';
-
-import 'package:turathi/utils/lib_organizer.dart';
+import '../data_layer.dart';
 
 class UserProvider extends ChangeNotifier {
   final UserService _userService = UserService();
@@ -57,7 +52,7 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> deleteUserprovider() async {
+  Future<String> deleteUserProvider() async {
     try {
       await _userService.deleteUser();
       notifyListeners();

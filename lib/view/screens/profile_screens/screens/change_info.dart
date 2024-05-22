@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//page to change user info
 class ChangeInfo extends StatefulWidget {
   const ChangeInfo({Key? key});
 

@@ -1,5 +1,7 @@
-import 'package:turathi/core/models/user_model.dart';
+
 import 'package:uuid/uuid.dart';
+
+import '../core/data_layer.dart';
 
 
 bool checkUser=false;//this is to check the user if is null or not when he sign in

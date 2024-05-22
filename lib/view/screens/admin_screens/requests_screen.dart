@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/admin_screens/widgets/request_widget.dart';
 
-import '../../../core/models/request_model.dart';
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
 
+//page to view all users requests
 class RequestScreen extends StatefulWidget {
   const RequestScreen({super.key});
 

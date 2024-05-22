@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:turathi/core/models/report_model.dart';
-import 'package:turathi/core/services/report_service.dart';
+import '../data_layer.dart';
 
 class ReportProvider extends ChangeNotifier {
   final ReportService _reportService = ReportService();

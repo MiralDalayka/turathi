@@ -1,19 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/location_screens/location_Screen.dart';
-import 'package:turathi/view/widgets/deff_button%203.dart';
+import '../../view/view_layer.dart';
+import '../data_layer.dart';
 
-import '../../view/screens/location_screens/body_Places.dart';
 
 // open the map to select the any location
 class NearestMap extends StatefulWidget {

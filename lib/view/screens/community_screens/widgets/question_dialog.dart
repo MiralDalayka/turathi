@@ -3,11 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/picking_files.dart';
-import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/core/providers/question_provider.dart';
-import 'package:turathi/utils/theme_manager.dart';
-
+import 'package:turathi/core/data_layer.dart';
+import '../../../view_layer.dart';
 class QuestionDialog extends StatefulWidget {
   const QuestionDialog({Key? key}) : super(key: key);
 

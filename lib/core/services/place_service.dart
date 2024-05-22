@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/core/services/notification_service.dart';
+import '../data_layer.dart';
 
-import '../../utils/shared.dart';
 
 class PlaceService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

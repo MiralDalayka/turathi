@@ -1,15 +1,11 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/core/services/google_map_add_place.dart';
-import 'package:turathi/utils/lib_organizer.dart';
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
 
-import '../../../core/functions/picking_files.dart';
-import '../../widgets/custom_text_form.dart';
-
+//form to edit the added place data
 class EditPlace extends StatefulWidget {
   const EditPlace({super.key,required this.placeModel});
   final PlaceModel placeModel;

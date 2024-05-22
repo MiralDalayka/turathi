@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/utils/shared.dart';
+import '../data_layer.dart';
 
 class QuestionService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

@@ -1,14 +1,9 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/location_screens/body_places.dart';
-import 'package:turathi/view/screens/location_screens/location_header.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//main page to view the places with actions:change the location
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
 
@@ -49,7 +44,6 @@ int currentTab = 0;
 
   @override
   Widget build(BuildContext context) {
-     var provider  = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

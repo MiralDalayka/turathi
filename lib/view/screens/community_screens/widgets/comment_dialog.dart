@@ -2,10 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialogAlert.dart';
-import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/core/providers/comment_provider.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import '../../../view_layer.dart';
 
 class CommentDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();

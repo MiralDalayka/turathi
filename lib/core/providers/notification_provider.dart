@@ -1,47 +1,7 @@
-// import 'dart:developer';
-
-// import 'package:flutter/cupertino.dart';
-// import 'package:turathi/core/models/notification_model.dart';
-// import 'package:turathi/core/services/notification_service.dart';
-
-// class NotificationProvider extends ChangeNotifier {
-
-
-//   final NotificationService _notificationService = NotificationService();
-
-//    final NotificationService notificationService = NotificationService();
-
-//   NotificationList _NotificationList = NotificationList(notifications: []);
-  
-//   Future<NotificationList> get notificationList async {
-
-//     if (_NotificationList.notifications.isEmpty) {
-//       await _getNotification();
-//     }
-//     log(_NotificationList.notifications.length.toString());
-//     return _NotificationList;
-
-    
-//   }
-
-//   Future<NotificationList> getUserNotifications(String userId) async {
-//     return await _notificationService.getUserNotifications(userId);
-//   }
-
-//    Future<void> _getNotification() async {
-//     _NotificationList = await _notificationService
-//         .getUserNotifications("")//////here add userID
-//         .whenComplete(() => {log("Provider get notifications")});
-//   }
-
-// }
-
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-import 'package:turathi/core/models/notification_model.dart';
-import 'package:turathi/core/services/notification_service.dart';
-import 'package:turathi/utils/lib_organizer.dart';
+import '../data_layer.dart';
+
 
 class NotificationProvider extends ChangeNotifier {
   final NotificationService _notificationService = NotificationService();

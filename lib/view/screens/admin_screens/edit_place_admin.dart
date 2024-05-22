@@ -1,13 +1,11 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/core/services/google_map_add_place.dart';
-import 'package:turathi/utils/lib_organizer.dart';
 
-import '../../widgets/custom_text_form.dart';
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
 
+//edit place info from admin page
 class EditPlaceAdmin extends StatefulWidget {
   const EditPlaceAdmin({super.key, required this.placeModel});
   final PlaceModel placeModel;
@@ -73,7 +71,7 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                 ),
                 TextFormFieldWidget(
                   controller: address!,
-                  hintText: "edit addredd",
+                  hintText: "edit address",
                   labelText: 'Address',
                 ),
                 TextFormFieldWidget(

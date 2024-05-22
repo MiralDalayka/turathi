@@ -1,10 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turathi/core/models/request_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-
-import '../../utils/shared.dart';
+import '../data_layer.dart';
 
 class RequestService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

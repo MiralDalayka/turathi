@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/view/view_layer.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});

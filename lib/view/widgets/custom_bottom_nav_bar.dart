@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/view/screens/favorite_screens/favorite_screen.dart';
-import 'package:turathi/view/screens/location_screens/location_Screen.dart';
-import 'package:turathi/view/screens/profile_screens/profile.dart';
 
-import '../screens/community_screens/community_screen.dart';
-import '../screens/home_screen_widgets/home_screen.dart';
+import 'package:turathi/view/view_layer.dart';
+
 
 class NavigationDestination {
   final IconData icon;

@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/view/widgets/small_Image.dart';
-import '../../../core/models/comment_model.dart';
-import '../../../core/models/question_model.dart';
-import '../../../core/providers/comment_provider.dart';
-import '../../../utils/layout_manager.dart';
-import '../../../utils/theme_manager.dart';
-import '../../widgets/add_button.dart';
-import '../../widgets/comment_card.dart';
-import 'widgets/comment_dialog.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//a page to view selected question and it's all comments
 class QuestionView extends StatefulWidget {
   const QuestionView({super.key, required this.question});
 

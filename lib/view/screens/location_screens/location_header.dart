@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geocode/geocode.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/functions/dialogAlert.dart';
-import 'package:turathi/core/functions/get_user_city.dart';
-import 'package:turathi/core/services/google_map_api.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
-import '../../../core/providers/user_provider.dart';
-import '../../../utils/shared.dart';
-
+//widget to provide user it's location and either update his location or choose any location
 class HeaderPart extends StatefulWidget {
   HeaderPart({super.key, required this.tab});
 

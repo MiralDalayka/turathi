@@ -1,11 +1,9 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:turathi/core/functions/get_current_location.dart';
-import 'package:turathi/core/models/user_model.dart';
-import '../../utils/shared.dart';
+import '../data_layer.dart';
+
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

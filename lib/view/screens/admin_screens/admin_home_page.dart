@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/admin_screens/widgets/buttons.dart';
+import '../../view_layer.dart';
 
+//Admin homepage provides actions,data view.
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
 

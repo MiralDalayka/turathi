@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:turathi/utils/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
+import '../data_layer.dart';
+
 
 import '../functions/get_current_location.dart';
 // open google map to track the destination

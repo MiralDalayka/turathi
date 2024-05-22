@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
+
 import 'package:intl/intl.dart';
-import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/comment_circle.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
 class CommentCard extends StatelessWidget {
   final CommentModel commentModel;

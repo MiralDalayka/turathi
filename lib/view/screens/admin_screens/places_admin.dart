@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/widgets/place_card.dart';
 
-class placesAdmin extends StatefulWidget {
-  const placesAdmin({Key? key}) : super(key: key);
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
+//view all added places
+class PlacesAdmin extends StatefulWidget {
+  const PlacesAdmin({Key? key}) : super(key: key);
 
   @override
-  _placesAdminState createState() => _placesAdminState();
+  _PlacesAdminState createState() => _PlacesAdminState();
 }
 
-class _placesAdminState extends State<placesAdmin> {
+class _PlacesAdminState extends State<PlacesAdmin> {
   late Future<PlaceList> _placesFuture;
 
   @override

@@ -2,13 +2,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/event_model.dart';
-import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/core/services/google_map_add_place.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import '../../../core/functions/picking_files.dart';
-import '../../widgets/custom_text_form.dart';
+import '../../../core/data_layer.dart';
+import '../../view_layer.dart';
 
+//admin event edit page
 class EditEvent extends StatefulWidget {
   const EditEvent({Key? key, required this.eventModel}) : super(key: key);
   final EventModel eventModel;

@@ -1,17 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/place_model.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/screens/placesdetails_screens/details_place.dart';
-import 'package:turathi/view/widgets/place_card.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
-import '../../../utils/Router/const_router_names.dart';
-
+//page to view all places based on location -selected or user location
 class BodyPlaces extends StatefulWidget {
   final String tab;
   final int dis_num;

@@ -4,7 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
-import 'package:turathi/core/services/user_service.dart';
+import '../data_layer.dart';
+
 
 class SignUpController{
 

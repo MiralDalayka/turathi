@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/utils/theme_manager.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
 
-class thirdBox extends StatefulWidget {
-  const thirdBox({super.key});
+class ThirdBoxWidget extends StatefulWidget {
+  const ThirdBoxWidget({super.key});
 
   @override
-  State<thirdBox> createState() => _thirdBox();
+  State<ThirdBoxWidget> createState() => _thirdBox();
 }
 
-class _thirdBox extends State<thirdBox> {
+class _thirdBox extends State<ThirdBoxWidget> {
   FirebaseAuth auth = FirebaseAuth.instance;
   UserService userService = UserService();
 

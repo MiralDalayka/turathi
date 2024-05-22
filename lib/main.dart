@@ -1,21 +1,10 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/comment_provider.dart';
-import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/core/providers/notification_provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/core/providers/question_provider.dart';
-import 'package:turathi/core/providers/report_provider.dart';
-import 'package:turathi/core/providers/request_provider.dart';
-import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/firebase_options.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
-import 'package:turathi/utils/Router/router_class.dart';
-
-
-import 'core/functions/get_current_location.dart';
+import 'package:turathi/view/view_layer.dart';
+import 'core/data_layer.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,19 +19,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // GetCurrentLocation().performNearbySearch(context);
 
     return MultiProvider(
-      // providers: [
-      //   ChangeNotifierProvider.value(value: PlaceProvider()),
-      //   ChangeNotifierProvider.value(value: EventProvider()),
-      //   ChangeNotifierProvider.value(value: QuestionProvider()),
-      //   ChangeNotifierProvider.value(value: NotificationProvider()),
-      //   ChangeNotifierProvider.value(value: UserProvider()),
-      //   ChangeNotifierProvider.value(value: ReportProvider()),
-      //   ChangeNotifierProvider.value(value: RequestProvider()),
-      //   ChangeNotifierProvider.value(value: CommentProvider()),
-      // ],
       providers: [
         ChangeNotifierProvider<PlaceProvider>(create: (_) => PlaceProvider()),
         ChangeNotifierProvider<EventProvider>(create: (_) => EventProvider()),

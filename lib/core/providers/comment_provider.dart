@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/core/services/comment_service.dart';
+import '../data_layer.dart';
 
 
 

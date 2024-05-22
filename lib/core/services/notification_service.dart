@@ -1,10 +1,7 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turathi/core/functions/calculate_distanceInKm.dart';
-import 'package:turathi/core/models/notification_model.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/providers/user_provider.dart';
-import 'package:turathi/utils/shared.dart';
+import '../data_layer.dart';
+
 
 class NotificationService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

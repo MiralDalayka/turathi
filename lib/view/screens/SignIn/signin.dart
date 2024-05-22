@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:turathi/core/controllers/login_controller.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/widgets/SignFormField.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+
+//page to sign in the user with his email and password
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 

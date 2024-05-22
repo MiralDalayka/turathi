@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/models/comment_model.dart';
-import 'package:turathi/core/providers/comment_provider.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/widgets/comment_card.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//page to view all comments on selected place
 class CommentsPlace extends StatefulWidget {
   final PlaceModel place;
 

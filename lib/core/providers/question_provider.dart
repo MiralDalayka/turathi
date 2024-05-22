@@ -1,9 +1,8 @@
 import 'dart:developer';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/core/models/question_model.dart';
-import 'package:turathi/core/services/file_storage_service.dart';
-import 'package:turathi/core/services/question_service.dart';
+import '../data_layer.dart';
+
 
 class QuestionProvider extends ChangeNotifier {
   final QuestionService _questionService = QuestionService();

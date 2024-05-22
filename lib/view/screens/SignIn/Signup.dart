@@ -1,15 +1,10 @@
-// ignore_for_file: unused_local_variable, annotate_overrides
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:turathi/core/controllers/signup_controller.dart';
-import 'package:turathi/core/functions/get_current_location.dart';
-import 'package:turathi/core/models/user_model.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/Router/const_router_names.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/SignFormField.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//page to create a new account in the app
 class SingUp extends StatefulWidget {
   const SingUp({super.key});
 

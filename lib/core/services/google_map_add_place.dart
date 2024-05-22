@@ -1,15 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/shared.dart';
-import 'package:turathi/utils/theme_manager.dart';
-import 'package:turathi/view/widgets/deff_button%203.dart';
+import '../../view/view_layer.dart';
+import '../data_layer.dart';
+
 
 // open the map to select the place location
 class AddPlaceMap extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter_map_math/flutter_geo_math.dart';
 // get distance in kilometers between two positions
 double getDistanceInKm(
     {required double lat1,

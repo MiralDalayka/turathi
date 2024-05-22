@@ -1,20 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/place_provider.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/add_data_screens/edit_place_page.dart';
-import 'package:turathi/view/widgets/added_card.dart';
-import 'package:turathi/view/widgets/place_card.dart';
-
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
+//page to view the added places by the user
 class AddedPlaces extends StatelessWidget {
   const AddedPlaces({super.key});
 
-  //  @override
-  // void initState() {
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {

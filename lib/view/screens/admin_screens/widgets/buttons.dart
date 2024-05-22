@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/layout_manager.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-//test
+
+import '../../../../core/data_layer.dart';
+import '../../../view_layer.dart';
+
+
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({super.key, required this.txt, required this.routeName});
   final String routeName;

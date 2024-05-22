@@ -1,15 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/core/services/user_service.dart';
-import 'package:turathi/utils/lib_organizer.dart';
-import 'package:turathi/view/screens/events_screens/widgets/event_widget_view.dart';
-import 'package:turathi/view/screens/home_screen_widgets/widgets/popular_image_slider.dart';
-import '../../../core/models/event_model.dart';
-import '../../widgets/add_button.dart';
+import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/view/view_layer.dart';
 
+//user home page includes popular places,events,notifications and, actions such as:adding place,navigate through the app
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 

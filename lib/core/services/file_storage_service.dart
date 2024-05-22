@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:turathi/utils/shared.dart';
+import '../data_layer.dart';
+
 
 class FilesStorageService {
   final FirebaseStorage _storageInstance =
