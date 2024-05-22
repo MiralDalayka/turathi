@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/utils/shared.dart';
 
+// Model class representing a NotificationModel
 class NotificationModel {
   String? id;
   String? userId;
@@ -12,6 +13,7 @@ class NotificationModel {
     date = DateTime.now();
   }
 
+//This is a factory Constractor to create NotificationModel instance from JSON obj
   NotificationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];
@@ -19,6 +21,8 @@ class NotificationModel {
     date = (json["date"] as Timestamp).toDate();
   }
 
+
+//convert the NotificationModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -28,6 +32,9 @@ class NotificationModel {
     return data;
   }
 }
+
+
+//  class representing a list of Notifications
 class NotificationList {
   List<NotificationModel> notifications;
 

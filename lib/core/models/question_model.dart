@@ -1,5 +1,7 @@
 import 'package:turathi/utils/shared.dart';
 
+
+// Model class representing a QuestionModel
 class QuestionModel {
   String? id;
   List<String>? images;
@@ -14,6 +16,7 @@ class QuestionModel {
 
   }
 
+//This is a factory Constractor to create QuestionModel instance from JSON obj
   QuestionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
 
@@ -22,6 +25,7 @@ class QuestionModel {
     writerName = json['writer'];
   }
 
+//convert the QuestionModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -32,6 +36,8 @@ class QuestionModel {
     return data;
   }
 }
+
+//  class representing a list of Questions
 class QuestionList {
   List<QuestionModel> questions;
 

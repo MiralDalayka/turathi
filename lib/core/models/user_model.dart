@@ -2,6 +2,7 @@ import '../../utils/shared.dart';
 
 enum UsersRole { user, expert }
 
+// Model class representing a UserModel
 class UserModel {
   String? id;
   String? name;
@@ -26,6 +27,7 @@ class UserModel {
     favList=[];
   }
 
+//This is a factory Constractor to create UserModel instance from JSON obj
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -39,6 +41,8 @@ class UserModel {
 
 
   }
+
+//convert the UserModel instance to a JSON object
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -55,6 +59,8 @@ class UserModel {
     return data;
   }
 }
+
+//  class representing a list of Users
 
 class UserList {
   List<UserModel> users;

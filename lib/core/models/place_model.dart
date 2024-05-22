@@ -6,6 +6,7 @@ import '../../utils/shared.dart';
 
 enum PlaceState { NewPlace, TrustWorthy, RegularPlace }
 
+// Model class representing a PlaceModel
 class PlaceModel {
   String? userId;
   String? placeId;
@@ -43,6 +44,7 @@ class PlaceModel {
     isVisible = true;
   }
 
+//This is a factory Constractor to create PlaceModel instance from JSON obj
   PlaceModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     placeId = json['placeId'];
@@ -58,6 +60,7 @@ class PlaceModel {
     latitude = json['latitude'];
   }
 
+//convert the PlaceModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['userId'] = this.userId;
@@ -76,6 +79,8 @@ class PlaceModel {
   }
 }
 
+
+//  class representing a list of Places
 class PlaceList {
   List<PlaceModel> places;
 
