@@ -11,9 +11,11 @@ class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "users";
 
+  // create new account
   Future<String> addUser(UserModel model, String password) async {
     bool mounted = false;
     try {
+      // add user to FirebaseAuth
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: model.email!, password: password);
     } catch (e) {
@@ -30,6 +32,7 @@ class UserService {
         }
       }
     }
+    // add user to database
     _fireStore
         .collection(_collectionName)
         .add(model.toJson())
@@ -41,11 +44,13 @@ class UserService {
     return "Done";
   }
 
+  //update user data in database
   Future<UserModel> updateUser(String id) async {
     String? newEmail = sharedUser.email;
 
     if (newEmail != null) {
       try {
+        // update user email in FirebaseAuth
         var currentUser = FirebaseAuth.instance.currentUser;
         if (currentUser?.email != newEmail) {
           await currentUser?.updateEmail(newEmail);
@@ -59,13 +64,15 @@ class UserService {
     } else {
       print("New email address is null. Cannot update.");
     }
-///////here update the user info in the firestore
+
+    // get user from database
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: id)
         .get();
     String userId = userData.docs[0].id;
 
+    // update the user info in the database
     try {
       await FirebaseFirestore.instance.collection('users').doc(userId).update(
         {
@@ -82,15 +89,19 @@ class UserService {
     return await getUserById(id);
   }
 
+  // update user location to the current location
   Future<void> updateUserLocation() async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
         .where('id', isEqualTo: sharedUser.id)
         .get();
     String userId = userData.docs[0].id;
+
+    // get user current location
     GetCurrentLocation getCurrentLocation = GetCurrentLocation();
     Position? currentLocation = await getCurrentLocation.getCurrentLocation();
     try {
+      // update user location in database
       await FirebaseFirestore.instance.collection('users').doc(userId).update(
         {
           'latitude': currentLocation!.latitude,
@@ -98,18 +109,23 @@ class UserService {
         },
       ).whenComplete(() {
         log("user current location updated successfully");
+        // update the user location in the application
         sharedUser.latitude = currentLocation.latitude;
-        sharedUser.longitude= currentLocation.longitude;
+        sharedUser.longitude = currentLocation.longitude;
       });
     } on FirebaseException catch (e) {
       log(e.toString());
     }
   }
 
+  // sign in to the application
   Future<bool> signIn(String email, String password) async {
     try {
+      // sign in using FirebaseAuth
       UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+
+      // get the user info from database
       sharedUser = (await getUserByEmail(email))!;
       log(credential.user.toString());
       return true;
@@ -121,10 +137,12 @@ class UserService {
     }
   }
 
+  //sign out from application
   signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
+  // get user from database by his email
   Future<UserModel?> getUserByEmail(String email) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)
@@ -132,8 +150,7 @@ class UserService {
         .get();
 
     if (userData.docs.isEmpty) {
-      // Email not found in the DB
-
+      // user with this email is not found in the database
       return null;
     }
 
@@ -151,6 +168,7 @@ class UserService {
     return UserModel.fromJson(data);
   }
 
+  // get all users from database
   Future<UserList> getUsers() async {
     QuerySnapshot usersData =
         await _fireStore.collection(_collectionName).get().whenComplete(() {
@@ -177,7 +195,9 @@ class UserService {
     return userList;
   }
 
-  Future<void> favPlace(String id) async {
+  // user can add place to his favorite places list
+  // add it to database
+  Future<void> addFavoritePlace(String id) async {
     try {
       QuerySnapshot userData = await _fireStore
           .collection(_collectionName)
@@ -197,7 +217,9 @@ class UserService {
     }
   }
 
-  Future<void> removeFavPlace(String id) async {
+  // user can remove place from his favorite places list
+  // remove it from database
+  Future<void> removeFavoritePlace(String id) async {
     try {
       QuerySnapshot userData = await _fireStore
           .collection(_collectionName)
@@ -216,31 +238,19 @@ class UserService {
     }
   }
 
+  // delete user account
   Future<void> deleteUser() async {
-    //delete from Auth
     try {
-      print("object${FirebaseAuth.instance.currentUser?.uid}");
-      print("qqqqqq->${FirebaseAuth.instance.currentUser!}");
+      //delete user from FirebaseAuth
       await FirebaseAuth.instance.currentUser!.delete();
-
-      //  print("FirebaseAuth.instance.currentUser${FirebaseAuth.instance.currentUser?.email}");
-
-      print('Successfully deleted user');
     } catch (error) {
-      print('Error deleting user 1: $error');
+      log('Error deleting user 1: $error');
     }
-
-    //here delete from the firestore
-    var db = FirebaseFirestore.instance;
-    var usersRef = db.collection('users');
-
-    usersRef.where('id', isEqualTo: sharedUser.id).get().then((querySnapshot) {
+    // delete from the database
+    await FirebaseFirestore.instance.collection('users')
+        .where('id', isEqualTo: sharedUser.id).get().then((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
         var doc = querySnapshot.docs.first;
-        var docId = doc.id;
-        print("Document ID for current user: $docId");
-
-        print("Done user: $docId");
         doc.reference.delete().then((_) {
           print('Successfully deleted document');
         }).catchError((error) {
@@ -254,6 +264,7 @@ class UserService {
     });
   }
 
+  // get user by Id from database
   Future<UserModel> getUserById(String Id) async {
     QuerySnapshot userData = await _fireStore
         .collection(_collectionName)

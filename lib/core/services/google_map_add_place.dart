@@ -11,6 +11,7 @@ import 'package:turathi/utils/shared.dart';
 import 'package:turathi/utils/theme_manager.dart';
 import 'package:turathi/view/widgets/deff_button%203.dart';
 
+// open the map to select the place location
 class AddPlaceMap extends StatefulWidget {
   const AddPlaceMap({Key? key}) : super(key: key);
 
@@ -20,8 +21,8 @@ class AddPlaceMap extends StatefulWidget {
 
 class _AddPlaceMapState extends State<AddPlaceMap> {
   late GoogleMapController mapController;
-  late CameraPosition cam_pos =
-  CameraPosition(target: LatLng(sharedUser.latitude!,sharedUser.longitude!), zoom: 13);
+  late CameraPosition cam_pos = CameraPosition(
+      target: LatLng(sharedUser.latitude!, sharedUser.longitude!), zoom: 13);
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -119,12 +120,8 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-//                     log("From done button ");
-// log("$addPlaceLocatonLat and $addPlaceLocatonLong");
-                    // placesProvider.createAddPlacesList(
-                    //     addPlaceLocatonLat, addPlaceLocatonLong);
-
-                    Navigator.of(context).pop([addPlaceLocatonLat,addPlaceLocatonLong]);
+                    Navigator.of(context)
+                        .pop([addPlaceLocatonLat, addPlaceLocatonLong]);
                   },
                   borderWidth: 0,
                 ),
@@ -146,49 +143,12 @@ class _AddPlaceMapState extends State<AddPlaceMap> {
       markerAdded = true;
     });
 
-    print(
-        '--- Latitude: ${tappedPoint.latitude}, --- Longitude: ${tappedPoint.longitude}');
-
     addPlaceLocatonLat = tappedPoint.latitude;
     addPlaceLocatonLong = tappedPoint.longitude;
-
-    //////back
   }
 
   @override
   void initState() {
-    // _initMap();
     super.initState();
   }
-
-  // Future<void> _initMap() async {
-  //   await _getCurrentLocation().then((value) {});
-  // }
-  //
-  // Future<Position> _getCurrentLocation() async {
-  //   try {
-  //     await Permission.locationWhenInUse.request();
-  //     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //
-  //     if (!serviceEnabled) {
-  //       throw 'Location services are disabled.';
-  //     }
-  //
-  //     LocationPermission permission = await Geolocator.checkPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       permission = await Geolocator.requestPermission();
-  //       if (permission == LocationPermission.denied) {
-  //         throw 'Location permission denied.';
-  //       }
-  //     }
-  //
-  //     if (permission == LocationPermission.deniedForever) {
-  //       throw 'Location permission permanently denied.';
-  //     }
-  //
-  //     return await Geolocator.getCurrentPosition();
-  //   } catch (e) {
-  //     throw e.toString();
-  //   }
-  // }
 }

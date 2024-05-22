@@ -4,9 +4,7 @@ import 'package:turathi/core/models/comment_model.dart';
 
 import '../../utils/shared.dart';
 
-
-
-enum PlaceState { NewPlace, TrustWorthy } //
+enum PlaceState { NewPlace, TrustWorthy, RegularPlace }
 
 class PlaceModel {
   String? userId;
@@ -24,12 +22,9 @@ class PlaceModel {
   double? longitude;
   double? latitude;
 
-  PlaceModel.empty(
-
-      ){
+  PlaceModel.empty() {
     placeId = '-1';
   }
-  
 
   PlaceModel(
       {required this.title,
@@ -38,13 +33,12 @@ class PlaceModel {
       required this.longitude,
       required this.latitude,
       this.status,
-        this.likesList
-      }) {
+      this.likesList}) {
     placeId = uuid.v4();
     userId = sharedUser.id;
     status = "Open To Visit";
     state = PlaceState.NewPlace.name;
-    likesList=[];
+    likesList = [];
     like = 0;
     isVisible = true;
   }
@@ -81,8 +75,6 @@ class PlaceModel {
     return data;
   }
 }
-
-
 
 class PlaceList {
   List<PlaceModel> places;

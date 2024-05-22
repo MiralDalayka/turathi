@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/functions/picking_files.dart';
 import 'package:turathi/core/models/event_model.dart';
 import 'package:turathi/core/providers/event_provider.dart';
-import 'package:turathi/core/services/google_map_addplace.dart';
+import 'package:turathi/core/services/google_map_add_place.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 import '../../widgets/custom_text_form.dart';
 

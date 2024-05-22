@@ -8,6 +8,7 @@ class ReportService {
   final String _collectionName = "reports";
 
 
+  // add report about place to database
   Future<String> addReport(ReportModel model) async {
     _fireStore
         .collection(_collectionName)

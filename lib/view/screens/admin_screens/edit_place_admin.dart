@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:turathi/core/services/admin_service.dart';
-import 'package:turathi/core/services/google_map_addplace.dart';
+import 'package:turathi/core/services/google_map_add_place.dart';
 import 'package:turathi/utils/lib_organizer.dart';
 
 import '../../widgets/custom_text_form.dart';

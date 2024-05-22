@@ -15,6 +15,7 @@ import 'package:turathi/view/widgets/deff_button%203.dart';
 
 import '../../view/screens/location_screens/body_Places.dart';
 
+// open the map to select the any location
 class NearestMap extends StatefulWidget {
   const NearestMap({Key? key}) : super(key: key);
 
@@ -24,9 +25,8 @@ class NearestMap extends StatefulWidget {
 
 class _NearestMapState extends State<NearestMap> {
   late GoogleMapController mapController;
-  late CameraPosition cam_pos =
-      CameraPosition(target: LatLng(sharedUser.latitude!,sharedUser.longitude!), zoom: 13);
-
+  late CameraPosition cam_pos = CameraPosition(
+      target: LatLng(sharedUser.latitude!, sharedUser.longitude!), zoom: 13);
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -35,14 +35,12 @@ class _NearestMapState extends State<NearestMap> {
   MapType currentMapType = MapType.hybrid;
   bool markerAdded = false;
 
-
   @override
   Widget build(BuildContext context) {
-    log("here!!!!");
-PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
+    PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
     return Scaffold(
       appBar: AppBar(
-           backgroundColor: ThemeManager.background,
+        backgroundColor: ThemeManager.background,
         leading: IconButton(
           onPressed: () {
             //locationRoute
@@ -128,17 +126,9 @@ PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
                   background: ThemeManager.primary,
                   textColor: ThemeManager.second,
                   onPressed: () {
-
-                    log("From done button ");
-                    //
-                    placeProvider.updatePosition(selectedNearestLat, selectedNearestLog);
+                    placeProvider.updatePosition(
+                        selectedNearestLat, selectedNearestLog);
                     Navigator.of(context).pop();
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => LocationPage(),
-                    //   ),
-                    // );
                   },
                   borderWidth: 0,
                 ),
@@ -160,49 +150,12 @@ PlaceProvider placeProvider = Provider.of<PlaceProvider>(context);
       markerAdded = true;
     });
 
-    // print(
-    //     'Latitude: ${tappedPoint.latitude}, Longitude: ${tappedPoint.longitude}');
     selectedNearestLat = tappedPoint.latitude;
     selectedNearestLog = tappedPoint.longitude;
-
-
-    //////back
   }
 
   @override
   void initState() {
-    // _initMap();
     super.initState();
   }
-
-  // Future<void> _initMap() async {
-  //   await _getCurrentLocation().then((value) {});
-  // }
-
-  // Future<Position> _getCurrentLocation() async {
-  //   try {
-  //     await Permission.locationWhenInUse.request();
-  //     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //
-  //     if (!serviceEnabled) {
-  //       throw 'Location services are disabled.';
-  //     }
-  //
-  //     LocationPermission permission = await Geolocator.checkPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       permission = await Geolocator.requestPermission();
-  //       if (permission == LocationPermission.denied) {
-  //         throw 'Location permission denied.';
-  //       }
-  //     }
-  //
-  //     if (permission == LocationPermission.deniedForever) {
-  //       throw 'Location permission permanently denied.';
-  //     }
-  //
-  //     return await Geolocator.getCurrentPosition();
-  //   } catch (e) {
-  //     throw e.toString();
-  //   }
-  // }
 }

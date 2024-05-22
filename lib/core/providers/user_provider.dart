@@ -44,14 +44,14 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> favPlace(String id) async {
-    await _userService.favPlace(id).whenComplete(() {
+    await _userService.addFavoritePlace(id).whenComplete(() {
       sharedUser.favList?.add(id);
     });
     notifyListeners();
   }
 
   Future<void> removeFavPlace(String id) async {
-    await _userService.removeFavPlace(id).whenComplete(() {
+    await _userService.removeFavoritePlace(id).whenComplete(() {
       sharedUser.favList?.remove(id);
     });
     notifyListeners();

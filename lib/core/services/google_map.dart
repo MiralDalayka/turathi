@@ -7,9 +7,9 @@ import 'package:turathi/utils/shared.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
-
 import '../functions/get_current_location.dart';
 
+// open google map to track the destination
 class MapScreenLocation extends StatefulWidget {
   const MapScreenLocation({Key? key, required this.lon, required this.lat})
       : super(key: key);
@@ -50,84 +50,23 @@ class _MapScreenState extends State<MapScreenLocation> {
   }
 
   Future<void> performNearbySearch() async {
-    // await _getCurrentLocation().then((currentPos) {
-    //   setState(() {
-        _launchMaps(
-            widget.lat, widget.lon, sharedUser.latitude!, sharedUser.longitude!);
-    //   }); //,
-    // }).catchError((error) {
-    //   showDialog(
-    //     context: context,
-    //     builder: (context) => AlertDialog(
-    //       title: Text('Error'),
-    //       content: Text('Failed to get current location: $error'),
-    //       actions: [
-    //         TextButton(
-    //           onPressed: () {
-    //             Navigator.of(context).pop();
-    //           },
-    //           child: Text('OK'),
-    //         ),
-    //       ],
-    //     ),
-    //   );
-    // });
+    _launchMaps(
+        widget.lat, widget.lon, sharedUser.latitude!, sharedUser.longitude!);
   }
 
   @override
   void initState() {
-    // _initMap();
     super.initState();
   }
 
-  // Future<void> _initMap() async {
-  //   await _getCurrentLocation().then((value) {}).catchError((error) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (context) => AlertDialog(
-  //         title: Text('Error'),
-  //         content: Text('Failed to get current location: $error'),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //             },
-  //             child: Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   });
-  // }
-
-  // Future<Position> _getCurrentLocation() async {
-  //   await Permission.locationWhenInUse.request();
-  //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   if (!serviceEnabled) {
-  //     throw 'Location services are disabled.';
-  //   }
-  //   LocationPermission permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //     if (permission == LocationPermission.denied) {
-  //       throw 'Location permission denied.';
-  //     }
-  //   }
-  //   if (permission == LocationPermission.deniedForever) {
-  //     throw 'Location permission permanently denied.';
-  //   }
-  //   return await Geolocator.getCurrentPosition();
-  // }
-
+  // connect with google map api
   void _launchMaps(double lat, double lon, double d, double a) async {
-    final double myLatitude = lat; // 32.494564056396484;
-    final double myLongitude = lon; //35.99126052856445  ;
-    final double destinationLatitude = d; //34.0522;
-    final double destinationLongitude = a; //-118.2437;
-    var url =
-    Uri.parse("https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
+    final double myLatitude = lat; // user latitude
+    final double myLongitude = lon; // user longitude
+    final double destinationLatitude = d; // place latitude
+    final double destinationLongitude = a; // place longitude
+    var url = Uri.parse(
+        "https://www.google.com/maps/dir/?api=1&origin=$myLatitude,$myLongitude&destination=$destinationLatitude,$destinationLongitude");
     await launchUrl(url);
-
   }
-
 }

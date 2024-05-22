@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/utils/layout_manager.dart';
 import 'package:turathi/utils/theme_manager.dart';
 
+// show a custom dialog with specific message to the user
 Widget showCustomAlertDialog(BuildContext context, String message) {
   return AlertDialog(
     backgroundColor: ThemeManager.primary,
@@ -21,7 +22,6 @@ Widget showCustomAlertDialog(BuildContext context, String message) {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-            
             },
             child: Text(
               'OK',
