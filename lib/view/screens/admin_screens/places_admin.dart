@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/data_layer.dart';
 import '../../view_layer.dart';
+
 //view all added places
 class PlacesAdmin extends StatefulWidget {
   const PlacesAdmin({Key? key}) : super(key: key);

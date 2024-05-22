@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:turathi/core/data_layer.dart';
 import '../../../view_layer.dart';
 
+// A stateless widget representing a dialog for writing comments
 class CommentDialog extends StatelessWidget {
   final TextEditingController commentController = TextEditingController();
   final String questionId;
@@ -13,6 +14,12 @@ class CommentDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String writeAComment = "Write a comment";
+    String hintPart = 'Share your ideas here...';
+    String cancel = 'Cancel';
+    String errorMsg = "Please write a comment before saving";
+    String save = 'Save';
+
     CommentProvider provider = Provider.of<CommentProvider>(context);
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -26,7 +33,7 @@ class CommentDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'Write a comment',
+              writeAComment,
               style: ThemeManager.textStyle,
               textAlign: TextAlign.center,
             ),
@@ -35,7 +42,7 @@ class CommentDialog extends StatelessWidget {
               maxLines: 5,
               controller: commentController,
               decoration: InputDecoration(
-                hintText: 'Share your ideas here...',
+                hintText: hintPart,
                 border: OutlineInputBorder(
                     borderSide: BorderSide(color: ThemeManager.primary)),
                 enabledBorder: OutlineInputBorder(
@@ -51,7 +58,7 @@ class CommentDialog extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Text(
-                    'Cancel',
+                    cancel,
                     style: ThemeManager.textStyle,
                   ),
                 ),
@@ -62,8 +69,7 @@ class CommentDialog extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return showCustomAlertDialog(
-                              context, "Please write a comment before saving");
+                          return showCustomAlertDialog(context, errorMsg);
                         },
                       );
                     } else {
@@ -76,7 +82,7 @@ class CommentDialog extends StatelessWidget {
                     }
                   },
                   child: Text(
-                    'Save',
+                    save,
                     style: ThemeManager.textStyle,
                   ),
                 ),

@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/data_layer.dart';
 import '../../../view_layer.dart';
+
+// A stateless widget representing a dialog for writing Question
 class QuestionDialog extends StatefulWidget {
   const QuestionDialog({Key? key}) : super(key: key);
 
@@ -22,6 +24,10 @@ class _QuestionDialogState extends State<QuestionDialog> {
 
   @override
   Widget build(BuildContext context) {
+    String writeQuestion='Write a question';
+    String hintFiled1='Title';
+    String hintField2='Ask your question here...';
+
     QuestionProvider questionProvider = Provider.of<QuestionProvider>(context);
     return Dialog(
       backgroundColor: ThemeManager.second,
@@ -36,7 +42,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Text(
-                'Write a question', // Change text here
+                writeQuestion, // Change text here
                 style: ThemeManager.textStyle,
                 textAlign: TextAlign.center,
               ),
@@ -44,7 +50,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
               TextField(
                 controller: title,
                 decoration: InputDecoration(
-                  hintText: 'Title',
+                  hintText: hintFiled1,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: ThemeManager.primary),
                   ),
@@ -58,7 +64,7 @@ class _QuestionDialogState extends State<QuestionDialog> {
                 maxLines: 5,
                 controller: text,
                 decoration: InputDecoration(
-                  hintText: 'Ask your question here...',
+                  hintText: hintField2,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: ThemeManager.primary),
                   ),
