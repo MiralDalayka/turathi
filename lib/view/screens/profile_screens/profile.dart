@@ -46,7 +46,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hi ${sharedUser.name ?? "Guest"}".toUpperCase(),
+                        "Hi ${sharedUser.name}".toUpperCase(),//?? "Guest"
                         style: TextStyle(
                           fontSize:
                               LayoutManager.widthNHeight0(context, 1) * 0.06,
@@ -98,11 +98,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                   ),
                   const firstBox(),
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.035,
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.045,
                   ),
                   const SecondBox(),
                   SizedBox(
-                    height: LayoutManager.widthNHeight0(context, 1) * 0.035,
+                    height: LayoutManager.widthNHeight0(context, 1) * 0.045,
                   ),
                   const thirdBox(),
                 ],
