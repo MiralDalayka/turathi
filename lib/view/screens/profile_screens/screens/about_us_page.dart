@@ -5,10 +5,10 @@ class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
 
   @override
-  State<AboutUsScreen> createState() => _AboutusState();
+  State<AboutUsScreen> createState() => _AboutUsState();
 }
 
-class _AboutusState extends State<AboutUsScreen> {
+class _AboutUsState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

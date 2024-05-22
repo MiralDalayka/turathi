@@ -245,37 +245,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   },
                                   placeModel: widget.placeModel,
                                 ),
-                                // child: IconButton(
-                                //   onPressed: () async {
-                                //     if (widget.placeModel.likesList!
-                                //         .contains(sharedUser.id)) {
-                                //       widget.placeModel =
-                                //           await placeProvider.dislikePost(
-                                //               widget.placeModel.placeId!);
-                                //     } else {
-                                //       widget.placeModel =
-                                //           await placeProvider.likePlace(
-                                //               widget.placeModel.placeId!);
-                                //     }
-                                //   },
-                                //   icon: SizedBox(
-                                //     width: LayoutManager.widthNHeight0(
-                                //             context, 1) *
-                                //         0.045,
-                                //     height: LayoutManager.widthNHeight0(
-                                //             context, 1) *
-                                //         0.045,
-                                //     child: Image.asset(
-                                //       widget.placeModel.likesList!
-                                //               .contains(sharedUser.id)
-                                //           ? "assets/images/img_png/like_filled.png"
-                                //           : "assets/images/img_png/like.png",
-                                //       color: ThemeManager.primary,
-                                //     ),
-                                //   ),
-                                //   splashColor: Colors.transparent,
-                                //   highlightColor: Colors.transparent,
-                                // ),
+
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 8),

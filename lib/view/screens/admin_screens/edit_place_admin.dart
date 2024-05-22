@@ -88,9 +88,6 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                 Text("State : ${widget.placeModel.state} ", style: style),
                 Text("Likes: ${widget.placeModel.likesList!.length}",
                     style: style),
-                // Text("latitude: ${widget.placeModel.latitude} ", style: style),
-                // Text("longitude: ${widget.placeModel.longitude} ",
-                    // style: style),
                 const SizedBox(
                   height: 10,
                 ),

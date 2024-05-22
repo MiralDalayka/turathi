@@ -16,24 +16,23 @@ class NavigationDestination {
 
 class NavigationBar extends StatelessWidget {
   final Color backgroundColor;
-  // final double height;
+
   final double elevation;
   final int selectedIndex;
   final Function(int) onDestinationSelected;
   final List<NavigationDestination> destinations;
-  // final TextStyle labelStyle;
+
   final double iconSize;
 
   const NavigationBar({
     super.key,
     required this.backgroundColor,
-    // required this.height,
+
     required this.elevation,
     required this.selectedIndex,
     required this.onDestinationSelected,
     required this.destinations,
     required this.iconSize,
-    // required this.labelStyle,
   });
 
   @override
@@ -100,7 +99,7 @@ class CustomeBottomNavBar extends StatelessWidget {
         child: Obx(
           () => NavigationBar(
             backgroundColor: Color(0xffF0F2F6),
-            // height: LayoutManager.widthNHeight0(context, 1)*0.05,
+
             elevation: 0,
             selectedIndex: controller.selectedIndex.value,
             onDestinationSelected: (index) {
@@ -116,10 +115,7 @@ class CustomeBottomNavBar extends StatelessWidget {
               NavigationDestination(icon: Icons.favorite_outline, index: 3),
               NavigationDestination(icon: Icons.person_outline, index: 4),
             ],
-            // labelStyle: TextStyle(
-            //   fontFamily: 'KohSantepheap',
-            //   fontWeight: FontWeight.bold,
-            // ),
+
               iconSize: LayoutManager.widthNHeight0(context, 1)*0.064, 
           ),
         ),

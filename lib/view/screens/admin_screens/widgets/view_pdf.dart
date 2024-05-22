@@ -43,9 +43,7 @@ class _PdfViewPageState extends State<PdfViewPage> {
           IconButton(
             icon: Icon(Icons.share),
             onPressed: () {
-              // if (widget.path.isNotEmpty) {
-              //   Share.shareFiles([widget.path], text: 'Sharing PDF Document');
-              // }
+
             },
           ),
         ],

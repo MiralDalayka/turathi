@@ -37,11 +37,10 @@ const String requestToBeExpertRoute = '/bottomScreen/Profile/RequestToBeExpert';
 const String editPlaceRoute =
     '/bottomScreen/profileScreen/AddedPlaces/EditPlace';
 
-/////////////////////
-//admin
+
+//admin screens
 const String signInAdminRoute = '/signInAdmin';
 const String homeAdminRoute = '/signInAdmin/home';
-//add to routers
 const String allReportsAdminRoute = '/signInAdmin/home/allReportsAdminRoute';
 const String placeReportsAdminRoute =
     '/signInAdmin/home/allReportsAdminRoute/PlaceReportsScreen';

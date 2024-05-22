@@ -125,14 +125,7 @@ log(widget.placeModel.title!);
                         'Location',
                         style: ThemeManager.textStyle
                             .copyWith(color: ThemeManager.primary
-                                // mapScreenOpened &&
-                                //         addPlaceLocatonLat != 0 &&
-                                //         addPlaceLocatonLong != 0
-                                //     ? Colors.grey
-                                //     : (addPlaceLocatonLat != 0 &&
-                                //             addPlaceLocatonLong != 0)
-                                //         ? Colors.grey
-                                //         : ThemeManager.primary,
+
                                 ),
                       ),
                     ),

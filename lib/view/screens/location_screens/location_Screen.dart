@@ -36,7 +36,6 @@ int currentTab = 0;
         setState(() {
           isTabControllerInitialized = true;
 
-          // log('selectedNearestLat: $selectedNearestLat, selectedNearestLog: $selectedNearestLog   \n,current long: $userNearestLog,current lat: $userNearestLat ');
         });
       }
     }
@@ -106,7 +105,7 @@ int currentTab = 0;
                             ),
                             const SizedBox(
                                 width:
-                                    4), // Add spacing between number and "Km"
+                                    4),
                             Text("Km",
                                 style: TextStyle(color: ThemeManager.primary)),
                           ],

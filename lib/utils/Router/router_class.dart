@@ -41,7 +41,6 @@ class MyRouter {
           return _route(PersonalDetailsScreen());
         }
 
-      // NotificationPage
 
       case notificationPage:
         {
@@ -123,7 +122,7 @@ class MyRouter {
             placeId: arg,
           ));
         }
-      //////////////////////////////////admin
+      //admin routes
       case signInAdminRoute:
         {
           return _route(const AdminSignIn());

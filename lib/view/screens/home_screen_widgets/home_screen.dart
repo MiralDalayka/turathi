@@ -211,13 +211,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: ThemeManager.second,
                     ));
                   }
-                  // if (snapshot.connectionState == ConnectionState.waiting) {
-                  //   return Center(child: CircularProgressIndicator());
-                  // } else if (snapshot.hasError) {
-                  //   return Center(child: Text('Error: ${snapshot.error}'));
-                  // } else
                   eventsList = data;
-                  print(">>..................${data.events}");
+
 
                   if (data.events.isNotEmpty) {
                     return Expanded(

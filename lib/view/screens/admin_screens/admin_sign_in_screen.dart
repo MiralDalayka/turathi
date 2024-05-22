@@ -133,7 +133,7 @@ class _AdminSignInState extends State<AdminSignIn> {
 
                           bool t =await service.signIn(_idController.text, _passController.text);
                           log(    t.toString());
-                          //nav to home
+
                           if(t) {
                             AdminCheck=true;
                             Navigator.of(context).pushReplacementNamed(homeAdminRoute);
