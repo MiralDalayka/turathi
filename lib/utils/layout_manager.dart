@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//This Class to make the Application Responsive 
 class LayoutManager{
  static double widthNHeight0(BuildContext context, int number) {
     if (number == 0) {

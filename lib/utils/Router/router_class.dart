@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/data_layer.dart';
 import '../../view/view_layer.dart';
 
-
+// Class responsible for generating routes in the application
 class MyRouter {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -171,11 +171,13 @@ class MyRouter {
     }
   }
 
+// Helper method to create a MaterialPageRoute
   static MaterialPageRoute _route(Widget child) {
     return MaterialPageRoute(builder: (_) => child);
   }
 }
 
+// Widget to display an undefined route error
 class UndefineRoute extends StatelessWidget {
   const UndefineRoute({Key? key, required this.routeName}) : super(key: key);
   final String routeName;

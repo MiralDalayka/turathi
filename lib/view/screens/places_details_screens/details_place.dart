@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/view/view_layer.dart';
-//page ti view the place info with actions
+
+//page to view the place info with actions
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({Key? key, required this.placeModel}) : super(key: key);
 

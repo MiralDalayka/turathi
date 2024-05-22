@@ -1,5 +1,7 @@
 import '../../utils/shared.dart';
 enum RequestStatus { accepted, rejected,waiting,dataWarning }
+
+// Model class representing a RequestModel
 class RequestModel {
   String? requestId;
   String? status;
@@ -18,12 +20,16 @@ class RequestModel {
     status = RequestStatus.waiting.name;
   }
 
+//This is a factory Constractor to create RequestModel instance from JSON obj
+
   RequestModel.fromJson(Map<String, dynamic> json) {
     requestId = json['requestId'];
     status = json['status'];
     certificate = json['certificate'];
     userId = json['userId'];
   }
+
+//convert the RequestModel instance to a JSON object
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -35,6 +41,7 @@ class RequestModel {
   }
 }
 
+//  class representing a list of Requests
 class RequestList {
   List<RequestModel> requests;
 

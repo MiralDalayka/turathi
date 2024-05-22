@@ -19,6 +19,8 @@ class _QuestionViewState extends State<QuestionView> {
 
   @override
   Widget build(BuildContext context) {
+    String noCommentsCase= "No Comments On This Place Yet";
+    String noCommentsCase2= "You're welcome to share your\n thoughts and comments!"; 
     var height = LayoutManager.widthNHeight0(context, 0) * 0.4;
     CommentProvider provider = Provider.of<CommentProvider>(context);
 
@@ -168,7 +170,7 @@ class _QuestionViewState extends State<QuestionView> {
                                     DefaultTextStyle(
                                       style: TextStyle(),
                                       child: Text(
-                                        "No Comments On This Place Yet",
+                                       noCommentsCase,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: ThemeManager.primary,
@@ -187,7 +189,7 @@ class _QuestionViewState extends State<QuestionView> {
                                     DefaultTextStyle(
                                       style: TextStyle(),
                                       child: Text(
-                                        "You're welcome to share your\n thoughts and comments!",
+                                       noCommentsCase2,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: ThemeManager.fontFamily,

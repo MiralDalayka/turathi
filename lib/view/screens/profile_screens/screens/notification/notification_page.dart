@@ -11,6 +11,7 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String appBarText='Notification ';
     NotificationList? notificationList;
     NotificationProvider notificationProvider = Provider.of<NotificationProvider>(context);
 
@@ -22,7 +23,7 @@ class NotificationPage extends StatelessWidget {
         centerTitle: true,
         backgroundColor: ThemeManager.background,
         title: Text(
-          'Notification ',
+          appBarText,
           style: ThemeManager.textStyle.copyWith(
             fontSize: LayoutManager.widthNHeight0(context, 1) * 0.05,
             fontWeight: FontWeight.bold,

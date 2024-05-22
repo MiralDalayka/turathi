@@ -9,7 +9,11 @@ class BodyPlaces extends StatefulWidget {
   final int dis_num;
   var dataList;
 
-  BodyPlaces({Key? key, required this.tab, required this.dis_num,required this.dataList})
+  BodyPlaces(
+      {Key? key,
+      required this.tab,
+      required this.dis_num,
+      required this.dataList})
       : super(key: key);
 
   @override
@@ -20,6 +24,11 @@ class _BodyPlacesState extends State<BodyPlaces> {
   bool get isNearestPlaceTab => widget.tab == "Nearest Place";
   bool get isMyLocationTab => widget.tab == "My Location";
   PlaceList? placesList;
+  String case2NoSelectedPlace = "You Have To Choose";
+  String case22NoSelectedPlace = "The Location You Want";
+
+  String case2NoPlaceNearestUserLoacation= "There IS No Places";
+  String case22NoPlaceNearestUserLoacation=  "Nearest Your Location";
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +40,7 @@ class _BodyPlacesState extends State<BodyPlaces> {
         MediaQuery.of(context).size.width ~/ totalWidth; //number of col
     final PlaceProvider placesProvider = Provider.of<PlaceProvider>(context);
 
-
     if (isMyLocationTab) {
-
       widget.dataList.addAll([sharedUser.latitude, sharedUser.longitude]);
     } else {
       widget.dataList.addAll([selectedNearestLat, selectedNearestLog]);
@@ -48,21 +55,21 @@ class _BodyPlacesState extends State<BodyPlaces> {
             children: [
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.02),
               Text(
-                "You Should Allow Access To",
+                case2NoSelectedPlace,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: ThemeManager.primary,
-                  fontFamily: "KohSantepheap",
+                  fontFamily: ThemeManager.fontFamily,
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
                 ),
               ),
               SizedBox(height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-              const Text(
-                "Your Location",
+              Text(
+                case22NoSelectedPlace,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontFamily: "KohSantepheap",
+                  fontFamily: ThemeManager.fontFamily,
                   fontSize: 16,
                 ),
               ),
@@ -137,22 +144,22 @@ class _BodyPlacesState extends State<BodyPlaces> {
                 SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.02),
                 Text(
-                  "There IS No Places",
+                 case2NoPlaceNearestUserLoacation,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: ThemeManager.primary,
-                    fontFamily: "KohSantepheap",
+                    fontFamily:ThemeManager.fontFamily,
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                   ),
                 ),
                 SizedBox(
                     height: LayoutManager.widthNHeight0(context, 1) * 0.025),
-                const Text(
-                  "Nearest Your Location",
+                 Text(
+                 case22NoPlaceNearestUserLoacation,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: "KohSantepheap",
+                    fontFamily: ThemeManager.fontFamily,
                     fontSize: 16,
                   ),
                 ),

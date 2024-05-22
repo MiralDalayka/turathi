@@ -15,13 +15,11 @@ class _HomeScreenState extends State<HomeScreen> {
   EventList? eventsList;
   UserService userService = UserService();
   String _greeting = '';
-  
 
   @override
   void initState() {
     super.initState();
     _setGreeting();
-
   }
 
   void _setGreeting() {
@@ -43,6 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String containerHeader = "Share Your Favourite Place With Us";
+    String popularPlaces = 'Popular Places';
+    String event = 'Events';
+    String seeAll = 'See All';
+    String noEventsCase= 'No Events are available';
     EventProvider eventProvider = Provider.of<EventProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               Icons.notifications_none_outlined,
               color: ThemeManager.primary,
-              // size:LayoutManager.widthNHeight0(context, 0) * 2,//here
             ),
             onPressed: () {
               Navigator.of(context).pushNamed(notificationPage);
@@ -78,13 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: ThemeManager.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.03,
-                  shadows: const [
-                    Shadow(
-                      color: Colors.grey,
-                      blurRadius: 1,
-                      offset: Offset(0, 1),
-                    ),
-                  ],
                 ),
               ),
               Text(
@@ -95,13 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.02,
                   letterSpacing: 4.5,
                   fontWeight: FontWeight.bold,
-                  shadows: const [
-                    Shadow(
-                      color: Colors.grey,
-                      blurRadius: 1,
-                      offset: Offset(0, 1),
-                    ),
-                  ],
                 ),
               ),
               SizedBox(
@@ -118,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      "Share Your Favourite Place With Us",
+                      containerHeader,
                       style: TextStyle(
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
@@ -128,9 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     AddButton(
                       onPressed: () {
-
-                          Navigator.of(context).pushNamed(addNewPlaceRoute);
-
+                        Navigator.of(context).pushNamed(addNewPlaceRoute);
                       },
                     )
                   ],
@@ -140,13 +126,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: LayoutManager.widthNHeight0(context, 0) * 0.014,
               ),
               Text(
-                'Popular Places',
+                popularPlaces,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: ThemeManager.fontFamily,
                   color: ThemeManager.primary,
                   fontSize: LayoutManager.widthNHeight0(context, 0) * 0.015,
-                
                 ),
               ),
               SizedBox(
@@ -160,16 +145,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Events',
+                    event,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: ThemeManager.fontFamily,
                       color: ThemeManager.primary,
                       fontSize:
                           LayoutManager.widthNHeight0(context, 0) * 0.0165,
-                      shadows: const [
-                      
-                      ],
+                      shadows: const [],
                     ),
                   ),
                   InkWell(
@@ -183,14 +166,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           right:
                               LayoutManager.widthNHeight0(context, 1) * 0.02),
                       child: Text(
-                        'See All',
+                        seeAll,
                         style: TextStyle(
                           fontWeight: FontWeight.w800,
                           fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                           fontSize:
                               LayoutManager.widthNHeight0(context, 0) * 0.0165,
-                        
                         ),
                       ),
                     ),
@@ -213,7 +195,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                   eventsList = data;
 
-
                   if (data.events.isNotEmpty) {
                     return Expanded(
                       child: SingleChildScrollView(
@@ -228,38 +209,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                   0.04,
                             ),
                             ViewEvent(
-                              eventModel: eventsList!.events[1],//change 1 to 0
+                              eventModel: eventsList!.events[1], //change 1 to 0
                               flag: false,
                             ),
                           ],
                         ),
                       ),
                     );
-                  }
-                  else {  return Padding(
-                    padding: EdgeInsets.only(
-                        top: LayoutManager.widthNHeight0(context, 1) * 0.2),
-                    child: Center(
-                      child: Text(
-                        'No Events are available',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: ThemeManager.fontFamily,
-                          color: ThemeManager.primary,
-                          shadows: const [
-                            Shadow(
-                              color: Colors.grey,
-                              blurRadius: 0.01,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
+                  } else {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                          top: LayoutManager.widthNHeight0(context, 1) * 0.2),
+                      child: Center(
+                        child: Text(
+                         noEventsCase,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: ThemeManager.fontFamily,
+                            color: ThemeManager.primary,
+                            shadows: const [
+                              Shadow(
+                                color: Colors.grey,
+                                blurRadius: 0.01,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-
-
-                }
+                    );
+                  }
                 },
               ),
             ],

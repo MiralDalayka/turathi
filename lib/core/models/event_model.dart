@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/utils/shared.dart';
 
+// Model class representing a EventModel
 class EventModel {
   String? id;
   String? name;
@@ -28,7 +29,7 @@ class EventModel {
 
 
   }
-
+//This is a factory Constractor to create EventModel instance from JSON obj
   EventModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -43,6 +44,7 @@ class EventModel {
 
   }
 
+//convert the EventModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -59,6 +61,7 @@ class EventModel {
   }
 }
 
+//  class representing a list of Events
 class EventList {
   List<EventModel> events;
 

@@ -17,7 +17,7 @@ class _LikeButtonState extends State<LikeButton> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        setState(() {
+        setState(() { // Call the onLike function when the button is pressed
           widget.onLike();
         });
       },
@@ -25,6 +25,8 @@ class _LikeButtonState extends State<LikeButton> {
         width: LayoutManager.widthNHeight0(context, 1) * 0.045,
         height: LayoutManager.widthNHeight0(context, 1) * 0.045,
         child: Image.asset(
+
+           // Show filled like icon if the current user has liked the place
           widget.placeModel.likesList!.contains(sharedUser.id)
               ? "assets/images/img_png/like_filled.png"
               : "assets/images/img_png/like.png",

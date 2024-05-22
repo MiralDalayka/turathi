@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:turathi/core/models/user_model.dart';
 import 'package:turathi/utils/shared.dart';
 
-class CommentModel {
-  String? id;
-  DateTime? date;
-  String? commentTxt;
-  String? writerName;
-  int? writtenByExpert;
-  String? placeId;
-  String? questionId;
+// Model class representing a comment
+class CommentModel { 
+  String? id; // Unique identifier for the comment
+  DateTime? date; // Timestamp of when the comment was created
+  String? commentTxt; // The text of the comment
+  String? writerName;// the creator of the comment
+  int? writtenByExpert; // to check of this comment written by expert or not 
+  String? placeId; // Identifier for the place
+  String? questionId;// Identifier for the question
 
   CommentModel(
       {
@@ -23,6 +24,7 @@ class CommentModel {
 
   }
 
+   //This is a factory Constractor to create CommentModel instance from JSON obj
   CommentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date =  (json["date"] as Timestamp).toDate();
@@ -33,6 +35,7 @@ class CommentModel {
     questionId = json['questionId'];
   }
 
+//convert the CommentModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
@@ -45,6 +48,9 @@ class CommentModel {
     return data;
   }
 }
+
+
+//  class representing a list of comments
 class CommentList {
   List<CommentModel> comments;
 

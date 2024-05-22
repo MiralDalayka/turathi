@@ -1,5 +1,6 @@
 import 'package:turathi/utils/shared.dart';
 
+// Model class representing a ReportModel
 class ReportModel {
   String? reportId;
   String? reasons;
@@ -15,6 +16,8 @@ class ReportModel {
     userId = sharedUser.id;
   }
 
+//This is a factory Constractor to create ReportModel instance from JSON obj
+
   ReportModel.fromJson(Map<String, dynamic> json) {
     reportId = json['reportId'];
     reasons = json['reasons'];
@@ -23,6 +26,8 @@ class ReportModel {
 
   }
 
+
+//convert the ReportModel instance to a JSON object
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['reportId'] = this.reportId;
@@ -34,6 +39,7 @@ class ReportModel {
   }
 }
 
+//  class representing a list of Reports
 class ReportList {
   List<ReportModel> reports;
 

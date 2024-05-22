@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:turathi/core/data_layer.dart';
 
 import '../../../view_layer.dart';
+
+//widget represents QuestionBox on the app
 class QuestionBox extends StatelessWidget {
   const QuestionBox({super.key, required this.question});
 
@@ -9,6 +11,8 @@ class QuestionBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String imageProfile="assets/images/img_png/imageProfile.png";
+    String userImage='assets/images/img_png/userProfile.png';
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
@@ -35,7 +39,7 @@ class QuestionBox extends StatelessWidget {
                                 LayoutManager.widthNHeight0(context, 0) * 0.17,
                            
                           )
-                        : Image.asset("assets/images/img_png/imageProfile.png"),
+                        : Image.asset(imageProfile),
                   )),
               SizedBox(
                 width: LayoutManager.widthNHeight0(context, 0) * 0.015,
@@ -80,7 +84,7 @@ class QuestionBox extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Image.asset(
-                            'assets/images/img_png/userProfile.png',
+                            userImage,
                             width:
                                 LayoutManager.widthNHeight0(context, 0) * 0.05,
                             height:

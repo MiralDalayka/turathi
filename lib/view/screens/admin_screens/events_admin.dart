@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/data_layer.dart';
 import '../../view_layer.dart';
+
 //page to view all events to the admin
 class EventsAdmin extends StatelessWidget {
   const EventsAdmin({Key? key});

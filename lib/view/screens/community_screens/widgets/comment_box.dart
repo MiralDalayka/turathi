@@ -3,7 +3,7 @@ import 'package:turathi/core/data_layer.dart';
 
 import '../../../view_layer.dart';
 
-
+//widget represents comments on the app
 class CommentBox extends StatelessWidget {
   const CommentBox({super.key, required this.comment});
 
@@ -11,12 +11,17 @@ class CommentBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String role = "EXPERT"; // Define role label for experts
+   String imageUrlUserProfile='assets/images/img_png/userProfile.png'; // Path to user profile image asset
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Display differently if the comment is written by an expert
             comment.writtenByExpert == 1
                 ? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,7 +30,7 @@ class CommentBox extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Image.asset(
-                            'assets/images/img_png/userProfile.png',
+                            imageUrlUserProfile,
                             width:
                                 LayoutManager.widthNHeight0(context, 0) * 0.05,
                             height:
@@ -34,14 +39,14 @@ class CommentBox extends StatelessWidget {
                           Text(
                             comment.writerName!,
                             style: TextStyle(
-                              fontFamily: 'KohSantepheap',
+                              fontFamily: ThemeManager.fontFamily,
                               color: ThemeManager.primary,
                             ),
                           )
                         ],
                       ),
                       Text(
-                        "EXPERT",
+                        role,
                         style: TextStyle(
                             color: ThemeManager.primary,
                             backgroundColor:
@@ -53,14 +58,14 @@ class CommentBox extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.asset(
-                        'assets/images/img_png/userProfile.png',
+                        imageUrlUserProfile,
                         width: LayoutManager.widthNHeight0(context, 0) * 0.05,
                         height: LayoutManager.widthNHeight0(context, 1) * 0.05,
                       ),
                       Text(
                         comment.writerName!,
                         style: TextStyle(
-                          fontFamily: 'KohSantepheap',
+                          fontFamily: ThemeManager.fontFamily,
                           color: ThemeManager.primary,
                         ),
                       )
