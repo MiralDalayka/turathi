@@ -206,7 +206,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                           maxLines: 3,
                         ),
 
-                        defaultButton3(
+                        defaultButton(
                           text: 'Show Map',
                           borderRadius: 18,
                           background: ThemeManager.primary,

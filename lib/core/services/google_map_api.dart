@@ -110,7 +110,7 @@ class _NearestMapState extends State<NearestMap> {
               child: Padding(
                 padding: EdgeInsets.all(
                     LayoutManager.widthNHeight0(context, 1) * 0.15),
-                child: defaultButton3(
+                child: defaultButton(
                   text: '       Done       ',
                   width: LayoutManager.widthNHeight0(context, 1) * 0.45,
                   borderRadius: 18,

@@ -336,7 +336,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ),
                           ),
                         ),
-                        defaultButton3(
+                        defaultButton(
                           text: 'Visit Place',
                           width: LayoutManager.widthNHeight0(context, 1) * 0.36,
                           borderRadius: 18,

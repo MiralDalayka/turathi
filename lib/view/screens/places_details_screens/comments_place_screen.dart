@@ -79,7 +79,7 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                         padding: EdgeInsets.only(
                             left:
                                 LayoutManager.widthNHeight0(context, 1) * 0.65),
-                        child: defaultButton3(
+                        child: defaultButton(
                           text: 'Send',
                           borderRadius: 18,
                           background: ThemeManager.primary,

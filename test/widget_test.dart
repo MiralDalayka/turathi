@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:turathi/core/data_layer.dart';
-import 'package:turathi/view/screens/placesdetails_screens/widgets/like_place_button.dart';
+import 'package:turathi/view/screens/places_details_screens/widgets/like_place_button.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

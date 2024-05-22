@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:turathi/view/view_layer.dart';
 
 
-Widget defaultButton3({
+Widget defaultButton({
   double width = double.infinity,
   double height = 50.0,
   Color borderColor = const Color(0xff6E232F),
@@ -17,8 +17,7 @@ Widget defaultButton3({
   required int borderWidth, // Change this line
 }) =>
     Container(
-      // width: width,
-      // height: height,
+
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(color: borderColor),
