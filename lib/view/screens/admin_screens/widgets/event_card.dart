@@ -38,14 +38,14 @@ class _EventCardState extends State<EventCard> {
             child: Stack(
               children: [
                 ClipRRect(
-                  
+
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
                     child: Image.network(
                       widget.eventModel.images != null &&
-                              widget.eventModel.images!.isNotEmpty
+                          widget.eventModel.images!.isNotEmpty
                           ? widget.eventModel.images![0]
                           : 'https://developers.google.com/static/maps/documentation/maps-static/images/error-image-generic.png?hl=ar',
                       fit: BoxFit.cover,
@@ -77,7 +77,7 @@ class _EventCardState extends State<EventCard> {
                     ),
                   ),
                 ),
-               
+
               ],
             ),
           ),

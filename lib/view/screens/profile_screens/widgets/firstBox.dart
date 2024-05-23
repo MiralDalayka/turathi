@@ -25,8 +25,7 @@ class FirstBox extends State<FirstBoxWidget> {
             children: [
               InkWell(
                 onTap: () {
-    
-                    Navigator.of(context).pushNamed(personalDetilsScreen);  
+                  Navigator.of(context).pushNamed(personalDetilsScreen);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
@@ -61,18 +60,13 @@ class FirstBox extends State<FirstBoxWidget> {
                   ),
                 ),
               ),
-
               SizedBox(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.05,
               ),
-
               InkWell(
-               onTap: () {
-              
-                    Navigator.of(context).pushNamed(changeInfo);
-         
+                onTap: () {
+                  Navigator.of(context).pushNamed(changeInfo);
                 },
-
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
                   child: Row(
@@ -109,14 +103,9 @@ class FirstBox extends State<FirstBoxWidget> {
               SizedBox(
                 height: LayoutManager.widthNHeight0(context, 1) * 0.05,
               ),
-
               InkWell(
                 onTap: () {
-       
-                 
-                    Navigator.of(context).pushNamed(deleteUserPage);
-              
-
+                  Navigator.of(context).pushNamed(deleteUserPage);
                 },
                 child: Padding(
                   padding: EdgeInsets.only(right: 17),
