@@ -44,7 +44,7 @@ class PlaceModel {
     isVisible = true;
   }
 
-//This is a factory Constractor to create PlaceModel instance from JSON obj
+//This is a factory Constructor to create PlaceModel instance from JSON obj
   PlaceModel.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     placeId = json['placeId'];

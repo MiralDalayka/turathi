@@ -29,7 +29,7 @@ class EventModel {
 
 
   }
-//This is a factory Constractor to create EventModel instance from JSON obj
+//This is a factory Constructor to create EventModel instance from JSON obj
   EventModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

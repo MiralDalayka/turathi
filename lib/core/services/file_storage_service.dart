@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data_layer.dart';
 
-
+// Service class To Manage File and images in FirebaseStorage
 class FilesStorageService {
   final FirebaseStorage _storageInstance =
       FirebaseStorage.instanceFor(bucket: 'turathi-96897.appspot.com');

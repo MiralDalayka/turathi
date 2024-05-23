@@ -6,7 +6,7 @@ class AdminModel {
 
   AdminModel({this.adminId, this.password});
 
-//This is a factory Constractor to create AdminModel instance from JSON obj
+//This is a factory Constructor to create AdminModel instance from JSON obj
   AdminModel.fromJson(Map<String, dynamic> json) {
     adminId = json['adminId'];
     password = json['password'];

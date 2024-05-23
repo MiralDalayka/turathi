@@ -16,7 +16,7 @@ class ReportModel {
     userId = sharedUser.id;
   }
 
-//This is a factory Constractor to create ReportModel instance from JSON obj
+//This is a factory Constructor to create ReportModel instance from JSON obj
 
   ReportModel.fromJson(Map<String, dynamic> json) {
     reportId = json['reportId'];

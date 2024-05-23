@@ -13,7 +13,7 @@ class NotificationModel {
     date = DateTime.now();
   }
 
-//This is a factory Constractor to create NotificationModel instance from JSON obj
+//This is a factory Constructor to create NotificationModel instance from JSON obj
   NotificationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];

@@ -27,7 +27,7 @@ class UserModel {
     favList=[];
   }
 
-//This is a factory Constractor to create UserModel instance from JSON obj
+//This is a factory Constructor to create UserModel instance from JSON obj
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

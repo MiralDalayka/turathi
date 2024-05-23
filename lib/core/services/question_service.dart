@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data_layer.dart';
 
+// Service class To Manage Questions in Database
 class QuestionService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "questions";

@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../data_layer.dart';
 
-
+// Provider class To Manage Places
 class PlaceProvider extends ChangeNotifier {
   final PlaceService _placeService = PlaceService();
 
   PlaceList _placeList = PlaceList(places: []);
 
+  //Getter for Places List
   Future<PlaceList> get placeList async {
     if (_placeList.places.isEmpty) {
       await _getPlaces();
@@ -17,8 +18,10 @@ class PlaceProvider extends ChangeNotifier {
     return _placeList;
   }
 
+  // add new place
   Future<String> addPlace(
       {required PlaceModel model, required List<XFile> images}) async {
+    // check if the place is exist before adding it
     bool exists = await _placeService.placeExists(model.title.toString());
 
     if (exists) {
@@ -33,22 +36,19 @@ class PlaceProvider extends ChangeNotifier {
       notifyListeners();
     }));
 
-    log(_placeList.places.length.toString());
-
     return "Done";
   }
 
   Future<void> _getPlaces() async {
-    _placeList = await _placeService
-        .getPlaces()
-        .whenComplete(() {log("Provider get places");});
+    _placeList = await _placeService.getPlaces().whenComplete(() {
+      log("Provider get places");
+    });
   }
-
+// update place data && images
   Future<PlaceModel> updatePlace(
       {required PlaceModel placeModel, required List<XFile> images}) async {
     log(placeModel.toJson().toString());
     int index = _placeList.places.indexOf(placeModel);
-    log("INDEX $index");
     _placeList.places[index] = await _placeService
         .updatePlace(placeModel: placeModel, images: images)
         .whenComplete(() {
@@ -57,31 +57,11 @@ class PlaceProvider extends ChangeNotifier {
     });
     return placeModel;
   }
-  // Future<PlaceModel> updatePlace({
-  //   required PlaceModel placeModel,
-  //   required List<XFile> images,
-  // }) async {
-  //   log(placeModel.toJson().toString());
-  //   int index = _placeList.places.indexOf(placeModel);
-  //   log("INDEX $index");
-  //   if (index != -1) {
-  //     _placeList.places[index] = await _placeService
-  //         .updatePlace(placeModel: placeModel, images: images)
-  //         .whenComplete(() {
-  //       notifyListeners();
-  //     });
-  //   } else {
-  //     log('PlaceModel not found in the list');
-  //   }
-  //   return placeModel;
-  // }
 
+  // add like to specific place
   Future<PlaceModel> likePlace(String id) async {
-    // int index = _placeList.places.indexOf(placeModel);
     var index =
         _placeList.places.indexWhere((element) => element.placeId == id);
-    log("INDEX $index");
-
     PlaceModel temp = await _placeService.likePlace(
         id, _placeList.places[index].likesList!.length);
     _placeList.places[index] = temp;
@@ -90,7 +70,8 @@ class PlaceProvider extends ChangeNotifier {
     return temp;
   }
 
-  Future<PlaceModel> dislikePost(String id) async {
+  // delete the like that added to specific place
+  Future<PlaceModel> deletePlaceLike(String id) async {
     var index =
         _placeList.places.indexWhere((element) => element.placeId == id);
 
@@ -103,6 +84,7 @@ class PlaceProvider extends ChangeNotifier {
     return temp;
   }
 
+  // get the nearest place by (specific value) kilometers based on specific latitude ,longitude
   Future<PlaceList> getNearestPlaceList(
       selectedNearestLat, selectedNearestLog, distanceValue) async {
     List<PlaceModel> nearestPlaces = [];
@@ -122,30 +104,33 @@ class PlaceProvider extends ChangeNotifier {
     return PlaceList(places: nearestPlaces);
   }
 
+  // get 10 places with highest likes
   Future<PlaceList> getMostPopularPlaces() async {
     PlaceList places = await placeList;
-    if(places.places.isNotEmpty){
+    if (places.places.isNotEmpty) {
       if (places.places.length >= 10) {
         return PlaceList(places: places.places.getRange(0, 9).toList());
       }
-      log(places.places.getRange(0, places.places.length).first.title! + "{{{{");
+      log(places.places.getRange(0, places.places.length).first.title! +
+          "{{{{");
 
       return places;
     }
     return PlaceList(places: []);
   }
 
+  // change the selected nearest place latitude and longitude
   updatePosition(lat, long) {
     selectedNearestLat = lat;
     selectedNearestLog = long;
     notifyListeners();
   }
 
+  // delete place data and images
   deletePlace(PlaceModel place_model) {
     _placeList.places.remove(place_model);
     _placeService.deletePlace(placeModel: place_model).whenComplete(() {
       notifyListeners();
-
     });
   }
 

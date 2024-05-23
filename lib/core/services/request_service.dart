@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data_layer.dart';
 
+// Service class To Manage User Request in Database
+
 class RequestService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
   final String _collectionName = "requests";

@@ -87,7 +87,7 @@ class _DeleteUser extends State<DeleteUser> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      userProvider.deleteUserProvider();
+                                      userProvider.deleteUser();
 
                                      
                                       Navigator.of(context)

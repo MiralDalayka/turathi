@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypt/crypt.dart';
 import '../data_layer.dart';
 
-
+// Service class To Manage Admin operations
 class AdminService {
   // collection names
   final String _collectionName = "admins";

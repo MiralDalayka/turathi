@@ -236,7 +236,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     if (widget.placeModel.likesList!
                                         .contains(sharedUser.id)) {
                                       widget.placeModel =
-                                          await placeProvider.dislikePost(
+                                          await placeProvider.deletePlaceLike(
                                               widget.placeModel.placeId!);
                                     } else {
                                       widget.placeModel =

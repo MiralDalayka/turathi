@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:geolocator/geolocator.dart';
 import '../data_layer.dart';
 
+// Service class To Manage Users in Database
 
 class UserService {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -245,8 +246,11 @@ class UserService {
       log('Error deleting user 1: $error');
     }
     // delete from the database
-    await FirebaseFirestore.instance.collection('users')
-        .where('id', isEqualTo: sharedUser.id).get().then((querySnapshot) {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: sharedUser.id)
+        .get()
+        .then((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
         var doc = querySnapshot.docs.first;
         doc.reference.delete().then((_) {

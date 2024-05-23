@@ -16,7 +16,7 @@ class QuestionModel {
 
   }
 
-//This is a factory Constractor to create QuestionModel instance from JSON obj
+//This is a factory Constructor to create QuestionModel instance from JSON obj
   QuestionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
 

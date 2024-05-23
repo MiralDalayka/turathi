@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data_layer.dart';
 
+// Service class To Manage Comments in Database
 class CommentService {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;

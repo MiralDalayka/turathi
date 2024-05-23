@@ -20,7 +20,7 @@ class RequestModel {
     status = RequestStatus.waiting.name;
   }
 
-//This is a factory Constractor to create RequestModel instance from JSON obj
+//This is a factory Constructor to create RequestModel instance from JSON obj
 
   RequestModel.fromJson(Map<String, dynamic> json) {
     requestId = json['requestId'];

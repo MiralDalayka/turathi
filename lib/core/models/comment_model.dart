@@ -24,7 +24,7 @@ class CommentModel {
 
   }
 
-   //This is a factory Constractor to create CommentModel instance from JSON obj
+   //This is a factory Constructor to create CommentModel instance from JSON obj
   CommentModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date =  (json["date"] as Timestamp).toDate();
