@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/view/screens/places_details_screens/widgets/like_place_button.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Like Place Button Test', (WidgetTester tester) async {
     PlaceModel placeModel = PlaceModel(
         latitude: 0,
         longitude: 0,
@@ -24,8 +23,8 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: LikeButton(
         onLike: () {
-          if(placeModel.likesList!.contains(sharedUser.id!))
-          placeModel.likesList!.remove(sharedUser.id!);
+          if (placeModel.likesList!.contains(sharedUser.id!))
+            placeModel.likesList!.remove(sharedUser.id!);
           else
             placeModel.likesList!.add(sharedUser.id!);
 

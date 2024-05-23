@@ -123,6 +123,7 @@ class _EditPlaceAdminState extends State<EditPlaceAdmin> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton.icon(
+                      key: Key("Visibility icon"),
                         onPressed: () {
                           setState(() {
                             widget.placeModel.isVisible =

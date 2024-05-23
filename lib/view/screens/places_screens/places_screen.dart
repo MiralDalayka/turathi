@@ -53,8 +53,11 @@ class _Location_PageState extends State<LocationPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Builder(builder: (context) {
+            Builder(
+
+                builder: (context) {
               if (currentTab == 0)
+
                 return HeaderPart(tab: "Update user location");
               else //if (tabController.index == 1)
                 return HeaderPart(tab: "Nearest Place");
@@ -146,6 +149,7 @@ class _Location_PageState extends State<LocationPage>
                   BodyPlaces(
                     tab: 'My Location',
                     dis_num: selectedDistance,
+
                     dataList: [sharedUser.latitude, sharedUser.longitude],
                   ),
                   isTabControllerInitialized
