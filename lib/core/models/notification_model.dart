@@ -7,10 +7,12 @@ class NotificationModel {
   String? userId;
   String? text;
   DateTime? date;
+  bool? isRead;
 
   NotificationModel({ required this.userId, required this.text}){
     id = uuid.v4();
     date = DateTime.now();
+    isRead = false;
   }
 
 //This is a factory Constructor to create NotificationModel instance from JSON obj
@@ -19,6 +21,8 @@ class NotificationModel {
     userId = json['userId'];
     text = json['text'];
     date = (json["date"] as Timestamp).toDate();
+    isRead = json['isRead'];
+
   }
 
 
@@ -29,6 +33,8 @@ class NotificationModel {
     data['userId'] = this.userId;
     data['text'] = this.text;
     data['date'] = this.date;
+    data['isRead'] = this.isRead;
+
     return data;
   }
 }

@@ -23,7 +23,7 @@ class NotificationService {
       // if distance is less than or equal 10 ,notify user
       if (distanceInKm <= 10){
         NotificationModel notificationModel =
-        NotificationModel(text: "place add", userId: user.id);
+        NotificationModel(text: "place near you is added", userId: user.id);
 
         // add the notification to database
         _fireStore
@@ -39,10 +39,10 @@ class NotificationService {
   }
 
   // get the user notifications from database
-  Future<NotificationList> getUserNotifications(String userId) async {
+  Future<NotificationList> getUserNotifications() async {
     QuerySnapshot notificationsData = await _fireStore
         .collection(_collectionName)
-        .where('userId', isEqualTo: userId)
+        .where('userId', isEqualTo: sharedUser.id)
         .get()
         .whenComplete(() {
       log("Service get Notifications for user done");
@@ -58,10 +58,31 @@ class NotificationService {
       data["userId"] = item.get("userId");
       data["text"] = item.get("text");
       data["date"] = item.get("date");
+      data["isRead"] = item.get("isRead");
+
 
       tempModel = NotificationModel.fromJson(data);
       notificationList.notifications.add(tempModel);
     }
     return notificationList;
   }
-}
+  Future<void> updateUserNotifications() async {
+    QuerySnapshot notificationsData = await _fireStore
+        .collection(_collectionName)
+        .where('userId', isEqualTo: sharedUser.id)
+        .where('isRead', isEqualTo:false)
+        .get();
+
+    for(var item in notificationsData.docs){
+      _fireStore
+          .collection(_collectionName)
+          .doc(item.id)
+          .update({"isRead":true})
+          .whenComplete(() {
+        log("UPDATE notification done");
+      }).catchError((error) {
+        log(error.toString());
+      });
+    }
+  }
+  }

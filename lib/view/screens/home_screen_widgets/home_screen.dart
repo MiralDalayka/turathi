@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/data_layer.dart';
+import 'package:turathi/core/models/notification_model.dart';
 import 'package:turathi/view/view_layer.dart';
 
 //user home page includes popular places,events,notifications and, actions such as:adding place,navigate through the app
@@ -13,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   EventList? eventsList;
+  NotificationList? notificationList;
   UserService userService = UserService();
   String _greeting = '';
 
@@ -45,8 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
     String popularPlaces = 'Popular Places';
     String event = 'Events';
     String seeAll = 'See All';
-    String noEventsCase= 'No Events are available';
+    String noEventsCase = 'No Events are available';
     EventProvider eventProvider = Provider.of<EventProvider>(context);
+    NotificationProvider notificationProvider =
+        Provider.of<NotificationProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
@@ -54,9 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           IconButton(
             key: Key("Notification"),
-            icon: Icon(
-              Icons.notifications_none_outlined,
-              color: ThemeManager.primary,
+            icon: FutureBuilder(
+              future: notificationProvider.notificationList,
+              builder: (context, snapshot) {
+                var data = snapshot.data;
+                if (data == null) {
+                  return Icon(Icons.notifications_none_outlined,
+                      color: ThemeManager.primary);
+                }
+                ;
+                notificationList = data;
+                return Icon(
+                  notificationList!.notifications.where((element) => element.isRead==false).length == 0
+                      ? Icons.notifications_none_outlined
+                      : Icons.notifications_active_outlined,
+                  color: ThemeManager.primary,
+                );
+              },
             ),
             onPressed: () {
               Navigator.of(context).pushNamed(notificationPage);
@@ -222,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           top: LayoutManager.widthNHeight0(context, 1) * 0.2),
                       child: Center(
                         child: Text(
-                         noEventsCase,
+                          noEventsCase,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontFamily: ThemeManager.fontFamily,

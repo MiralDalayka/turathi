@@ -14,7 +14,6 @@ class PlaceProvider extends ChangeNotifier {
     if (_placeList.places.isEmpty) {
       await _getPlaces();
     }
-    log(_placeList.places.length.toString());
     return _placeList;
   }
 
