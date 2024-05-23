@@ -24,7 +24,7 @@ class PlaceService {
           .collection(_collectionName)
           .add(model.toJson())
           .whenComplete(() {
-        _notificationService.notifyUsers(model.latitude!, model.longitude!);
+        _notificationService.notifyUsers(model.latitude!, model.longitude!,model.title!);
         log("Add Place Done");
       });
     });

@@ -10,7 +10,7 @@ class NotificationProvider extends ChangeNotifier {
   //Getter for Notifications List for current user
   Future<NotificationList> get notificationList async {
     if (_notificationList.notifications.isEmpty) {
-      await _getNotifications().whenComplete(() => notifyListeners());
+      await _getNotifications();
     }
     return _notificationList;
   }
