@@ -13,7 +13,7 @@ We want to make it simple for everyone to discover and learn about historical pl
 Tourism within Jordan plays a vital role in the country's income. Our app is like your friendly guide, providing a complete tour package to explore hidden spots in Jordan. Our main mission is to make information easy to find and organized. But it's not just about information – our app is all about bringing people together. It encourages them to share and discover lesser-known places. We make sure all the details you need for your adventure are right there.
 
 ## **Imagine Thre Are Many Places**
-<img width="1447" alt="Screenshot 2024-05-24 at 6 01 58 PM" src="https://github.com/MiralDalayka/turathi/assets/162041062/4b962da6-b33d-4da0-b39a-c8a2f80c10ab">
+<img width="1416" alt="Screenshot 2024-05-24 at 6 06 57 PM" src="https://github.com/MiralDalayka/turathi/assets/162041062/6477eedd-f666-47c5-9de3-14b83a69bb6c">
 
 ## **Features**
 - Friendly UI.
