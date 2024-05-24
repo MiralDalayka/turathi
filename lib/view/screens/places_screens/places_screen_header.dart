@@ -109,6 +109,12 @@ class _HeaderPartState extends State<HeaderPart> {
                     userProvider.updateUserLocation().whenComplete(() async {
                       await _getCurrentLocation();
                     });
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return showCustomAlertDialog(context, "Your Location Updated Successfully");
+                        },
+                      );
                   },
                   txt:tab1Msg ),
             SizedBox(
