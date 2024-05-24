@@ -16,7 +16,7 @@ We want to encourage community participation and cooperation, so we have created
 So, our app isn't just an information hub – it's a way to connect, explore, and make the most of the incredible places and experiences Jordan has to offer!
 We believe this will make tourism in Jordan more vibrant, sustainable, and exciting.
 
-## **Imagine Thre Are Many Places**
+## **Imagine There Are Many Places**
 <img width="1416" alt="Screenshot 2024-05-24 at 6 06 57 PM" src="https://github.com/MiralDalayka/turathi/assets/162041062/6477eedd-f666-47c5-9de3-14b83a69bb6c">
 
 ## **OverView**
@@ -56,7 +56,7 @@ To get started
 - Install the dependencies by running flutter pub get
 * In AndroidStudio or VsCode, run lib/main.dart with arguments --flavor=prod on Android Devices, or just run lib/main.dart with no arguments on IOS
 
-**Ensure every property detail is meticulously verified for your peace of mind  😄**
+**In Jordan, there are so many amazing historical places that deserve to be visited, each telling a story of our rich legacy.  TURATHI will be your guide.**
 
 
 
