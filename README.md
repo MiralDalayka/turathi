@@ -48,9 +48,10 @@ And we're not just sticking to historical locations:
 
 ## **Getting Started**
 Dependencies
-* Flutter 3.16.1
-+ Dart 3.2.1
+* Flutter  3.22.0
++ Dart 3.4.0
 - DevTools 2.28.3
+- Android SDK version 34.0.0
 
 To get started
 - Install the dependencies by running flutter pub get
