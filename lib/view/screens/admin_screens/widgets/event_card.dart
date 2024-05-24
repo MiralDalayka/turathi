@@ -39,7 +39,7 @@ class _EventCardState extends State<EventCard> {
               children: [
                 ClipRRect(
 
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,

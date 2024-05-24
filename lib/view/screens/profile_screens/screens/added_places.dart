@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turathi/core/data_layer.dart';
 import 'package:turathi/view/view_layer.dart';
+
 //page to view the added places by the user
 class AddedPlaces extends StatelessWidget {
   const AddedPlaces({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -62,143 +62,117 @@ class AddedPlaces extends StatelessWidget {
                 if (userPlaces.isEmpty) {
                   return Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              top: LayoutManager.widthNHeight0(context, 1) *
-                                  0.5),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Add any historical place u know now",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: ThemeManager.primary,
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  "It looks like you haven’t add \nany Place just yet.",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontFamily: ThemeManager.fontFamily,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        Text(
+                          "Add any historical place you know now",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: ThemeManager.primary,
+                            fontFamily: ThemeManager.fontFamily,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
                           ),
-                        )
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          "It looks like you haven’t added \nany Place just yet.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: ThemeManager.fontFamily,
+                            fontSize: 16,
+                          ),
+                        ),
                       ],
                     ),
                   );
                 } else {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: LayoutManager.widthNHeight0(context, 1) * 0.05,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal:
-                                LayoutManager.widthNHeight0(context, 1) * 0.05,
-                          ),
-                          child: GridView.builder(
-                            itemCount: userPlaces.length,
-                            shrinkWrap: true,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: crossAxisCount,
-                              childAspectRatio: cardWidth / (cardWidth + 65),
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 16,
-                            ),
-                            itemBuilder: (context, index) {
-                              final placeModel = userPlaces[index];
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushNamed(
-                                    placeDetailsRoute,
-                                    arguments: placeModel,
+                  return Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                      vertical: LayoutManager.widthNHeight0(context, 1) * 0.05,
+                    ),
+                    child: GridView.builder(
+                      itemCount: userPlaces.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        childAspectRatio: cardWidth / (cardWidth + 65),
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 16,
+                      ),
+                      itemBuilder: (context, index) {
+                        final placeModel = userPlaces[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              placeDetailsRoute,
+                              arguments: placeModel,
+                            );
+                          },
+                          child: SizedBox(
+                            width: cardWidth,
+                            child: AddedCard(
+                                placeModel: placeModel,
+                                onPress: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => EditPlace(
+                                        placeModel: placeModel,
+                                      ),
+                                    ),
                                   );
                                 },
-                                child: SizedBox(
-                                  width: cardWidth,
-                                  child: AddedCard(
-                                      placeModel: placeModel,
-                                      onPress: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => EditPlace(
-                                              placeModel: placeModel,
+                                onDelete: () {
+                                  print("delete");
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor: ThemeManager.primary,
+                                        title: Text(
+                                          'Confirm Deletion',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        content: Text(
+                                          'Are you sure you want to delete this Place?',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                        );
-                                      },
-                                      onDelete: () {
-                                        print("delete");
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              backgroundColor:
-                                                  ThemeManager.primary,
-                                              title: Text(
-                                                'Confirm Deletion',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              content: Text(
-                                                'Are you sure you want to delete this Place?',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text(
-                                                    'Cancel',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () async {
-                                                    await placeProvider
-                                                        .deletePlace(placeModel);
-                    
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text(
-                                                    'OK',
-                                                    style: TextStyle(
-                                                        color: Color.fromARGB(
-                                                            255, 255, 32, 16),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      }),
-                                ),
-                              );
-                            },
+                                          TextButton(
+                                            onPressed: () async {
+                                              await placeProvider
+                                                  .deletePlace(placeModel);
+
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              'OK',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 255, 32, 16),
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                }),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   );
                 }

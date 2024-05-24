@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ThemeManager.background,
-        toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.04,
+        toolbarHeight: LayoutManager.widthNHeight0(context, 0) * 0.042,
         actions: <Widget>[
           IconButton(
             key: Key("Notification"),
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Icon(
                   notificationList!.notifications.where((element) => element.isRead==false).length == 0
                       ? Icons.notifications_none_outlined
-                      : Icons.notifications_active_outlined,
+                      : Icons.notifications_active,
                   color: ThemeManager.primary,
                 );
               },
