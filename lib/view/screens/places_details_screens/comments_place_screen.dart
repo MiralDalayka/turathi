@@ -64,7 +64,7 @@ class _CommentsPlaceState extends State<CommentsPlace> {
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: null,
-                        maxLength: 83,
+                        maxLength: 140,
                         style: TextStyle(
                           height:
                               LayoutManager.widthNHeight0(context, 1) * 0.01,
