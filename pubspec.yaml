@@ -79,7 +79,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/img_png/icon.png"
+  image_path: "assets/images/img_png/icon2.png"
   mockito: ^5.4.4
   integration_test:
     sdk: flutter
