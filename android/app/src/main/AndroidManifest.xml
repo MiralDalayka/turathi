@@ -21,7 +21,7 @@
         android:requestLegacyExternalStorage="true"
         android:label="turathi"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyAoil6egyTbeRl_QsgScpxGzr13e9WXKu0"/>
         <activity
