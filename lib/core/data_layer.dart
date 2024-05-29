@@ -33,8 +33,6 @@ export 'package:turathi/core/services/google_map.dart';
 export 'package:turathi/core/functions/get_user_city.dart';
 export 'package:turathi/core/services/google_map_api.dart';
 export 'package:turathi/core/providers/report_provider.dart';
-export 'package:turathi/core/controllers/signup_controller.dart';
 export 'package:turathi/core/providers/request_provider.dart';
 export 'package:turathi/core/data_layer.dart';
 export 'package:turathi/core/providers/notification_provider.dart';
-export 'package:turathi/core/controllers/login_controller.dart';
